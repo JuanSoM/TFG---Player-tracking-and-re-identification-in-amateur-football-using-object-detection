@@ -13,6 +13,7 @@ Este proyecto tiene como objetivo desarrollar una herramienta accesible y eficie
 
 La solución propuesta se basa en modelos preentrenados, sin requerir hardware especializado, y está diseñada para optimizar su aplicabilidad en el ámbito del fútbol amateur, mejorando la experiencia de entrenadores y jugadores.
 
+
 ## Objetivos
 
 El objetivo principal de este TFG es desarrollar una aplicación capaz de realizar el seguimiento y la reidentificación de jugadores durante los partidos de fútbol amateur. Algunas de las funcionalidades clave del sistema incluyen:
@@ -21,6 +22,8 @@ El objetivo principal de este TFG es desarrollar una aplicación capaz de realiz
 - **Reidentificación de jugadores:** Integración de un sistema que minimiza la pérdida de identidad, incluso cuando los jugadores desaparecen temporalmente del campo de visión.
 - **Corrección manual:** Notificación al usuario cuando se detectan cambios inesperados en los identificadores de los jugadores, permitiendo correcciones manuales.
 - **Reentrenamiento automatizado:** Generación de anotaciones para reentrenar el modelo, optimizando el sistema con el tiempo.
+
+https://github.com/user-attachments/assets/5c362a27-de44-4d9b-9edf-1b46f06a27b4
 
 ## Entregables
 
