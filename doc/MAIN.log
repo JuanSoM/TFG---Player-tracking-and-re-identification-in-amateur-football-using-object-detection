@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.12)  17 MAR 2025 11:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.12)  17 MAR 2025 12:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -699,7 +699,7 @@ Package biblatex Info: Reference segment=0 on input line 30.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<cover.pdf, id=15, 597.73312pt x 845.40843pt>
+<cover.pdf, id=19, 597.73312pt x 845.40843pt>
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf>
 Package pdftex.def Info: cover.pdf  used on input line 33.
@@ -708,7 +708,7 @@ File: cover.pdf Graphic file (type pdf)
 <use cover.pdf>
 Package pdftex.def Info: cover.pdf  used on input line 33.
 (pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
-<cover.pdf, id=18, page=1, 597.73312pt x 845.40843pt>
+<cover.pdf, id=22, page=1, 597.73312pt x 845.40843pt>
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf, page 1>
 Package pdftex.def Info: cover.pdf , page1 used on input line 33.
@@ -731,7 +731,7 @@ Package pdftex.def Info: cover.pdf , page1 used on input line 33.
 
 
  <./cover.pdf>]
-<title.pdf, id=36, 597.73312pt x 845.40843pt>
+<title.pdf, id=40, 597.73312pt x 845.40843pt>
 File: title.pdf Graphic file (type pdf)
 <use title.pdf>
 Package pdftex.def Info: title.pdf  used on input line 38.
@@ -740,7 +740,7 @@ File: title.pdf Graphic file (type pdf)
 <use title.pdf>
 Package pdftex.def Info: title.pdf  used on input line 38.
 (pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
-<title.pdf, id=39, page=1, 597.73312pt x 845.40843pt>
+<title.pdf, id=43, page=1, 597.73312pt x 845.40843pt>
 File: title.pdf Graphic file (type pdf)
 <use title.pdf, page 1>
 Package pdftex.def Info: title.pdf , page1 used on input line 38.
@@ -783,13 +783,30 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 
 [2{C:/Users/jismbs/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+<image/metricasBeta.png, id=70, 310.761pt x 271.61475pt>
+File: image/metricasBeta.png Graphic file (type png)
+<use image/metricasBeta.png>
+Package pdftex.def Info: image/metricasBeta.png  used on input line 67.
+(pdftex.def)             Requested size: 341.43437pt x 298.43314pt.
+<image/Centrarse.png, id=72, 418.56375pt x 122.25674pt>
+File: image/Centrarse.png Graphic file (type png)
+<use image/Centrarse.png>
+Package pdftex.def Info: image/Centrarse.png  used on input line 76.
+(pdftex.def)             Requested size: 341.43437pt x 99.72696pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+
+[3 <./image/metricasBeta.png>]
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=66, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=80, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 67.
+Package pdftex.def Info: backcover.pdf  used on input line 89.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -797,7 +814,7 @@ pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 67.
+Package pdftex.def Info: backcover.pdf  used on input line 89.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -807,58 +824,60 @@ ersion <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=69, page=1, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=83, page=1, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 67.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 89.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
-[3]
+[4]
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 67.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 89.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 67.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 89.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 67.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 89.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-[4
+[5
 
- <./backcover.pdf>] (MAIN.aux)
+ <./backcover.pdf>]
+
+[6 <./image/Centrarse.png>] (MAIN.aux)
  ***********
 LaTeX2e <2024-11-01>
 L3 programming layer <2024-11-02>
  ***********
 Package rerunfilecheck Info: File `MAIN.out' has not changed.
-(rerunfilecheck)             Checksum: 2A16CA9E3A5B75F60E989F3C6DACAE16;536.
+(rerunfilecheck)             Checksum: E011245E3863FB5D22B8258047F4B4FD;572.
 Package logreq Info: Writing requests to 'MAIN.run.xml'.
 \openout1 = `MAIN.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19137 strings out of 473681
- 335775 string characters out of 5718718
- 949236 words of memory out of 5000000
- 42016 multiletter control sequences out of 15000+600000
+ 19172 strings out of 473681
+ 336538 string characters out of 5718718
+ 951312 words of memory out of 5000000
+ 42046 multiletter control sequences out of 15000+600000
  563140 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,17n,81p,1905b,1317s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,17n,81p,1905b,1400s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/jismbs/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
 /cmbx12.pfb><C:/Users/jismbs/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
 msfonts/cm/cmcsc10.pfb><C:/Users/jismbs/AppData/Local/Programs/MiKTeX/fonts/typ
 e1/public/amsfonts/cm/cmr12.pfb><C:/Users/jismbs/AppData/Local/Programs/MiKTeX/
 fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/jismbs/AppData/Local/Progra
 ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on MAIN.pdf (5 pages, 216698 bytes).
+Output written on MAIN.pdf (7 pages, 285729 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
- 11 named destinations out of 1000 (max. 500000)
- 85 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 145 PDF objects out of 1000 (max. 8388607)
+ 16 named destinations out of 1000 (max. 500000)
+ 103 words of extra memory for PDF output out of 10000 (max. 10000000)
 
