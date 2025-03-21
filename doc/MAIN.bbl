@@ -17,46 +17,21 @@
 \endgroup
 
 \datalist[entry]{nty/global//global/global/global}
-  \entry{pekar2021epidemiology}{article}{}{}
-    \name{author}{3}{}{%
-      {{hash=PC}{%
-         family={Pekar},
-         familyi={P\bibinitperiod},
-         given={Christopher},
-         giveni={C\bibinitperiod},
-      }}%
-      {{hash=GS}{%
-         family={Gordan},
-         familyi={G\bibinitperiod},
-         given={Sven},
-         giveni={S\bibinitperiod},
-      }}%
-      {{hash=GE}{%
-         family={Goligher},
-         familyi={G\bibinitperiod},
-         given={Ewan},
-         giveni={E\bibinitperiod},
+  \entry{gta-link}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=s}{%
+         family={sjc042},
+         familyi={s\bibinitperiod},
       }}%
     }
-    \list{publisher}{1}{%
-      {BioMed Central}%
-    }
-    \strng{namehash}{PCGSGE1}
-    \strng{fullhash}{PCGSGE1}
+    \strng{namehash}{s1}
+    \strng{fullhash}{s1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{sortinit}{P}
-    \field{sortinithash}{P}
-    \verb{doi}
-    \verb 10.1186/s13054-021-03772-y
-    \endverb
-    \field{number}{1}
-    \field{pages}{1\bibrangedash 9}
-    \field{title}{Epidemiology of respiratory failure in the intensive care
-  unit: A review}
-    \field{volume}{25}
-    \field{journaltitle}{Critical Care}
-    \field{year}{2021}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{gta-link}
+    \field{year}{2025}
   \endentry
 \enddatalist
 \endinput

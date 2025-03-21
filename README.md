@@ -13,6 +13,7 @@ Este proyecto tiene como objetivo desarrollar una herramienta accesible y eficie
 
 La solución propuesta se basa en modelos preentrenados, sin requerir hardware especializado, y está diseñada para optimizar su aplicabilidad en el ámbito del fútbol amateur, mejorando la experiencia de entrenadores y jugadores.
 
+El proyecto estará basado en un estudio previo realizado por Jiacheng Sun. Estará referenciado en el apartado de [Referencias](#referencias).
 
 ## Objetivos
 
@@ -70,15 +71,14 @@ Este proyecto sigue una metodología **iterativa y ágil** para abordar los desa
 | Desarrollo del módulo de reidentificación | 50    |
 | Testeo y ajuste del sistema         | 50    |
 | Desarrollo de la interfaz de usuario | 43    |
-| Validación y documentación          | 50    |
-| Implementación de manual de usuario | 3     |
+| Validación y documentación          | 53    |
 | **Total**                           | **296** |
 
 ## Referencias
 
 1. [Person Re-identification](https://paperswithcode.com/task/person-re-identification)
-2. [SoccerNet](https://www.soccer-net.org/home)
-3. [GTA-Link GitHub](https://github.com/sjc042/gta-link)
+2. [SoccerNet](https://github.com/SoccerNet/sn-tracking)
+3. [GTA-Link GitHub - Jiacheng Sun](https://github.com/sjc042/gta-link)
 4. [Multi-object Tracking: A Review](https://sertiscorp.medium.com/multi-object-tracking-a-review-6aaeea495209)
 
 ## Licencia

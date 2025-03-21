@@ -50,7 +50,7 @@
 	
 	\section{Diario de avances}
 	
-	\subsection{Registro 3-16 de marzo)}
+	\subsection{Semana 3-16 de marzo)}
 	
 	Por ahora lo que llevamos es un dataset hecho en roboflow con un partido de España contra Suiza. Realizamos capturas y dividimos el conjunto en training, validation y test.
 	
@@ -58,7 +58,7 @@
 	
 	Se replanteó el objetivo del TFG. Se focalizará en la reidentificación de jugadores cuando salen fuera de plano y en el desarrollo de una aplicación que permita al usuario decidir si cuando se produce un cambio de identificador, mantenerlo o cambiarlo, creando un dataset revisado.
 	
-	\subsection{Registro 17 marzo}
+	\subsection{Semana 17-31 de marzo \cite{gta-link}}
 	
 	A la hora de medir resultados como estas gráficas:
 	
@@ -78,8 +78,42 @@
 		\label{fig:Centrarse}
 	\end{figure}
 	
+	Me he puesto a mirar lo que hace exactamente el código del repositorio de gta-link. Y en resumidas cuentas necesitamos un dataset con una pred, ya realizada, como es el caso de SoccerNet. Podemos descargar el dataset con el tracking realizado en los archivos .txt que se encuentran dentro de cada clip.\vspace{0.5cm}
+	
+	He utilizado las siguientes líneas de comando para realizar la descarga del dataset.
+	
+	\begin{verbatim}
+		from SoccerNet.Downloader import SoccerNetDownloader
+		mySoccerNetDownloader = SoccerNetDownloader(LocalDirectory="path/to/SoccerNet")
+		mySoccerNetDownloader.downloadDataTask(task="tracking",
+		 split=["train","test","challenge"])
+	\end{verbatim}
+	
+	Posteriormente hice unos ajustes en el código para que cogiera los archivos \texttt{gt.txt} para que se tomara como referencia \textbf{--pred\_dir {tracking results directory}}, ya que estos son archivos \textbf{MOT}, que guardan información sobre los \textbf{bounding box} de cada objeto de cada frame, conteniendo información sobre \textbf{frame}, \textbf{id}, \textbf{bb\_left}, \textbf{bb\_top}, \textbf{bb\_width}, \textbf{bb\_height}, \textbf{conf}, \textbf{x}, \textbf{y}, \textbf{z}, en este orden.
+	
+	Estos son esenciales para que se pueda ejecutar el archivo \texttt{generate\_tracklets.py} para generar los \textbf{tracklets}.
+	
+	Un \textbf{tracklet} se genera al seguir a un objeto desde su detección en un fotograma hasta el siguiente. En este proceso, el código asocia las detecciones de objetos de cada fotograma con un identificador único (\textbf{ID}) para cada objeto, y los agrupa en una \textbf{"trayectoria"} que sigue ese objeto a lo largo del tiempo.
+	
+	En el código:
+	
+	\begin{itemize}
+		\item \textbf{Extracción de características:} El código utiliza un modelo de reidentificación de personas (\texttt{FeatureExtractor}) para extraer características visuales de cada objeto detectado en los fotogramas. Esto es útil para seguir objetos entre fotogramas, incluso cuando se producen cambios de apariencia debido a variaciones en la vista o el movimiento.
+		\item \textbf{Cálculo de tracklets:} Para cada fotograma, el código agrupa las detecciones de objetos utilizando el identificador único (\texttt{track\_id}). Si un objeto se detecta en un fotograma y luego aparece en otro, se agrega a un tracklet, que es una colección de todas las detecciones del mismo objeto a lo largo de varios fotogramas. Además, se guarda información como el puntaje de la detección y las características extraídas del modelo de reidentificación.
+		\item \textbf{Salvado de tracklets:} Al final de cada secuencia de video o serie de fotogramas, los tracklets generados se guardan en un archivo \texttt{pickle} para su posterior uso, permitiendo analizar y trabajar con las trayectorias de los objetos en el futuro.
+	\end{itemize}
+	
+	El programa \texttt{generate\_tracklets.py}, lo que hará será generar unos ficheros \texttt{.pkl} que guardan los datos de las trayectorias de los objetos detectados a lo largo del tiempo. Esto incluye, por ejemplo, las \textbf{detecciones de objetos en cada fotograma}, las \textbf{características extraídas por el modelo de reidentificación}, y los \textbf{identificadores únicos (ID)} asignados a cada objeto (en formato binario).
+	
+	Una vez que se tenga esos ficheros se realiza una \textbf{refinación de los tracklets} para evitar que se cambien los \textbf{ids con frecuencia}. Mejora los \textbf{tracklets} (trayectorias de objetos) generados por un \textbf{tracker en tareas de seguimiento de múltiples objetos (MOT)}. Utiliza dos componentes principales: el \textbf{Tracklet Splitter}, que divide \textbf{tracklets impuros} (con múltiples identidades) en subtracklets más precisos mediante \textbf{clustering (DBSCAN)}, y el \textbf{Tracklet Connector}, que fusiona \textbf{tracklets fragmentados} que pertenecen al mismo objeto basándose en \textbf{similitudes visuales y restricciones espaciales}. Los resultados refinados se guardan en archivos \texttt{.txt} en formato \textbf{MOT}, listos para su evaluación, visualización o análisis posterior. Este proceso optimiza la \textbf{precisión del seguimiento}, corrigiendo errores como \textbf{cambios de identidad} y \textbf{fragmentaciones}.\vspace{0.5cm}
 	
 	
+	Ahora que tenemos un dataset etiquetado, tendremos que:
+	
+	\begin{itemize}
+		\item \textbf{Encontrar una combinación de hiperparámetros óptima: } Con el objetivo de que el cambio de ids sea el mínimo posible.
+		\item \textbf{Desarrollar una aplicación: } Con el onjetivo de que avise al usuario sobre los cambios de id en los frames y confirme si está bien cambiado o debería conservarse el anterior.
+	\end{itemize}
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\printbibliography

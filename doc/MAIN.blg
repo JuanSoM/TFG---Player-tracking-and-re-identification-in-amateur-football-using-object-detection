@@ -22,50 +22,52 @@ Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Database file #1: MAIN-blx.bib
 Database file #2: references.bib
-Warning--I didn't find a database entry for "futuro"
-Warning--I didn't find a database entry for "vincent2006epidemiology"
+You're missing a field name---line 7 of file references.bib
+ :  year = {2025},  
+ :                  % Usa el año actual o el año en que se creó el repositorio
+I'm skipping whatever remains of this entry
 Biblatex version: 3.20
 Reallocating 'wiz_functions' (item size: 4) to 9000 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 You've used 2 entries,
             6402 wiz_defined-function locations,
-            1214 strings with 9216 characters,
-and the built_in function-call counts, 10281 in all, are:
-= -- 759
-> -- 225
-< -- 48
-+ -- 334
-- -- 92
-* -- 661
-:= -- 1355
+            1206 strings with 8995 characters,
+and the built_in function-call counts, 4813 in all, are:
+= -- 238
+> -- 148
+< -- 26
++ -- 102
+- -- 52
+* -- 232
+:= -- 631
 add.period$ -- 0
 call.type$ -- 2
-change.case$ -- 25
+change.case$ -- 9
 chr.to.int$ -- 42
 cite$ -- 2
-duplicate$ -- 996
-empty$ -- 808
-format.name$ -- 88
-if$ -- 2082
+duplicate$ -- 407
+empty$ -- 450
+format.name$ -- 46
+if$ -- 1043
 int.to.chr$ -- 0
-int.to.str$ -- 3
+int.to.str$ -- 2
 missing$ -- 0
-newline$ -- 61
-num.names$ -- 58
-pop$ -- 416
+newline$ -- 37
+num.names$ -- 41
+pop$ -- 377
 preamble$ -- 1
-purify$ -- 33
+purify$ -- 11
 quote$ -- 0
-skip$ -- 314
+skip$ -- 234
 stack$ -- 0
-substring$ -- 1318
-swap$ -- 193
-text.length$ -- 55
+substring$ -- 341
+swap$ -- 102
+text.length$ -- 45
 text.prefix$ -- 1
 top$ -- 1
 type$ -- 56
 warning$ -- 0
-while$ -- 192
+while$ -- 98
 width$ -- 0
-write$ -- 60
-(There were 2 warnings)
+write$ -- 36
+(There was 1 error message)
