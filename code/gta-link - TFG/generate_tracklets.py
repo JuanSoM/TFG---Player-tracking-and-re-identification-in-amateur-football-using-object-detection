@@ -119,3 +119,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     main(args.model_path, args.data_path, args.pred_dir, args.tracker)
+
+#primera prueba
+#python generate_tracklets.py --model_path ../reid_checkpoints/sports_model.pth.tar-60 --data_path SoccerNet/tracking/test --pred_dir DeepEIoU_Baseline --tracker DeepEIoU
