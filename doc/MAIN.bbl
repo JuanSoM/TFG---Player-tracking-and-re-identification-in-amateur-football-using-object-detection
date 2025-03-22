@@ -17,21 +17,47 @@
 \endgroup
 
 \datalist[entry]{nty/global//global/global/global}
-  \entry{gta-link}{misc}{}{}
-    \name{author}{1}{}{%
-      {{hash=s}{%
-         family={sjc042},
-         familyi={s\bibinitperiod},
+  \entry{sun2024gta}{inproceedings}{}{}
+    \name{author}{4}{}{%
+      {{hash=SJ}{%
+         family={Sun},
+         familyi={S\bibinitperiod},
+         given={Jiacheng},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=HHW}{%
+         family={Huang},
+         familyi={H\bibinitperiod},
+         given={Hsiang-Wei},
+         giveni={H\bibinithyphendelim W\bibinitperiod},
+      }}%
+      {{hash=YCY}{%
+         family={Yang},
+         familyi={Y\bibinitperiod},
+         given={Cheng-Yen},
+         giveni={C\bibinithyphendelim Y\bibinitperiod},
+      }}%
+      {{hash=HJN}{%
+         family={Hwang},
+         familyi={H\bibinitperiod},
+         given={Jenq-Neng},
+         giveni={J\bibinithyphendelim N\bibinitperiod},
       }}%
     }
-    \strng{namehash}{s1}
-    \strng{fullhash}{s1}
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{SJ+1}
+    \strng{fullhash}{SJHHWYCYHJN1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
     \field{sortinit}{S}
     \field{sortinithash}{S}
-    \field{title}{gta-link}
-    \field{year}{2025}
+    \field{booktitle}{Proceedings of the Asian Conference on Computer Vision}
+    \field{pages}{421\bibrangedash 434}
+    \field{title}{GTA: Global Tracklet Association for Multi-Object Tracking in
+  Sports}
+    \field{year}{2024}
   \endentry
 \enddatalist
 \endinput
