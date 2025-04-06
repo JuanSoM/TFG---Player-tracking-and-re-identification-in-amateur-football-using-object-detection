@@ -17,6 +17,92 @@
 \endgroup
 
 \datalist[entry]{nty/global//global/global/global}
+  \entry{huang2024iterative}{inproceedings}{}{}
+    \name{author}{8}{}{%
+      {{hash=HHW}{%
+         family={Huang},
+         familyi={H\bibinitperiod},
+         given={Hsiang-Wei},
+         giveni={H\bibinithyphendelim W\bibinitperiod},
+      }}%
+      {{hash=YCY}{%
+         family={Yang},
+         familyi={Y\bibinitperiod},
+         given={Cheng-Yen},
+         giveni={C\bibinithyphendelim Y\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Sun},
+         familyi={S\bibinitperiod},
+         given={Jiacheng},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=KPK}{%
+         family={Kim},
+         familyi={K\bibinitperiod},
+         given={Pyong-Kun},
+         giveni={P\bibinithyphendelim K\bibinitperiod},
+      }}%
+      {{hash=KKJ}{%
+         family={Kim},
+         familyi={K\bibinitperiod},
+         given={Kwang-Ju},
+         giveni={K\bibinithyphendelim J\bibinitperiod},
+      }}%
+      {{hash=LK}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Kyoungoh},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=HCI}{%
+         family={Huang},
+         familyi={H\bibinitperiod},
+         given={Chung-I},
+         giveni={C\bibinithyphendelim I\bibinitperiod},
+      }}%
+      {{hash=HJN}{%
+         family={Hwang},
+         familyi={H\bibinitperiod},
+         given={Jenq-Neng},
+         giveni={J\bibinithyphendelim N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HHW+1}
+    \strng{fullhash}{HHWYCYSJKPKKKJLKHCIHJN1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{booktitle}{Proceedings of the IEEE/CVF Winter Conference on
+  Applications of Computer Vision}
+    \field{pages}{163\bibrangedash 172}
+    \field{title}{Iterative Scale-Up ExpansionIoU and Deep Features Association
+  for Multi-Object Tracking in Sports}
+    \field{year}{2024}
+  \endentry
+
+  \entry{sportsmot_paperswithcode}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=P}{%
+         family={{Papers With Code}},
+         familyi={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{P1}
+    \strng{fullhash}{P1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{note}{Accessed: 2025-04-06}
+    \field{title}{Multiple Object Tracking on SportsMOT}
+    \verb{url}
+    \verb https://paperswithcode.com/sota/multiple-object-tracking-on-sportsmot
+    \endverb
+    \field{year}{2025}
+  \endentry
+
   \entry{sun2024gta}{inproceedings}{}{}
     \name{author}{4}{}{%
       {{hash=SJ}{%

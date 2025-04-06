@@ -112,8 +112,49 @@
 	
 	\begin{itemize}
 		\item \textbf{Encontrar una combinación de hiperparámetros óptima: } Con el objetivo de que el cambio de ids sea el mínimo posible.
-		\item \textbf{Desarrollar una aplicación: } Con el onjetivo de que avise al usuario sobre los cambios de id en los frames y confirme si está bien cambiado o debería conservarse el anterior.
+		\item \textbf{Desarrollar una aplicación: } Con el objetivo de que avise al usuario sobre los cambios de id en los frames y confirme si está bien cambiado o debería conservarse el anterior.
 	\end{itemize}
+	
+	\subsection{Semana 31-6 de abril)}
+	
+	En estas semanas hemos estado invirtiendo tiempo en las siguientes cosas. En un principio lo que teníamos era un dataset preparado con los ficheros ground truth fruto de un tracker usado (como DeepEIoU). Pero dado un vídeo, no podíamos aplicar los programas de gta-link, por lo que teníamos que conseguir los ficheros MOT de alguna manera. 
+	
+	Había dos opciones. La primera aplicar un tracker y la segunda aplicar un modelo de YOLO.
+	
+	Para la primera opción busqué en varios repositorios, que trataran con trackers, principalmente DeepEIoU, que es el tracker con el mejor rendimiento según las estadísticas de paperscode \cite{sportsmot_paperswithcode}.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/deepEIoU}
+		\caption{\textbf{Métricas DeepEIoU}}
+		\label{fig:deepEIoU}
+	\end{figure} 
+	
+	Tras encontrar un repositorio que trataba en específico con este \cite{huang2024iterative}. Tuve que modificar código para que utilizara cpu, ya que estaba configurado para gpu de nvidia. Los paquetes no se me instalaban correctamente. Los inputs que utilizaba para los programas eran ficheros tipo .npy.
+	
+	Dado que me estaba dando muchos problemas, después de dos días decidí que la mejor solución era utilizar un modelo de YOLO. Empecé utilizando un modelo de YOLO estandar capaz de detectar personas. El inconveniente de esto es que el video, estaba grabado desde un ángulo muy bajo, por lo que el modelo detectara las personas de las gradas y esto, a la larga, es un problema. 
+	
+	Entonces para resolver esto había dos opciones. La primera era realizar una segmentación del campo y la segunda entrenar un modelo de YOLO específico para jugadores. La segmentación del campo es demasiado costosa, porque no hay nada automatizado y sería segmentar infinidad de frames. Además de que es específica para un partido de fútbol en un ángulo en específico.Por lo tanto, la mejor opción para mi gusto es entrenar un modelo de YOLO con un dataset, por ahora, específico del partido de balonmano que me proporcionó mi tutor Jose Manuel Jerez. El dataset lo hice creando un programa utilizando las librerias de opencv (cv2) que extraía frames cada 20 segundos que transcurría de vídeo. Los 20 segundos previenen levemente más overfitting del que ocurre por tener frames del mismo partido. 
+	
+	Esta opción me permite etiquetar poco, ya que Roboflow tiene una herramienta de etiquetado automático una vez se han etiquetado unas cuantas imágenes, por lo que simplemente tuve que corregir aquellas imágenes con un mal etiquetado.
+	
+	Tras tener el dataset etiquetado le añadí algunas augmentations. 
+	
+	A la hora de entrenar el modelo lo hice con 25 epochs. Tardó hora y media en entrenarse.
+	
+	Apliqué los programas del repositorio de gta-link y los resultados del trackeo son muy buenos, pero la ReID no tiene nada que ver con los resultados tan consistentes del dataset de SoccerNet debido a que la grabación no es profesional.
+	
+	Aun así tras 23 intentos observe que los parámetros que daban mejores resultados eran los siguientes: --use\_split --min\_len 100 --eps 0.8 --min\_samples 10 --max\_k 4 --use\_connect --spatial\_factor 1.0 --merge\_dist\_thres 0.7   
+	
+	Recientemente le he añadido frames del partido de fútbol 7 al dataset de roboflow. Y he creado un nuevo modelo de YOLO entrenado exclusivamente con ese dataset.
+	
+	Los objetivos para la próxima semana:
+	
+	\begin{itemize}
+		\item \textbf{Buscar como aplicar un tracker:} Después de aplicar un trackeo con YOLO, sería necesario aplicar DeepEIoU. Investigar si aplicar un doble gta-link puede funcionar para refinar los tracklets todavía más.
+		\item \textbf{Seguir desarrollando la aplicación: } Con el objetivo de que avise al usuario sobre los cambios de id en los frames y confirme si está bien cambiado o debería conservarse el anterior. Ya tengo un programa prueba\_revision\_ReID.py, que funciona como prototipo, pero falta desarrollarlo mucho.
+	\end{itemize}
+	
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\printbibliography
