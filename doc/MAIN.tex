@@ -155,6 +155,11 @@
 		\item \textbf{Seguir desarrollando la aplicación: } Con el objetivo de que avise al usuario sobre los cambios de id en los frames y confirme si está bien cambiado o debería conservarse el anterior. Ya tengo un programa prueba\_revision\_ReID.py, que funciona como prototipo, pero falta desarrollarlo mucho.
 	\end{itemize}
 	
+	\subsection{Semana 7-13 de abril)}
+	
+	Al final el proceso de usar el tracker es obligatorio, ya que los objetos son detectados por YOLO, pero luego los ids son colocados por el tracker, y de ahí saldrán ficheros tipo MOT. Entonces tras aplicar YOLO para tener ficheros con la info de los bounding box sobre los jugadores intentaremos aplicarle un tracker y de ahí  un modelo de ReID, para posteriormente utilizar gta.
+	
+	Secuencia de trabajo: YOLO + DeepEIoU + GTA
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\printbibliography

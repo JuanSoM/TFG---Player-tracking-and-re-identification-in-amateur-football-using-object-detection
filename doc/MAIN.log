@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.12)  7 APR 2025 00:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.12)  8 APR 2025 17:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -830,10 +830,10 @@ Package pdftex.def Info: image/deepEIoU.png  used on input line 128.
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=114, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=113, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 164.
+Package pdftex.def Info: backcover.pdf  used on input line 169.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -841,7 +841,7 @@ pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 164.
+Package pdftex.def Info: backcover.pdf  used on input line 169.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -851,27 +851,27 @@ ersion <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=117, page=1, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=116, page=1, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 164.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 169.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 [7]
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 164.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 169.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 164.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 169.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 164.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 169.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 [8
 
@@ -880,20 +880,27 @@ Package pdftex.def Info: backcover.pdf , page1 used on input line 164.
 LaTeX2e <2024-11-01>
 L3 programming layer <2024-11-02>
  ***********
-Package rerunfilecheck Info: File `MAIN.out' has not changed.
-(rerunfilecheck)             Checksum: 3235E5890A5917AF235D518479A2A6B1;817.
+
+
+Package rerunfilecheck Warning: File `MAIN.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `MAIN.out':
+(rerunfilecheck)             Before: 3235E5890A5917AF235D518479A2A6B1;817
+(rerunfilecheck)             After:  10AB28C38089B4D975D97B653351089F;991.
 Package logreq Info: Writing requests to 'MAIN.run.xml'.
 \openout1 = `MAIN.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19209 strings out of 473681
- 337499 string characters out of 5718718
+ 19210 strings out of 473681
+ 337513 string characters out of 5718718
  956541 words of memory out of 5000000
  42076 multiletter control sequences out of 15000+600000
  563477 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,17n,81p,1905b,1470s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,17n,81p,1905b,1295s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\jismbs\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcr
 m1200.pk><C:/Users/jismbs/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
 onts/cm/cmbx12.pfb><C:/Users/jismbs/AppData/Local/Programs/MiKTeX/fonts/type1/p
@@ -901,9 +908,9 @@ ublic/amsfonts/cm/cmcsc10.pfb><C:/Users/jismbs/AppData/Local/Programs/MiKTeX/fo
 nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jismbs/AppData/Local/Programs/
 MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/jismbs/AppData/Local
 /Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on MAIN.pdf (9 pages, 354949 bytes).
+Output written on MAIN.pdf (9 pages, 355734 bytes).
 PDF statistics:
- 174 PDF objects out of 1000 (max. 8388607)
- 22 named destinations out of 1000 (max. 500000)
+ 175 PDF objects out of 1000 (max. 8388607)
+ 23 named destinations out of 1000 (max. 500000)
  116 words of extra memory for PDF output out of 10000 (max. 10000000)
 
