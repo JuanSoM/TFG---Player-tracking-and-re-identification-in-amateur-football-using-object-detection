@@ -616,5 +616,5 @@ def main():
 if __name__ == "__main__":
     main()
 
-#primera prueba
-#python refine_tracklets.py --dataset SoccerNet --tracker DeepEIoU --track_src DeepEIoU_Tracklets_test --use_split --min_len 100 --eps 0.6 --min_samples 10 --max_k 3 --use_connect --spatial_factor 1.0 --merge_dist_thres 0.4
+#prueba definitiva
+#python refine_tracklets.py --dataset SoccerNet --tracker DeepEIoU --track_src DeepEIoU_Tracklets_frames_trackerVideo2 --use_split --min_len 100 --eps 0.8 --min_samples 10 --max_k 4 --use_connect --spatial_factor 1.0 --merge_dist_thres 0.7
