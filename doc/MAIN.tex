@@ -7,6 +7,7 @@
 \usepackage{hyperref}           % Para enlaces
 \usepackage{listings}           % Para código fuente (ajusta lenguaje)
 \usepackage{verbatim}
+\usepackage{float}
 \usepackage[backend=bibtex,style=numeric]{biblatex} % Para citas numéricas
 \addbibresource{references.bib} % Cargar archivo .bib
 \usepackage{url}
@@ -161,27 +162,240 @@
 	
 	Secuencia de trabajo: YOLO + DeepEIoU + GTA
 	
+	\subsection{Semana 7-13 de abril)}
+	
+	Planteé una estructura oficial de lo que llevo hecho para que sea más formal y dar contexto e información sobre todo lo que rodea las prácticas y el proyecto de TFG.
+	
 	\section{Motivación y Contexto}
+	
+	\subsection{¿Por qué es importante el análisis en fútbol amateur?}
+	
+	El análisis de rendimiento, la estadística avanzada y el seguimiento de jugadores han revolucionado el fútbol profesional. Sin embargo, en el fútbol amateur estas tecnologías todavía son muy poco accesibles.
+	Poder aplicar técnicas de tracking y análisis en estos niveles permitiría:
+	\begin{itemize}
+		\item \textbf{Mejorar el entrenamiento de jugadores jóvenes.}
+		\item \textbf{Facilitar la toma de decisiones a entrenadores y clubes pequeños.}
+		\item \textbf{Promover el desarrollo del talento de forma más justa y basada en datos.}
+	\end{itemize}
+	
+	\subsection{¿Qué problema hay actualmente?}
+	
+	La causa del primer problema que encontramos es la deficiencia en las infraestructuras tecnológicas para la práctica del fútbol amateur; el hecho de no disponer de sistemas avanzados que implementan las cámaras múltiples o los sensores del fútbol en el sector profesional, por el alto coste que implicaría el uso de las soluciones comerciales de tracking (GPS, cámaras VICON, sistemas ópticos, etc.) y la escasez de datos de movimiento y rendimiento que sufren las categorías base y amateur.
 	
 	\section{Objetivos}
 	
+	El presente proyecto tiene como principal objetivo colaborar en el análisis de los deportes a nivel de fútbol amateur implementando un sistema de detección automática, de seguimiento y de reidentificación de los jugadores. A día de hoy, existe una diferencia muy considerable entre la tecnología que existe para el análisis táctico y de rendimiento del fútbol profesional y la del ámbito amateur, lo cual significa que clubes, entrenadores y jugadores amateurs no tienen las herramientas disponible para realizar un análisis automatizado y estructurado de sus partidos.
+	Este trabajo pretende eliminar esta desigualdad creando un flujo de trabajo modular y eficiente que permita aplicar tecnología avanzada de visión por computador en el ámbito amateur. Para ello se combinan modelos de detección de objetos (YOLOX) con algoritmos de seguimiento multiobjeto (DeepEIoU) y técnicas de reidentificación de personas (ReID) con el modelo OSNet, las cuales son reforzadas con un refinamiento posterior (GTA-Link) que mejora la calidad de las trayectorias generadas.
+	
+	Los objetivos específicos del proyecto son los siguientes:
+	
+	\begin{itemize}
+		\item Desarrollar un sistema capaz de identificar y seguir automáticamente a los jugadores durante el transcurso de un partido de fútbol grabado en vídeo.
+		\item Implementar un modelo de reidentificación que permita mantener la coherencia de los IDs incluso ante desapariciones temporales del jugador en la escena.
+		\item Aplicar técnicas de post-procesamiento para corregir errores comunes en los tracklets generados, como fragmentación o mezcla de identidades.
+		\item Facilitar la reutilización y escalabilidad del flujo de trabajo en otros entornos deportivos, fomentando así su adopción por parte de entidades del fútbol base o amateur.
+		\item Probar y validar el sistema sobre secuencias reales de fútbol amateur, evaluando su rendimiento en condiciones no controladas.
+	\end{itemize}
+
+	
 	\section{Estado del sector}
+	
+	El análisis de rendimiento en el fútbol ha experimentado una transformación significativa en las últimas décadas, impulsada por avances tecnológicos que permiten una recopilación y procesamiento de datos cada vez más precisos y en tiempo real. Sin embargo, existe una marcada diferencia entre las herramientas utilizadas en el ámbito profesional y las accesibles para equipos amateurs.
+	
+	\subsection{Soluciones en el Ámbito Profesional}
+	
+	En el fútbol profesional, sistemas como TRACAB se han consolidado como referentes en el seguimiento y análisis de jugadores. TRACAB es un sistema de seguimiento óptico que utiliza cámaras y algoritmos de visión por computadora para rastrear en tiempo real la posición de todos los jugadores y el balón en el campo. Este sistema ha sido implementado en ligas de élite como la Premier League, La Liga y la Bundesliga, y está certificado por la FIFA para programas de seguimiento electrónico de rendimiento (EPTS). "https://tracab.com/products/tracab-technologies/?utm\_source=chatgpt.com"
+	
+	\subsection{Herramientas Disponibles para el Fútbol Amateur}
+	
+	En contraste, el fútbol amateur ha comenzado a adoptar herramientas más asequibles y adaptadas a sus necesidades y recursos. Una de las más destacadas es LongoMatch, un software de análisis de vídeo que permite a entrenadores y analistas etiquetar eventos, crear estadísticas y generar informes tácticos a partir de grabaciones de partidos.
+	
+	LongoMatch ofrece "https://longomatch.com/en/?utm\_source=chatgpt.com":
+	\begin{itemize}
+		\item	Análisis en tiempo real y post-partido con soporte para múltiples cámaras.
+
+	
+		\item Personalización de paneles de análisis según las necesidades del equipo.
+	
+		\item Exportación de datos y vídeos para compartir con jugadores y cuerpo técnico.
+	
+		\item Compatibilidad con diversas plataformas y dispositivos móviles.
+	\end{itemize}
+	
+	Además, herramientas como PIX4TEAM 2 han emergido para automatizar la grabación de partidos sin necesidad de un operador de cámara, facilitando la recopilación de material para análisis en equipos con recursos limitados. "https://shop.movensee.com/es/content/31-pix4team-camara-automatica-para-los-deportes-colectivos"
+	
+	\subsection{Limitaciones}
+	
+	\begin{center}
+		\begin{tabular}{|p{6.5cm}|p{6.5cm}|}
+			\hline
+			\textbf{Limitaciones del sector amateur} & \textbf{Aportaciones del presente proyecto} \\
+			\hline
+			Los sistemas comerciales como Second Spectrum o STATS SportVU requieren múltiples cámaras y hardware costoso. &
+			Se utiliza vídeo monocámara accesible y fácil de capturar con dispositivos comunes. \\
+			\hline
+			Los trackers convencionales pierden frecuentemente la identidad del jugador en escenas con oclusiones o cambios de plano. &
+			Se implementa un módulo de re-identificación (ReID) basado en TorchReID y OSNet para mantener la identidad a lo largo del partido. \\
+			\hline
+			No existen herramientas que generen anotaciones automáticas de forma sencilla a partir del vídeo. &
+			Se desarrolla un flujo de trabajo que genera archivos de anotaciones (formato MOT) automáticamente a partir del vídeo de entrada. \\
+			\hline
+			Los modelos existentes están entrenados en entornos profesionales, con condiciones muy diferentes al fútbol amateur. &
+			Los modelos utilizados en este proyecto han sido entrenados y validados específicamente sobre partidos de fútbol amateur. \\
+			\hline
+			Las soluciones actuales no están diseñadas para clubes pequeños: requieren licencias, suscripciones o personal técnico. &
+			Se busca una solución reproducible, ligera y gratuita basada en herramientas \textit{open-source}, accesible a cualquier usuario técnico. \\
+			\hline
+		\end{tabular}
+	\end{center}
 	
 	\section{Tecnologías empleadas}
 	
+	Este proyecto ha hecho uso de diversas tecnologías de software y frameworks de inteligencia artificial que permiten implementar un sistema de tracking con detección, seguimiento y reidentificación de jugadores en partidos de fútbol amateur. A continuación, se detallan las principales herramientas y recursos utilizados.
+	
+	\subsection{Programación}
+	
+	Para el desarrollo del sistema se ha utilizado el lenguaje de programación Python, por su gran ecosistema de librerías para visión por computadora y deep learning. El flujo de trabajo se ha dividido en diferentes etapas, desarrolladas principalmente en entornos Jupyter Notebook y scripts de Python:
+	
+	\begin{itemize}
+		\item \textbf{Jupyter Notebook:} Se utilizó para entrenar el modelo de detección de objetos YOLO, aprovechando la facilidad para experimentar de forma interactiva con parámetros y visualizar resultados.
+		\item \textbf{Python (scripts):} Fue empleado para el entrenamiento del modelo de re-identificación (ReID), así como para aplicar todos los modelos en el flujo final de inferencia y generación de vídeos etiquetados con las predicciones.
+	\end{itemize}
+	
+	\subsection{Gestión de datos y flujo de trabajo}
+	
+	\textbf{Roboflow} ha sido una herramienta fundamental para gestionar el dataset de entrenamiento del detector YOLO. Roboflow permite subir imágenes, etiquetarlas, realizar aumentos de datos automáticamente y exportar el dataset en el formato deseado (en nuestro caso, YOLOv8).
+	
+	\textbf{GitHub} ha sido el sistema elegido para el control de versiones y colaboración. Se ha utilizado para organizar y almacenar los diferentes módulos del proyecto, así como mantener un historial ordenado de los avances y pruebas realizadas durante el desarrollo del TFG.
+	
+	\subsection{Modelos utilizados}
+	
+	\textbf{YOLO (You Only Look Once)} ha sido el modelo principal utilizado para la detección de jugadores. Su arquitectura permite realizar detección en tiempo real, con una alta precisión y bajo coste computacional. Se entrenó una versión ligera del modelo con imágenes de fútbol amateur obtenidas del dataset gestionado en Roboflow.
+	
+	\textbf{DeepEIoU} fue el algoritmo de tracking utilizado para asociar detecciones entre frames y mantener la identidad de cada jugador. DeepEIoU combina estrategias geométricas (IoU) y de apariencia (cuando se usa ReID), lo que mejora la robustez frente a oclusiones y cambios de plano.
+	
+	Este modelo ha sido clave para generar archivos de anotación con los ID temporales de los jugadores a lo largo del vídeo, y servir como base para el post-procesamiento posterior mediante GTA-Link.
+	
+	\textbf{TorchReID} se ha usado como framework para entrenar el modelo de re-identificación. Se utilizó el modelo \textit{osnet\_x1\_0}, que fue ajustado sobre imágenes recortadas de jugadores, organizadas en carpetas según su identidad. Este modelo se utilizó posteriormente para mejorar el seguimiento, reduciendo los cambios de identidad.
+	
+	
+	
 	\section{Módulo de detección (YOLO)}
+	https://arxiv.org/abs/1506.02640
+	
+	\subsection{Arquitectura YOLO}
+	
+	YOLO (You Only Look Once) es una arquitectura de detección de objetos en imágenes y vídeos que ha destacado por su velocidad y precisión. La arquitectura original de YOLO, según la propuesta en el artículo de Redmon et al. (2016)\footnote{Redmon, J., Divvala, S., Girshick, R.,  Farhadi, A. (2016). You Only Look Once: Unified, Real-Time Object Detection. arXiv preprint arXiv:1506.02640.}, se inspira parcialmente en GoogleNet y está compuesta por 24 capas convolucionales, cuatro capas de agrupamiento máximo (max pooling) y dos capas totalmente conectadas al final.
+	
+	Antes de procesarse, la imagen de entrada es redimensionada a un tamaño fijo de 448x448 píxeles. El flujo interno de la red emplea convoluciones de tipo 1x1 que tienen como función principal reducir el número de canales de activación intermedios sin afectar a la información espacial. Posteriormente, se aplican convoluciones de 3x3 para capturar patrones locales más complejos. Cada una de estas capas es seguida por una función de activación ReLU, que introduce no linealidad al modelo, excepto en la capa de salida, donde se emplea una función de activación lineal.
+	
+	Además, para mejorar la estabilidad del entrenamiento y evitar el sobreajuste, se aplican técnicas como la normalización por lotes (Batch Normalization) y el abandono (Dropout). Estas estrategias permiten que el modelo generalice mejor ante nuevos datos y se mantenga robusto frente a variaciones del entorno.
+	
+	Esta arquitectura permite que YOLO realice detección de múltiples objetos en una sola pasada sobre la imagen (de ahí su nombre), lo que lo convierte en un modelo extremadamente eficiente para tareas en tiempo real.
+	
+	\subsection{¿Cómo funciona la detecci\'on de objetos con YOLO?}
+	
+	Una vez entendida la arquitectura interna de YOLO, es importante comprender cómo se lleva a cabo el proceso de detección de objetos. Para ello, se puede imaginar el caso práctico de una aplicación que detecta jugadores y balones de fútbol a partir de una imagen de vídeo.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/yolodec1}
+		\caption{\textbf{YOLO Detection. First Step}}
+		\label{fig:YOLO Detection. First Step}
+	\end{figure}
+	
+	El algoritmo de detección en YOLO se basa en cuatro pilares fundamentales: la división en cuadrículas, la regresión de cajas delimitadoras (bounding boxes), el cálculo del coeficiente de intersección sobre unión (IoU), y la supresión no máxima (NMS).
+	
+	\begin{enumerate}
+		\item \textbf{División en cuadrículas (bloques residuales):} La imagen de entrada se divide en una cuadrícula de tamaño $N\times N$, donde cada celda es responsable de detectar los objetos que contiene. Cada celda predice una clase y una probabilidad asociada, además de parámetros que definen la caja delimitadora. 
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.8\textwidth]{image/yolodec2}
+			\caption{\textbf{YOLO Detection. Second Step}}
+			\label{fig:YOLO Detection. Second Step}
+		\end{figure}
+		
+		
+		\item \textbf{Regresión de cajas delimitadoras:} Cada celda predice varias cajas en el formato $Y = [p_c, b_x, b_y, b_h, b_w, c_1, c_2, \dots, c_n]$, donde:
+		\begin{itemize}
+			\item $p_c$ es la probabilidad de que la celda contenga un objeto.
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.8\textwidth]{image/yolodec3}
+				\caption{\textbf{YOLO Detection. Third Step}}
+				\label{fig:YOLO Detection. Third Step}
+			\end{figure}
+			\item $b_x$, $b_y$ son las coordenadas del centro de la caja respecto a la celda.
+			\item $b_h$, $b_w$ son la altura y la anchura de la caja.
+			\item $c_1, c_2, \dots$ son las probabilidades de pertenencia a cada clase (jugador, balón, etc.).
+		\end{itemize}
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.8\textwidth]{image/yolodec4}
+			\caption{\textbf{YOLO Detection. Fourth Step}}
+			\label{fig:YOLO Detection. Fourth Step}
+		\end{figure}
+		
+		
+		
+		
+		\item \textbf{Intersección sobre Unión (IoU):} Para cada predicción, YOLO calcula el solapamiento entre la caja predicha y las cajas reales (ground truth). El valor del IoU (entre 0 y 1) permite descartar predicciones de baja calidad. Sólo aquellas con un IoU superior a un umbral son tenidas en cuenta.
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.8\textwidth]{image/yolodec5}
+			\caption{\textbf{YOLO Detection. Fifth Step}}
+			\label{fig:YOLO Detection. Fifth Step}
+		\end{figure}
+		
+		
+		\item \textbf{Supresión No Máxima (NMS):} Cuando varias cajas se solapan con valores altos de IoU, el algoritmo aplica NMS para conservar sólo la de mayor probabilidad, eliminando duplicados y reduciendo el ruido en las predicciones.
+	\end{enumerate}
+	
+	Este proceso completo permite que, en un único paso y de forma muy eficiente, YOLO identifique múltiples objetos en una imagen, indicando su clase y ubicación precisa. Esta capacidad lo convierte en una herramienta especialmente útil en el análisis de vídeo deportivo, donde se requiere detectar varios jugadores en escenas rápidas y dinámicas.
+	"https://www.datacamp.com/blog/yolo-object-detection-explained"
+	
 	
 	\section{Módulo de tracking + Gestión de IDs}
 	
+	
+	\subsection{Módulo de tracking}
+	En el contexto de la detección de objetos en vídeo, como la realizada por modelos como YOLO, cada fotograma es procesado de forma independiente. Esto significa que, aunque el detector puede identificar y localizar objetos en cada imagen, no mantiene información sobre la identidad de estos objetos a lo largo del tiempo. Por ejemplo, no puede determinar si el jugador detectado en el fotograma 1 es el mismo que en el fotograma 2.
+	
+	Para abordar esta limitación, se emplean algoritmos de seguimiento de objetos (trackers) que asocian las detecciones entre fotogramas consecutivos, permitiendo así mantener la identidad de cada objeto a lo largo del tiempo. Estos trackers asignan un identificador único a cada objeto y actualizan su posición en cada nuevo fotograma, incluso en presencia de oclusiones o cambios de apariencia.
+	
+	Un ejemplo destacado de este enfoque es el algoritmo Deep SORT (Simple Online and Realtime Tracking with a Deep Association Metric), que combina información de movimiento y apariencia para asociar detecciones entre fotogramas. Deep SORT utiliza un filtro de Kalman para predecir la posición futura de los objetos y un descriptor de apariencia basado en redes neuronales profundas para comparar similitudes visuales entre detecciones. La asociación entre detecciones y trayectorias se realiza mediante el algoritmo húngaro, que minimiza el coste total de asociación considerando tanto la distancia de movimiento como la similitud de apariencia.
+	"https://doi.org/10.1109/ICIP.2017.8296962"
+	
+	\subsection{Gestión de IDs}
+	
+	"https://paperswithcode.com/task/person-re-identification"
+	
+	La Re-identificación de Personas es una tarea de visión por computadora cuyo objetivo es asociar la identidad de una persona a través de diferentes cámaras o ubicaciones en una secuencia de vídeo o imágenes. Implica detectar y seguir a una persona y luego utilizar características como apariencia, forma del cuerpo y ropa para asociar su identidad en diferentes fotogramas. El objetivo es asociar a la misma persona en múltiples vistas de cámara no superpuestas de manera robusta y eficiente. 
+	
+	
 	\section{Propuesta}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/Flowcharts}
+		\caption{\textbf{Propuesta}}
+		\label{fig:Propuesta}
+	\end{figure}
 	
 	\section{Arquitectura general del sistema}
 	
+	
 	\section{Resultados Preliminares}
+	
 	
 	\section{Dificultades encontradas}
 	
+	
 	\section{Conclusiones}
+	
 	
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

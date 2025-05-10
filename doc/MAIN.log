@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.12)  8 APR 2025 17:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.12)  11 MAY 2025 01:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -294,59 +294,67 @@ Package: verbatim 2024-01-22 v1.5x LaTeX2e package for verbatim enhancements
 \every@verbatim=\toks22
 \verbatim@line=\toks23
 \verbatim@in@stream=\read2
-) (C:\Users\jismbs\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.st
-y
+) (C:\Users\jismbs\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count296
+\float@exts=\toks24
+\float@box=\box56
+\@float@everytoks=\toks25
+\@floatcapt=\box57
+)
+(C:\Users\jismbs\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.sty
 Package: biblatex 2024/03/21 v3.20 programmable bibliographies (PK/MW)
+
 (C:\Users\jismbs\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count296
+\lrq@indent=\count297
 
 (C:\Users\jismbs\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 ))
-\c@tabx@nest=\count297
-\c@listtotal=\count298
-\c@listcount=\count299
-\c@liststart=\count300
-\c@liststop=\count301
-\c@citecount=\count302
-\c@citetotal=\count303
-\c@multicitecount=\count304
-\c@multicitetotal=\count305
-\c@instcount=\count306
-\c@maxnames=\count307
-\c@minnames=\count308
-\c@maxitems=\count309
-\c@minitems=\count310
-\c@citecounter=\count311
-\c@maxcitecounter=\count312
-\c@savedcitecounter=\count313
-\c@uniquelist=\count314
-\c@uniquename=\count315
-\c@refsection=\count316
-\c@refsegment=\count317
-\c@maxextratitle=\count318
-\c@maxextratitleyear=\count319
-\c@maxextraname=\count320
-\c@maxextradate=\count321
-\c@maxextraalpha=\count322
-\c@abbrvpenalty=\count323
-\c@highnamepenalty=\count324
-\c@lownamepenalty=\count325
-\c@maxparens=\count326
-\c@parenlevel=\count327
-\blx@tempcnta=\count328
-\blx@tempcntb=\count329
-\blx@tempcntc=\count330
-\c@blx@maxsection=\count331
-\blx@maxsegment@0=\count332
-\blx@notetype=\count333
-\blx@parenlevel@text=\count334
-\blx@parenlevel@foot=\count335
-\blx@sectionciteorder@0=\count336
-\blx@sectionciteorderinternal@0=\count337
-\blx@entrysetcounter=\count338
-\blx@biblioinstance=\count339
+\c@tabx@nest=\count298
+\c@listtotal=\count299
+\c@listcount=\count300
+\c@liststart=\count301
+\c@liststop=\count302
+\c@citecount=\count303
+\c@citetotal=\count304
+\c@multicitecount=\count305
+\c@multicitetotal=\count306
+\c@instcount=\count307
+\c@maxnames=\count308
+\c@minnames=\count309
+\c@maxitems=\count310
+\c@minitems=\count311
+\c@citecounter=\count312
+\c@maxcitecounter=\count313
+\c@savedcitecounter=\count314
+\c@uniquelist=\count315
+\c@uniquename=\count316
+\c@refsection=\count317
+\c@refsegment=\count318
+\c@maxextratitle=\count319
+\c@maxextratitleyear=\count320
+\c@maxextraname=\count321
+\c@maxextradate=\count322
+\c@maxextraalpha=\count323
+\c@abbrvpenalty=\count324
+\c@highnamepenalty=\count325
+\c@lownamepenalty=\count326
+\c@maxparens=\count327
+\c@parenlevel=\count328
+\blx@tempcnta=\count329
+\blx@tempcntb=\count330
+\blx@tempcntc=\count331
+\c@blx@maxsection=\count332
+\blx@maxsegment@0=\count333
+\blx@notetype=\count334
+\blx@parenlevel@text=\count335
+\blx@parenlevel@foot=\count336
+\blx@sectionciteorder@0=\count337
+\blx@sectionciteorderinternal@0=\count338
+\blx@entrysetcounter=\count339
+\blx@biblioinstance=\count340
 \labelnumberwidth=\skip55
 \labelalphawidth=\skip56
 \biblabelsep=\skip57
@@ -358,9 +366,9 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 \blx@bcfin=\read3
 \blx@bcfout=\write3
 \blx@langwohyphens=\language79
-\c@mincomprange=\count340
-\c@maxcomprange=\count341
-\c@mincompwidth=\count342
+\c@mincomprange=\count341
+\c@maxcomprange=\count342
+\c@mincompwidth=\count343
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
 
@@ -371,74 +379,74 @@ Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'numeric.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count343
-\c@savedafterword=\count344
-\c@annotator=\count345
-\c@savedannotator=\count346
-\c@author=\count347
-\c@savedauthor=\count348
-\c@bookauthor=\count349
-\c@savedbookauthor=\count350
-\c@commentator=\count351
-\c@savedcommentator=\count352
-\c@editor=\count353
-\c@savededitor=\count354
-\c@editora=\count355
-\c@savededitora=\count356
-\c@editorb=\count357
-\c@savededitorb=\count358
-\c@editorc=\count359
-\c@savededitorc=\count360
-\c@foreword=\count361
-\c@savedforeword=\count362
-\c@holder=\count363
-\c@savedholder=\count364
-\c@introduction=\count365
-\c@savedintroduction=\count366
-\c@namea=\count367
-\c@savednamea=\count368
-\c@nameb=\count369
-\c@savednameb=\count370
-\c@namec=\count371
-\c@savednamec=\count372
-\c@translator=\count373
-\c@savedtranslator=\count374
-\c@shortauthor=\count375
-\c@savedshortauthor=\count376
-\c@shorteditor=\count377
-\c@savedshorteditor=\count378
-\c@labelname=\count379
-\c@savedlabelname=\count380
-\c@institution=\count381
-\c@savedinstitution=\count382
-\c@lista=\count383
-\c@savedlista=\count384
-\c@listb=\count385
-\c@savedlistb=\count386
-\c@listc=\count387
-\c@savedlistc=\count388
-\c@listd=\count389
-\c@savedlistd=\count390
-\c@liste=\count391
-\c@savedliste=\count392
-\c@listf=\count393
-\c@savedlistf=\count394
-\c@location=\count395
-\c@savedlocation=\count396
-\c@organization=\count397
-\c@savedorganization=\count398
-\c@origlocation=\count399
-\c@savedoriglocation=\count400
-\c@origpublisher=\count401
-\c@savedorigpublisher=\count402
-\c@publisher=\count403
-\c@savedpublisher=\count404
-\c@language=\count405
-\c@savedlanguage=\count406
-\c@origlanguage=\count407
-\c@savedoriglanguage=\count408
-\c@pageref=\count409
-\c@savedpageref=\count410
+\c@afterword=\count344
+\c@savedafterword=\count345
+\c@annotator=\count346
+\c@savedannotator=\count347
+\c@author=\count348
+\c@savedauthor=\count349
+\c@bookauthor=\count350
+\c@savedbookauthor=\count351
+\c@commentator=\count352
+\c@savedcommentator=\count353
+\c@editor=\count354
+\c@savededitor=\count355
+\c@editora=\count356
+\c@savededitora=\count357
+\c@editorb=\count358
+\c@savededitorb=\count359
+\c@editorc=\count360
+\c@savededitorc=\count361
+\c@foreword=\count362
+\c@savedforeword=\count363
+\c@holder=\count364
+\c@savedholder=\count365
+\c@introduction=\count366
+\c@savedintroduction=\count367
+\c@namea=\count368
+\c@savednamea=\count369
+\c@nameb=\count370
+\c@savednameb=\count371
+\c@namec=\count372
+\c@savednamec=\count373
+\c@translator=\count374
+\c@savedtranslator=\count375
+\c@shortauthor=\count376
+\c@savedshortauthor=\count377
+\c@shorteditor=\count378
+\c@savedshorteditor=\count379
+\c@labelname=\count380
+\c@savedlabelname=\count381
+\c@institution=\count382
+\c@savedinstitution=\count383
+\c@lista=\count384
+\c@savedlista=\count385
+\c@listb=\count386
+\c@savedlistb=\count387
+\c@listc=\count388
+\c@savedlistc=\count389
+\c@listd=\count390
+\c@savedlistd=\count391
+\c@liste=\count392
+\c@savedliste=\count393
+\c@listf=\count394
+\c@savedlistf=\count395
+\c@location=\count396
+\c@savedlocation=\count397
+\c@organization=\count398
+\c@savedorganization=\count399
+\c@origlocation=\count400
+\c@savedoriglocation=\count401
+\c@origpublisher=\count402
+\c@savedorigpublisher=\count403
+\c@publisher=\count404
+\c@savedpublisher=\count405
+\c@language=\count406
+\c@savedlanguage=\count407
+\c@origlanguage=\count408
+\c@savedoriglanguage=\count409
+\c@pageref=\count410
+\c@savedpageref=\count411
 \shorthandwidth=\skip63
 \shortjournalwidth=\skip64
 \shortserieswidth=\skip65
@@ -477,19 +485,19 @@ Package biblatex Info: ... file 'biblatex.def' found.
 
 (C:\Users\jismbs\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.def
 File: biblatex.def 2024/03/21 v3.20 biblatex compatibility (PK/MW)
-\c@textcitecount=\count411
-\c@textcitetotal=\count412
-\c@textcitemaxnames=\count413
-\c@biburlbigbreakpenalty=\count414
-\c@biburlbreakpenalty=\count415
-\c@biburlnumpenalty=\count416
-\c@biburlucpenalty=\count417
-\c@biburllcpenalty=\count418
+\c@textcitecount=\count412
+\c@textcitetotal=\count413
+\c@textcitemaxnames=\count414
+\c@biburlbigbreakpenalty=\count415
+\c@biburlbreakpenalty=\count416
+\c@biburlnumpenalty=\count417
+\c@biburlucpenalty=\count418
+\c@biburllcpenalty=\count419
 \biburlbigskip=\muskip18
 \biburlnumskip=\muskip19
 \biburlucskip=\muskip20
 \biburllcskip=\muskip21
-\c@smartand=\count419
+\c@smartand=\count420
 )
 Package biblatex Info: Trying to load bibliography style 'numeric'...
 Package biblatex Info: ... file 'numeric.bbx' found.
@@ -503,8 +511,8 @@ Package biblatex Info: ... file 'standard.bbx' found.
 (C:\Users\jismbs\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\standard.
 bbx
 File: standard.bbx 2024/03/21 v3.20 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count420
-\c@bbx:relatedtotal=\count421
+\c@bbx:relatedcount=\count421
+\c@bbx:relatedtotal=\count422
 ))
 Package biblatex Info: Trying to load citation style 'numeric'...
 Package biblatex Info: ... file 'numeric.cbx' found.
@@ -538,8 +546,8 @@ Package: expl3 2024-11-02 L3 programming layer (loader)
 (C:\Users\jismbs\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pd
 ftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count422
-\l__pdf_internal_box=\box56
+\l__color_backend_stack_int=\count423
+\l__pdf_internal_box=\box58
 ))
 Package biblatex Info: ... and expl3
 (biblatex)             2024-11-02 L3 programming layer (loader) 
@@ -560,9 +568,9 @@ Package: geometry 2020/01/02 v5.9 Page Geometry
 (C:\Users\jismbs\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count423
-\Gm@cntv=\count424
-\c@Gm@tempcnt=\count425
+\Gm@cnth=\count424
+\Gm@cntv=\count425
+\c@Gm@tempcnt=\count426
 \Gm@bindingoffset=\dimen159
 \Gm@wd@mp=\dimen160
 \Gm@odd@mp=\dimen161
@@ -571,48 +579,48 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layoutheight=\dimen164
 \Gm@layouthoffset=\dimen165
 \Gm@layoutvoffset=\dimen166
-\Gm@dimlist=\toks24
+\Gm@dimlist=\toks26
 
 (C:\Users\jismbs\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)
 )
-\@quotelevel=\count426
-\@quotereset=\count427
+\@quotelevel=\count427
+\@quotereset=\count428
  (MAIN.aux)
 \openout1 = `MAIN.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
 
 (C:\Users\jismbs\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.m
 kii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count428
+\scratchcounter=\count429
 \scratchdimen=\dimen167
-\scratchbox=\box57
-\nofMPsegments=\count429
-\nofMParguments=\count430
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count431
+\scratchbox=\box59
+\nofMPsegments=\count430
+\nofMParguments=\count431
+\everyMPshowfont=\toks27
+\MPscratchCnt=\count432
 \MPscratchDim=\dimen168
-\MPnumerator=\count432
-\makeMPintoPDFobject=\count433
-\everyMPtoPDFconversion=\toks26
+\MPnumerator=\count433
+\makeMPintoPDFobject=\count434
+\everyMPtoPDFconversion=\toks28
 )
 (C:\Users\jismbs\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-
 base.sty
@@ -638,12 +646,12 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
-Package hyperref Info: Link coloring OFF on input line 30.
+Package hyperref Info: Link coloring OFF on input line 31.
 (MAIN.out) (MAIN.out)
 \@outlinefile=\write4
 \openout4 = `MAIN.out'.
 
-\c@lstlisting=\count434
+\c@lstlisting=\count435
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
 
@@ -662,8 +670,8 @@ Package biblatex Info: Data encoding 'utf8' specified.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'MAIN.bbl' found.
  (MAIN.bbl)
-Package biblatex Info: Reference section=0 on input line 30.
-Package biblatex Info: Reference segment=0 on input line 30.
+Package biblatex Info: Reference section=0 on input line 31.
+Package biblatex Info: Reference segment=0 on input line 31.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -699,59 +707,59 @@ Package biblatex Info: Reference segment=0 on input line 30.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<cover.pdf, id=23, 597.73312pt x 845.40843pt>
+<cover.pdf, id=123, 597.73312pt x 845.40843pt>
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf>
-Package pdftex.def Info: cover.pdf  used on input line 33.
+Package pdftex.def Info: cover.pdf  used on input line 34.
 (pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf>
-Package pdftex.def Info: cover.pdf  used on input line 33.
+Package pdftex.def Info: cover.pdf  used on input line 34.
 (pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
-<cover.pdf, id=26, page=1, 597.73312pt x 845.40843pt>
+<cover.pdf, id=126, page=1, 597.73312pt x 845.40843pt>
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf, page 1>
-Package pdftex.def Info: cover.pdf , page1 used on input line 33.
-(pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
-File: cover.pdf Graphic file (type pdf)
-<use cover.pdf, page 1>
-Package pdftex.def Info: cover.pdf , page1 used on input line 33.
+Package pdftex.def Info: cover.pdf , page1 used on input line 34.
 (pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf, page 1>
-Package pdftex.def Info: cover.pdf , page1 used on input line 33.
+Package pdftex.def Info: cover.pdf , page1 used on input line 34.
+(pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
+File: cover.pdf Graphic file (type pdf)
+<use cover.pdf, page 1>
+Package pdftex.def Info: cover.pdf , page1 used on input line 34.
 (pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
 
 
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf, page 1>
-Package pdftex.def Info: cover.pdf , page1 used on input line 33.
+Package pdftex.def Info: cover.pdf , page1 used on input line 34.
 (pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
 [1
 
 
  <./cover.pdf>]
-<title.pdf, id=44, 597.73312pt x 845.40843pt>
+<title.pdf, id=144, 597.73312pt x 845.40843pt>
 File: title.pdf Graphic file (type pdf)
 <use title.pdf>
-Package pdftex.def Info: title.pdf  used on input line 38.
+Package pdftex.def Info: title.pdf  used on input line 39.
 (pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
 File: title.pdf Graphic file (type pdf)
 <use title.pdf>
-Package pdftex.def Info: title.pdf  used on input line 38.
+Package pdftex.def Info: title.pdf  used on input line 39.
 (pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
-<title.pdf, id=47, page=1, 597.73312pt x 845.40843pt>
+<title.pdf, id=147, page=1, 597.73312pt x 845.40843pt>
 File: title.pdf Graphic file (type pdf)
 <use title.pdf, page 1>
-Package pdftex.def Info: title.pdf , page1 used on input line 38.
-(pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
-File: title.pdf Graphic file (type pdf)
-<use title.pdf, page 1>
-Package pdftex.def Info: title.pdf , page1 used on input line 38.
+Package pdftex.def Info: title.pdf , page1 used on input line 39.
 (pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
 File: title.pdf Graphic file (type pdf)
 <use title.pdf, page 1>
-Package pdftex.def Info: title.pdf , page1 used on input line 38.
+Package pdftex.def Info: title.pdf , page1 used on input line 39.
+(pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
+File: title.pdf Graphic file (type pdf)
+<use title.pdf, page 1>
+Package pdftex.def Info: title.pdf , page1 used on input line 39.
 (pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
 
 
@@ -760,11 +768,11 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.38 ...oscale=true, width=\paperwidth]{title.pdf}
+l.39 ...oscale=true, width=\paperwidth]{title.pdf}
                                                   
 File: title.pdf Graphic file (type pdf)
 <use title.pdf, page 1>
-Package pdftex.def Info: title.pdf , page1 used on input line 38.
+Package pdftex.def Info: title.pdf , page1 used on input line 39.
 (pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
  [1
 
@@ -785,132 +793,302 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 [2{C:/Users/jismbs/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\cite' on input line 61.
+(hyperref)                removing `\cite' on input line 62.
 
-<image/metricasBeta.png, id=78, 310.761pt x 271.61475pt>
+<image/metricasBeta.png, id=203, 310.761pt x 271.61475pt>
 File: image/metricasBeta.png Graphic file (type png)
 <use image/metricasBeta.png>
-Package pdftex.def Info: image/metricasBeta.png  used on input line 67.
+Package pdftex.def Info: image/metricasBeta.png  used on input line 68.
 (pdftex.def)             Requested size: 341.43437pt x 298.43314pt.
-<image/Centrarse.png, id=80, 418.56375pt x 122.25674pt>
+<image/Centrarse.png, id=205, 418.56375pt x 122.25674pt>
 File: image/Centrarse.png Graphic file (type png)
 <use image/Centrarse.png>
-Package pdftex.def Info: image/Centrarse.png  used on input line 76.
+Package pdftex.def Info: image/Centrarse.png  used on input line 77.
 (pdftex.def)             Requested size: 341.43437pt x 99.72696pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 
-[3 <./image/metricasBeta.png>]
-Overfull \hbox (73.3839pt too wide) in paragraph at lines 87--87
+[3
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.83 	
+       <./image/metricasBeta.png>]
+Overfull \hbox (73.3839pt too wide) in paragraph at lines 88--88
 []  \OT1/cmtt/m/n/12 mySoccerNetDownloader = SoccerNetDownloader(LocalDirectory
 ="path/to/SoccerNet")[] 
  []
 
 
-Overfull \hbox (6.22516pt too wide) in paragraph at lines 94--95
+Overfull \hbox (6.22516pt too wide) in paragraph at lines 95--96
 []\OT1/cmr/m/n/12 Estos son es-en-ciales para que se pueda eje-cu-tar el archiv
 o \OT1/cmtt/m/n/12 generate[]tracklets.py
  []
 
 
 
-[4 <./image/Centrarse.png>]
-<image/deepEIoU.png, id=96, 867.84225pt x 246.9225pt>
+[4
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.108 	
+        <./image/Centrarse.png>]
+<image/deepEIoU.png, id=221, 867.84225pt x 246.9225pt>
 File: image/deepEIoU.png Graphic file (type png)
 <use image/deepEIoU.png>
-Package pdftex.def Info: image/deepEIoU.png  used on input line 128.
+Package pdftex.def Info: image/deepEIoU.png  used on input line 129.
 (pdftex.def)             Requested size: 341.43437pt x 97.14711pt.
 
 
-[5 <./image/deepEIoU.png>]
+[5
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.135 	
+        <./image/deepEIoU.png>]
 
 [6]
 
-pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
-ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=113, 597.23125pt x 845.1575pt>
-File: backcover.pdf Graphic file (type pdf)
-<use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 169.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
-ersion <1.7>, but at most version <1.5> allowed
-File: backcover.pdf Graphic file (type pdf)
-<use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 169.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
-ersion <1.7>, but at most version <1.5> allowed
-
-
-pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
-ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=116, page=1, 597.23125pt x 845.1575pt>
-File: backcover.pdf Graphic file (type pdf)
-<use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 169.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
 [7]
+Overfull \hbox (88.48886pt too wide) in paragraph at lines 207--208
+\OT1/cmr/m/n/12 rendimiento (EPTS). "https://tracab.com/products/tracab-technol
+ogies/?utm[]source=chatgpt.com" 
+ []
+
+
+Overfull \hbox (132.85098pt too wide) in paragraph at lines 225--226
+\OT1/cmr/m/n/12 laci^^Son de ma-te-rial para an^^Salisis en equipos con re-cur-
+sos lim-i-ta-dos. "https://shop.movensee.com/es/content/31-
+ []
+
+
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 232--233
+[]\OT1/cmr/bx/n/12 Aportaciones del pre-sente
+ []
+
+
+Underfull \hbox (badness 5504) in paragraph at lines 238--239
+\OT1/cmr/m/n/12 identificaci^^Son (ReID) basado en
+ []
+
+
+Underfull \hbox (badness 5331) in paragraph at lines 244--245
+[]\OT1/cmr/m/n/12 Los mod-e-los uti-liza-dos en este
+ []
+
+
+Underfull \hbox (badness 1270) in paragraph at lines 244--245
+\OT1/cmr/m/n/12 i-da-dos es-pec^^S^^Pficamente so-bre par-
+ []
+
+
+Underfull \hbox (badness 1648) in paragraph at lines 246--246
+[]\OT1/cmr/m/n/12 Las solu-ciones ac-tuales no est^^San
+ []
+
+
+Underfull \hbox (badness 2103) in paragraph at lines 246--246
+\OT1/cmr/m/n/12 quieren li-cen-cias, suscrip-ciones o
+ []
+
+
+Underfull \hbox (badness 1237) in paragraph at lines 247--248
+\OT1/cmr/m/n/12 lig-era y gra-tuita basada en her-
+ []
+
+
+
+[9]
+Overfull \hbox (24.38252pt too wide) in paragraph at lines 279--280
+[]\OT1/cmr/bx/n/12 TorchReID \OT1/cmr/m/n/12 se ha us-ado como frame-work para 
+en-tre-nar el mod-elo de re-identificaci^^Son.
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 288.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 288.
+
+
+[10]
+<image/yolodec1.jpg, id=258, 803.0pt x 362.35374pt>
+File: image/yolodec1.jpg Graphic file (type jpg)
+<use image/yolodec1.jpg>
+Package pdftex.def Info: image/yolodec1.jpg  used on input line 302.
+(pdftex.def)             Requested size: 341.43437pt x 154.07294pt.
+<image/yolodec2.jpg, id=259, 803.0pt x 358.33875pt>
+File: image/yolodec2.jpg Graphic file (type jpg)
+<use image/yolodec2.jpg>
+Package pdftex.def Info: image/yolodec2.jpg  used on input line 314.
+(pdftex.def)             Requested size: 341.43437pt x 152.36577pt.
+
+Underfull \vbox (badness 1226) has occurred while \output is active []
+
+
+
+[11
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.318 		
+         <./image/yolodec1.jpg>]
+<image/yolodec3.jpg, id=268, 803.0pt x 389.455pt>
+File: image/yolodec3.jpg Graphic file (type jpg)
+<use image/yolodec3.jpg>
+Package pdftex.def Info: image/yolodec3.jpg  used on input line 325.
+(pdftex.def)             Requested size: 341.43437pt x 165.5964pt.
+<image/yolodec4.jpg, id=269, 803.0pt x 414.54875pt>
+File: image/yolodec4.jpg Graphic file (type jpg)
+<use image/yolodec4.jpg>
+Package pdftex.def Info: image/yolodec4.jpg  used on input line 336.
+(pdftex.def)             Requested size: 341.43437pt x 176.26628pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[12
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.340 		
+        
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.340 		
+         <./image/yolodec2.jpg> <./image/yolodec3.jpg>]
+<image/yolodec5.jpg, id=279, 803.0pt x 451.6875pt>
+File: image/yolodec5.jpg Graphic file (type jpg)
+<use image/yolodec5.jpg>
+Package pdftex.def Info: image/yolodec5.jpg  used on input line 348.
+(pdftex.def)             Requested size: 341.43437pt x 192.05768pt.
+
+
+[13
+pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.366 	
+       
+pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.366 	
+        <./image/yolodec4.jpg> <./image/yolodec5.jpg>]
+<image/Flowcharts.png, id=288, 1806.75pt x 627.34375pt>
+File: image/Flowcharts.png Graphic file (type png)
+<use image/Flowcharts.png>
+Package pdftex.def Info: image/Flowcharts.png  used on input line 383.
+(pdftex.def)             Requested size: 341.43437pt x 118.55519pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[14]
+
+pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
+ersion <1.7>, but at most version <1.5> allowed
+<backcover.pdf, id=294, 597.23125pt x 845.1575pt>
+File: backcover.pdf Graphic file (type pdf)
+<use backcover.pdf>
+Package pdftex.def Info: backcover.pdf  used on input line 406.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+
+
+pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
+ersion <1.7>, but at most version <1.5> allowed
+File: backcover.pdf Graphic file (type pdf)
+<use backcover.pdf>
+Package pdftex.def Info: backcover.pdf  used on input line 406.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+
+
+pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
+ersion <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
+ersion <1.7>, but at most version <1.5> allowed
+<backcover.pdf, id=297, page=1, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 169.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 406.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+
+
+[15
+pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.406 ...e=true, width=\paperwidth]{backcover.pdf}
+                                                   <./image/Flowcharts.png>]
+File: backcover.pdf Graphic file (type pdf)
+<use backcover.pdf, page 1>
+Package pdftex.def Info: backcover.pdf , page1 used on input line 406.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 169.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 406.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 169.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 406.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-[8
+[16
 
  <./backcover.pdf>] (MAIN.aux)
  ***********
 LaTeX2e <2024-11-01>
 L3 programming layer <2024-11-02>
  ***********
-
-
-Package rerunfilecheck Warning: File `MAIN.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `MAIN.out':
-(rerunfilecheck)             Before: 3235E5890A5917AF235D518479A2A6B1;817
-(rerunfilecheck)             After:  10AB28C38089B4D975D97B653351089F;991.
+Package rerunfilecheck Info: File `MAIN.out' has not changed.
+(rerunfilecheck)             Checksum: 3BC8AC261BA20AD79F1189886F40CEBA;5430.
 Package logreq Info: Writing requests to 'MAIN.run.xml'.
 \openout1 = `MAIN.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19210 strings out of 473681
- 337513 string characters out of 5718718
- 956541 words of memory out of 5000000
- 42076 multiletter control sequences out of 15000+600000
+ 19434 strings out of 473681
+ 341555 string characters out of 5718718
+ 959259 words of memory out of 5000000
+ 42253 multiletter control sequences out of 15000+600000
  563477 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,17n,81p,1905b,1295s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,17n,81p,1905b,1293s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\jismbs\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcr
 m1200.pk><C:/Users/jismbs/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
 onts/cm/cmbx12.pfb><C:/Users/jismbs/AppData/Local/Programs/MiKTeX/fonts/type1/p
 ublic/amsfonts/cm/cmcsc10.pfb><C:/Users/jismbs/AppData/Local/Programs/MiKTeX/fo
-nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jismbs/AppData/Local/Programs/
-MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/jismbs/AppData/Local
-/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on MAIN.pdf (9 pages, 355734 bytes).
+nts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/jismbs/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/jismbs/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/jismbs/AppD
+ata/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/ji
+smbs/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/
+Users/jismbs/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.
+pfb><C:/Users/jismbs/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmsy10.pfb><C:/Users/jismbs/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/amsfonts/cm/cmti12.pfb><C:/Users/jismbs/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/amsfonts/cm/cmtt12.pfb>
+Output written on MAIN.pdf (17 pages, 1358511 bytes).
 PDF statistics:
- 175 PDF objects out of 1000 (max. 8388607)
- 23 named destinations out of 1000 (max. 500000)
- 116 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 390 PDF objects out of 1000 (max. 8388607)
+ 66 named destinations out of 1000 (max. 500000)
+ 346 words of extra memory for PDF output out of 10000 (max. 10000000)
 

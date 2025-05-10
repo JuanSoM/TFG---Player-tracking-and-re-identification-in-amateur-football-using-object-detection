@@ -80,7 +80,14 @@ Este proyecto sigue una metodología **iterativa y ágil** para abordar los desa
 2. [SoccerNet](https://github.com/SoccerNet/sn-tracking)
 3. [GTA-Link GitHub - Jiacheng Sun](https://github.com/sjc042/gta-link)
 4. [Multi-object Tracking: A Review](https://sertiscorp.medium.com/multi-object-tracking-a-review-6aaeea495209)
-
+5. ```bib
+   @inproceedings{huang2024iterative,
+     title={Iterative Scale-Up ExpansionIoU and Deep Features Association for Multi-Object Tracking in Sports},
+     author={Huang, Hsiang-Wei and Yang, Cheng-Yen and Sun, Jiacheng and Kim, Pyong-Kun and Kim, Kwang-Ju and Lee, Kyoungoh and Huang, Chung-I and Hwang, Jenq-Neng},
+     booktitle={Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision},
+     pages={163--172},
+     year={2024}
+   }
 ## Licencia
 
 Este proyecto está bajo la licencia [MIT](LICENSE).
