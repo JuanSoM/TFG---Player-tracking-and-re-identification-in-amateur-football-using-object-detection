@@ -1,30 +1,41 @@
-\contentsline {section}{\numberline {1}Introducción}{3}{section.1}%
-\contentsline {section}{\numberline {2}Diario de avances}{3}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Semana 3-16 de marzo)}{3}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Semana 17-31 de marzo \blx@tocontentsinit {0}\cite {sun2024gta}}{3}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Semana 31-6 de abril)}{5}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Semana 7-13 de abril)}{6}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}Semana 7-13 de abril)}{7}{subsection.2.5}%
-\contentsline {section}{\numberline {3}Motivación y Contexto}{7}{section.3}%
-\contentsline {subsection}{\numberline {3.1}¿Por qué es importante el análisis en fútbol amateur?}{7}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}¿Qué problema hay actualmente?}{7}{subsection.3.2}%
-\contentsline {section}{\numberline {4}Objetivos}{7}{section.4}%
-\contentsline {section}{\numberline {5}Estado del sector}{8}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Soluciones en el Ámbito Profesional}{8}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Herramientas Disponibles para el Fútbol Amateur}{8}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Limitaciones}{9}{subsection.5.3}%
-\contentsline {section}{\numberline {6}Tecnologías empleadas}{9}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Programación}{9}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Gestión de datos y flujo de trabajo}{10}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Modelos utilizados}{10}{subsection.6.3}%
-\contentsline {section}{\numberline {7}Módulo de detección (YOLO)}{10}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Arquitectura YOLO}{10}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}¿Cómo funciona la detecci\'on de objetos con YOLO?}{11}{subsection.7.2}%
-\contentsline {section}{\numberline {8}Módulo de tracking + Gestión de IDs}{14}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Módulo de tracking}{14}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Gestión de IDs}{14}{subsection.8.2}%
-\contentsline {section}{\numberline {9}Propuesta}{15}{section.9}%
-\contentsline {section}{\numberline {10}Arquitectura general del sistema}{15}{section.10}%
-\contentsline {section}{\numberline {11}Resultados Preliminares}{15}{section.11}%
-\contentsline {section}{\numberline {12}Dificultades encontradas}{15}{section.12}%
-\contentsline {section}{\numberline {13}Conclusiones}{15}{section.13}%
+\contentsline {section}{\numberline {1}Introducción}{4}{section.1}%
+\contentsline {section}{\numberline {2}Diario de avances}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Semana 3-16 de marzo)}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Semana 17-31 de marzo \blx@tocontentsinit {0}\cite {sun2024gta}}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Semana 31-6 de abril)}{6}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Semana 7-13 de abril)}{7}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Semana 7-13 de abril)}{8}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Motivación y Contexto}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}¿Por qué es importante el análisis en fútbol amateur?}{8}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}¿Qué problema hay actualmente?}{8}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Objetivos}{8}{section.4}%
+\contentsline {section}{\numberline {5}Estado del sector}{9}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Soluciones en el Ámbito Profesional}{9}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Herramientas Disponibles para el Fútbol Amateur}{10}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Limitaciones}{11}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Tecnologías empleadas}{11}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Programación}{11}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Gestión de datos y flujo de trabajo}{12}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Modelos utilizados}{12}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Módulo de detección (YOLO)}{12}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Arquitectura YOLO}{12}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}¿Cómo funciona la detección de objetos con YOLO?}{13}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Módulo de tracking + Gestión de IDs}{16}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Módulo de tracking}{16}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Gestión de IDs}{16}{subsection.8.2}%
+\contentsline {section}{\numberline {9}Propuesta}{17}{section.9}%
+\contentsline {section}{\numberline {10}Arquitectura general del sistema}{18}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Preparar el dataset (Roboflow)}{18}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Entrenamiento del modelo de YOLO}{19}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Preparar el dataset de entrenamiento del modelo de ReID}{20}{subsection.10.3}%
+\contentsline {subsubsection}{\numberline {10.3.1}annotate\_review.py}{20}{subsubsection.10.3.1}%
+\contentsline {subsubsection}{\numberline {10.3.2}annotate\_review\_precise.py}{24}{subsubsection.10.3.2}%
+\contentsline {subsubsection}{\numberline {10.3.3}dicMaker\_idPlayer.py}{28}{subsubsection.10.3.3}%
+\contentsline {subsection}{\numberline {10.4}Entrenar el modelo de ReID}{30}{subsection.10.4}%
+\contentsline {subsection}{\numberline {10.5}Preparar el dataset de testeo del modelo de ReID}{35}{subsection.10.5}%
+\contentsline {subsection}{\numberline {10.6}Aplicar modelo de detección de objetos (YOLO)}{35}{subsection.10.6}%
+\contentsline {subsection}{\numberline {10.7}Aplicar tracker (deepeiou) y modelo de reid}{35}{subsection.10.7}%
+\contentsline {subsection}{\numberline {10.8}Aplicar GTA-LINK}{35}{subsection.10.8}%
+\contentsline {section}{\numberline {11}Resultados Preliminares}{35}{section.11}%
+\contentsline {section}{\numberline {12}Dificultades encontradas}{35}{section.12}%
+\contentsline {section}{\numberline {13}Conclusiones}{35}{section.13}%

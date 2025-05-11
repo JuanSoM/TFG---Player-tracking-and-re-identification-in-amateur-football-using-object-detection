@@ -11,7 +11,26 @@
 \usepackage[backend=bibtex,style=numeric]{biblatex} % Para citas numéricas
 \addbibresource{references.bib} % Cargar archivo .bib
 \usepackage{url}
+\usepackage{xcolor}
 
+\lstdefinestyle{pythonstyle}{
+	language=Python,
+	backgroundcolor=\color{white},   
+	basicstyle=\ttfamily\small, % Tamaño más pequeño para mayor legibilidad
+	breaklines=true,
+	frame=single, % Poner marco alrededor del código
+	captionpos=b,
+	numbers=none, % Sin numeración de líneas
+	keywordstyle=\color{blue}\bfseries, % Palabras clave en azul y en negrita
+	commentstyle=\color{green}, % Estilo para los comentarios
+	stringstyle=\color{red}, % Estilo para las cadenas de texto
+	tabsize=2, % Tamaño de tabulación
+	showstringspaces=false, % Evitar espacio adicional en cadenas
+	xleftmargin=0pt, % Sin margen izquierdo
+	xrightmargin=0pt, % Sin margen derecho
+	aboveskip=0pt, % Sin espacio extra antes
+	belowskip=0pt, % Sin espacio extra después
+}
 
 \usepackage{geometry}           % Para ajustar márgenes
 
@@ -206,11 +225,35 @@
 	
 	En el fútbol profesional, sistemas como TRACAB se han consolidado como referentes en el seguimiento y análisis de jugadores. TRACAB es un sistema de seguimiento óptico que utiliza cámaras y algoritmos de visión por computadora para rastrear en tiempo real la posición de todos los jugadores y el balón en el campo. Este sistema ha sido implementado en ligas de élite como la Premier League, La Liga y la Bundesliga, y está certificado por la FIFA para programas de seguimiento electrónico de rendimiento (EPTS). "https://tracab.com/products/tracab-technologies/?utm\_source=chatgpt.com"
 	
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.45\textwidth} % Controla el ancho de la imagen
+			\centering
+			\includegraphics[width=\textwidth]{image/tracab}
+			\label{tracab}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth} % Controla el ancho de la imagen
+			\centering
+			\includegraphics[width=\textwidth]{image/tracab2}
+			\label{tracab2}
+		\end{minipage}
+		\caption{\textbf{Tracab}}
+	\end{figure}
+	
+	
 	\subsection{Herramientas Disponibles para el Fútbol Amateur}
 	
 	En contraste, el fútbol amateur ha comenzado a adoptar herramientas más asequibles y adaptadas a sus necesidades y recursos. Una de las más destacadas es LongoMatch, un software de análisis de vídeo que permite a entrenadores y analistas etiquetar eventos, crear estadísticas y generar informes tácticos a partir de grabaciones de partidos.
 	
-	LongoMatch ofrece "https://longomatch.com/en/?utm\_source=chatgpt.com":
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/longomatch}
+		\caption{\textbf{Interfaz de Longomatch}}
+		\label{fig:longomatch}
+	\end{figure} 
+	
+	LongoMatch ofrece "https://longomatch.com/en/":
 	\begin{itemize}
 		\item	Análisis en tiempo real y post-partido con soporte para múltiples cámaras.
 
@@ -293,7 +336,7 @@
 	
 	Esta arquitectura permite que YOLO realice detección de múltiples objetos en una sola pasada sobre la imagen (de ahí su nombre), lo que lo convierte en un modelo extremadamente eficiente para tareas en tiempo real.
 	
-	\subsection{¿Cómo funciona la detecci\'on de objetos con YOLO?}
+	\subsection{¿Cómo funciona la detección de objetos con YOLO?}
 	
 	Una vez entendida la arquitectura interna de YOLO, es importante comprender cómo se lleva a cabo el proceso de detección de objetos. Para ello, se puede imaginar el caso práctico de una aplicación que detecta jugadores y balones de fútbol a partir de una imagen de vídeo.
 	
@@ -366,6 +409,13 @@
 	
 	Para abordar esta limitación, se emplean algoritmos de seguimiento de objetos (trackers) que asocian las detecciones entre fotogramas consecutivos, permitiendo así mantener la identidad de cada objeto a lo largo del tiempo. Estos trackers asignan un identificador único a cada objeto y actualizan su posición en cada nuevo fotograma, incluso en presencia de oclusiones o cambios de apariencia.
 	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/tracking_id}
+		\caption{\textbf{Tracking}}
+		\label{tracking_id}
+	\end{figure}
+	
 	Un ejemplo destacado de este enfoque es el algoritmo Deep SORT (Simple Online and Realtime Tracking with a Deep Association Metric), que combina información de movimiento y apariencia para asociar detecciones entre fotogramas. Deep SORT utiliza un filtro de Kalman para predecir la posición futura de los objetos y un descriptor de apariencia basado en redes neuronales profundas para comparar similitudes visuales entre detecciones. La asociación entre detecciones y trayectorias se realiza mediante el algoritmo húngaro, que minimiza el coste total de asociación considerando tanto la distancia de movimiento como la similitud de apariencia.
 	"https://doi.org/10.1109/ICIP.2017.8296962"
 	
@@ -375,8 +425,21 @@
 	
 	La Re-identificación de Personas es una tarea de visión por computadora cuyo objetivo es asociar la identidad de una persona a través de diferentes cámaras o ubicaciones en una secuencia de vídeo o imágenes. Implica detectar y seguir a una persona y luego utilizar características como apariencia, forma del cuerpo y ropa para asociar su identidad en diferentes fotogramas. El objetivo es asociar a la misma persona en múltiples vistas de cámara no superpuestas de manera robusta y eficiente. 
 	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\textwidth]{image/gestion_id}
+		\caption{\textbf{Person Re-Identification}}
+		\label{gestion_id}
+	\end{figure}
+	
 	
 	\section{Propuesta}
+	
+	El flujo de trabajo propuesto tiene como objetivo optimizar el análisis de vídeos deportivos mediante un proceso de detección, seguimiento y reidentificación de jugadores, utilizando técnicas avanzadas de visión por computadora. El propósito es automatizar y mejorar la precisión en la identificación de jugadores a lo largo del vídeo, proporcionando un sistema que permita analizar el comportamiento de cada jugador durante el transcurso del partido.
+	
+	El resultado esperado de este flujo de trabajo es un archivo etiquetado que permita identificar a cada jugador con un seguimiento consistente a lo largo de las secuencias del video que utilizamos como input, lo que se traduce en un análisis más eficaz y exhaustivo. Este sistema facilitaría la recopilación de datos clave sobre el rendimiento individual de los jugadores, como su posición, movimientos y comportamientos durante el partido, ayudando a cerrar la brecha entre el análisis del fútbol profesional y el amateur.
+	
+	Al final del proceso, se espera obtener una salida en formato de vídeo con los jugadores anotados en el mismo y otra en formato MOT que contenga las trayectorias y las identificaciones de los jugadores, lo cual puede ser utilizado para estudios adicionales, análisis tácticos y optimización del rendimiento. Este flujo de trabajo proporciona la base para un sistema más completo y adaptable, capaz de integrarse con otras herramientas y métodos de análisis deportivos.
 	
 	\begin{figure}[H]
 		\centering
@@ -385,7 +448,732 @@
 		\label{fig:Propuesta}
 	\end{figure}
 	
+	
 	\section{Arquitectura general del sistema}
+	
+	A continuación, se explica paso a paso el flujo completo, desde la entrada de vídeo original hasta la salida final con el vídeo anotado y anotaciones generadas. Cada módulo del sistema se presenta de forma independiente, especificando su función dentro del flujo, la tecnología empleada y los beneficios que aporta al conjunto. \ref{fig:Propuesta}
+	
+	
+	\subsection{Preparar el dataset (Roboflow)}
+	
+	https://roboflow.com/
+	
+	Para entrenar el modelo de detección de jugadores, utilizamos la plataforma Roboflow, una herramienta online ampliamente utilizada para gestionar datasets de visión por computador. Roboflow facilita la carga, etiquetado, preprocesado y exportación de conjuntos de datos en formatos compatibles con múltiples frameworks de deep learning, incluyendo YOLO.
+	
+	En nuestro caso, el proceso comenzó con la recopilación de fotogramas extraídos de vídeos de partidos de fútbol amateur. Estos frames fueron subidos a Roboflow, donde se realizó el etiquetado manual de los jugadores. Cada jugador fue anotado mediante la creación de una \textit{bounding box} alrededor de su figura, y se le asignó la clase \texttt{jugador}.
+	
+	Aunque en este proyecto únicamente se ha utilizado una clase (\texttt{jugador}), Roboflow permite una gestión flexible de múltiples clases. En el caso de que se hubiera querido incluir también la detección de otros roles como \texttt{árbitro} o \texttt{balón}, bastaría con asignar un nuevo nombre de clase a las anotaciones correspondientes durante el etiquetado. Cada vez que se etiqueta un objeto en un fotograma, se puede seleccionar (o crear) la clase deseada desde el menú desplegable de etiquetas.
+	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/dif_de_clases}
+		\caption{\textbf{Diferenciación de clases}}
+		\label{dif_de_clases}
+	\end{figure}
+	
+	De este modo, el dataset resultante puede incluir múltiples clases, y el modelo YOLO aprenderá a diferenciarlas durante el entrenamiento, basándose en sus apariencias y posiciones relativas. Esta capacidad de distinguir entre diferentes tipos de objetos resulta esencial en contextos deportivos donde intervienen múltiples agentes.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/entr_yolo}
+		\caption{\textbf{Entrenamiento YOLO}}
+		\label{entr_yolo}
+	\end{figure}
+	
+	Una vez completado el etiquetado, el dataset fue exportado desde Roboflow en el formato YOLOv5/YOLOv8, incluyendo las anotaciones en archivos de texto por imagen, y un archivo \texttt{data.yaml} que especifica la configuración general del conjunto de datos, como las rutas, el número de clases y sus nombres.
+	
+	
+	\subsection{Entrenamiento del modelo de YOLO}
+	
+	Una vez preparado el conjunto de datos en Roboflow y exportado en formato compatible con YOLOv8, se procedió al entrenamiento del modelo utilizando el framework \texttt{Ultralytics}, que proporciona una implementación optimizada y fácil de usar de los modelos YOLO.
+	
+	El entrenamiento se realizó en Python, comenzando por la descarga del dataset directamente desde la API de Roboflow. Para ello, se utilizó el siguiente fragmento de código:
+	
+	\begin{verbatim}
+		from roboflow import Roboflow
+		rf = Roboflow(api_key="sONwHlD0Zcp6DurtT8Nw")
+		project = rf.workspace("pruebabalonmano").project("handball-dataset-def-2")
+		version = project.version(1)
+		dataset = version.download("yolov8")
+	\end{verbatim}
+	
+	Este código descarga automáticamente las imágenes y las anotaciones en formato YOLOv8, incluyendo el archivo \texttt{data.yaml} con la configuración del dataset.
+	
+	A continuación, se cargó un modelo base preentrenado \texttt{yolov8n.pt} (versión ligera del modelo), y se inició el entrenamiento personalizado con los parámetros definidos:
+	
+	\begin{verbatim}
+		from ultralytics import YOLO
+		
+		model = YOLO("yolov8n.pt")  # Modelo base preentrenado
+		results = model.train(
+		data=f"{dataset.location}/data.yaml",
+		epochs=25,
+		imgsz=640,
+		batch=16,
+		name="yolov8_handball"
+		)
+	\end{verbatim}
+	
+	En este caso, se entrenó durante 25 épocas, con imágenes de tamaño 640×640 píxeles y un tamaño de lote (\texttt{batch size}) de 16 imágenes. El modelo aprende a identificar la clase \texttt{jugador} a partir de los ejemplos anotados.
+	
+	Una vez finalizado el entrenamiento, se genera automáticamente el archivo \texttt{best.pt}, que contiene los pesos del modelo con mejor rendimiento en validación. Este modelo final puede utilizarse directamente para la inferencia:
+	
+	\begin{verbatim}
+		best_model = YOLO("runs/detect/yolov8_handball/weights/best.pt")
+	\end{verbatim}
+	
+	Este flujo de trabajo permite adaptar el modelo YOLOv8 a un dominio concreto, como el fútbol amateur, utilizando anotaciones específicas y obteniendo así un detector más ajustado al contexto real de aplicación.
+	
+	
+	\subsection{Preparar el dataset de entrenamiento del modelo de ReID}
+	
+	El manejo de errores relacionados con la asignación incorrecta de IDs es un paso crucial en el proceso de reidentificación (ReID). Para resolver este problema, se utilizó un enfoque interactivo en el que se corrigen manualmente los errores de asignación de IDs en las anotaciones generadas por el modelo de ReID previamente entrenado con el dataset de SportMOT, que contiene imágenes de fútbol profesional.
+	
+	\subsubsection{annotate\_review.py}
+	
+	En primer lugar, las anotaciones de un partido de fútbol amateur fueron generadas utilizando el modelo de ReID entrenado con el dataset de SportMOT. Posteriormente, estas anotaciones fueron procesadas para corregir posibles errores de asignación de IDs. El código utilizado para este proceso interactivo es  y es el siguiente:
+	
+	\begin{verbatim}
+		import os
+		import cv2
+		import argparse
+		import tkinter as tk
+		from tkinter import simpledialog
+		from collections import Counter
+		
+		# Interactive MOT correction with flexible ID modification and distinct duplicate coloring
+		
+		def parse_mot_file(mot_path):
+		entries = []
+		with open(mot_path, 'r') as f:
+		for line in f:
+			if not line.strip(): continue
+				parts = line.strip().split(',')
+			entries.append({
+				'frame': int(float(parts[0])), 
+				'id': int(float(parts[1])), 
+				'bbox': tuple(map(float, parts[2:6])),
+				'raw': line.strip()
+			})
+		return entries
+		
+		
+		def draw_annotations(img, detections, global_highlight=None, raw_color_map=None):
+		out = img.copy()
+		global_h = set(global_highlight or [])
+		for det in detections:
+			x, y, w, h = map(int, det['bbox'])
+			tid = det['id']
+			raw = det['raw']
+			if raw_color_map and raw in raw_color_map:
+				color = raw_color_map[raw]
+			elif tid in global_h:
+				color = (0, 0, 255)
+			else:
+				color = (0, 255, 0)
+			cv2.rectangle(out, (x, y), (x + w, y + h), color, 2)
+			cv2.putText(out, str(tid), (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+		return out
+	\end{verbatim}
+	
+	Este código permite corregir las asignaciones incorrectas de IDs mediante una interfaz gráfica que permite al usuario modificar o eliminar detecciones, asignar nuevos IDs a instancias específicas, y aprobar o eliminar duplicados.
+	
+	\textbf{Interacción del usuario:} La interacción con el programa es completamente visual e intuitiva. Al ejecutar el código, el usuario puede visualizar las detecciones en cada fotograma del video y recibir la opción de:
+	
+	\begin{itemize}
+		\item Navegar entre los fotogramas (siguiente y anterior):
+		\begin{lstlisting}[style=pythonstyle]
+			if key == ord('n') and i < len(frames) - 1:
+			i += 1
+			elif key == ord('p') and i > 0:
+			i -= 1
+		\end{lstlisting}
+		
+		\item Modificar o eliminar instancias específicas de detecciones con IDs incorrectos:
+		\begin{lstlisting}[style=pythonstyle]
+			if key in (ord('m'), ord('d')):
+			root = tk.Tk(); root.withdraw()
+			prompt = "Introduzca 'i'<indice> para instancia o ID para global:"
+			sel = simpledialog.askstring("Seleccionar deteccion", prompt)
+			root.destroy()
+			if not sel: continue
+			if sel.startswith('i'):
+			try:
+			idx = int(sel[1:]) - 1
+			chosen = duplicate_entries[idx]
+			except:
+			print("Seleccion invalida")
+			continue
+			if key == ord('m'):
+			new_id = simpledialog.askinteger("Nuevo ID", "Nuevo ID para la instancia seleccionada:")
+			if new_id is not None:
+			raw_map[chosen['raw']] = new_id
+			print(f"Instancia bbox {chosen['bbox']} mapeada a {new_id}")
+			else:
+			removed.add(chosen['raw'])
+			print(f"Instancia bbox {chosen['bbox']} eliminada")
+			else:
+			try:
+			orig = int(sel)
+			except:
+			print("ID invalido.")
+			continue
+			if key == ord('m'):
+			new = simpledialog.askinteger("Nuevo ID", f"Nuevo ID para todas detecciones {orig}:")
+			if new is not None:
+			id_map[orig] = new
+			print(f"Mapeado global ID {orig} -> {new}")
+			else:
+			for d in by_frame[orig_frame]:
+			cur = raw_map.get(d['raw'], id_map.get(d['id'], d['id']))
+			if cur == orig:
+			removed.add(d['raw'])
+			print(f"Todas detecciones ID {orig} eliminadas en frame {orig_frame}")
+		\end{lstlisting}
+		
+		\item Corregir duplicados, donde se le presenta un mensaje con las IDs duplicadas detectadas en el fotograma:
+		\begin{lstlisting}[style=pythonstyle]
+			if duplicate_entries:
+			dup_msgs = []
+			dup_ids = []
+			for idx_det, det in enumerate(duplicate_entries, 1):
+			det_id = raw_map.get(det['raw'], id_map.get(det['id'], det['id']))
+			name = color_names[(idx_det - 1) % len(color_names)]
+			dup_msgs.append(f"{idx_det} ({name}) id {det_id}")
+			dup_ids.append(det_id)
+			print("Duplicados: " + ", ".join(dup_msgs) + f" en frame {orig_frame}")
+		\end{lstlisting}
+		
+		\item Aceptar los cambios realizados y continuar con la corrección de otras detecciones:
+		\begin{lstlisting}[style=pythonstyle]
+			elif key == ord('c'):
+			if duplicate_entries:
+			approved_dup_ids.update(dup_ids)
+			break
+		\end{lstlisting}
+	\end{itemize}
+	
+	
+	El programa recorre automáticamente los fotogramas del video y, al detectar un nuevo ID, muestra una serie de opciones al usuario. Estos nuevos IDs se resaltan en rojo, lo que facilita su identificación como detecciones recién encontradas. Una vez que el usuario aprueba el ID, este se mantiene en verde, indicando que ha sido aprobado y no se volverá a revisar en el futuro. \ref{entr_reid}
+	
+	Este programa permite arreglar problemas graves de asignación de ids. Por ejemplo, que un jugador tenga un nuevo id durante el resto de la secuencia.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/entr_reid}
+		\caption{\textbf{Programa para el entrenamiento}}
+		\label{entr_reid}
+	\end{figure}
+	
+	
+	\subsubsection{annotate\_review\_precise.py}
+	
+	El programa \texttt{annotate\_review\_precise.py} es una versión complementaria del programa anterior \texttt{annotate\_review.py}.
+	
+	El código utilizado en este programa es el siguiente:
+	\vspace{0.5cm}
+	
+	\begin{lstlisting}[style=pythonstyle]
+		import os
+		import cv2
+		import argparse
+		import tkinter as tk
+		from tkinter import simpledialog
+		from collections import Counter
+		
+		# Interactive MOT correction with manual frame control, per-frame ID modifications, approval colors, and undo
+		
+		def parse_mot_file(mot_path):
+		entries = []
+		with open(mot_path, 'r') as f:
+		for line in f:
+		if not line.strip(): continue
+		parts = line.strip().split(',')
+		entries.append({
+			'frame': int(float(parts[0])),  # frame number
+			'id':    int(float(parts[1])),  # original ID
+			'bbox':  tuple(map(float, parts[2:6])),  # bbox
+			'raw':   line.strip()  # raw line
+		})
+		return entries
+		
+		
+		def draw_annotations(img, detections,
+		new_ids, approved_new_ids,
+		duplicate_entries, approved_dup_ids,
+		raw_color_map=None, raw_index_map=None):
+		out = img.copy()
+		for det in detections:
+		x, y, w, h = map(int, det['bbox'])
+		tid = det['id']
+		raw = det['raw']
+		# determine color
+		if raw_color_map and raw in raw_color_map:
+		color = raw_color_map[raw]
+		elif tid in approved_new_ids or tid in approved_dup_ids:
+		color = (0, 255, 0)  # green approved
+		elif tid in new_ids or any(d['id'] == tid for d in duplicate_entries):
+		color = (0, 0, 255)  # red pending
+		else:
+		color = (0, 255, 0)
+		# draw rectangle
+		cv2.rectangle(out, (x, y), (x + w, y + h), color, 2)
+		# prepare label
+		label = str(tid)
+		if raw_index_map and raw in raw_index_map:
+		label += f"(i{raw_index_map[raw] + 1})"
+		# put text
+		cv2.putText(out, label, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+		return out
+		
+		
+		def get_mapped_id(frame, det,
+		id_map, raw_map,
+		frame_id_map, frame_raw_map):
+		# per-frame raw map
+		if frame in frame_raw_map and det['raw'] in frame_raw_map[frame]:
+		return frame_raw_map[frame][det['raw']]
+		# per-frame id map
+		if frame in frame_id_map and det['id'] in frame_id_map[frame]:
+		return frame_id_map[frame][det['id']]
+		# fallback global maps
+		return raw_map.get(det['raw'], id_map.get(det['id'], det['id']))
+		
+		
+		def pause_loop(by_frame, frames,
+		id_map, raw_map,
+		frame_id_map, frame_raw_map,
+		removed, frames_dir,
+		new_ids, duplicate_entries,
+		approved_new_ids, approved_dup_ids,
+		start_i):
+		i = start_i
+		orig_frame = frames[i]
+		# color palette for duplicates
+		palette = [(255, 0, 0), (255, 255, 0), (255, 0, 255), (0, 255, 255), (128, 0, 255)]
+		raw_color_map = {d['raw']: palette[idx % len(palette)] for idx, d in enumerate(duplicate_entries)}
+		raw_index_map = {d['raw']: idx for idx, d in enumerate(duplicate_entries)}
+		
+		# display duplicate info with indices
+		if duplicate_entries:
+		dup_info = ', '.join(f"i{idx+1}:{d['id']}" for idx, d in enumerate(duplicate_entries))
+		print(f"Duplicados en frame {orig_frame}: {dup_info}")
+		elif new_ids:
+		print(f"Nuevos IDs en frame {orig_frame}: {new_ids}")
+		print("Navegacion: [n]/[c]=next, [p]=prev, [u]=undo, [m]=modificar, [d]=delete, [q]=quit")
+		
+		while True:
+		f2 = frames[i]
+		dets2 = [d for d in by_frame[f2] if d['raw'] not in removed]
+		mapped2 = []
+		for d in dets2:
+		mid = get_mapped_id(f2, d, id_map, raw_map, frame_id_map, frame_raw_map)
+		mapped2.append({'bbox': d['bbox'], 'id': mid, 'raw': d['raw']})
+		img2 = cv2.imread(os.path.join(frames_dir, f"{f2:06d}.jpg"))
+		cv2.imshow('Annotations', draw_annotations(
+		img2, mapped2,
+		new_ids, approved_new_ids,
+		duplicate_entries, approved_dup_ids,
+		raw_color_map if f2 == orig_frame else None,
+		raw_index_map if f2 == orig_frame else None
+		))
+		
+		key = cv2.waitKey(0) & 0xFF
+		if key in (ord('n'), ord('c')):
+		approved_new_ids.update(new_ids)
+		approved_dup_ids.update(d['id'] for d in duplicate_entries)
+		return min(i + 1, len(frames) - 1), False
+		elif key == ord('p'):
+		return max(i - 1, 0), False
+		elif key == ord('u'):
+		return max(i - 1, 0), True
+		elif key in (ord('m'), ord('d')):
+		root = tk.Tk(); root.withdraw()
+		sel = simpledialog.askstring("Seleccionar deteccion", "'i'<numero> o ID:")
+		root.destroy()
+		if not sel: continue
+		# instance-level
+		if sel.startswith('i'):
+		try:
+		idx = int(sel[1:]) - 1
+		chosen = duplicate_entries[idx]
+		except:
+		print("Seleccion invalida"); continue
+		if key == ord('m'):
+		new_id = simpledialog.askinteger("Nuevo ID", "ID para esta instancia:")
+		if new_id is not None:
+		frame_raw_map.setdefault(orig_frame, {})[chosen['raw']] = new_id
+		print(f"Instancia raw={chosen['raw']} -> {new_id} en frame {orig_frame}")
+		else:
+		removed.add(chosen['raw'])
+		print("Instancia eliminada")
+		# global-level
+		else:
+		try:
+		orig = int(sel)
+		except:
+		print("ID invalido"); continue
+		if key == ord('m'):
+		new = simpledialog.askinteger("Nuevo ID", f"ID {orig} -> ? en frame {orig_frame}:")
+		if new is not None:
+		frame_id_map.setdefault(orig_frame, {})[orig] = new
+		print(f"ID {orig} -> {new} en frame {orig_frame}")
+		else:
+		for d in by_frame[orig_frame]:
+		cur = get_mapped_id(orig_frame, d, id_map, raw_map, frame_id_map, frame_raw_map)
+		if cur == orig:
+		removed.add(d['raw'])
+		print(f"Instancias ID {orig} eliminadas en frame {orig_frame}")
+		continue
+		elif key == ord('q'):
+		return len(frames), False
+		else:
+		continue
+	\end{lstlisting}
+	
+	Este programa introduce varias mejoras y características adicionales respecto a la versión anterior:
+	
+	\begin{itemize}
+		\item \textbf{Deshacer cambios:} La opción de deshacer (\texttt{[u]}) permite revertir los cambios realizados en el fotograma actual, añadiendo flexibilidad al proceso de corrección.
+		\item \textbf{Visualización de duplicados mejorada:} Los duplicados se visualizan con colores específicos y se puede asignar un nuevo ID o eliminarlos en función de la decisión del usuario.
+		\item \textbf{Control manual:} Se cambia la manera de recorrer los frames automáticamente a manualmente. Cada vez que se apruebe un frame se pasa al siguiente.
+	\end{itemize}
+	
+	Este enfoque permite una corrección más precisa y segura, evitando acarrear ids erróneos.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/dir_reid}
+		\caption{\textbf{Estructura del dataset}}
+		\label{dir_reid}
+	\end{figure}
+	
+	\subsubsection{dicMaker\_idPlayer.py}
+	
+	El programa \texttt{dicMaker\_idPlayer.py} se utiliza para procesar un archivo MOT y generar recortes de imágenes de los jugadores en cada fotograma, organizados por ID de jugador. El archivo MOT contiene las anotaciones de las detecciones para cada fotograma, y el objetivo de este programa es generar recortes individuales de cada jugador basado en esas anotaciones.
+	
+	El proceso se realiza en dos etapas principales:
+	
+	1. \textbf{Lectura y análisis del archivo MOT:} El programa lee el archivo MOT que contiene las anotaciones de cada detección (frame, ID de jugador, coordenadas de la caja delimitadora) y organiza las detecciones por fotograma.
+	
+	2. \textbf{Recorte y guardado de las imágenes de los jugadores:} Para cada fotograma y cada jugador identificado en las detecciones, el programa recorta la región de la imagen correspondiente a las coordenadas de la caja delimitadora y guarda cada recorte en una carpeta organizada por ID de jugador.
+	
+	El código utilizado en este proceso es el siguiente:
+	\vspace{0.5cm}
+	
+	\begin{lstlisting}[style=pythonstyle]
+		import os 
+		import cv2
+		import argparse
+		from tqdm import tqdm
+		
+		def parse_mot_file(mot_file_path):
+		detections = {}
+		with open(mot_file_path, 'r') as f:
+		for line in f:
+		parts = line.strip().split(',')
+		if len(parts) < 6:
+		continue
+		
+		frame_id = int(float(parts[0]))
+		track_id = int(float(parts[1]))
+		x, y, w, h = map(float, parts[2:6])
+		
+		if frame_id not in detections:
+		detections[frame_id] = []
+		detections[frame_id].append((track_id, int(x), int(y), int(w), int(h)))
+		
+		return detections
+		
+		def crop_and_save_detections(image_folder, detections, output_folder):
+		os.makedirs(output_folder, exist_ok=True)
+		
+		for frame_id in tqdm(sorted(detections.keys()), desc="Procesando frames"):
+		img_path = os.path.join(image_folder, f"{frame_id:06d}.jpg")
+		
+		if not os.path.exists(img_path):
+		continue
+		
+		img = cv2.imread(img_path)
+		if img is None:
+		continue
+		
+		for track_id, x, y, w, h in detections[frame_id]:
+		track_folder = os.path.join(output_folder, f"player_{track_id:03d}")
+		os.makedirs(track_folder, exist_ok=True)
+		
+		x1 = max(0, x)
+		y1 = max(0, y)
+		x2 = min(img.shape[1], x + w)
+		y2 = min(img.shape[0], y + h)
+		
+		if x2 <= x1 or y2 <= y1:
+		continue
+		
+		crop = img[y1:y2, x1:x2]
+		
+		# Cambiado el nombre del archivo al formato deseado: frameId_trackId.jpg
+		output_filename = f"{frame_id:06d}_{track_id:03d}.jpg"
+		output_path = os.path.join(track_folder, output_filename)
+		cv2.imwrite(output_path, crop)
+		
+		def main():
+		parser = argparse.ArgumentParser()
+		parser.add_argument('--mot_file', required=True)
+		parser.add_argument('--image_folder', required=True)
+		parser.add_argument('--output_folder', required=True)
+		
+		args = parser.parse_args()
+		
+		print("Leyendo archivo MOT...")
+		detections = parse_mot_file(args.mot_file)
+		
+		print("\nRecortando detecciones...")
+		crop_and_save_detections(args.image_folder, detections, args.output_folder)
+		
+		print(f"\nProceso completado. Recortes en: {args.output_folder}")
+		
+		if __name__ == "__main__":
+		main()
+	\end{lstlisting}
+	\vspace{0.5cm}
+	
+	El programa realiza las siguientes funciones:
+	
+	\begin{itemize}
+		\item \textbf{Parseo del archivo MOT:} El archivo MOT se procesa para organizar las detecciones por fotograma y por jugador. Cada detección incluye las coordenadas de la caja delimitadora y el ID de jugador.
+		\item \textbf{Recorte de las imágenes:} Para cada fotograma y cada jugador detectado, se recorta la imagen según las coordenadas de la caja delimitadora. Los recortes se guardan en una estructura de carpetas donde cada jugador tiene su propia carpeta identificada por su \texttt{track\_id}.
+		\item \textbf{Uso de la barra de progreso:} Se utiliza la librería \texttt{tqdm} para mostrar una barra de progreso durante el procesamiento de los fotogramas, facilitando el seguimiento del proceso.
+	\end{itemize}
+	
+	
+	\subsection{Entrenar el modelo de ReID}
+	
+	Para el entrenamiento del modelo de re-identificación (ReID), se utilizó el repositorio \texttt{Sportsreid}, que está basado en \texttt{SoccerNet Re-Identification} y \texttt{Torchreid}. Este repositorio permite reidentificar al mismo jugador en diferentes fotogramas de un video de un partido de fútbol. Sportsreid ha alcanzado el segundo puesto en el leaderboard de la división de prueba del reto SoccerNet 2022 de Re-Identification.
+	
+	El entrenamiento se lleva a cabo utilizando un archivo de configuración que define los parámetros del modelo, el optimizador y el scheduler, así como el conjunto de datos a utilizar. A continuación se describe el proceso de entrenamiento utilizando el archivo \texttt{main.py} proporcionado en el repositorio.
+	
+	El código de entrenamiento es el siguiente:
+	\vspace{0.5cm}
+	
+	\begin{lstlisting}[style=pythonstyle]
+		import sys
+		import time
+		import os.path as osp
+		import argparse
+		import torch
+		import torch.nn as nn
+		
+		import torchreid
+		from torchreid.reid.utils import (
+		Logger, check_isfile, set_random_seed, collect_env_info,
+		resume_from_checkpoint, load_pretrained_weights, compute_model_complexity
+		)
+		from default_config import (
+		imagedata_kwargs, optimizer_kwargs, videodata_kwargs, engine_run_kwargs,
+		get_default_config, lr_scheduler_kwargs
+		)
+		
+		def build_datamanager(cfg):
+		# ImageDataManager con batch sizes de train/test y relabel de IDs
+		return torchreid.data.ImageDataManager(
+		root=cfg.data.root,
+		sources=tuple(cfg.data.sources),
+		targets=(),                          # sin target set separado
+		height=cfg.data.height,
+		width=cfg.data.width,
+		batch_size_train=cfg.train.batch_size,
+		batch_size_test=cfg.test.batch_size,
+		transform_train=cfg.data.transforms,
+		transform_test=cfg.data.transforms,
+		combineall=cfg.data.combineall,
+		relabel=True,                        # remapea IDs a [0..N-1]
+		num_workers=cfg.data.workers,
+		verbose=True,
+		use_gpu=cfg.use_gpu
+		)
+		
+		def build_engine(cfg, datamanager, model, optimizer, scheduler):
+		if cfg.data.type == 'image':
+		if cfg.loss.name == 'softmax':
+		engine = torchreid.engine.ImageSoftmaxEngine(
+		datamanager,
+		model,
+		optimizer=optimizer,
+		scheduler=scheduler,
+		use_gpu=cfg.use_gpu,
+		label_smooth=cfg.loss.softmax.label_smooth
+		)
+		else:
+		engine = torchreid.engine.ImageTripletEngine(
+		datamanager,
+		model,
+		optimizer=optimizer,
+		margin=cfg.loss.triplet.margin,
+		weight_t=cfg.loss.triplet.weight_t,
+		weight_x=cfg.loss.triplet.weight_x,
+		weight_tc=cfg.loss.triplet.weight_tc,
+		weight_cc=cfg.loss.triplet.weight_cc,
+		scheduler=scheduler,
+		use_gpu=cfg.use_gpu,
+		label_smooth=cfg.loss.softmax.label_smooth,
+		topk=cfg.loss.triplet.topk,
+		bottomk=cfg.loss.triplet.bottomk,
+		warmup_lr=cfg.train.warmup_lr,
+		warmup_steps=cfg.train.warmup_steps,
+		lr=cfg.train.lr
+		)
+		else:
+		if cfg.loss.name == 'softmax':
+		engine = torchreid.engine.VideoSoftmaxEngine(
+		datamanager,
+		model,
+		optimizer=optimizer,
+		scheduler=scheduler,
+		use_gpu=cfg.use_gpu,
+		label_smooth=cfg.loss.softmax.label_smooth,
+		pooling_method=cfg.video.pooling_method
+		)
+		else:
+		engine = torchreid.engine.VideoTripletEngine(
+		datamanager,
+		model,
+		optimizer=optimizer,
+		margin=cfg.loss.triplet.margin,
+		weight_t=cfg.loss.triplet.weight_t,
+		weight_x=cfg.loss.triplet.weight_x,
+		scheduler=scheduler,
+		use_gpu=cfg.use_gpu,
+		label_smooth=cfg.loss.softmax.label_smooth
+		)
+		return engine
+		
+		def reset_config(cfg, args):
+		# Ruta por defecto a tu carpeta GTA-Link
+		cfg.data.root = args.root or r'C:\Users\jismbs\Documents\gta-link'
+		# Dataset de entrada por defecto
+		cfg.data.sources = args.sources or ['player_crops2']
+		# Transforms si se especifican
+		if args.transforms:
+		cfg.data.transforms = args.transforms
+		
+		def check_cfg(cfg):
+		if cfg.loss.name == 'triplet' and cfg.loss.triplet.weight_x == 0:
+		assert cfg.train.fixbase_epoch == 0, \
+		'The output of classifier is not included in the computational graph'
+		
+		def main():
+		parser = argparse.ArgumentParser(
+		formatter_class=argparse.ArgumentDefaultsHelpFormatter
+		)
+		parser.add_argument(
+		'--config-file', type=str, default='', help='path to config file'
+		)
+		parser.add_argument(
+		'-s', '--sources', type=str, nargs='+',
+		help='source datasets (delimited by space)'
+		)
+		parser.add_argument(
+		'-t', '--targets', type=str, nargs='+',
+		help='target datasets (delimited by space)'
+		)
+		parser.add_argument(
+		'--transforms', type=str, nargs='+', help='data augmentation'
+		)
+		parser.add_argument(
+		'--root', type=str, default='', help='path to data root'
+		)
+		parser.add_argument(
+		'opts', default=None, nargs=argparse.REMAINDER,
+		help='Modify config options using the command-line'
+		)
+		args = parser.parse_args()
+		
+		cfg = get_default_config()
+		cfg.use_gpu = torch.cuda.is_available()
+		if args.config_file:
+		cfg.merge_from_file(args.config_file)
+		reset_config(cfg, args)
+		cfg.merge_from_list(args.opts)
+		set_random_seed(cfg.train.seed)
+		check_cfg(cfg)
+		
+		log_name = 'test.log' if cfg.test.evaluate else 'train.log'
+		log_name += time.strftime('-%Y-%m-%d-%H-%M-%S')
+		sys.stdout = Logger(osp.join(cfg.data.save_dir, log_name))
+		
+		print('Show configuration\n{}\n'.format(cfg))
+		print('Collecting env info ...')
+		print('** System info **\n{}\n'.format(collect_env_info()))
+		
+		if cfg.use_gpu:
+		torch.backends.cudnn.benchmark = False  # reproducibilidad
+		
+		datamanager = build_datamanager(cfg)
+		
+		print('Building model: {}'.format(cfg.model.name))
+		model = torchreid.models.build_model(
+		name=cfg.model.name,
+		num_classes=datamanager.num_train_pids,
+		loss=cfg.loss.name,
+		pretrained=cfg.model.pretrained,
+		use_gpu=cfg.use_gpu,
+		img_size=(cfg.data.height, cfg.data.width),
+		)
+		num_params, flops = compute_model_complexity(
+		model, (1, 3, cfg.data.height, cfg.data.width)
+		)
+		print('Model complexity: params={:,} flops={:,}'.format(num_params, flops))
+		
+		if cfg.model.load_weights and check_isfile(cfg.model.load_weights):
+		load_pretrained_weights(model, cfg.model.load_weights)
+		
+		if cfg.use_gpu:
+		model = nn.DataParallel(model).cuda()
+		
+		optimizer = torchreid.optim.build_optimizer(model, **optimizer_kwargs(cfg))
+		scheduler = torchreid.optim.build_lr_scheduler(
+		optimizer, **lr_scheduler_kwargs(cfg)
+		)
+		
+		if cfg.model.resume and check_isfile(cfg.model.resume):
+		cfg.train.start_epoch = resume_from_checkpoint(
+		cfg.model.resume, model, optimizer=optimizer, scheduler=scheduler
+		)
+		
+		print('Building {}-engine for {}-reid'.format(cfg.loss.name, cfg.data.type))
+		engine = build_engine(cfg, datamanager, model, optimizer, scheduler)
+		engine.run(**engine_run_kwargs(cfg))
+		
+		
+		if __name__ == '__main__':
+		main()
+	\end{lstlisting}
+	
+	Este código realiza las siguientes funciones clave:
+	
+	\begin{itemize}
+		\item \textbf{Configuración del entorno de entrenamiento:} El código configura los parámetros del modelo, el optimizador y el scheduler para el entrenamiento del modelo de ReID utilizando la configuración especificada en el archivo YAML.
+		\item \textbf{Gestión de datos:} Utiliza \texttt{torchreid.data.ImageDataManager} para gestionar el conjunto de datos de entrada y salida, aplicando las transformaciones necesarias y ajustando los batch sizes para el entrenamiento y la evaluación.
+		\item \textbf{Entrenamiento del modelo:} El modelo es entrenado utilizando diferentes arquitecturas de red, como ResNet50, OSNet, y ViT, con la opción de utilizar diferentes funciones de pérdida como \texttt{softmax} o \texttt{triplet}, dependiendo de la configuración elegida.
+		\item \textbf{Gestión del proceso de entrenamiento:} El código proporciona un sistema de logging para registrar el progreso del entrenamiento y las métricas obtenidas, como la precisión media (mAP) y el rendimiento en el ranking-1.
+	\end{itemize}
+	
+	Este proceso de entrenamiento es fundamental para ajustar el modelo de ReID a las características del conjunto de datos de fútbol amateur, permitiendo una mejor identificación de los jugadores en los distintos fotogramas del video.
+	
+	
+	
+	\subsection{Preparar el dataset de testeo del modelo de ReID}
+	
+	
+	\subsection{Aplicar modelo de detección de objetos (YOLO)}
+	
+	
+	\subsection{Aplicar tracker (deepeiou) y modelo de reid}
+	
+	
+	\subsection{Aplicar GTA-LINK}
 	
 	
 	\section{Resultados Preliminares}
