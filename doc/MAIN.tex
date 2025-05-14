@@ -1163,23 +1163,281 @@
 	Este proceso de entrenamiento es fundamental para ajustar el modelo de ReID a las características del conjunto de datos de fútbol amateur, permitiendo una mejor identificación de los jugadores en los distintos fotogramas del video.
 	
 	
+	\subsection{Preparar el dataset de testeo del modelo de ReID} 
 	
-	\subsection{Preparar el dataset de testeo del modelo de ReID}
+	En este apartado del flujo, lo que haremos será realizar el mismo tipo de anotación que para preparar el dataset de entrenamiento para el modelo de ReID, pero utilizando otra secuencia de vídeo. El objetivo es evaluar si el modelo ha aprendido correctamente las características de cada jugador para re-identificarlo en diferentes fotogramas del nuevo vídeo.
+	
+	El proceso sigue los siguientes pasos:
+	
+	\begin{itemize}
+		\item \textbf{Selección de la secuencia de testeo:} Se selecciona un conjunto de datos de prueba que contenga una secuencia de vídeo diferente a la utilizada para el entrenamiento. Este conjunto de datos debe ser representativo de las condiciones del entorno de aplicación real, asegurando que las características visuales del nuevo vídeo sean lo suficientemente desafiantes para el modelo.
+		
+		\item \textbf{Anotación de las detecciones:} Al igual que en el dataset de entrenamiento, se realiza la anotación de las detecciones de los jugadores en los fotogramas de la secuencia de testeo. Esto se puede hacer utilizando el mismo sistema de anotaciones basado en un archivo MOT, donde se especifican las coordenadas de las cajas delimitadoras y los IDs de los jugadores en cada fotograma.
+		
+		\item \textbf{Uso de un modelo preentrenado:} El modelo previamente entrenado con el dataset de entrenamiento se utiliza para procesar la secuencia de testeo. El modelo debe ser capaz de re-identificar a los jugadores correctamente en cada fotograma, basándose en las características aprendidas durante el entrenamiento.
+		
+		\item \textbf{Evaluación de la re-identificación:} Una vez que el modelo haya procesado la secuencia de testeo, se evalúa su capacidad de re-identificación observando cómo asigna los mismos IDs a los jugadores a lo largo del vídeo. El modelo se evalúa utilizando métricas estándar de re-identificación, como la precisión en el top-1 y el mAP (Mean Average Precision).
+		
+		\item \textbf{Corrección de errores:} Si el modelo comete errores en la re-identificación de jugadores (por ejemplo, asignando un ID incorrecto o perdiendo la pista de un jugador en un fotograma), se pueden realizar correcciones manuales en las anotaciones, similares a las realizadas en la fase de entrenamiento. Esto asegura que los errores sean identificados y corregidos para mejorar la precisión del modelo en la evaluación.
+	\end{itemize}
+	
+	Este proceso de preparación del dataset de testeo es fundamental para verificar si el modelo de ReID ha generalizado correctamente las características aprendidas durante el entrenamiento y si puede realizar una re-identificación exitosa en nuevas secuencias de vídeo, lo que es esencial para su despliegue en entornos reales.
 	
 	
-	\subsection{Aplicar modelo de detección de objetos (YOLO)}
+	\subsection{Aplicar modelo de detección de objetos (YOLOX)}
+	
+	Para aplicar el modelo de detección de objetos YOLOX, se utilizó el código del repositorio \texttt{DeepEIoU}, específicamente el archivo \texttt{demo.py}, junto con una configuración personalizada definida en el archivo \texttt{yolox\_x\_ch\_sportsmot.py}. El objetivo es detectar jugadores en los fotogramas de un vídeo utilizando el modelo YOLOX.
+	
+	\subsubsection{Configuración del Modelo YOLOX en \texttt{yolox\_x\_ch\_sportsmot.py}}
+	
+	El archivo \texttt{yolox\_x\_ch\_sportsmot.py} define los parámetros clave del modelo YOLOX, que son cruciales para la detección de objetos en los fotogramas. Los puntos clave de esta configuración son:
+	
+	\begin{itemize}
+		\item \textbf{Número de Clases y Tamaño de Entrada:} El número de clases se establece en 1, ya que solo se está detectando la clase "jugador". El tamaño de la entrada de la imagen se define como (800, 1440), lo que permite trabajar con imágenes de alta resolución.
+		\begin{verbatim}
+			self.num_classes = 1
+			self.input_size = (800, 1440)
+			self.test_size = (800, 1440)
+		\end{verbatim}
+		
+		\item \textbf{Parámetros de Evaluación:} Se especifican los umbrales de confianza (\texttt{test\_conf}) y de NMS (\texttt{nmsthre}), que son cruciales para filtrar las detecciones de baja calidad y evitar duplicados en la misma imagen.
+		\begin{verbatim}
+			self.test_conf = 0.1
+			self.nmsthre = 0.7
+		\end{verbatim}
+		
+		\item \textbf{Configuración de Datos y Transformaciones:} Se utiliza la clase \texttt{MOTDataset} para cargar el conjunto de datos de detección de objetos, con las transformaciones definidas en \texttt{TrainTransform} y \texttt{ValTransform} para preprocesar las imágenes de entrada.
+		\begin{verbatim}
+			dataset = MOTDataset(
+			data_dir='/work/hsiangwei/dataset/',
+			json_file=self.train_ann,
+			name='',
+			img_size=self.input_size,
+			preproc=TrainTransform(
+			rgb_means=(0.485, 0.456, 0.406),
+			std=(0.229, 0.224, 0.225),
+			max_labels=500,
+			),
+			)
+		\end{verbatim}
+	\end{itemize}
+	
+	\subsubsection{Implementación en \texttt{demo.py}}
+	
+	El archivo \texttt{demo.py} aplica el modelo YOLOX para realizar la detección de objetos en una secuencia de vídeo. Los aspectos clave de su funcionamiento son:
+	
+	\begin{itemize}
+		\item \textbf{Cargar el Modelo:} El modelo se carga utilizando la configuración definida en el archivo de experimentos, que especifica la arquitectura y los parámetros de entrenamiento. Se utiliza la clase \texttt{Predictor} para gestionar la inferencia.
+		\begin{verbatim}
+			model = exp.get_model().to(args.device)
+			model.eval()
+		\end{verbatim}
+		
+		\item \textbf{Inferencia en Fotogramas de Vídeo:} En cada fotograma del vídeo, se realiza la detección de objetos utilizando el modelo YOLOX. El preprocesamiento de las imágenes se realiza con la función \texttt{preproc}, que ajusta el tamaño de las imágenes y normaliza los valores RGB.
+		\begin{verbatim}
+			img, ratio = preproc(img, self.test_size, self.rgb_means, self.std)
+			img = torch.from_numpy(img).unsqueeze(0).float().to(self.device)
+		\end{verbatim}
+		
+		\item \textbf{Postprocesamiento de Detecciones:} Después de realizar la inferencia, se aplica el postprocesamiento para filtrar las detecciones utilizando los umbrales de confianza y NMS. Esto garantiza que solo se conserven las detecciones más confiables.
+		\begin{verbatim}
+			outputs = postprocess(
+			outputs, self.num_classes, self.confthre, self.nmsthre
+			)
+		\end{verbatim}
+		
+		\item \textbf{Visualización de Detecciones:} Finalmente, las detecciones de objetos se visualizan en el fotograma utilizando la función \texttt{plot\_tracking}. Esta función dibuja las cajas delimitadoras alrededor de los jugadores detectados, y puede mostrar el ID del jugador junto con la caja de la detección.
+		\begin{verbatim}
+			online_im = plot_tracking(
+			img_info['raw_img'], online_tlwhs, 
+			online_ids, frame_id=frame_id + 1, fps=1. timer.average_time
+			)
+		\end{verbatim}
+	\end{itemize}
 	
 	
-	\subsection{Aplicar tracker (deepeiou) y modelo de reid}
+	
+	
+	\subsection{Aplicar tracker (DeepEIoU) y modelo de reID}
+	
+	En esta sección, se aplican el tracker Deep-EIoU y el modelo de reidentificación (ReID) para hacer el seguimiento y asociar las detecciones de jugadores a lo largo de los fotogramas de un vídeo.
+	
+	\subsubsection{Deep-EIoU en \texttt{DeepEIoU.py}}
+	
+	El archivo \texttt{DeepEIoU.py} contiene la implementación del tracker Deep-EIoU, que utiliza el algoritmo de seguimiento y Kalman filter para asociar las detecciones de objetos a lo largo de los fotogramas. A continuación se describen los puntos clave de su implementación:
+	
+	\begin{itemize}
+		\item \textbf{Clase \texttt{STrack}:}  
+		La clase \texttt{STrack} representa un objeto de seguimiento y contiene las características principales, como la predicción de la posición del objeto, la actualización de las características y la gestión de su estado utilizando un filtro de Kalman.
+		\begin{lstlisting}[style=pythonstyle]
+			class STrack(BaseTrack):
+			shared_kalman = KalmanFilter()
+			def __init__(self, tlwh, score, feat=None, feat_history=30):
+			...
+		\end{lstlisting}
+		
+		La clase gestiona el estado del objeto (\texttt{tracked}, \texttt{lost}), la actualización de sus características visuales (con el método \texttt{update\_features}) y la predicción de la siguiente posición usando el filtro de Kalman.
+		
+		\item \textbf{Predicción y Actualización:}  
+		La predicción de la siguiente posición de un objeto se realiza usando el filtro de Kalman para predecir su estado y su covarianza. La función \texttt{predict()} actualiza la posición del objeto.
+		\begin{lstlisting}[style=pythonstyle]
+			def predict(self):
+			self.mean, self.covariance = self.kalman_filter.predict(self.mean, self.covariance)
+		\end{lstlisting}
+		
+		\item \textbf{Activación y Re-activación:}  
+		Los objetos se activan al ser detectados por primera vez y se reactivan si han sido perdidos temporalmente. El método \texttt{activate()} inicia un nuevo seguimiento, mientras que \texttt{re\_activate()} se utiliza para volver a activar objetos previamente perdidos.
+		\begin{lstlisting}[style=pythonstyle]
+			def activate(self, kalman_filter, frame_id):
+			...
+			def re_activate(self, new_track, frame_id, new_id=False):
+			...
+		\end{lstlisting}
+		
+		\item \textbf{Estado del Objeto:}  
+		La propiedad \texttt{tlwh} convierte la posición de los objetos en el formato de caja delimitadora y la propiedad \texttt{xywh} convierte la caja en un formato de coordenadas (centro x, centro y, ancho, altura).
+		\begin{lstlisting}[style=pythonstyle]
+			@property
+			def tlwh(self):
+			...
+			@property
+			def xywh(self):
+			...
+		\end{lstlisting}
+		
+		\item \textbf{Tracker \texttt{Deep\_EIoU}:}  
+		El tracker \texttt{Deep\_EIoU} gestiona los objetos detectados y su seguimiento a lo largo de los fotogramas. El método \texttt{update()} actualiza los objetos seguidos, gestiona las asociaciones entre objetos y detecciones, y controla la activación y reactivación de los objetos.
+		\begin{lstlisting}[style=pythonstyle]
+			class Deep_EIoU(object):
+			def __init__(self, args, frame_rate=30):
+			...
+			def update(self, output_results, embedding):
+			...
+		\end{lstlisting}
+		
+		El método \texttt{update()} recibe las detecciones y las características de cada objeto, realiza asociaciones entre los objetos seguidos y las nuevas detecciones, y actualiza el estado de cada objeto.
+		
+		\item \textbf{Asociación de Detecciones:}  
+		La asociación de objetos se realiza utilizando una combinación de la distancia IoU (Intersection over Union) y la distancia en el espacio de características (\texttt{embedding}) de ReID. Los objetos se asocian primero con detecciones de alta puntuación y luego con detecciones de puntuación baja.
+		\begin{lstlisting}[style=pythonstyle]
+			ious_dists = matching.eiou_distance(strack_pool, detections, cur_expand_scale)
+			matches, u_track, u_detection = matching.linear_assignment(dists, thresh=self.args.match_thresh)
+		\end{lstlisting}
+		
+		\item \textbf{Gestión de la Pérdida de Objetos:}  
+		Los objetos perdidos se gestionan mediante el parámetro \texttt{max\_time\_lost}, y se marcan como eliminados si no se han rastreado durante el número máximo de fotogramas permitidos.
+		\begin{lstlisting}[style=pythonstyle]
+			for track in self.lost_stracks:
+			if self.frame_id - track.end_frame > self.max_time_lost:
+			track.mark_removed()
+		\end{lstlisting}
+	\end{itemize}
+	
+	\subsubsection{Modelo de Reidentificación (ReID)}
+	
+	El modelo de ReID se utiliza para asociar objetos detectados en diferentes fotogramas a través de sus características visuales. A continuación, se describe cómo se integran las características de ReID con el tracker Deep-EIoU:
+	
+	\begin{itemize}
+		\item \textbf{Extracción de Características de ReID:}  
+		Se extraen características visuales de las detecciones utilizando un extractor de características preentrenado, como el modelo \texttt{osnet\_x1\_0}.
+		\begin{lstlisting}[style=pythonstyle]
+			extractor = FeatureExtractor(
+			model_name='osnet_x1_0',
+			model_path='checkpoints/sports_model.pth.tar-60',
+			device='cpu'
+			)
+		\end{lstlisting}
+		
+		\item \textbf{Asignación de Características a Detecciones:}  
+		Las características extraídas se asignan a las detecciones de los jugadores, permitiendo al tracker realizar la reidentificación de los mismos a lo largo de los fotogramas.
+		\begin{lstlisting}[style=pythonstyle]
+			cropped_imgs = [frame[max(0,int(y1)):min(height,int(y2)),max(0,int(x1)):min(width,int(x2))] for x1,y1,x2,y2,_,_,_ in det]
+			embs = extractor(cropped_imgs)
+			embs = embs.cpu().detach().numpy()
+		\end{lstlisting}
+	\end{itemize}
+	
 	
 	
 	\subsection{Aplicar GTA-LINK}
+	
+	El proceso de seguimiento de objetos en un vídeo puede verse afectado por problemas como cambios de identidad o interrupciones temporales en el seguimiento de jugadores. Para abordar estos desafíos, se aplica el método \textbf{GTA: Global Tracklet Association}. Este enfoque se utiliza para refinar y mejorar la asociación de tracklets generados durante el seguimiento. A través de la aplicación de GTA, es posible corregir problemas como cambios de identidad, fusionar tracklets incorrectos y garantizar una asociación más precisa de los jugadores a lo largo del tiempo.
+	
+	GTA-LINK permite mejorar el rendimiento del seguimiento de objetos al trabajar sobre los resultados de cualquier modelo de seguimiento, como DeepEIoU. Este proceso de post-procesamiento refina las asociaciones de tracklets mediante dos componentes principales: el \textbf{tracklet splitter} y el \textbf{tracklet connector}. El primero se encarga de dividir tracklets que contienen múltiples identidades utilizando un algoritmo de clustering no supervisado basado en densidad, mientras que el segundo conecta los tracklets correctos mediante el cálculo de distancias promedio entre las características de los tracklets.
+	
+	La importancia de GTA-LINK radica en su capacidad para corregir y mejorar los resultados de cualquier modelo de seguimiento sin necesidad de modificaciones en el modelo de seguimiento original. En el flujo de trabajo, se emplea este método después de obtener las predicciones iniciales de seguimiento y antes de la reidentificación para garantizar que las asociaciones de tracklets sean lo más precisas posibles.
+	
+	
+	En este apartado del flujo, se utilizan dos scripts principales para generar y refinar los tracklets: \textbf{generate\_tracklets.py} y \textbf{refine\_tracklets.py}. A continuación, se explica cómo funciona cada uno de estos scripts y qué aportan al flujo general de trabajo.
+	
+	\subsubsection{generate\_tracklets.py}
+	
+	El script \textbf{generate\_tracklets.py} tiene como objetivo generar tracklets a partir de los resultados de seguimiento y las secuencias originales de fotogramas en formato RGB. Este proceso se realiza de la siguiente manera:
+	
+	\begin{itemize}
+		\item Primero, se carga un extractor de características utilizando el modelo de reidentificación \texttt{osnet\_x1\_0}. Este modelo es responsable de generar las características que se usarán para asociar las detecciones de los jugadores en cada fotograma.
+		\item Se procesan las secuencias de vídeo para obtener las predicciones de seguimiento en cada fotograma. Para cada fotograma, se extraen las características de las detecciones y se actualizan los tracklets existentes.
+		\item El script organiza los resultados de las detecciones de cada secuencia en archivos \texttt{.pkl}, que contienen los tracklets de la secuencia, con las características extraídas asociadas a cada uno.
+	\end{itemize}
+	
+	El código esencial del script se muestra a continuación:
+	
+	\begin{lstlisting}[style=pythonstyle]
+		def main(model_path, data_path, pred_dir, tracker):
+		# Cargar extractor de caracteristicas
+		val_transforms = T.Compose([T.Resize([256, 128]), T.ToTensor(), T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
+		extractor = FeatureExtractor(model_name='osnet_x1_0', model_path=model_path, device=device)
+		# Procesar secuencias y generar tracklets
+		for s_id, seq in tqdm(enumerate(seqs, 1), total=len(seqs), desc='Processing Seqs'):
+		# Iterar sobre los frames y actualizar los tracklets con las detecciones y caracteristicas
+		for frame_id in range(1, last_frame+1):
+		# Actualizacion de tracklets con las caracteristicas extraidas
+		features = extractor(input_batch)
+		# Guardar tracklets en archivos .pkl
+		with open(track_output_path, 'wb') as f:
+		pickle.dump(seq_tracks, f)
+	\end{lstlisting}
+	
+	Este script genera los tracklets a partir de las predicciones del seguimiento, asociando las características extraídas a cada tracklet y guardando los resultados en formato \textbf{pickle}.
+	
+	\subsubsection{refine\_tracklets.py}
+	
+	El script \textbf{refine\_tracklets.py} es un proceso de post-procesamiento que se aplica a los tracklets generados para mejorar su precisión y corregir errores en la asociación de identidades. Este script realiza las siguientes tareas:
+	
+	\begin{itemize}
+		\item \textbf{Tracklet splitter}: Utiliza el algoritmo de clustering DBSCAN para dividir los tracklets impuros que contienen múltiples identidades. Esto se logra mediante el análisis de las características de los jugadores en los diferentes fotogramas.
+		\item \textbf{Tracklet connector}: Después de dividir los tracklets, se conecta los tracklets correctos basándose en la similitud de sus características. Se usa una métrica de distancia para evaluar las características y decidir si dos tracklets deben fusionarse.
+		\item \textbf{Visualización de distancias}: El script también genera mapas de calor para visualizar las distancias entre los tracklets, lo que permite evaluar cómo las conexiones y divisiones afectan la precisión del seguimiento.
+	\end{itemize}
+	
+	El código esencial de este script es el siguiente:
+	
+	\begin{lstlisting}[style=pythonstyle]
+		def merge_tracklets(tracklets, seq2Dist, Dist, seq_name=None, max_x_range=None, max_y_range=None, merge_dist_thres=None):
+		# Realiza la fusion de los tracklets
+		while (np.any(Dist[non_diagonal_mask] < merge_dist_thres)):
+		min_index = np.argmin(Dist[non_diagonal_mask])
+		track1 = tracklets[idx2tid[track1_idx]]
+		track2 = tracklets[idx2tid[track2_idx]]
+		inSpatialRange = check_spatial_constraints(track1, track2, max_x_range, max_y_range)
+		if inSpatialRange:
+		track1.features += track2.features
+		track1.times += track2.times
+		track1.bboxes += track2.bboxes
+		tracklets[idx2tid[track1_idx]] = track1
+		tracklets.pop(idx2tid[track2_idx])
+	\end{lstlisting}
+	
+	Este script se encarga de mejorar los tracklets mediante la fusión y la división de tracklets en función de sus características y la similitud espacial. Esto mejora la precisión del seguimiento de jugadores en el vídeo.
+	
 	
 	
 	\section{Resultados Preliminares}
 	
 	
+	
 	\section{Dificultades encontradas}
+	
 	
 	
 	\section{Conclusiones}
