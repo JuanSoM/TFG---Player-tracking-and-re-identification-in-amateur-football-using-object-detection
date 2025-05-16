@@ -43,5 +43,8 @@
 \contentsline {subsubsection}{\numberline {10.8.1}generate\_tracklets.py}{41}{subsubsection.10.8.1}%
 \contentsline {subsubsection}{\numberline {10.8.2}refine\_tracklets.py}{41}{subsubsection.10.8.2}%
 \contentsline {section}{\numberline {11}Resultados Preliminares}{42}{section.11}%
-\contentsline {section}{\numberline {12}Dificultades encontradas}{42}{section.12}%
-\contentsline {section}{\numberline {13}Conclusiones}{42}{section.13}%
+\contentsline {subsection}{\numberline {11.1}Comparación de protocolos de re-identificación}{42}{subsection.11.1}%
+\contentsline {subsubsection}{\numberline {11.1.1}Ejemplo de evaluación de Re-Identification}{43}{subsubsection.11.1.1}%
+\contentsline {subsection}{\numberline {11.2}Resultados de ReID comparando YOLOv10 y DeepEIoU con osnet de modelo de ReID}{45}{subsection.11.2}%
+\contentsline {section}{\numberline {12}Dificultades encontradas}{45}{section.12}%
+\contentsline {section}{\numberline {13}Conclusiones}{45}{section.13}%

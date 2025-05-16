@@ -145,5 +145,62 @@
   Sports}
     \field{year}{2024}
   \endentry
+
+  \entry{7410490}{inproceedings}{}{}
+    \name{author}{6}{}{%
+      {{hash=ZL}{%
+         family={Zheng},
+         familyi={Z\bibinitperiod},
+         given={Liang},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=SL}{%
+         family={Shen},
+         familyi={S\bibinitperiod},
+         given={Liyue},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=TL}{%
+         family={Tian},
+         familyi={T\bibinitperiod},
+         given={Lu},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=WS}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Shengjin},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=WJ}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Jingdong},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=TQ}{%
+         family={Tian},
+         familyi={T\bibinitperiod},
+         given={Qi},
+         giveni={Q\bibinitperiod},
+      }}%
+    }
+    \keyw{Cameras;Detectors;Visualization;Benchmark testing;Open
+  systems;Boosting;Measurement}
+    \strng{namehash}{ZL+1}
+    \strng{fullhash}{ZLSLTLWSWJTQ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{Z}
+    \field{sortinithash}{Z}
+    \field{booktitle}{2015 IEEE International Conference on Computer Vision
+  (ICCV)}
+    \verb{doi}
+    \verb 10.1109/ICCV.2015.133
+    \endverb
+    \field{pages}{1116\bibrangedash 1124}
+    \field{title}{Scalable Person Re-identification: A Benchmark}
+    \field{year}{2015}
+  \endentry
 \enddatalist
 \endinput

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.14)  14 MAY 2025 21:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.14)  16 MAY 2025 01:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -703,12 +703,12 @@ Package biblatex Info: Reference segment=0 on input line 50.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<cover.pdf, id=191, 597.73312pt x 845.40843pt>
+<cover.pdf, id=203, 597.73312pt x 845.40843pt>
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf>
 Package pdftex.def Info: cover.pdf  used on input line 53.
 (pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
-<cover.pdf, id=193, page=1, 597.73312pt x 845.40843pt>
+<cover.pdf, id=205, page=1, 597.73312pt x 845.40843pt>
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf, page 1>
 Package pdftex.def Info: cover.pdf , page1 used on input line 53.
@@ -731,12 +731,12 @@ Package pdftex.def Info: cover.pdf , page1 used on input line 53.
 
 
  <./cover.pdf>]
-<title.pdf, id=211, 597.73312pt x 845.40843pt>
+<title.pdf, id=223, 597.73312pt x 845.40843pt>
 File: title.pdf Graphic file (type pdf)
 <use title.pdf>
 Package pdftex.def Info: title.pdf  used on input line 58.
 (pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
-<title.pdf, id=213, page=1, 597.73312pt x 845.40843pt>
+<title.pdf, id=225, page=1, 597.73312pt x 845.40843pt>
 File: title.pdf Graphic file (type pdf)
 <use title.pdf, page 1>
 Package pdftex.def Info: title.pdf , page1 used on input line 58.
@@ -791,12 +791,12 @@ Overfull \hbox (2.24379pt too wide) in paragraph at lines 37--37
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\cite' on input line 81.
 
-<image/metricasBeta.png, id=291, 310.761pt x 271.61475pt>
+<image/metricasBeta.png, id=307, 310.761pt x 271.61475pt>
 File: image/metricasBeta.png Graphic file (type png)
 <use image/metricasBeta.png>
 Package pdftex.def Info: image/metricasBeta.png  used on input line 87.
 (pdftex.def)             Requested size: 341.43437pt x 298.43314pt.
-<image/Centrarse.png, id=293, 418.56375pt x 122.25674pt>
+<image/Centrarse.png, id=309, 418.56375pt x 122.25674pt>
 File: image/Centrarse.png Graphic file (type png)
 <use image/Centrarse.png>
 Package pdftex.def Info: image/Centrarse.png  used on input line 96.
@@ -833,7 +833,7 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.127 	
         <./image/Centrarse.png>]
-<image/deepEIoU.png, id=308, 867.84225pt x 246.9225pt>
+<image/deepEIoU.png, id=324, 867.84225pt x 246.9225pt>
 File: image/deepEIoU.png Graphic file (type png)
 <use image/deepEIoU.png>
 Package pdftex.def Info: image/deepEIoU.png  used on input line 148.
@@ -856,12 +856,12 @@ Overfull \hbox (88.48886pt too wide) in paragraph at lines 226--227
 ogies/?utm[]source=chatgpt.com" 
  []
 
-<image/tracab.png, id=327, 1204.5pt x 677.53125pt>
+<image/tracab.png, id=343, 1204.5pt x 677.53125pt>
 File: image/tracab.png Graphic file (type png)
 <use image/tracab.png>
 Package pdftex.def Info: image/tracab.png  used on input line 232.
 (pdftex.def)             Requested size: 192.0548pt x 108.02469pt.
-<image/tracab2.png, id=328, 1927.2pt x 1084.05pt>
+<image/tracab2.png, id=344, 1927.2pt x 1084.05pt>
 File: image/tracab2.png Graphic file (type png)
 <use image/tracab2.png>
 Package pdftex.def Info: image/tracab2.png  used on input line 238.
@@ -875,7 +875,7 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.248 	
         <./image/tracab.png (PNG copy)> <./image/tracab2.png>]
-<image/longomatch.png, id=335, 1927.2pt x 956.57375pt>
+<image/longomatch.png, id=351, 1927.2pt x 956.57375pt>
 File: image/longomatch.png Graphic file (type png)
 <use image/longomatch.png>
 Package pdftex.def Info: image/longomatch.png  used on input line 251.
@@ -947,12 +947,12 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 
 [12]
-<image/yolodec1.jpg, id=356, 803.0pt x 362.35374pt>
+<image/yolodec1.jpg, id=372, 803.0pt x 362.35374pt>
 File: image/yolodec1.jpg Graphic file (type jpg)
 <use image/yolodec1.jpg>
 Package pdftex.def Info: image/yolodec1.jpg  used on input line 345.
 (pdftex.def)             Requested size: 341.43437pt x 154.07294pt.
-<image/yolodec2.jpg, id=357, 803.0pt x 358.33875pt>
+<image/yolodec2.jpg, id=373, 803.0pt x 358.33875pt>
 File: image/yolodec2.jpg Graphic file (type jpg)
 <use image/yolodec2.jpg>
 Package pdftex.def Info: image/yolodec2.jpg  used on input line 357.
@@ -969,12 +969,12 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.361 		
          <./image/yolodec1.jpg>]
-<image/yolodec3.jpg, id=366, 803.0pt x 389.455pt>
+<image/yolodec3.jpg, id=382, 803.0pt x 389.455pt>
 File: image/yolodec3.jpg Graphic file (type jpg)
 <use image/yolodec3.jpg>
 Package pdftex.def Info: image/yolodec3.jpg  used on input line 368.
 (pdftex.def)             Requested size: 341.43437pt x 165.5964pt.
-<image/yolodec4.jpg, id=367, 803.0pt x 414.54875pt>
+<image/yolodec4.jpg, id=383, 803.0pt x 414.54875pt>
 File: image/yolodec4.jpg Graphic file (type jpg)
 <use image/yolodec4.jpg>
 Package pdftex.def Info: image/yolodec4.jpg  used on input line 379.
@@ -997,7 +997,7 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.383 		
          <./image/yolodec2.jpg> <./image/yolodec3.jpg>]
-<image/yolodec5.jpg, id=376, 803.0pt x 451.6875pt>
+<image/yolodec5.jpg, id=392, 803.0pt x 451.6875pt>
 File: image/yolodec5.jpg Graphic file (type jpg)
 <use image/yolodec5.jpg>
 Package pdftex.def Info: image/yolodec5.jpg  used on input line 391.
@@ -1017,7 +1017,7 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.409 	
         <./image/yolodec4.jpg> <./image/yolodec5.jpg>]
-<image/tracking_id.png, id=385, 1283.79625pt x 720.6925pt>
+<image/tracking_id.png, id=401, 1283.79625pt x 720.6925pt>
 File: image/tracking_id.png Graphic file (type png)
 <use image/tracking_id.png>
 Package pdftex.def Info: image/tracking_id.png  used on input line 414.
@@ -1031,12 +1031,12 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.427 	
         <./image/tracking_id.png (PNG copy)>]
-<image/gestion_id.png, id=391, 371.3875pt x 371.3875pt>
+<image/gestion_id.png, id=407, 371.3875pt x 371.3875pt>
 File: image/gestion_id.png Graphic file (type png)
 <use image/gestion_id.png>
 Package pdftex.def Info: image/gestion_id.png  used on input line 430.
 (pdftex.def)             Requested size: 170.71393pt x 170.71564pt.
-<image/Flowcharts.png, id=392, 1806.75pt x 627.34375pt>
+<image/Flowcharts.png, id=408, 1806.75pt x 627.34375pt>
 File: image/Flowcharts.png Graphic file (type png)
 <use image/Flowcharts.png>
 Package pdftex.def Info: image/Flowcharts.png  used on input line 446.
@@ -1058,7 +1058,7 @@ Overfull \hbox (6.09908pt too wide) in paragraph at lines 465--466
 ase (\OT1/cmtt/m/n/12 jugador\OT1/cmr/m/n/12 ), Roboflow
  []
 
-<image/dif_de_clases.png, id=399, 1354.05875pt x 619.31375pt>
+<image/dif_de_clases.png, id=415, 1354.05875pt x 619.31375pt>
 File: image/dif_de_clases.png Graphic file (type png)
 <use image/dif_de_clases.png>
 Package pdftex.def Info: image/dif_de_clases.png  used on input line 470.
@@ -1075,7 +1075,7 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.474 	
         <./image/Flowcharts.png>]
-<image/entr_yolo.png, id=407, 1542.76375pt x 611.28375pt>
+<image/entr_yolo.png, id=423, 1542.76375pt x 611.28375pt>
 File: image/entr_yolo.png Graphic file (type png)
 <use image/entr_yolo.png>
 Package pdftex.def Info: image/entr_yolo.png  used on input line 479.
@@ -1138,7 +1138,7 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
 
 
 [22]
-<image/entr_reid.png, id=472, 1902.10625pt x 970.62625pt>
+<image/entr_reid.png, id=488, 1902.10625pt x 970.62625pt>
 File: image/entr_reid.png Graphic file (type png)
 <use image/entr_reid.png>
 Package pdftex.def Info: image/entr_reid.png  used on input line 664.
@@ -1173,7 +1173,7 @@ Overfull \hbox (4.88432pt too wide) in paragraph at lines 840--841
 cor-rer los frames au-tom^^Saticamente
  []
 
-<image/dir_reid.png, id=636, 844.15375pt x 447.6725pt>
+<image/dir_reid.png, id=652, 844.15375pt x 447.6725pt>
 File: image/dir_reid.png Graphic file (type png)
 <use image/dir_reid.png>
 Package pdftex.def Info: image/dir_reid.png  used on input line 847.
@@ -1283,12 +1283,45 @@ e cada se-cuen-cia en archivos
 
 [42]
 
+[43]
+<image/metricas_reid_yolo10.png, id=1092, 262.73157pt x 115.18031pt>
+File: image/metricas_reid_yolo10.png Graphic file (type png)
+<use image/metricas_reid_yolo10.png>
+Package pdftex.def Info: image/metricas_reid_yolo10.png  used on input line 155
+9.
+(pdftex.def)             Requested size: 341.43437pt x 149.68866pt.
+
+
+[44]
+<image/metricas_reid_deepEIoU.png, id=1102, 194.97844pt x 89.58469pt>
+File: image/metricas_reid_deepEIoU.png Graphic file (type png)
+<use image/metricas_reid_deepEIoU.png>
+Package pdftex.def Info: image/metricas_reid_deepEIoU.png  used on input line 1
+566.
+(pdftex.def)             Requested size: 341.43437pt x 156.88216pt.
+
+
+[45
+pdfTeX warning (ext4): destination with the same identifier (name{figure.18}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1581 	
+        
+pdfTeX warning (ext4): destination with the same identifier (name{figure.19}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1581 	
+         <./image/metricas_reid_yolo10.png> <./image/metricas_reid_deepEIoU.png
+>]
+
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=1072, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=1116, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 1452.
+Package pdftex.def Info: backcover.pdf  used on input line 1584.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -1298,29 +1331,29 @@ ersion <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=1074, page=1, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=1118, page=1, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 1452.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 1584.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
-[43]
+[46]
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 1452.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 1584.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 1452.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 1584.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 1452.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 1584.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-[44
+[47
 
  <./backcover.pdf>] (MAIN.aux)
  ***********
@@ -1328,37 +1361,38 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-04-14>
  ***********
 Package rerunfilecheck Info: File `MAIN.out' has not changed.
-(rerunfilecheck)             Checksum: 20EEB4F6B9016F14784BD85CC1C3AF68;9454.
+(rerunfilecheck)             Checksum: 7434102475394BAA80176C75E94602C1;10533.
 Package logreq Info: Writing requests to 'MAIN.run.xml'.
 \openout1 = `MAIN.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 20920 strings out of 469940
- 361911 string characters out of 5468441
- 1471288 words of memory out of 5000000
- 46855 multiletter control sequences out of 15000+600000
- 632701 words of font info for 60 fonts, out of 8000000 for 9000
+ 20972 strings out of 469940
+ 363321 string characters out of 5468441
+ 1472327 words of memory out of 5000000
+ 46891 multiletter control sequences out of 15000+600000
+ 633042 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,79p,1905b,2112s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Soriano\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tc
-rm1200.pk><C:/Users/Soriano/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
-sfonts/cm/cmbx12.pfb><C:/Users/Soriano/AppData/Local/Programs/MiKTeX/fonts/type
-1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/Soriano/AppData/Local/Programs/MiKTe
-X/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Soriano/AppData/Local/Pro
-grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Soriano/AppData
-/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Soria
-no/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/U
-sers/Soriano/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.
-pfb><C:/Users/Soriano/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
-/cm/cmr8.pfb><C:/Users/Soriano/AppData/Local/Programs/MiKTeX/fonts/type1/public
-/amsfonts/cm/cmsy10.pfb><C:/Users/Soriano/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/amsfonts/cm/cmti12.pfb><C:/Users/Soriano/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Soriano/AppData/Local/P
-rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on MAIN.pdf (45 pages, 13468689 bytes).
+bx1200.pk> <C:\Users\Soriano\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/d
+pi600\tcrm1200.pk><C:/Users/Soriano/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmbx12.pfb><C:/Users/Soriano/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/Soriano/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Soriano/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Soriano
+/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Use
+rs/Soriano/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.p
+fb><C:/Users/Soriano/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmr7.pfb><C:/Users/Soriano/AppData/Local/Programs/MiKTeX/fonts/type1/public/
+amsfonts/cm/cmr8.pfb><C:/Users/Soriano/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Soriano/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Soriano/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Soriano/AppData
+/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on MAIN.pdf (48 pages, 13497465 bytes).
 PDF statistics:
- 1291 PDF objects out of 1440 (max. 8388607)
- 671 named destinations out of 1000 (max. 500000)
- 512 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1344 PDF objects out of 1440 (max. 8388607)
+ 686 named destinations out of 1000 (max. 500000)
+ 546 words of extra memory for PDF output out of 10000 (max. 10000000)
 

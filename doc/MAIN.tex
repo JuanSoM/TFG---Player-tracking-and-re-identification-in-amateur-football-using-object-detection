@@ -1434,7 +1434,141 @@
 	
 	\section{Resultados Preliminares}
 	
-	
+ 	\subsection{Comparación de protocolos de re-identificación} \cite{7410490}
+ 	
+ 	En ambos casos —tanto en el protocolo “estándar” de Market-1501 como en tu evaluación actual— la idea central es muy parecida, pero difieren en qué pones en la galería y cómo defines tus consultas:
+ 	
+ 	\begin{enumerate}
+ 		\item \textbf{Market-1501 (Zheng et al., CVPR 2015)}
+ 		\begin{itemize}
+ 			\item \textbf{Dataset.}  
+ 			Cada persona del set de test aporta varias imágenes (por ejemplo, desde varias cámaras).
+ 			\item \textbf{Split query vs.\ gallery.}  
+ 			Para cada persona, se elige una imagen como “consulta” y el resto pasa a la “galería”.  
+ 			Así reproduces un escenario realista: buscas a alguien (consulta) entre muchas posibles (galería), pero sin que la misma toma aparezca en ambos lados.
+ 			\item \textbf{Distancias y ranking.}  
+ 			Mides la distancia (euclídea o coseno) entre cada consulta y todas las imágenes de la galería, y ordenas los candidatos de menor a mayor distancia.
+ 			\item \textbf{CMC (Rank-\(k\)).}  
+ 			Calculas el porcentaje de consultas en que la persona correcta está entre los \(k\) primeros resultados (Rank-1, Rank-5, Rank-10).
+ 			\item \textbf{mAP.}  
+ 			Para cada consulta construyes su curva Precisión–Recall sobre todo el ranking y obtienes su \emph{Average Precision}; luego promedias sobre todas las consultas.
+ 			\item \textbf{Ventajas.}
+ 			\begin{itemize}
+ 				\item Evalúa “one‐shot” re-identificación en un benchmark controlado.
+ 				\item Galería relativamente pequeña (decenas–centenas de imágenes).
+ 			\end{itemize}
+ 		\end{itemize}
+ 		
+ 		\item \textbf{Tu protocolo actual (detección vs.\ detección por frame)}
+ 		\begin{itemize}
+ 			\item \textbf{Extracción.}  
+ 			A partir de un vídeo, generas miles de recortes (detecciones) y extraes un embedding por cada uno.
+ 			\item \textbf{Split query vs.\ gallery.}  
+ 			Para cada jugador (\texttt{track\_id}), tomas una detección como consulta y todas las demás detecciones de ese mismo jugador pasan a la galería, que puede ser muy grande (p. ej. 25 000 detecciones).
+ 			\item \textbf{Distancias y ranking.}  
+ 			Igual que en Market-1501, mides distancias consulta→galería.
+ 			\item \textbf{CMC (Rank-\(k\)) y mAP.}  
+ 			Cálculo idéntico: porcentaje de veces que tu embedding de consulta aparece en top-\(k\) de esas 25 000 detecciones, y AP sobre el ranking completo.
+ 			\item \textbf{Diferencias clave.}
+ 			\begin{itemize}
+ 				\item \textbf{Escala de la galería:} Market-1501 suele tener menos de 1 000 imágenes; aquí tienes decenas de miles.
+ 				\item \textbf{Naturaleza de la galería:} Market-1501 agrupa vistas distintas (cámaras), mientras que tú repites la misma cámara+jugador cientos de veces (frames contiguos).
+ 				\item \textbf{Objetivo:} Market-1501 mide robustez a cambios de punto de vista e iluminación entre cámaras; tu versión mide robustez a pequeñas variaciones de pose y ruido de detección dentro de un mismo vídeo.
+ 			\end{itemize}
+ 		\end{itemize}
+ 	\end{enumerate}
+ 	
+ 	\subsubsection{Ejemplo de evaluación de Re-Identification}
+ 	
+ 	Supongamos que ya tienes dos ficheros de entrada:
+ 	
+ 	\medskip
+ 	\noindent
+ 	\textbf{feats\_all.npy} con 6 embeddings (cada uno es un vector, pero aquí sólo indicamos su índice):
+ 	\begin{center}
+ 		\begin{tabular}{c|cccccc}
+ 			idx:   & 0 & 1 & 2 & 3 & 4 & 5 \\ \hline
+ 			feats: & $e_0$ & $e_1$ & $e_2$ & $e_3$ & $e_4$ & $e_5$
+ 		\end{tabular}
+ 	\end{center}
+ 	
+ 	\medskip
+ 	\noindent
+ 	\textbf{ids\_all.npy} con los IDs correspondientes:
+ 	\begin{center}
+ 		\begin{tabular}{c|cccccc}
+ 			idx: & 0 & 1 & 2 & 3 & 4 & 5 \\ \hline
+ 			ids: & 1 & 2 & 1 & 2 & 3 & 3
+ 		\end{tabular}
+ 	\end{center}
+ 	
+ 	\bigskip
+ 	
+ 	\begin{enumerate}
+ 		\item \textbf{Split consulta vs.\ galería.}\\
+ 		Para cada ID que aparece al menos dos veces:
+ 		\begin{itemize}
+ 			\item ID 1 en índices 0 y 2: consulta $q_0=0$, galería $g_0=2$.
+ 			\item ID 2 en índices 1 y 3: consulta $q_1=1$, galería $g_1=3$.
+ 			\item ID 3 en índices 4 y 5: consulta $q_2=4$, galería $g_2=5$.
+ 		\end{itemize}
+ 		Quedan consultas $[0,1,4]$ y galería $[2,3,5]$.
+ 		
+ 		\item \textbf{Matriz de distancias (Query × Galería).}\\
+ 		Supongamos estas distancias euclídeas:
+ 		\begin{center}
+ 			\begin{tabular}{c|ccc}
+ 				& $g=2$ & $g=3$ & $g=5$ \\ \hline
+ 				$q=0$ & 0.5 & 1.2 & 2.0 \\
+ 				$q=1$ & 1.0 & 0.4 & 1.5 \\
+ 				$q=4$ & 2.5 & 2.0 & 0.3
+ 			\end{tabular}
+ 		\end{center}
+ 		
+ 		\item \textbf{Rank-1 (mini-ejemplo).}\\
+ 		Para cada consulta, el candidato más cercano:
+ 		\begin{itemize}
+ 			\item $q=0$ (ID 1): mejor es $g=2$ (ID 1) → acierto.
+ 			\item $q=1$ (ID 2): mejor es $g=3$ (ID 2) → acierto.
+ 			\item $q=4$ (ID 3): mejor es $g=5$ (ID 3) → acierto.
+ 		\end{itemize}
+ 		Rank-1 = $3/3 = 100\%$.
+ 		
+ 		\item \textbf{mAP (Average Precision).}\\
+ 		Para cada consulta marcamos hits en el ranking completo:
+ 		\[
+ 		\begin{array}{l|c}
+ 			Consulta & AP \\ \hline
+ 			q=0 & 1.0 \\
+ 			q=1 & 1.0 \\
+ 			q=4 & 1.0
+ 		\end{array}
+ 		\]
+ 		\[
+ 		\mathrm{mAP} = \frac{1.0 + 1.0 + 1.0}{3} = 100\%.
+ 		\]
+ 		
+ 		En un caso real con miles de embeddings y detecciones, el procedimiento es idéntico: 
+ 		se calculan Rank-1, Rank-5, Rank-10 y mAP sobre las listas ordenadas de distancias.
+ 	\end{enumerate}
+ 	
+ 	\subsection{Resultados de ReID comparando YOLOv10 y DeepEIoU con osnet de modelo de ReID}
+ 	
+ 	\begin{figure}[H]
+ 		\centering
+ 		\includegraphics[width=0.8\textwidth]{image/metricas_reid_yolo10}
+ 		\caption{\textbf{Resultado Yolov10}}
+ 		\label{fig:Resultado Yolov10}
+ 	\end{figure}
+ 	
+ 	\begin{figure}[H]
+ 		\centering
+ 		\includegraphics[width=0.8\textwidth]{image/metricas_reid_deepEIoU}
+ 		\caption{\textbf{Resultado DeepEIoU con Osnet}}
+ 		\label{fig:Resultado DeepEIoU con Osnet}
+ 	\end{figure}
+ 	
+ 	\subsection{Resultados de MOT comparando YOLOv10 y YOLOX}
 	
 	\section{Dificultades encontradas}
 	
