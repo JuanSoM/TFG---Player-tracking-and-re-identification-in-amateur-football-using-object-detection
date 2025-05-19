@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.12)  16 MAY 2025 21:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.12)  19 MAY 2025 00:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1316,12 +1316,20 @@ File: image/metricas_mot_yolo10.png Graphic file (type png)
 Package pdftex.def Info: image/metricas_mot_yolo10.png  used on input line 1575
 .
 (pdftex.def)             Requested size: 341.43437pt x 34.60759pt.
-<image/metricas_mot_deepEIoU.png, id=1111, 264.38776pt x 25.89674pt>
-File: image/metricas_mot_deepEIoU.png Graphic file (type png)
-<use image/metricas_mot_deepEIoU.png>
-Package pdftex.def Info: image/metricas_mot_deepEIoU.png  used on input line 15
-82.
+<image/metricas_mot_deepEIoU_osnet_sportmot.png, id=1111, 264.38776pt x 25.8967
+4pt>
+File: image/metricas_mot_deepEIoU_osnet_sportmot.png Graphic file (type png)
+<use image/metricas_mot_deepEIoU_osnet_sportmot.png>
+Package pdftex.def Info: image/metricas_mot_deepEIoU_osnet_sportmot.png  used o
+n input line 1582.
 (pdftex.def)             Requested size: 341.43437pt x 33.44485pt.
+<image/metricas_mot_deepEIoU_osnet_soccernet.png, id=1112, 263.7855pt x 27.7035
+pt>
+File: image/metricas_mot_deepEIoU_osnet_soccernet.png Graphic file (type png)
+<use image/metricas_mot_deepEIoU_osnet_soccernet.png>
+Package pdftex.def Info: image/metricas_mot_deepEIoU_osnet_soccernet.png  used 
+on input line 1589.
+(pdftex.def)             Requested size: 341.43437pt x 35.85854pt.
 
 
 [45
@@ -1329,34 +1337,35 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.18}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1597 	
+l.1593 	
         
 pdfTeX warning (ext4): destination with the same identifier (name{figure.19}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1597 	
+l.1593 	
         
 pdfTeX warning (ext4): destination with the same identifier (name{figure.20}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1597 	
+l.1593 	
         
 pdfTeX warning (ext4): destination with the same identifier (name{figure.21}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1597 	
+l.1593 	
          <./image/metricas_reid_yolo10.png> <./image/metricas_reid_deepEIoU.png
-> <./image/metricas_mot_yolo10.png> <./image/metricas_mot_deepEIoU.png>]
+> <./image/metricas_mot_yolo10.png> <./image/metricas_mot_deepEIoU_osnet_sportm
+ot.png>]
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=1126, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=1127, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 1600.
+Package pdftex.def Info: backcover.pdf  used on input line 1609.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -1364,7 +1373,7 @@ pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 1600.
+Package pdftex.def Info: backcover.pdf  used on input line 1609.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -1374,27 +1383,34 @@ ersion <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=1129, page=1, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=1130, page=1, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 1600.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 1609.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
-[46]
+[46
+pdfTeX warning (ext4): destination with the same identifier (name{figure.22}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1609 ...=true, width=\paperwidth]{backcover.pdf}
+                                                   <./image/metricas_mot_deepEI
+oU_osnet_soccernet.png>]
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 1600.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 1609.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 1600.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 1609.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 1600.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 1609.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 [47
 
@@ -1410,10 +1426,10 @@ Package logreq Info: Writing requests to 'MAIN.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 20995 strings out of 473681
- 364125 string characters out of 5718718
- 1480521 words of memory out of 5000000
- 43186 multiletter control sequences out of 15000+600000
+ 21008 strings out of 473681
+ 364937 string characters out of 5718718
+ 1480692 words of memory out of 5000000
+ 43198 multiletter control sequences out of 15000+600000
  564286 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,81p,1905b,2112s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1433,9 +1449,9 @@ sfonts/cm/cmsy10.pfb><C:/Users/jismbs/AppData/Local/Programs/MiKTeX/fonts/type1
 /public/amsfonts/cm/cmti12.pfb><C:/Users/jismbs/AppData/Local/Programs/MiKTeX/f
 onts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/jismbs/AppData/Local/Program
 s/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on MAIN.pdf (48 pages, 13504131 bytes).
+Output written on MAIN.pdf (48 pages, 13507071 bytes).
 PDF statistics:
- 1358 PDF objects out of 1440 (max. 8388607)
- 689 named destinations out of 1000 (max. 500000)
- 579 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1361 PDF objects out of 1440 (max. 8388607)
+ 690 named destinations out of 1000 (max. 500000)
+ 584 words of extra memory for PDF output out of 10000 (max. 10000000)
 
