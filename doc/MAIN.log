@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.14)  19 MAY 2025 19:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.14)  20 MAY 2025 09:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -791,12 +791,12 @@ Overfull \hbox (2.24379pt too wide) in paragraph at lines 37--37
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\cite' on input line 81.
 
-<image/metricasBeta.png, id=312, 310.761pt x 271.61475pt>
+<image/metricasBeta.png, id=311, 310.761pt x 271.61475pt>
 File: image/metricasBeta.png Graphic file (type png)
 <use image/metricasBeta.png>
 Package pdftex.def Info: image/metricasBeta.png  used on input line 87.
 (pdftex.def)             Requested size: 341.43437pt x 298.43314pt.
-<image/Centrarse.png, id=314, 418.56375pt x 122.25674pt>
+<image/Centrarse.png, id=313, 418.56375pt x 122.25674pt>
 File: image/Centrarse.png Graphic file (type png)
 <use image/Centrarse.png>
 Package pdftex.def Info: image/Centrarse.png  used on input line 96.
@@ -833,7 +833,7 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.127 	
         <./image/Centrarse.png>]
-<image/deepEIoU.png, id=329, 867.84225pt x 246.9225pt>
+<image/deepEIoU.png, id=328, 867.84225pt x 246.9225pt>
 File: image/deepEIoU.png Graphic file (type png)
 <use image/deepEIoU.png>
 Package pdftex.def Info: image/deepEIoU.png  used on input line 148.
@@ -856,12 +856,12 @@ Overfull \hbox (88.48886pt too wide) in paragraph at lines 226--227
 ogies/?utm[]source=chatgpt.com" 
  []
 
-<image/tracab.png, id=348, 1204.5pt x 677.53125pt>
+<image/tracab.png, id=347, 1204.5pt x 677.53125pt>
 File: image/tracab.png Graphic file (type png)
 <use image/tracab.png>
 Package pdftex.def Info: image/tracab.png  used on input line 232.
 (pdftex.def)             Requested size: 192.0548pt x 108.02469pt.
-<image/tracab2.png, id=349, 1927.2pt x 1084.05pt>
+<image/tracab2.png, id=348, 1927.2pt x 1084.05pt>
 File: image/tracab2.png Graphic file (type png)
 <use image/tracab2.png>
 Package pdftex.def Info: image/tracab2.png  used on input line 238.
@@ -875,7 +875,7 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.248 	
         <./image/tracab.png (PNG copy)> <./image/tracab2.png>]
-<image/longomatch.png, id=356, 1927.2pt x 956.57375pt>
+<image/longomatch.png, id=355, 1927.2pt x 956.57375pt>
 File: image/longomatch.png Graphic file (type png)
 <use image/longomatch.png>
 Package pdftex.def Info: image/longomatch.png  used on input line 251.
@@ -947,12 +947,12 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 
 [12]
-<image/yolodec1.jpg, id=377, 803.0pt x 362.35374pt>
+<image/yolodec1.jpg, id=376, 803.0pt x 362.35374pt>
 File: image/yolodec1.jpg Graphic file (type jpg)
 <use image/yolodec1.jpg>
 Package pdftex.def Info: image/yolodec1.jpg  used on input line 345.
 (pdftex.def)             Requested size: 341.43437pt x 154.07294pt.
-<image/yolodec2.jpg, id=378, 803.0pt x 358.33875pt>
+<image/yolodec2.jpg, id=377, 803.0pt x 358.33875pt>
 File: image/yolodec2.jpg Graphic file (type jpg)
 <use image/yolodec2.jpg>
 Package pdftex.def Info: image/yolodec2.jpg  used on input line 357.
@@ -969,12 +969,12 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.361 		
          <./image/yolodec1.jpg>]
-<image/yolodec3.jpg, id=387, 803.0pt x 389.455pt>
+<image/yolodec3.jpg, id=386, 803.0pt x 389.455pt>
 File: image/yolodec3.jpg Graphic file (type jpg)
 <use image/yolodec3.jpg>
 Package pdftex.def Info: image/yolodec3.jpg  used on input line 368.
 (pdftex.def)             Requested size: 341.43437pt x 165.5964pt.
-<image/yolodec4.jpg, id=388, 803.0pt x 414.54875pt>
+<image/yolodec4.jpg, id=387, 803.0pt x 414.54875pt>
 File: image/yolodec4.jpg Graphic file (type jpg)
 <use image/yolodec4.jpg>
 Package pdftex.def Info: image/yolodec4.jpg  used on input line 379.
@@ -997,7 +997,7 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.383 		
          <./image/yolodec2.jpg> <./image/yolodec3.jpg>]
-<image/yolodec5.jpg, id=397, 803.0pt x 451.6875pt>
+<image/yolodec5.jpg, id=396, 803.0pt x 451.6875pt>
 File: image/yolodec5.jpg Graphic file (type jpg)
 <use image/yolodec5.jpg>
 Package pdftex.def Info: image/yolodec5.jpg  used on input line 391.
@@ -1017,7 +1017,7 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.409 	
         <./image/yolodec4.jpg> <./image/yolodec5.jpg>]
-<image/tracking_id.png, id=406, 1283.79625pt x 720.6925pt>
+<image/tracking_id.png, id=405, 1283.79625pt x 720.6925pt>
 File: image/tracking_id.png Graphic file (type png)
 <use image/tracking_id.png>
 Package pdftex.def Info: image/tracking_id.png  used on input line 414.
@@ -1031,12 +1031,12 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.427 	
         <./image/tracking_id.png (PNG copy)>]
-<image/gestion_id.png, id=412, 371.3875pt x 371.3875pt>
+<image/gestion_id.png, id=411, 371.3875pt x 371.3875pt>
 File: image/gestion_id.png Graphic file (type png)
 <use image/gestion_id.png>
 Package pdftex.def Info: image/gestion_id.png  used on input line 430.
 (pdftex.def)             Requested size: 170.71393pt x 170.71564pt.
-<image/Flowcharts.png, id=413, 1806.75pt x 627.34375pt>
+<image/Flowcharts.png, id=412, 1806.75pt x 627.34375pt>
 File: image/Flowcharts.png Graphic file (type png)
 <use image/Flowcharts.png>
 Package pdftex.def Info: image/Flowcharts.png  used on input line 446.
@@ -1058,7 +1058,7 @@ Overfull \hbox (6.09908pt too wide) in paragraph at lines 465--466
 ase (\OT1/cmtt/m/n/12 jugador\OT1/cmr/m/n/12 ), Roboflow
  []
 
-<image/dif_de_clases.png, id=420, 1354.05875pt x 619.31375pt>
+<image/dif_de_clases.png, id=419, 1354.05875pt x 619.31375pt>
 File: image/dif_de_clases.png Graphic file (type png)
 <use image/dif_de_clases.png>
 Package pdftex.def Info: image/dif_de_clases.png  used on input line 470.
@@ -1075,7 +1075,7 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.474 	
         <./image/Flowcharts.png>]
-<image/entr_yolo.png, id=428, 1542.76375pt x 611.28375pt>
+<image/entr_yolo.png, id=427, 1542.76375pt x 611.28375pt>
 File: image/entr_yolo.png Graphic file (type png)
 <use image/entr_yolo.png>
 Package pdftex.def Info: image/entr_yolo.png  used on input line 479.
@@ -1138,7 +1138,7 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
 
 
 [22]
-<image/entr_reid.png, id=493, 1902.10625pt x 970.62625pt>
+<image/entr_reid.png, id=492, 1902.10625pt x 970.62625pt>
 File: image/entr_reid.png Graphic file (type png)
 <use image/entr_reid.png>
 Package pdftex.def Info: image/entr_reid.png  used on input line 664.
@@ -1173,7 +1173,7 @@ Overfull \hbox (4.88432pt too wide) in paragraph at lines 840--841
 cor-rer los frames au-tom^^Saticamente
  []
 
-<image/dir_reid.png, id=657, 844.15375pt x 447.6725pt>
+<image/dir_reid.png, id=656, 844.15375pt x 447.6725pt>
 File: image/dir_reid.png Graphic file (type png)
 <use image/dir_reid.png>
 Package pdftex.def Info: image/dir_reid.png  used on input line 847.
@@ -1284,7 +1284,7 @@ e cada se-cuen-cia en archivos
 [42]
 
 [43]
-<image/metricas_reid_yolo10.png, id=1097, 172.39406pt x 90.3375pt>
+<image/metricas_reid_yolo10.png, id=1096, 172.39406pt x 90.3375pt>
 File: image/metricas_reid_yolo10.png Graphic file (type png)
 <use image/metricas_reid_yolo10.png>
 Package pdftex.def Info: image/metricas_reid_yolo10.png  used on input line 155
@@ -1293,14 +1293,14 @@ Package pdftex.def Info: image/metricas_reid_yolo10.png  used on input line 155
 
 
 [44]
-<image/metricas_reid_deepEIoU_osnet_sportsmot.png, id=1107, 163.3603pt x 76.034
+<image/metricas_reid_deepEIoU_osnet_sportsmot.png, id=1106, 163.3603pt x 76.034
 06pt>
 File: image/metricas_reid_deepEIoU_osnet_sportsmot.png Graphic file (type png)
 <use image/metricas_reid_deepEIoU_osnet_sportsmot.png>
 Package pdftex.def Info: image/metricas_reid_deepEIoU_osnet_sportsmot.png  used
  on input line 1566.
 (pdftex.def)             Requested size: 341.43437pt x 158.93137pt.
-<image/metricas_reid_deepEIoU_osnet_soccernet.png, id=1108, 167.87718pt x 92.59
+<image/metricas_reid_deepEIoU_osnet_soccernet.png, id=1107, 167.87718pt x 92.59
 593pt>
 File: image/metricas_reid_deepEIoU_osnet_soccernet.png Graphic file (type png)
 <use image/metricas_reid_deepEIoU_osnet_soccernet.png>
@@ -1326,7 +1326,7 @@ as been already used, duplicate ignored
 l.1577  	
           <./image/metricas_reid_yolo10.png> <./image/metricas_reid_deepEIoU_os
 net_sportsmot.png>]
-<image/metricas_reid_deepEIoU_resnet_soccernet.png, id=1117, 167.87718pt x 90.3
+<image/metricas_reid_deepEIoU_resnet_soccernet.png, id=1116, 167.87718pt x 90.3
 375pt>
 File: image/metricas_reid_deepEIoU_resnet_soccernet.png Graphic file (type png)
 
@@ -1334,20 +1334,20 @@ File: image/metricas_reid_deepEIoU_resnet_soccernet.png Graphic file (type png)
 Package pdftex.def Info: image/metricas_reid_deepEIoU_resnet_soccernet.png  use
 d on input line 1580.
 (pdftex.def)             Requested size: 341.43437pt x 183.73328pt.
-<image/metricas_mot_yolo10.png, id=1118, 267.399pt x 27.10126pt>
+<image/metricas_mot_yolo10.png, id=1117, 267.399pt x 27.10126pt>
 File: image/metricas_mot_yolo10.png Graphic file (type png)
 <use image/metricas_mot_yolo10.png>
 Package pdftex.def Info: image/metricas_mot_yolo10.png  used on input line 1589
 .
 (pdftex.def)             Requested size: 341.43437pt x 34.60759pt.
-<image/metricas_mot_deepEIoU_osnet_sportmot.png, id=1119, 264.38776pt x 25.8967
+<image/metricas_mot_deepEIoU_osnet_sportmot.png, id=1118, 264.38776pt x 25.8967
 4pt>
 File: image/metricas_mot_deepEIoU_osnet_sportmot.png Graphic file (type png)
 <use image/metricas_mot_deepEIoU_osnet_sportmot.png>
 Package pdftex.def Info: image/metricas_mot_deepEIoU_osnet_sportmot.png  used o
 n input line 1596.
 (pdftex.def)             Requested size: 341.43437pt x 33.44485pt.
-<image/metricas_mot_deepEIoU_osnet_soccernet.png, id=1120, 263.7855pt x 25.2945
+<image/metricas_mot_deepEIoU_osnet_soccernet.png, id=1119, 263.7855pt x 25.2945
 pt>
 File: image/metricas_mot_deepEIoU_osnet_soccernet.png Graphic file (type png)
 <use image/metricas_mot_deepEIoU_osnet_soccernet.png>
@@ -1386,7 +1386,7 @@ _reid_deepEIoU_resnet_soccernet.png> <./image/metricas_mot_yolo10.png> <./image
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=1135, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=1134, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
 Package pdftex.def Info: backcover.pdf  used on input line 1623.
@@ -1399,7 +1399,7 @@ ersion <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=1137, page=1, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=1136, page=1, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
 Package pdftex.def Info: backcover.pdf , page1 used on input line 1623.
@@ -1436,7 +1436,7 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-04-14>
  ***********
 Package rerunfilecheck Info: File `MAIN.out' has not changed.
-(rerunfilecheck)             Checksum: B6AC5F76C337728364454BFDF4358A8E;10831.
+(rerunfilecheck)             Checksum: 070162BE152D0F9953AA7CBBC5C58A90;10364.
 Package logreq Info: Writing requests to 'MAIN.run.xml'.
 \openout1 = `MAIN.run.xml'.
 
@@ -1444,7 +1444,7 @@ Package logreq Info: Writing requests to 'MAIN.run.xml'.
 Here is how much of TeX's memory you used:
  21040 strings out of 469940
  366542 string characters out of 5468441
- 1472817 words of memory out of 5000000
+ 1472763 words of memory out of 5000000
  46952 multiletter control sequences out of 15000+600000
  633042 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1465,9 +1465,9 @@ amsfonts/cm/cmr8.pfb><C:/Users/Soriano/AppData/Local/Programs/MiKTeX/fonts/type
 /fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Soriano/AppData/Local/Prog
 rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Soriano/AppData
 /Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on MAIN.pdf (49 pages, 13510904 bytes).
+Output written on MAIN.pdf (49 pages, 13510002 bytes).
 PDF statistics:
- 1370 PDF objects out of 1440 (max. 8388607)
+ 1369 PDF objects out of 1440 (max. 8388607)
  693 named destinations out of 1000 (max. 500000)
  579 words of extra memory for PDF output out of 10000 (max. 10000000)
 
