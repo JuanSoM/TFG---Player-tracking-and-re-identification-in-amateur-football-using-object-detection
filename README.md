@@ -74,6 +74,41 @@ Este proyecto sigue una metodología **iterativa y ágil** para abordar los desa
 | Validación y documentación          | 53    |
 | **Total**                           | **296** |
 
+## Dataset Etiquetado
+
+Este dataset incluye anotaciones de bounding boxes, identificadores de jugadores y clases, siguiendo el formato de SoccerNet, pero adaptado a las necesidades concretas del proyecto para el contexto de fútbol amateur.
+
+Dataset etiquetado desde el siguiente enlace:
+
+[Dataset etiquetado para ReID de futbol amateur](https://drive.google.com/file/d/19JdrNt9_aiiNRV_AndWeEoMUuCuVx_HI/view?usp=sharing)
+
+
+## Modelos Usados
+
+Para la tarea de **reidentificación de jugadores**, se han utilizado varios modelos preentrenados con arquitecturas diversas, incluyendo redes convolucionales y transformadores. La siguiente tabla resume las características clave de cada modelo probado:
+
+### Modelos entrenados con Dataset de SoccerNet (futbol profesional)
+
+| name             | #params | Resolution | mAP  | rank-1 | chkpt                                                                                 | config                                                                                 |
+|------------------|---------|------------|------|--------|----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| ResNet50-fc512   | 24.6M   | 256x128    | 81.8 | 76.1   | [model](https://drive.google.com/file/d/1o45E8lxB9mxJ1lfSgMpi3mC0zUwVvzgz/view?usp=sharing) | [config](https://drive.google.com/file/d/1CqtCPpn9NSlZ5NMmGUqWfd-fcOOWVyOu/view?usp=sharing) |
+| OSNet_x1_0       | 2.2M    | 256x128    | 83.4 | 78.0   | [model](https://drive.google.com/file/d/1To0Ww6_HxU2ITAlb4kQEgYExV-orwit8/view?usp=sharing) | [config](https://drive.google.com/file/d/1xO4Qe7f4FwpXnEe39cn24FdRDg6F-LLu/view?usp=sharing) |
+
+
+### Modelos entrenados con Dataset de Sportsmot (futbol profesional)
+
+| name             | #params | Resolution | chkpt                                                                                 | config                                                                                 |
+|------------------|---------|------------|----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| OSNet_x1_0       | 2.2M    | 256x128    | [model](https://drive.google.com/file/d/1Wt_U-D2wfkMyKl1RIuIN2mAoM8M99jho/view?usp=sharing) |
+
+
+### Modelos entrenados con Dataset de propio (futbol amateur)
+| name             | #params | Resolution | mAP  | rank-1 | chkpt                                                                                 | config                                                                                 |
+|------------------|---------|------------|------|--------|----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| OSNet_x1_0       | 2.2M    | 256x128    | 89.7% | 97.9%   | [model](https://drive.google.com/file/d/1i52wTC13yQ-HMI4R1tKdFqCP9TCotKAX/view?usp=sharing) |
+
+Todo lo referente al entrenamiento del modelo está en la carpeta [entrenamientoReID](https://github.com/JuanSoM/TFG---Player-tracking-and-re-identification-in-amateur-football-using-object-detection/tree/main/code/entrenamientoReID)
+
 ## Referencias
 
 1. [Person Re-identification](https://paperswithcode.com/task/person-re-identification)
