@@ -107,7 +107,7 @@ Para la tarea de **reidentificación de jugadores**, se han utilizado varios mod
 |------------------|---------|------------|------|--------|----------------------------------------------------------------------------------------|
 | OSNet_x1_0       | 2.2M    | 256x128    | 89.7% | 97.9%   | [model](https://drive.google.com/file/d/1i52wTC13yQ-HMI4R1tKdFqCP9TCotKAX/view?usp=sharing) |
 
-Todo lo referente al entrenamiento del modelo está en la carpeta [entrenamientoReID](https://github.com/JuanSoM/TFG---Player-tracking-and-re-identification-in-amateur-football-using-object-detection/tree/main/code/entrenamientoReID)
+Todo lo referente al entrenamiento del modelo con dataset de futbol amateur está en la carpeta [entrenamientoReID](https://github.com/JuanSoM/TFG---Player-tracking-and-re-identification-in-amateur-football-using-object-detection/tree/main/code/entrenamientoReID)
 
 ## Referencias
 
