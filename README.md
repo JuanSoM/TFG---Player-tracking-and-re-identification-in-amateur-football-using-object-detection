@@ -91,8 +91,8 @@ Para la tarea de **reidentificación de jugadores**, se han utilizado varios mod
 
 | name             | #params | Resolution | mAP  | rank-1 | chkpt                                                                                 | config                                                                                 |
 |------------------|---------|------------|------|--------|----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| ResNet50-fc512   | 24.6M   | 256x128    | 28.8 | 88.1   | [model](https://drive.google.com/file/d/1o45E8lxB9mxJ1lfSgMpi3mC0zUwVvzgz/view?usp=sharing) | [config](https://drive.google.com/file/d/1CqtCPpn9NSlZ5NMmGUqWfd-fcOOWVyOu/view?usp=sharing) |
-| OSNet_x1_0       | 2.2M    | 256x128    | 30.3 | 90.4   | [model](https://drive.google.com/file/d/1To0Ww6_HxU2ITAlb4kQEgYExV-orwit8/view?usp=sharing) | [config](https://drive.google.com/file/d/1xO4Qe7f4FwpXnEe39cn24FdRDg6F-LLu/view?usp=sharing) |
+| ResNet50-fc512   | 24.6M   | 256x128    | 28.8% | 88.1%   | [model](https://drive.google.com/file/d/1o45E8lxB9mxJ1lfSgMpi3mC0zUwVvzgz/view?usp=sharing) | [config](https://drive.google.com/file/d/1CqtCPpn9NSlZ5NMmGUqWfd-fcOOWVyOu/view?usp=sharing) |
+| OSNet_x1_0       | 2.2M    | 256x128    | 30.3% | 90.4%   | [model](https://drive.google.com/file/d/1To0Ww6_HxU2ITAlb4kQEgYExV-orwit8/view?usp=sharing) | [config](https://drive.google.com/file/d/1xO4Qe7f4FwpXnEe39cn24FdRDg6F-LLu/view?usp=sharing) |
 
 
 ### Modelos entrenados con Dataset de Sportsmot (futbol profesional)
