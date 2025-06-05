@@ -97,13 +97,13 @@ Para la tarea de **reidentificación de jugadores**, se han utilizado varios mod
 
 ### Modelos entrenados con Dataset de Sportsmot (futbol profesional)
 
-| name             | #params | Resolution | mAP  | rank-1                                                                                  | config                                                                                 |
+| name             | #params | Resolution | mAP  | rank-1                                                                                  | chkpt                                                                                 |
 |------------------|---------|------------|------|--------|----------------------------------------------------------------------------------------|
 | OSNet_x1_0       | 2.2M    | 256x128    | 28.6% | 91.3%   | [model](https://drive.google.com/file/d/1Wt_U-D2wfkMyKl1RIuIN2mAoM8M99jho/view?usp=sharing) |
 
 
 ### Modelos entrenados con Dataset propio (futbol amateur)
-| name             | #params | Resolution | mAP  | rank-1                                                                                  | config                                                                                 |
+| name             | #params | Resolution | mAP  | rank-1                                                                                  | chkpt                                                                                 |
 |------------------|---------|------------|------|--------|----------------------------------------------------------------------------------------|
 | OSNet_x1_0       | 2.2M    | 256x128    | 89.7% | 97.9%   | [model](https://drive.google.com/file/d/1i52wTC13yQ-HMI4R1tKdFqCP9TCotKAX/view?usp=sharing) |
 
