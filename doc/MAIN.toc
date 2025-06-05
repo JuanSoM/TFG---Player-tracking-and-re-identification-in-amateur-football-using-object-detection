@@ -46,6 +46,6 @@
 \contentsline {subsection}{\numberline {11.1}Comparación de protocolos de re-identificación}{42}{subsection.11.1}%
 \contentsline {subsubsection}{\numberline {11.1.1}Ejemplo de evaluación de Re-Identification}{43}{subsubsection.11.1.1}%
 \contentsline {subsection}{\numberline {11.2}Resultados de ReID}{45}{subsection.11.2}%
-\contentsline {subsection}{\numberline {11.3}Resultados de MOT}{46}{subsection.11.3}%
-\contentsline {section}{\numberline {12}Dificultades encontradas}{47}{section.12}%
-\contentsline {section}{\numberline {13}Conclusiones}{47}{section.13}%
+\contentsline {subsection}{\numberline {11.3}Resultados de MOT}{47}{subsection.11.3}%
+\contentsline {section}{\numberline {12}Dificultades encontradas}{48}{section.12}%
+\contentsline {section}{\numberline {13}Conclusiones}{48}{section.13}%

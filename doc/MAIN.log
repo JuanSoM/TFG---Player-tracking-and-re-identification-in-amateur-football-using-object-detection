@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.14)  20 MAY 2025 09:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.14)  6 JUN 2025 00:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1287,26 +1287,26 @@ e cada se-cuen-cia en archivos
 <image/metricas_reid_yolo10.png, id=1096, 172.39406pt x 90.3375pt>
 File: image/metricas_reid_yolo10.png Graphic file (type png)
 <use image/metricas_reid_yolo10.png>
-Package pdftex.def Info: image/metricas_reid_yolo10.png  used on input line 155
-9.
+Package pdftex.def Info: image/metricas_reid_yolo10.png  used on input line 156
+3.
 (pdftex.def)             Requested size: 341.43437pt x 178.93631pt.
 
 
 [44]
-<image/metricas_reid_deepEIoU_osnet_sportsmot.png, id=1106, 163.3603pt x 76.034
-06pt>
-File: image/metricas_reid_deepEIoU_osnet_sportsmot.png Graphic file (type png)
-<use image/metricas_reid_deepEIoU_osnet_sportsmot.png>
-Package pdftex.def Info: image/metricas_reid_deepEIoU_osnet_sportsmot.png  used
- on input line 1566.
-(pdftex.def)             Requested size: 341.43437pt x 158.93137pt.
-<image/metricas_reid_deepEIoU_osnet_soccernet.png, id=1107, 167.87718pt x 92.59
-593pt>
-File: image/metricas_reid_deepEIoU_osnet_soccernet.png Graphic file (type png)
-<use image/metricas_reid_deepEIoU_osnet_soccernet.png>
-Package pdftex.def Info: image/metricas_reid_deepEIoU_osnet_soccernet.png  used
- on input line 1573.
-(pdftex.def)             Requested size: 341.43437pt x 188.32658pt.
+<image/sports_model.pth.tar-60_sportsmot.png, id=1106, 140.77594pt x 104.64093p
+t>
+File: image/sports_model.pth.tar-60_sportsmot.png Graphic file (type png)
+<use image/sports_model.pth.tar-60_sportsmot.png>
+Package pdftex.def Info: image/sports_model.pth.tar-60_sportsmot.png  used on i
+nput line 1570.
+(pdftex.def)             Requested size: 341.43437pt x 253.83853pt.
+<image/model.osnet.pth.tar-10_soccernet.png, id=1107, 146.04562pt x 101.62968pt
+>
+File: image/model.osnet.pth.tar-10_soccernet.png Graphic file (type png)
+<use image/model.osnet.pth.tar-10_soccernet.png>
+Package pdftex.def Info: image/model.osnet.pth.tar-10_soccernet.png  used on in
+put line 1577.
+(pdftex.def)             Requested size: 341.43437pt x 237.61864pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1317,43 +1317,33 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.18}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1577  	
+l.1581  	
          
 pdfTeX warning (ext4): destination with the same identifier (name{figure.19}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1577  	
-          <./image/metricas_reid_yolo10.png> <./image/metricas_reid_deepEIoU_os
-net_sportsmot.png>]
-<image/metricas_reid_deepEIoU_resnet_soccernet.png, id=1116, 167.87718pt x 90.3
-375pt>
-File: image/metricas_reid_deepEIoU_resnet_soccernet.png Graphic file (type png)
+l.1581  	
+          <./image/metricas_reid_yolo10.png> <./image/sports_model.pth.tar-60_s
+portsmot.png>]
+<image/model.resnet50.pth.tar-20_soccernet.png, id=1116, 144.54pt x 104.64093pt
+>
+File: image/model.resnet50.pth.tar-20_soccernet.png Graphic file (type png)
+<use image/model.resnet50.pth.tar-20_soccernet.png>
+Package pdftex.def Info: image/model.resnet50.pth.tar-20_soccernet.png  used on
+ input line 1584.
+(pdftex.def)             Requested size: 341.43437pt x 247.19789pt.
+<image/resultado_entrenamiento_reid_myData_osnet.png, id=1117, 141.52875pt x 10
+1.62968pt>
+File: image/resultado_entrenamiento_reid_myData_osnet.png Graphic file (type pn
+g)
+<use image/resultado_entrenamiento_reid_myData_osnet.png>
+Package pdftex.def Info: image/resultado_entrenamiento_reid_myData_osnet.png  u
+sed on input line 1591.
+(pdftex.def)             Requested size: 341.43437pt x 245.22658pt.
 
-<use image/metricas_reid_deepEIoU_resnet_soccernet.png>
-Package pdftex.def Info: image/metricas_reid_deepEIoU_resnet_soccernet.png  use
-d on input line 1580.
-(pdftex.def)             Requested size: 341.43437pt x 183.73328pt.
-<image/metricas_mot_yolo10.png, id=1117, 267.399pt x 27.10126pt>
-File: image/metricas_mot_yolo10.png Graphic file (type png)
-<use image/metricas_mot_yolo10.png>
-Package pdftex.def Info: image/metricas_mot_yolo10.png  used on input line 1589
-.
-(pdftex.def)             Requested size: 341.43437pt x 34.60759pt.
-<image/metricas_mot_deepEIoU_osnet_sportmot.png, id=1118, 264.38776pt x 25.8967
-4pt>
-File: image/metricas_mot_deepEIoU_osnet_sportmot.png Graphic file (type png)
-<use image/metricas_mot_deepEIoU_osnet_sportmot.png>
-Package pdftex.def Info: image/metricas_mot_deepEIoU_osnet_sportmot.png  used o
-n input line 1596.
-(pdftex.def)             Requested size: 341.43437pt x 33.44485pt.
-<image/metricas_mot_deepEIoU_osnet_soccernet.png, id=1119, 263.7855pt x 25.2945
-pt>
-File: image/metricas_mot_deepEIoU_osnet_soccernet.png Graphic file (type png)
-<use image/metricas_mot_deepEIoU_osnet_soccernet.png>
-Package pdftex.def Info: image/metricas_mot_deepEIoU_osnet_soccernet.png  used 
-on input line 1603.
-(pdftex.def)             Requested size: 341.43437pt x 32.74039pt.
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 
 
 [46
@@ -1361,74 +1351,103 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.20}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1607 	
-        
+l.1595  	
+         
 pdfTeX warning (ext4): destination with the same identifier (name{figure.21}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1607 	
-        
+l.1595  	
+          <./image/model.osnet.pth.tar-10_soccernet.png> <./image/model.resnet5
+0.pth.tar-20_soccernet.png>]
+<image/metricas_mot_yolo10.png, id=1126, 267.399pt x 27.10126pt>
+File: image/metricas_mot_yolo10.png Graphic file (type png)
+<use image/metricas_mot_yolo10.png>
+Package pdftex.def Info: image/metricas_mot_yolo10.png  used on input line 1600
+.
+(pdftex.def)             Requested size: 341.43437pt x 34.60759pt.
+<image/metricas_mot_deepEIoU_osnet_sportmot.png, id=1127, 264.38776pt x 25.8967
+4pt>
+File: image/metricas_mot_deepEIoU_osnet_sportmot.png Graphic file (type png)
+<use image/metricas_mot_deepEIoU_osnet_sportmot.png>
+Package pdftex.def Info: image/metricas_mot_deepEIoU_osnet_sportmot.png  used o
+n input line 1607.
+(pdftex.def)             Requested size: 341.43437pt x 33.44485pt.
+<image/metricas_mot_deepEIoU_osnet_soccernet.png, id=1128, 263.7855pt x 25.2945
+pt>
+File: image/metricas_mot_deepEIoU_osnet_soccernet.png Graphic file (type png)
+<use image/metricas_mot_deepEIoU_osnet_soccernet.png>
+Package pdftex.def Info: image/metricas_mot_deepEIoU_osnet_soccernet.png  used 
+on input line 1614.
+(pdftex.def)             Requested size: 341.43437pt x 32.74039pt.
+
+
+[47
 pdfTeX warning (ext4): destination with the same identifier (name{figure.22}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1607 	
+l.1631 	
         
 pdfTeX warning (ext4): destination with the same identifier (name{figure.23}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1607 	
-         <./image/metricas_reid_deepEIoU_osnet_soccernet.png> <./image/metricas
-_reid_deepEIoU_resnet_soccernet.png> <./image/metricas_mot_yolo10.png> <./image
-/metricas_mot_deepEIoU_osnet_sportmot.png>]
-
-pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
-ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=1134, 597.23125pt x 845.1575pt>
-File: backcover.pdf Graphic file (type pdf)
-<use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 1623.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
-ersion <1.7>, but at most version <1.5> allowed
-
-
-pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
-ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=1136, page=1, 597.23125pt x 845.1575pt>
-File: backcover.pdf Graphic file (type pdf)
-<use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 1623.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
-[47
+l.1631 	
+        
 pdfTeX warning (ext4): destination with the same identifier (name{figure.24}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1623 ...=true, width=\paperwidth]{backcover.pdf}
-                                                   <./image/metricas_mot_deepEI
-oU_osnet_soccernet.png>]
+l.1631 	
+        
+pdfTeX warning (ext4): destination with the same identifier (name{figure.25}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1631 	
+         <./image/resultado_entrenamiento_reid_myData_osnet.png> <./image/metri
+cas_mot_yolo10.png> <./image/metricas_mot_deepEIoU_osnet_sportmot.png> <./image
+/metricas_mot_deepEIoU_osnet_soccernet.png>]
+
+pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
+ersion <1.7>, but at most version <1.5> allowed
+<backcover.pdf, id=1143, 597.23125pt x 845.1575pt>
+File: backcover.pdf Graphic file (type pdf)
+<use backcover.pdf>
+Package pdftex.def Info: backcover.pdf  used on input line 1634.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+
+
+pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
+ersion <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
+ersion <1.7>, but at most version <1.5> allowed
+<backcover.pdf, id=1145, page=1, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 1623.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 1634.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+
+
+[48]
+File: backcover.pdf Graphic file (type pdf)
+<use backcover.pdf, page 1>
+Package pdftex.def Info: backcover.pdf , page1 used on input line 1634.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 1623.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 1634.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 1623.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 1634.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-[48
+[49
 
  <./backcover.pdf>] (MAIN.aux)
  ***********
@@ -1442,10 +1461,10 @@ Package logreq Info: Writing requests to 'MAIN.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 21040 strings out of 469940
- 366542 string characters out of 5468441
- 1472763 words of memory out of 5000000
- 46952 multiletter control sequences out of 15000+600000
+ 21054 strings out of 469940
+ 367118 string characters out of 5468441
+ 1472824 words of memory out of 5000000
+ 46964 multiletter control sequences out of 15000+600000
  633042 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,79p,1905b,2112s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1465,9 +1484,9 @@ amsfonts/cm/cmr8.pfb><C:/Users/Soriano/AppData/Local/Programs/MiKTeX/fonts/type
 /fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Soriano/AppData/Local/Prog
 rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Soriano/AppData
 /Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on MAIN.pdf (49 pages, 13510002 bytes).
+Output written on MAIN.pdf (50 pages, 13512108 bytes).
 PDF statistics:
- 1369 PDF objects out of 1440 (max. 8388607)
- 693 named destinations out of 1000 (max. 500000)
- 579 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1376 PDF objects out of 1440 (max. 8388607)
+ 695 named destinations out of 1000 (max. 500000)
+ 584 words of extra memory for PDF output out of 10000 (max. 10000000)
 

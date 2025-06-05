@@ -1554,6 +1554,10 @@
  	
  	\subsection{Resultados de ReID}
  	
+ 	Todos los resultados que he recogido son los modelos de reid frente al dataset etiquetados con solo las detecciones. 
+ 	
+ 	Para YOLOv10 he tenido que hacer una evaluación más creativa para calcular las métricas
+ 	
  	\begin{figure}[H]
  		\centering
  		\includegraphics[width=0.8\textwidth]{image/metricas_reid_yolo10}
@@ -1563,23 +1567,30 @@
  	
  	\begin{figure}[H]
  		\centering
- 		\includegraphics[width=0.8\textwidth]{image/metricas_reid_deepEIoU_osnet_sportsmot}
- 		\caption{\textbf{Resultado ReID DeepEIoU con Osnet entrenado con el dataset de Sportmot}}
- 		\label{fig:Resultado DeepEIoU con Osnet reid sportsmot}
+ 		\includegraphics[width=0.8\textwidth]{image/sports_model.pth.tar-60_sportsmot}
+ 		\caption{\textbf{Resultado ReID con Osnet entrenado con el dataset de Sportmot}}
+ 		\label{fig:Resultado DeepEIoU con Osnet reid sportsmot osnet_x1_0}
  	\end{figure}
  	
  	\begin{figure}[H]
  		\centering
- 		\includegraphics[width=0.8\textwidth]{image/metricas_reid_deepEIoU_osnet_soccernet}
- 		\caption{\textbf{Resultado ReID DeepEIoU con Osnet entrenado con el dataset de Soccernet}}
- 		\label{fig:Resultado DeepEIoU con Osnet reid soccernet}
+ 		\includegraphics[width=0.8\textwidth]{image/model.osnet.pth.tar-10_soccernet}
+ 		\caption{\textbf{Resultado ReID con Osnet entrenado con el dataset de Soccernet}}
+ 		\label{fig:Resultado DeepEIoU con Osnet reid soccernet osnet_x1_0}
  	\end{figure}
  	
  	\begin{figure}[H]
  		\centering
- 		\includegraphics[width=0.8\textwidth]{image/metricas_reid_deepEIoU_resnet_soccernet}
- 		\caption{\textbf{Resultado ReID DeepEIoU con Resnet entrenado con el dataset de Soccernet}}
- 		\label{fig:Resultado  con Resnet reid soccernet}
+ 		\includegraphics[width=0.8\textwidth]{image/model.resnet50.pth.tar-20_soccernet}
+ 		\caption{\textbf{Resultado ReID con Resnet entrenado con el dataset de Soccernet}}
+ 		\label{fig:Resultado  con Resnet reid soccernet resnet50_fc512}
+ 	\end{figure}
+ 	
+ 	\begin{figure}[H]
+ 		\centering
+ 		\includegraphics[width=0.8\textwidth]{image/resultado_entrenamiento_reid_myData_osnet}
+ 		\caption{\textbf{Resultado ReID con Osnet entrenado con mi dataset etiquetado}}
+ 		\label{fig:Resultado  con Osnet reid mi dataset etiquetado osnet_x1_0}
  	\end{figure}
  	
  	\subsection{Resultados de MOT}
