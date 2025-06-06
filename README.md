@@ -134,9 +134,9 @@ A mí este error me salió porque puse el nombre del modelo con los pesos preent
 
 Yo usé, para empezar la primera iteración del flujo, el modelo de sportmot por defecto [sports_model.pth.tar-60](https://drive.google.com/file/d/1Wt_U-D2wfkMyKl1RIuIN2mAoM8M99jho/view?usp=sharing): 
 
-.. code-block:: python
+```bash
     python tools/demo.py 
-
+```
 Nota: 
    Modificar esta linea del codigo de demo.py para poner tu video como input: 
     parser.add_argument(
@@ -146,38 +146,40 @@ Nota:
 Luego aplicar:
 Usaremos vídeo2.mp4 que es un clip de largo de un partido de fútbol amateur.
 
-.. code-block:: python
+```bash
    python extract_frames.py --video_path video2.mp4 --output_dir frames_trackerVideo2
-
+```
 Crear una carpeta gt con el archivo MOT resultado de ejecutar demo.py con el video
 
-.. code-block:: python
+```bash
    python generate_tracklets.py --model_path "../reid_checkpoints/sports_model.pth.tar-60" --data_path "C:\Users\jismbs\Documents\gta-link\frames_trackerVideo2" --pred_dir "." --tracker "DeepEIoU"
+```
 
 Usé esta combinación de parámetros para la ejecución de refine_tracklets.py: --use_split --min_len 100 --eps 0.6 --min_samples 10 --max_k 3 --use_connect --spatial_factor 1.0 --merge_dist_thres 0.4
 Es la más óptima en cuanto a resultados (comprobado por prueba y error), ya que es la que crea la menor cantidad de tracklets (menos cantidad de ids distintos)
 
-.. code-block:: python
+```bash
    python refine_tracklets.py --dataset SoccerNet --tracker DeepEIoU --track_src DeepEIoU_Tracklets_frames_trackerVideo2 --use_split --min_len 100 --eps 0.6 --min_samples 10 --max_k 3 --use_connect --spatial_factor 1.0 --merge_dist_thres 0.4
+```
 
-.. code-block:: python
+```bash
    python visualize2.py  
-
-.. code-block:: python
+```
+```bash
    python videomakerByFrame.py
-
+```
 ### Segundo capítulo (etiquetado de dataset para reidentificación)
 
 En este capítulo empezaremos por corregir el mot resultado de ejecutar refine_tracklets.py. Para ello hice dos programas que me ayudaban a semiautomatizar el proceso de corrección del fichero mot.
 
 Uno para hacer cambios más generales (p. ej cambiar un id para el resto de la secuencia de vídeo). 
-.. code-block:: python
+```bash
    python annotate_review.py
-
+```
 Otro para hacer cambios más precisos frame a frame
-.. code-block:: python
+```bash
    python annotate_review_precise.py
-
+```
 Recomiendo encarecidamente que los ficheros se ejecuten varias veces y que no se haga todo directamente (p. ej hacer un único cambio de id por cada ejecución del annotate_review.py). Ya que es fácil equivocarse y tener que descartar el proceso de correción de 2h no es factible.
 
 Tras varias correciones me quedé con el archivo que consideré suficientemente correcto como para tomarlo de referencia para entrenamiento y evaluación: [mot_corr30_c.txt](https://github.com/JuanSoM/TFG---Player-tracking-and-re-identification-in-amateur-football-using-object-detection/blob/main/code/gta-link%20-%20TFG/DeepEIoU_trackerVideo2_Split%2BConnect_eps0.8_minSamples10_K4_mergeDist0.7_spatial1.0/mot_corr30_c.txt)
@@ -185,30 +187,30 @@ Tras varias correciones me quedé con el archivo que consideré suficientemente 
 
 Una vez tengamos el archivo mot casi perfecto ejecutaremos el siguiente programa con la intención de crear un directorio general y dentro de este, uno individual para cada uno de los jugadores detectados en el vídeo. El mot_file tiene que ser el corregido para poder tener el mejor entrenamiento y evaluación posible.
 
-.. code-block:: python
+```bash
    python dicMaker_idPlayer.py --mot_file "C:\Users\jismbs\Documents\gta-link\DeepEIoU_trackerVideo2_Split+Connect_eps0.8_minSamples10_K4_mergeDist0.7_spatial1.0\mot_corr30_c.txt" --image_folder "C:\Users\jismbs\Documents\gta-link\frames_trackerVideo2\video2\img1" --output_folder "C:\Users\jismbs\Documents\gta-link\player_crops"
-
+```
 Con el siguiente código tendremos un directorio general. Y luego varias subcarpetas divididas en train, query y gallery. Para poder entrenar el modelo de ReID (train) y poder evaluarlo más tarde (query y gallery)
 
-.. code-block:: python
+```bash
    python dicMakerForTrainingReID.py 
-
+```
 ### Tercer capítulo (entrenamiento de un modelo con mi dataset etiquetado)
 
 Para realizar el entrenamiento del modelo de ReID me base en la documentación de [Torchreid](https://kaiyangzhou.github.io/deep-person-reid/) proporcionado por el repositorio de [deep-person-reid](https://github.com/KaiyangZhou/deep-person-reid)
 
 Bastaría con ejecutar la siguiente línea en el directorio de [entrenamientoReID](code/entrenamientoReID)
 
-.. code-block:: python
+```bash
    python main.py 
-
+```
 ### Cuarto capítulo (evaluación de ReID)
 
 Tendríamos que ejecutar la siguiente línea estando en el directorio de [entrenamientoReID](code/entrenamientoReID):
 
-.. code-block:: python
+```bash
    python eval.py 
-
+```
 ### Quinto capítulo (vídeos generados con distintos modelos)
 
 Sería repetir el capítulo uno, pero cambiando el model_name y los pesos usados (p. ej model.resnet50.pth.tar-20)
