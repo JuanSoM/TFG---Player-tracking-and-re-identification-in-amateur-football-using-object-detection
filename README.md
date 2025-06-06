@@ -176,7 +176,7 @@ Uno para hacer cambios más generales (p. ej cambiar un id para el resto de la s
 ```bash
    python annotate_review.py
 ```
-Otro para hacer cambios más precisos frame a frame
+Otro para hacer cambios más precisos frame a frame.
 ```bash
    python annotate_review_precise.py
 ```
@@ -197,19 +197,36 @@ Con el siguiente código tendremos un directorio general. Y luego varias subcarp
 ```
 ### Tercer capítulo (entrenamiento de un modelo con mi dataset etiquetado)
 
-Para realizar el entrenamiento del modelo de ReID me base en la documentación de [Torchreid](https://kaiyangzhou.github.io/deep-person-reid/) proporcionado por el repositorio de [deep-person-reid](https://github.com/KaiyangZhou/deep-person-reid)
+Para realizar el entrenamiento del modelo de ReID con mi propio [dataset etiquetado](https://drive.google.com/file/d/19JdrNt9_aiiNRV_AndWeEoMUuCuVx_HI/view?usp=sharing), me base en la documentación de [Torchreid](https://kaiyangzhou.github.io/deep-person-reid/) proporcionado por el repositorio de [deep-person-reid](https://github.com/KaiyangZhou/deep-person-reid)
 
 Bastaría con ejecutar la siguiente línea en el directorio de [entrenamientoReID](code/entrenamientoReID)
 
 ```bash
    python main.py 
 ```
+**Importante:** Los modelos de [Soccernet](#modelos-entrenados-con-dataset-de-soccernet-futbol-profesional) y [Sportsmot](#modelos-entrenados-con-dataset-de-sportsmot-futbol-profesional) no han sido entrenados con este método. Han sido aplicados directamente en el flujo. Los modelos de Soccernet están en el repositorio de [sportsreid](https://github.com/shallowlearn/sportsreid?tab=readme-ov-file#metrics-pretrained-models-and-config-files) y el de Sportsmot está en el repositorio de [gta-link](https://github.com/sjc042/gta-link/blob/main/reid_checkpoints/sports_model.pth.tar-60)
+
+Usar main.py sería factible para entrenar cualquier tipo de modelo suporteado por torchreid con mi dataset etiquetado. En caso de que queramos ver el rendimiento de YOLOv10 trendemos que tomar otro camino.
+
+Para YOLOv10: 
+
+Ejecutaremos el cuaderno jupiter [evaluacion_yolov10](code\Deep-EIoU1\evaluacion_yolov10.ipynb)
+
 ### Cuarto capítulo (evaluación de ReID)
 
-Tendríamos que ejecutar la siguiente línea estando en el directorio de [entrenamientoReID](code/entrenamientoReID):
+Para la evaluación de modelos de torchreid tendríamos que ejecutar la siguiente línea estando en el directorio de [entrenamientoReID](code/entrenamientoReID):
 
 ```bash
    python eval.py 
+```
+
+Para YOLOv10: 
+
+Con los resultados ejecutaremos del [jupyter](code\Deep-EIoU1\evaluacion_yolov10.ipynb):
+```bash
+   cd ..
+   cd gta-link - TFG
+   python eval_reid.py  --feats feats.npy  --ids   ids.npy  --step 500 --nq 2 --show-examples 3 --out_csv realistic_reid.csv
 ```
 ### Quinto capítulo (vídeos generados con distintos modelos)
 
