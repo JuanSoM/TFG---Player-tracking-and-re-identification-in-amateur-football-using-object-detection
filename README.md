@@ -220,7 +220,7 @@ Para la evaluación de modelos de torchreid tendríamos que ejecutar la siguient
    python eval.py 
 ```
 
-Para YOLOv10: 
+**Para YOLOv10:**
 
 Con los resultados ejecutaremos del [jupyter](code\Deep-EIoU1\evaluacion_yolov10.ipynb):
 ```bash
