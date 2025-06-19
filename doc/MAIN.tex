@@ -8,6 +8,7 @@
 \usepackage{listings}           % Para código fuente (ajusta lenguaje)
 \usepackage{verbatim}
 \usepackage{float}
+\usepackage{amsmath}  
 \usepackage[backend=bibtex,style=numeric]{biblatex} % Para citas numéricas
 \addbibresource{references.bib} % Cargar archivo .bib
 \usepackage{url}
@@ -1165,20 +1166,18 @@
 	
 	\subsection{Preparar el dataset de testeo del modelo de ReID} 
 	
-	En este apartado del flujo, lo que haremos será realizar el mismo tipo de anotación que para preparar el dataset de entrenamiento para el modelo de ReID, pero utilizando otra secuencia de vídeo. El objetivo es evaluar si el modelo ha aprendido correctamente las características de cada jugador para re-identificarlo en diferentes fotogramas del nuevo vídeo.
+	En este punto del flujo, lo que llevaremos a cabo es realizar las mismas anotaciones que para preparar el `dataset` de entrenamiento del modelo ReID, pero esta vez aplicadas a otra secuencia de vídeo. El objetivo sería comprobar si el modelo ha aprendido correctamente las características de cada uno de los jugadores como para re-identificar al jugador en distintos fotogramas del nuevo vídeo.
 	
 	El proceso sigue los siguientes pasos:
 	
 	\begin{itemize}
-		\item \textbf{Selección de la secuencia de testeo:} Se selecciona un conjunto de datos de prueba que contenga una secuencia de vídeo diferente a la utilizada para el entrenamiento. Este conjunto de datos debe ser representativo de las condiciones del entorno de aplicación real, asegurando que las características visuales del nuevo vídeo sean lo suficientemente desafiantes para el modelo.
+		\item \textbf{Selección de la secuencia de testeo:} Para establecer el conjunto de datos de prueba se elige una secuencia de vídeo que sea diferente a la del conjunto de datos de entrenamiento. Este conjunto de datos de prueba deberá ser representativo de las condiciones del entorno de aplicación real, de tal forma que las características visuales de la nueva secuencia de vídeo proporcionen un reto suficiente al modelo.
 		
-		\item \textbf{Anotación de las detecciones:} Al igual que en el dataset de entrenamiento, se realiza la anotación de las detecciones de los jugadores en los fotogramas de la secuencia de testeo. Esto se puede hacer utilizando el mismo sistema de anotaciones basado en un archivo MOT, donde se especifican las coordenadas de las cajas delimitadoras y los IDs de los jugadores en cada fotograma.
+		\item \textbf{Anotación de las detecciones:} Dado que el procedimiento es análogo al anterior de la fase de entrenamiento, se realiza la anotación de las detecciones de los jugadores desde cada fotograma de la secuencia de test. Este procedimiento se puede llevar a cabo de la misma forma que el sistema de anotaciones del archivo MOT, indicando las coordenadas de las cajas delimitadoras y los IDs de los jugadores en el correspondiente fotograma.
 		
-		\item \textbf{Uso de un modelo preentrenado:} El modelo previamente entrenado con el dataset de entrenamiento se utiliza para procesar la secuencia de testeo. El modelo debe ser capaz de re-identificar a los jugadores correctamente en cada fotograma, basándose en las características aprendidas durante el entrenamiento.
+		\item \textbf{Uso de un modelo preentrenado:} El modelo que se había entrenado previamente con el dataset de entrenamiento es el que se utiliza ahora para procesar la secuencia de test, el que debe ser capaz de re-identificar correctamente a los jugadores en cada fotograma de acuerdo con las características aprendidas en el entrenamiento.
 		
-		\item \textbf{Evaluación de la re-identificación:} Una vez que el modelo haya procesado la secuencia de testeo, se evalúa su capacidad de re-identificación observando cómo asigna los mismos IDs a los jugadores a lo largo del vídeo. El modelo se evalúa utilizando métricas estándar de re-identificación, como la precisión en el top-1 y el mAP (Mean Average Precision).
-		
-		\item \textbf{Corrección de errores:} Si el modelo comete errores en la re-identificación de jugadores (por ejemplo, asignando un ID incorrecto o perdiendo la pista de un jugador en un fotograma), se pueden realizar correcciones manuales en las anotaciones, similares a las realizadas en la fase de entrenamiento. Esto asegura que los errores sean identificados y corregidos para mejorar la precisión del modelo en la evaluación.
+		\item \textbf{Evaluación de la re-identificación:} Una vez que el modelo halla procesado la secuencia de testeo, se evalúa su capacidad de re-identificación observando a qué jugadores va asignando el mismo ID a lo largo del vídeo. El modelo se evalúa utilizando métricas estándar de re-identificación, tales como la precisión a top-1 y el mAP (Mean Average Precision).
 	\end{itemize}
 	
 	Este proceso de preparación del dataset de testeo es fundamental para verificar si el modelo de ReID ha generalizado correctamente las características aprendidas durante el entrenamiento y si puede realizar una re-identificación exitosa en nuevas secuencias de vídeo, lo que es esencial para su despliegue en entornos reales.
@@ -1434,6 +1433,62 @@
 	
 	\section{Resultados Preliminares}
 	
+	\subsection{Definiciones de las métricas usadas}
+	
+	En esta subsección definiré el significado de las métricas usadas y su importancia en la evaluación.
+	
+	\subsubsection{Rank-k Accuracy (Rank-1, Rank-5, Rank-10, etc.)}
+	
+	La Rank-k accuracy es una métrica que permite calcular con qué frecuencia la identidad correcta aparece dentro de las k predicciones más próximas (medidas mediante distancia de embeddings) generadas por el modelo considerando k: la Rank-1 accuracy mide si la identidad correcta ocupa la primera posición (top-1) cuando el modelo devuleve una predicción; ejemplos para Rank-1: para una determinada imagen de consulta (query) del jugador "player\_005", el modelo genera un embedding para la query, que confronta con todos los embeddings de la galería, con los que genera ranking ordenando los resultados (según similitud o distancia Euclídea/coseno) obteniendo el ranking. La imagen que ocupa el primer lugar (top-1) en la galería será un acierto en Rank-1, si corresponde a la misma identidad que el jugador de la query.
+	
+	\begin{equation}
+		\text{Rank-1} = \left( \frac{\text{\# queries con identidad correcta en top-1}}{\text{\# total de queries}} \right) \times 100\%
+	\end{equation}
+	
+	\textbf{Nota importante}: Un embbeding es transformar una imagen (por ejemplo, de un jugador) en un vector numérico, de dimensión fija (por ejemplo, 512 dimensiones), que resume su contenido visual de forma discriminativa (permite distinguir entre diferentes identidades de forma efectiva).
+	
+	\subsubsection{mAP – mean Average Precision}
+	
+	La mAP no solo toma en cuenta que la predicción correcta esté entre las top-k, sino que también se interesa por el orden de las predicciones y por cómo se distribuyen las identidades que son correctas a lo largo del ranking.
+	
+	Es una métrica más exigente y también más representativa de la calidad de recuperación en general.
+	
+	
+	Para cada query:
+	
+	
+	Se calcula el Average Precision (AP), que evalúa la precisión acumulada mientras se van encontrando imágenes correctas en el ranking.
+	
+	
+	Finalmente, se hace la media de estos valores sobre todas las queries, que es el mean Average Precision (mAP).
+	
+	
+	Fórmula del AP para una query con varias coincidencias relevantes:
+	
+	\begin{equation}
+		AP = \sum_{k=1}^N P(k) \cdot \Delta r(k)
+	\end{equation}
+	
+	Donde:
+	
+	\begin{itemize}
+		\item $P(k)$ es la precisión en la posición $k$.
+		\item $\Delta r(k)$ es el cambio en recall en esa posición.
+	\end{itemize}
+	
+	Si solo hay una coincidencia relevante (una imagen en la galería con la misma identidad), el AP será igual a la precisión en la posición en que aparece esa coincidencia.
+	
+	\begin{equation}
+		mAP = \frac{1}{Q} \sum_{i=1}^{Q} AP_i
+	\end{equation}
+	
+	Donde:
+	
+	\begin{itemize}
+		\item $Q$ es el número de queries.
+		\item $AP_i$ es la \textit{average precision} para la query $i$.
+	\end{itemize}
+	
  	\subsection{Comparación de protocolos de re-identificación} \cite{7410490}
  	
  	En ambos casos, tanto en el protocolo de Market-1501 como en la evaluación actual, la idea central es muy parecida, pero difieren en qué se pone en la galería y cómo se definen las consultas:
@@ -1552,11 +1607,13 @@
  		se calculan Rank-1, Rank-5, Rank-10 y mAP sobre las listas ordenadas de distancias.
  	\end{enumerate}
  	
- 	\subsection{Resultados de ReID}
+ 	\subsection{Evaluación de la re-identificación}
  	
- 	Todos los resultados que he recogido son los modelos de reid frente al dataset etiquetados con solo las detecciones. 
+ 	Los resultados recopilados pertenecen a los modelos de Reid aplicados al conjunto de datos etiquetado, considerando solo las detecciones de cada jugador. 
  	
- 	Para YOLOv10 he tenido que hacer una evaluación más creativa para calcular las métricas
+ 	\subsubsection{YOLOv10}
+ 	
+ 	Para YOLOv10 he tenido que hacer una evaluación más creativa para calcular las métricas.
  	
  	\begin{figure}[H]
  		\centering
@@ -1565,6 +1622,13 @@
  		\label{fig:Resultado Yolov10 reid}
  	\end{figure}
  	
+ 	Este experimento ilustra una forma poco habitual de aproximarse a utilizar un detector como el YOLOv10 para tareas de reidentificación y el resultado lo deja claramente manifiesto para tal propósito.
+ 	El YOLOv10 está especializado para tareas de detección, no para reconocer si las clases son (muy) similares visualmente. Su arquitectura es capaz de localizar objetos, no de mapear imágenes en el espacio donde las distancias reflejan similitud de identidad, además de que sus capas de salida están especificamente diseñadas para boxes delimitadores, no para embeddings.
+ 	El resultado lo pone de manifiesto: un Rank-1 que solamente alcanza el 29.6% y un muy bajo mAP del 14.28%; esto significa que el modelo no puede identificar correctamente la mayoría de los jugadores ni siquiera para los 5 o 10 primeros candidatos. Por ello, el método de ReID que se pretende implantar es aplicable a un sistema de ReID con modificaciones extremas.
+ 	
+ 	
+ 	\subsubsection{Osnet Sportsmot}
+ 	
  	\begin{figure}[H]
  		\centering
  		\includegraphics[width=0.8\textwidth]{image/sports_model.pth.tar-60_sportsmot}
@@ -1572,6 +1636,13 @@
  		\label{fig:Resultado DeepEIoU con Osnet reid sportsmot osnet_x1_0}
  	\end{figure}
  	
+ 	Este modelo, que se basa en OSNet, fue entrenado con el dataset SportsMOT, un dataset de fútbol profesional que contiene secuencias de jugadores en entornos controlados y de alta calidad visual. La arquitectura OSNet permite extraer de manera efectiva tanto la información visual global como local, lo que se traduce en su alta Rank-1 del 91.3%. Sin embargo, el mAP solo es del 28.6%, lo que implica que mientras el modelo tiende a clasificar correctamente la imagen, el resto, las imágenes relacionadas con la misma identidad, no están clasificadas correctamente; esto es consistente con el hecho de que el modelo fue entrenado sobre un deporte profesional pero no se adapta a las características propias del fútbol amateur: cámaras distantes, resoluciones más bajas, variaciones de luz, recortes menos precisos. En resumen, el rendimiento sugiere que el modelo responde de manera adecuada con los ejemplos más evidentes, pero no es capaz de conseguir agrupar las distintas apariciones de un mismo jugador.
+ 	
+ 	A pesar de que es un modelo OSNet entrenado específicamente en el dominio futbolístico, las diferencias que existen del dominio en un sentido profesional y amateur limitan la capacidad de generalizar, lo que afecta la calidad general de la escala y penaliza el mAP.
+ 	
+
+  	
+ 	\subsubsection{Osnet Soccernet}
  	\begin{figure}[H]
  		\centering
  		\includegraphics[width=0.8\textwidth]{image/model.osnet.pth.tar-10_soccernet}
@@ -1579,6 +1650,14 @@
  		\label{fig:Resultado DeepEIoU con Osnet reid soccernet osnet_x1_0}
  	\end{figure}
  	
+ 	El presente modelo también se basa en OSNet, aunque, a diferencia del anterior, no se encuentra ajustado al dominio, sino que cuenta con preentrenamiento realizado sobre SoccerNet, es decir, un dataset profesional de fútbol.
+ 	
+ 	El hecho de que el atributo Rank-1 sea relativamente alto (90.4%) pero el valor mAP sólo llegue al 30.3% es indicativo de que en los casos en que el modelo acierta, estos son los más evidentes, pero en el caso de ejemplos ambiguos, el performance decay es grande, lo cual tiene todo el sentido dado que SoccerNet suele contener imágenes de mejor calidad (múltiples cámaras bien calibradas, contexto mejor regulado), mientras que tu dataset normalmente contiene imágenes en situaciones de mayor ruido visual, con compresión, aficiones visuales de pose o escales. 
+ 	Un modelo tiene la capacidad de identificar patrones generales (forma del cuerpo, color de la camiseta) pero no está ajustado para poder lidiar con las especificidades visuales del fútbol amateur, lo que se traduce en un deterioro muy importante en las predicciones que son más difíciles.
+ 	
+ 	El hecho de que OSNet sea una arquitectura potente sólo nos puede llevar a la conclusión que el desajuste de dominio impide la precisión global del modelo.
+ 	
+ 	\subsubsection{ResNet Soccernet}
  	\begin{figure}[H]
  		\centering
  		\includegraphics[width=0.8\textwidth]{image/model.resnet50.pth.tar-20_soccernet}
@@ -1586,12 +1665,23 @@
  		\label{fig:Resultado  con Resnet reid soccernet resnet50_fc512}
  	\end{figure}
  	
+ 	A pesar de las ventajas que proporciona su arquitectura, que es clásica y robusta, ResNet-50 no es una arquitectura adecuada para ReID por sí sola, ya que se enfoca en la extracción de características muy globales, abstractas, sin un mantenimiento local de la información espiritual. Mientras que OSNet es una arquitectura desenvolvente que extrae características de varias escalas y es capaz de mantener la información al nivel local, ResNet-50 tiende a extraer características más globales (aunque también reciben información de las escalas restantes).
+ 	Esto perjudica el rendimiento en tareas como la reidentificación de las personas, donde los detalles visuales estereotipados marcan la gran diferencia. Al final, el resultado es similar al modelo OSNet preentrenado, pero un poco inferior, en especial en Rank-1.
+ 	
+ 	A pesar de ser robusta, ResNet-50 pierde poder de discriminación frente a las arquitecturas entrenadas de manera específica a la tarea (OSNet) y su rendimiento hace evidentes estas capacidades.
+ 	
+ 	\subsubsection{Osnet mi dataset estiquetado}
  	\begin{figure}[H]
  		\centering
  		\includegraphics[width=0.8\textwidth]{image/resultado_entrenamiento_reid_myData_osnet}
  		\caption{\textbf{Resultado ReID con Osnet entrenado con mi dataset etiquetado}}
  		\label{fig:Resultado  con Osnet reid mi dataset etiquetado osnet_x1_0}
  	\end{figure}
+ 	
+ 	El máximo rendimiento de toda la batería de pruebas corresponde a este modelo, porque es el modelo mejor adaptado a la problemática de clasificar el fútbol amateur, dado que está entrenado directamente sobre las imágenes de tu propio conjunto de datos.
+ 	OSNet está diseñado para aprender características discriminativas a la vez que captura información a nivel local y global gracias a su diseño multi-escala y a sus bloques convolucionales eficientes. En fotografía de fútbol amateur (donde las condiciones de luz, resolución y calidad son muy variables), esta arquitectura es particularmente adecuada en cuanto a que puede sacarle el mejor provecho a elementos visuales muy finos (textura de las camisetas, siluetas, posturas, etc.) para distinguir a los jugadores.
+ 	
+ 	Una mAP alta indica que el modelo es capaz de mantener la consistencia incluso en los casos más difíciles, y un Rank-1 cercano al 98% indica que en la mayoría de las consultas el primer candidato es correcto.
  	
  	\subsection{Resultados de MOT}
 	
