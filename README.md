@@ -172,7 +172,7 @@ Es la más óptima en cuanto a resultados (comprobado por prueba y error), ya qu
 
 En este capítulo empezaremos por corregir el mot resultado de ejecutar refine_tracklets.py. Para ello hice dos programas que me ayudaban a semiautomatizar el proceso de corrección del fichero mot.
 
-Uno para hacer cambios más generales (p. ej cambiar un id para el resto de la secuencia de vídeo). 
+Uno para hacer cambios más generales (p. ej. cambiar un id para el resto de la secuencia de vídeo). 
 ```bash
    python annotate_review.py
 ```
@@ -180,7 +180,7 @@ Otro para hacer cambios más precisos frame a frame.
 ```bash
    python annotate_review_precise.py
 ```
-Recomiendo encarecidamente que los ficheros se ejecuten varias veces y que no se haga todo directamente (p. ej hacer un único cambio de id por cada ejecución del annotate_review.py). Ya que es fácil equivocarse y tener que descartar el proceso de correción de 2h no es factible.
+Recomiendo encarecidamente que los ficheros se ejecuten varias veces y que no se haga todo directamente (p. ej. hacer un único cambio de id por cada ejecución del annotate_review.py). Ya que es fácil equivocarse y tener que descartar el proceso de correción de 2h no es factible.
 
 Tras varias correciones me quedé con el archivo que consideré suficientemente correcto como para tomarlo de referencia para entrenamiento y evaluación: [mot_corr30_c.txt](https://github.com/JuanSoM/TFG---Player-tracking-and-re-identification-in-amateur-football-using-object-detection/blob/main/code/gta-link%20-%20TFG/DeepEIoU_trackerVideo2_Split%2BConnect_eps0.8_minSamples10_K4_mergeDist0.7_spatial1.0/mot_corr30_c.txt)
 
@@ -230,7 +230,7 @@ Con los resultados ejecutaremos del [jupyter](code\Deep-EIoU1\evaluacion_yolov10
 ```
 ### Quinto capítulo (vídeos generados con distintos modelos)
 
-Sería repetir el capítulo uno, pero cambiando el model_name y los pesos usados (p. ej model.resnet50.pth.tar-20)
+Sería repetir el capítulo uno, pero cambiando el model_name y los pesos usados (p. ej. model.resnet50.pth.tar-20)
 De esta manera iremos obteniendo vídeos diferentes usando un modelo distinto y podremos comparar los resultados de manera visual.
 
 

@@ -1032,219 +1032,218 @@
 		\item Se recomienda tener al menos 3 imágenes por jugador para que la división sea efectiva.
 	\end{itemize}
 	
-	\subsection{Entrenar el modelo de ReID}
 	
-	Para el entrenamiento del modelo de re-identificación (ReID), se utilizó el repositorio \texttt{Sportsreid}, que está basado en \texttt{SoccerNet Re-Identification} y \texttt{Torchreid}. Este repositorio permite reidentificar al mismo jugador en diferentes fotogramas de un video de un partido de fútbol. Sportsreid ha alcanzado el segundo puesto en el leaderboard de la división de prueba del reto SoccerNet 2022 de Re-Identification.
 	
-	El entrenamiento se lleva a cabo utilizando un archivo de configuración que define los parámetros del modelo, el optimizador y el scheduler, así como el conjunto de datos a utilizar. A continuación se describe el proceso de entrenamiento utilizando el archivo \texttt{main.py} proporcionado en el repositorio.
+	\subsection{Entrenar los modelos de ReID para YOLO}
 	
-	El código de entrenamiento es el siguiente:
-	\vspace{0.5cm}
-	
-	\begin{lstlisting}[style=pythonstyle]
-		import sys
-		import time
-		import os.path as osp
-		import argparse
-		import torch
-		import torch.nn as nn
-		
-		import torchreid
-		from torchreid.reid.utils import (
-		Logger, check_isfile, set_random_seed, collect_env_info,
-		resume_from_checkpoint, load_pretrained_weights, compute_model_complexity
-		)
-		from default_config import (
-		imagedata_kwargs, optimizer_kwargs, videodata_kwargs, engine_run_kwargs,
-		get_default_config, lr_scheduler_kwargs
-		)
-		
-		def build_datamanager(cfg):
-		# ImageDataManager con batch sizes de train/test y relabel de IDs
-		return torchreid.data.ImageDataManager(
-		root=cfg.data.root,
-		sources=tuple(cfg.data.sources),
-		targets=(),                          # sin target set separado
-		height=cfg.data.height,
-		width=cfg.data.width,
-		batch_size_train=cfg.train.batch_size,
-		batch_size_test=cfg.test.batch_size,
-		transform_train=cfg.data.transforms,
-		transform_test=cfg.data.transforms,
-		combineall=cfg.data.combineall,
-		relabel=True,                        # remapea IDs a [0..N-1]
-		num_workers=cfg.data.workers,
-		verbose=True,
-		use_gpu=cfg.use_gpu
-		)
-		
-		def build_engine(cfg, datamanager, model, optimizer, scheduler):
-		if cfg.data.type == 'image':
-		if cfg.loss.name == 'softmax':
-		engine = torchreid.engine.ImageSoftmaxEngine(
-		datamanager,
-		model,
-		optimizer=optimizer,
-		scheduler=scheduler,
-		use_gpu=cfg.use_gpu,
-		label_smooth=cfg.loss.softmax.label_smooth
-		)
-		else:
-		engine = torchreid.engine.ImageTripletEngine(
-		datamanager,
-		model,
-		optimizer=optimizer,
-		margin=cfg.loss.triplet.margin,
-		weight_t=cfg.loss.triplet.weight_t,
-		weight_x=cfg.loss.triplet.weight_x,
-		weight_tc=cfg.loss.triplet.weight_tc,
-		weight_cc=cfg.loss.triplet.weight_cc,
-		scheduler=scheduler,
-		use_gpu=cfg.use_gpu,
-		label_smooth=cfg.loss.softmax.label_smooth,
-		topk=cfg.loss.triplet.topk,
-		bottomk=cfg.loss.triplet.bottomk,
-		warmup_lr=cfg.train.warmup_lr,
-		warmup_steps=cfg.train.warmup_steps,
-		lr=cfg.train.lr
-		)
-		else:
-		if cfg.loss.name == 'softmax':
-		engine = torchreid.engine.VideoSoftmaxEngine(
-		datamanager,
-		model,
-		optimizer=optimizer,
-		scheduler=scheduler,
-		use_gpu=cfg.use_gpu,
-		label_smooth=cfg.loss.softmax.label_smooth,
-		pooling_method=cfg.video.pooling_method
-		)
-		else:
-		engine = torchreid.engine.VideoTripletEngine(
-		datamanager,
-		model,
-		optimizer=optimizer,
-		margin=cfg.loss.triplet.margin,
-		weight_t=cfg.loss.triplet.weight_t,
-		weight_x=cfg.loss.triplet.weight_x,
-		scheduler=scheduler,
-		use_gpu=cfg.use_gpu,
-		label_smooth=cfg.loss.softmax.label_smooth
-		)
-		return engine
-		
-		def reset_config(cfg, args):
-		# Ruta por defecto a tu carpeta GTA-Link
-		cfg.data.root = args.root or r'C:\Users\jismbs\Documents\gta-link'
-		# Dataset de entrada por defecto
-		cfg.data.sources = args.sources or ['player_crops2']
-		# Transforms si se especifican
-		if args.transforms:
-		cfg.data.transforms = args.transforms
-		
-		def check_cfg(cfg):
-		if cfg.loss.name == 'triplet' and cfg.loss.triplet.weight_x == 0:
-		assert cfg.train.fixbase_epoch == 0, \
-		'The output of classifier is not included in the computational graph'
-		
-		def main():
-		parser = argparse.ArgumentParser(
-		formatter_class=argparse.ArgumentDefaultsHelpFormatter
-		)
-		parser.add_argument(
-		'--config-file', type=str, default='', help='path to config file'
-		)
-		parser.add_argument(
-		'-s', '--sources', type=str, nargs='+',
-		help='source datasets (delimited by space)'
-		)
-		parser.add_argument(
-		'-t', '--targets', type=str, nargs='+',
-		help='target datasets (delimited by space)'
-		)
-		parser.add_argument(
-		'--transforms', type=str, nargs='+', help='data augmentation'
-		)
-		parser.add_argument(
-		'--root', type=str, default='', help='path to data root'
-		)
-		parser.add_argument(
-		'opts', default=None, nargs=argparse.REMAINDER,
-		help='Modify config options using the command-line'
-		)
-		args = parser.parse_args()
-		
-		cfg = get_default_config()
-		cfg.use_gpu = torch.cuda.is_available()
-		if args.config_file:
-		cfg.merge_from_file(args.config_file)
-		reset_config(cfg, args)
-		cfg.merge_from_list(args.opts)
-		set_random_seed(cfg.train.seed)
-		check_cfg(cfg)
-		
-		log_name = 'test.log' if cfg.test.evaluate else 'train.log'
-		log_name += time.strftime('-%Y-%m-%d-%H-%M-%S')
-		sys.stdout = Logger(osp.join(cfg.data.save_dir, log_name))
-		
-		print('Show configuration\n{}\n'.format(cfg))
-		print('Collecting env info ...')
-		print('** System info **\n{}\n'.format(collect_env_info()))
-		
-		if cfg.use_gpu:
-		torch.backends.cudnn.benchmark = False  # reproducibilidad
-		
-		datamanager = build_datamanager(cfg)
-		
-		print('Building model: {}'.format(cfg.model.name))
-		model = torchreid.models.build_model(
-		name=cfg.model.name,
-		num_classes=datamanager.num_train_pids,
-		loss=cfg.loss.name,
-		pretrained=cfg.model.pretrained,
-		use_gpu=cfg.use_gpu,
-		img_size=(cfg.data.height, cfg.data.width),
-		)
-		num_params, flops = compute_model_complexity(
-		model, (1, 3, cfg.data.height, cfg.data.width)
-		)
-		print('Model complexity: params={:,} flops={:,}'.format(num_params, flops))
-		
-		if cfg.model.load_weights and check_isfile(cfg.model.load_weights):
-		load_pretrained_weights(model, cfg.model.load_weights)
-		
-		if cfg.use_gpu:
-		model = nn.DataParallel(model).cuda()
-		
-		optimizer = torchreid.optim.build_optimizer(model, **optimizer_kwargs(cfg))
-		scheduler = torchreid.optim.build_lr_scheduler(
-		optimizer, **lr_scheduler_kwargs(cfg)
-		)
-		
-		if cfg.model.resume and check_isfile(cfg.model.resume):
-		cfg.train.start_epoch = resume_from_checkpoint(
-		cfg.model.resume, model, optimizer=optimizer, scheduler=scheduler
-		)
-		
-		print('Building {}-engine for {}-reid'.format(cfg.loss.name, cfg.data.type))
-		engine = build_engine(cfg, datamanager, model, optimizer, scheduler)
-		engine.run(**engine_run_kwargs(cfg))
-		
-		
-		if __name__ == '__main__':
-		main()
-	\end{lstlisting}
-	
-	Este código realiza las siguientes funciones clave:
+	El entrenamiento de los modelos de reidentificación se ha organizado de forma modular, siguiendo una arquitectura clara que separa las distintas responsabilidades del proceso. A continuación se describe brevemente la función de cada componente principal implicado:
 	
 	\begin{itemize}
-		\item \textbf{Configuración del entorno de entrenamiento:} El código configura los parámetros del modelo, el optimizador y el scheduler para el entrenamiento del modelo de ReID utilizando la configuración especificada en el archivo YAML.
-		\item \textbf{Gestión de datos:} Utiliza \texttt{torchreid.data.ImageDataManager} para gestionar el conjunto de datos de entrada y salida, aplicando las transformaciones necesarias y ajustando los batch sizes para el entrenamiento y la evaluación.
-		\item \textbf{Entrenamiento del modelo:} El modelo es entrenado utilizando diferentes arquitecturas de red, como ResNet50, OSNet, y ViT, con la opción de utilizar diferentes funciones de pérdida como \texttt{softmax} o \texttt{triplet}, dependiendo de la configuración elegida.
-		\item \textbf{Gestión del proceso de entrenamiento:} El código proporciona un sistema de logging para registrar el progreso del entrenamiento y las métricas obtenidas, como la precisión media (mAP) y el rendimiento en el ranking-1.
+		\item \textbf{datasets/sportsreid\_dataset.py}: contiene la clase del dataset personalizado utilizado para el entrenamiento. Define cómo se cargan las imágenes, las etiquetas de identidad y cómo se aplican las transformaciones necesarias.
+		
+		\item \textbf{engine/trainer.py}: implementa la lógica principal del entrenamiento, incluyendo el bucle de épocas, el cálculo de pérdidas, métricas y la evaluación del modelo.
+		
+		\item \textbf{models/model\_builder.py}: define la arquitectura del modelo de reidentificación, incluyendo la selección de backbone (por ejemplo, OSNet) y el número de clases de salida.
+		
+		\item \textbf{utils/transforms.py}: contiene las transformaciones de imagen aplicadas durante el preprocesamiento, tanto en fase de entrenamiento como de validación.
+		
+		\item \textbf{utils/visualization.py}: módulo auxiliar para visualizar imágenes junto con sus etiquetas o embeddings, útil para depuración y análisis cualitativo del modelo.
+		
+		\item \textbf{main.py}: archivo principal desde el que se lanza el entrenamiento. Se encarga de la configuración general, carga de parámetros y orquestación del resto de módulos.
 	\end{itemize}
 	
-	Este proceso de entrenamiento es fundamental para ajustar el modelo de ReID a las características del conjunto de datos de fútbol amateur, permitiendo una mejor identificación de los jugadores en los distintos fotogramas del video.
+	\subsubsection{Módulo \texttt{sportsreid\_dataset.py}}
+	
+	Este módulo define el conjunto de datos personalizado utilizado para entrenar el modelo de reidentificación en el dominio del fútbol amateur. Se construye sobre la clase base \texttt{ImageDataset} de \texttt{Torchreid}, lo que garantiza compatibilidad directa con el resto de herramientas del framework.
+	
+	\paragraph{Clase \texttt{SportsReIDDataset}}
+	
+	La clase \texttt{SportsReIDDataset} se encarga de organizar y cargar las imágenes de jugadores, almacenadas bajo una estructura de carpetas jerárquica. Dicha estructura contiene tres subdirectorios principales: \texttt{train}, \texttt{query} y \texttt{gallery}, cada uno de los cuales agrupa las imágenes correspondientes a una fase del entrenamiento o evaluación.
+	
+	\begin{itemize}
+		\item En cada subdirectorio, las imágenes están organizadas en carpetas con nombres como \texttt{player\_<pid>}, donde \texttt{<pid>} es el identificador original del jugador.
+		\item Durante la inicialización, se recorren todas las carpetas de jugadores para extraer el conjunto total de identificadores únicos (\texttt{pid\_set}).
+		\item A continuación, se construye un diccionario de reindexado \texttt{pid2label}, que asigna a cada jugador un nuevo identificador continuo, empezando desde cero. Esta reindexación es esencial para el entrenamiento, ya que el modelo espera que los identificadores sean enteros consecutivos.
+	\end{itemize}
+	
+	Cada conjunto de datos (train, query y gallery) se carga utilizando el método privado \texttt{\_load\_set}, que genera una lista de tuplas con el siguiente formato:
+	
+	\begin{center}
+		\texttt{(ruta\_imagen, pid, camid, dsetid)}
+	\end{center}
+	
+	\begin{itemize}
+		\item \texttt{pid}: identificador del jugador reindexado.
+		\item \texttt{camid}: identificador de la cámara. Se asignan valores fijos por conjunto:
+		\begin{itemize}
+			\item 0 para \texttt{query},
+			\item 1 para \texttt{gallery},
+			\item 2 para \texttt{train}.
+		\end{itemize}
+		\item \texttt{dsetid}: identificador del dataset. En este caso se fija a 0 para todas las imágenes, ya que solo se usa un único conjunto de datos.
+	\end{itemize}
+	
+	Además, si alguno de los subconjuntos se encuentra vacío, se incluye una imagen de relleno ficticia para asegurar la compatibilidad con \texttt{Torchreid}, evitando errores durante el entrenamiento.
+	
+	\paragraph{Función \texttt{register\_dataset}}
+	
+	Finalmente, se proporciona una función auxiliar \texttt{register\_dataset}, que registra el dataset personalizado bajo el nombre \texttt{sportsreid} dentro del entorno de \texttt{Torchreid}. Esto permite que se pueda referenciar directamente en los scripts de entrenamiento utilizando dicho identificador.
+	
+	
+	\subsubsection{Módulo \texttt{trainer.py}}
+	
+	El módulo \texttt{trainer.py} encapsula la lógica principal para entrenar el modelo de reidentificación utilizando las herramientas provistas por el framework \texttt{Torchreid}. Este archivo define dos funciones clave: una para preparar los datos y otra para lanzar el entrenamiento.
+	
+	\paragraph{Función \texttt{get\_datamanager}}
+	
+	Esta función construye un objeto \texttt{ImageDataManager}, que se encarga de la gestión de los datos durante todo el proceso de entrenamiento y evaluación. El \texttt{DataManager} cumple un papel fundamental al encargarse de:
+	
+	\begin{itemize}
+		\item Cargar el conjunto de datos desde el directorio especificado mediante el parámetro \texttt{dataset\_dir}.
+		\item Aplicar transformaciones de preprocesamiento como volteo aleatorio (\texttt{random\_flip}) y modificación de color (\texttt{color\_jitter}).
+		\item Normalizar las imágenes con la media y desviación estándar estándar de ImageNet.
+		\item Organizar los datos en minibatches para entrenamiento (\texttt{batch\_size\_train=32}) y evaluación (\texttt{batch\_size\_test=100}).
+	\end{itemize}
+	
+	El dataset utilizado está registrado bajo el nombre \texttt{sportsreid}, que corresponde al conjunto personalizado definido en el archivo \texttt{sportsreid\_dataset.py}. La resolución de las imágenes se fija a 256 píxeles de alto y 128 píxeles de ancho, dimensiones estándar para modelos de reidentificación.
+	
+	\paragraph{Función \texttt{train\_model}}
+	
+	Esta función recibe un objeto \texttt{DataManager} y un modelo previamente construido, y lanza el proceso completo de entrenamiento. Su funcionamiento se desglosa de la siguiente manera:
+	
+	\begin{enumerate}
+		\item Se construye un optimizador utilizando el algoritmo \texttt{Adam} con una tasa de aprendizaje de 0.0003.
+		
+		\item A continuación, se define una política de aprendizaje basada en un plan de reducción del learning rate cada 20 épocas (\texttt{stepsize=20}), utilizando el scheduler \texttt{single\_step}.
+		
+		\item Se crea un objeto \texttt{ImageSoftmaxEngine}, que implementa el motor de entrenamiento y evaluación supervisada mediante entropía cruzada con suavizado de etiquetas (\texttt{label\_smooth=True}).
+		
+		\item Finalmente, se lanza el entrenamiento mediante el método \texttt{run}, indicando:
+		\begin{itemize}
+			\item La carpeta donde se guardarán los resultados y modelos entrenados (\texttt{save\_dir='log/osnet\_sportsreid'}).
+			\item El número máximo de épocas (\texttt{max\_epoch=1} en esta versión inicial de prueba).
+			\item Frecuencia de evaluación (\texttt{eval\_freq=-1}, lo que desactiva la evaluación intermedia).
+			\item Frecuencia de impresión por consola (\texttt{print\_freq=10}).
+			\item Parámetros opcionales como \texttt{test\_only=False} y \texttt{visrank=False}, que desactivan el testeo aislado y la visualización de rankings de imágenes similares.
+		\end{itemize}
+	\end{enumerate}
+	
+	Una vez finalizado el entrenamiento, se devuelve el objeto \texttt{engine}, que contiene el modelo ya entrenado y permite realizar evaluaciones posteriores.
+	
+	\subsubsection{Módulo \texttt{model\_builder.py}}
+	
+	Este módulo está dedicado a la construcción del modelo de reidentificación que se entrenará con los datos previamente preparados. Utiliza directamente las funcionalidades del framework \texttt{Torchreid}, que proporciona implementaciones de arquitecturas avanzadas diseñadas específicamente para tareas de person re-identification.
+	
+	\paragraph{Función \texttt{build\_model}}
+	
+	La función \texttt{build\_model} construye una instancia del modelo OSNet, concretamente la variante \texttt{osnet\_x1\_0}, que ha demostrado ser especialmente efectiva en tareas de reidentificación por su capacidad de capturar información multiescala y contextos locales y globales simultáneamente.
+	
+	El modelo se construye con los siguientes parámetros:
+	
+	\begin{itemize}
+		\item \texttt{name='osnet\_x1\_0'}: se selecciona la arquitectura OSNet en su versión base (x1.0), entrenada originalmente sobre ImageNet.
+		\item \texttt{num\_classes=num\_classes}: especifica el número de clases (identidades únicas de jugadores) que debe predecir el modelo. Este valor se determina dinámicamente en función del dataset.
+		\item \texttt{loss='softmax'}: se indica que el modelo se entrenará con una función de pérdida basada en entropía cruzada estándar, compatible con clasificación supervisada.
+		\item \texttt{pretrained=True}: se carga el modelo con pesos preentrenados, lo que proporciona una base más robusta que acelera la convergencia y mejora la precisión.
+		\item \texttt{use\_gpu=True}: habilita el uso de la GPU para el entrenamiento, si está disponible.
+	\end{itemize}
+	
+	La función retorna el modelo ya configurado, listo para ser entrenado con el \texttt{engine} definido en el archivo \texttt{trainer.py}. Esta separación modular permite fácilmente cambiar la arquitectura o parámetros del modelo sin alterar el resto del pipeline.
+	
+	
+	\subsubsection{Módulo \texttt{transforms.py}}
+	
+	El módulo \texttt{transforms.py} define el conjunto de transformaciones de preprocesamiento que se aplican a las imágenes antes de ser introducidas al modelo de reidentificación. Estas transformaciones aseguran una representación coherente y normalizada de los datos de entrada, lo que facilita un entrenamiento más estable y eficiente.
+	
+	\paragraph{Función \texttt{get\_transform}}
+	
+	La función \texttt{get\_transform} retorna una secuencia de transformaciones encadenadas mediante \texttt{torchvision.transforms.Compose}. Las transformaciones aplicadas son las siguientes:
+	
+	\begin{itemize}
+		\item \texttt{T.Resize((256, 128))}: redimensiona todas las imágenes a una resolución fija de 256 píxeles de alto y 128 píxeles de ancho. Esta dimensión es estándar en tareas de reidentificación, ya que mantiene la proporción corporal y reduce el coste computacional.
+		
+		\item \texttt{T.ToTensor()}: convierte la imagen de formato \texttt{PIL} o \texttt{numpy array} a un tensor de PyTorch, con valores normalizados en el rango [0, 1].
+		
+		\item \texttt{T.Normalize(mean, std)}: aplica una normalización canal a canal utilizando la media y desviación estándar de las imágenes de ImageNet:
+		\begin{itemize}
+			\item \texttt{mean = [0.485, 0.456, 0.406]}
+			\item \texttt{std = [0.229, 0.224, 0.225]}
+		\end{itemize}
+		Esta normalización es fundamental cuando se emplean modelos preentrenados sobre ImageNet, como OSNet, ya que asegura una coherencia estadística entre los datos originales y los nuevos datos de entrada.
+	\end{itemize}
+	
+	Este conjunto de transformaciones se utiliza principalmente durante la fase de inferencia o validación, ya que no incluye modificaciones aleatorias como rotaciones o cambios de color, las cuales sí se añaden durante el entrenamiento desde el propio \texttt{ImageDataManager}.
+	
+	\subsubsection{Módulo \texttt{visualization.py}}
+	
+	El módulo \texttt{visualization.py} tiene como propósito evaluar el rendimiento del modelo de reidentificación entrenado y generar visualizaciones de los resultados obtenidos. Esto resulta especialmente útil para realizar un análisis cualitativo del comportamiento del modelo, más allá de las métricas numéricas tradicionales.
+	
+	\paragraph{Función \texttt{visualize\_results}}
+	
+	Esta función realiza los siguientes pasos secuenciales:
+	
+	\begin{enumerate}
+		\item Se carga el modelo previamente entrenado desde la ruta indicada en \texttt{model\_path}. Para ello, se instancia un modelo OSNet con un número ficticio de clases igual a 1, ya que no se requiere reentrenar el modelo. Posteriormente, se restauran los pesos entrenados mediante \texttt{load\_state\_dict}.
+		
+		\item Se prepara nuevamente el conjunto de datos mediante el \texttt{DataManager}, llamando a la función \texttt{get\_datamanager}, para asegurar que los datos de prueba estén correctamente cargados.
+		
+		\item Se realiza la extracción de características (\textit{feature extraction}) de todas las imágenes tanto del conjunto \texttt{query} como del conjunto \texttt{gallery}. Esto se hace con la función \texttt{torchreid.utils.feature\_extraction}, que retorna una matriz de distancias (\texttt{distmat}) y las listas de identidades y cámaras asociadas a cada imagen.
+		
+		\item Con la matriz de distancias y las identidades extraídas, se evalúan las métricas estándar en reidentificación:
+		\begin{itemize}
+			\item \textbf{mAP (mean Average Precision)}: evalúa la precisión media considerando el ranking completo.
+			\item \textbf{CMC (Cumulative Matching Characteristics)}: calcula la tasa de aciertos en las primeras posiciones del ranking, destacando especialmente el \texttt{top-1} y el \texttt{top-5}.
+		\end{itemize}
+		
+		\item Finalmente, se genera una visualización de los resultados mediante la función \texttt{visualize\_rank}. Esta función guarda imágenes en las que se muestran, para cada imagen de consulta, sus cinco resultados más similares en la galería. El resultado se almacena en la carpeta \texttt{visrank\_results}, facilitando una inspección visual de la calidad del ranking realizado por el modelo.
+	\end{enumerate}
+	
+	
+	\subsubsection{Módulo \texttt{main.py}}
+	
+	Actúa como el punto de entrada principal del sistema de entrenamiento, cuyo objetivo es el de coordinar la ejecución de todas las fases, desde la preparación de los datos hasta el entrenamiento y guardado del modelo final. Además, tiene otros bloques de verificación que ayudan a comprobar que el conjunto de datos ha sido correctamente cargado y formateado.
+	
+	\paragraph{Función \texttt{main}}
+	
+	La función \texttt{main} se compone de varios pasos organizados de forma secuencial:
+	
+	\begin{enumerate}
+		\item \textbf{Registro del dataset personalizado.}  
+		Se llama a la función \texttt{register\_dataset()} para registrar el conjunto \texttt{sportsreid} en el sistema de \texttt{Torchreid}. Esto permite que el dataset sea identificado por su nombre durante el proceso de entrenamiento.
+		
+		\item \textbf{Configuración de rutas.}  
+		Se define la ruta al directorio raíz del dataset, que contiene las carpetas \texttt{train}, \texttt{query} y \texttt{gallery}, y también la ruta de guardado de los resultados y modelos (\texttt{save\_dir}).
+		
+		\item \textbf{Verificación del dataset.}  
+		A modo de comprobación manual, se instancia el dataset utilizando la clase \texttt{SportsReIDDataset} y se imprimen algunos ejemplos de cada subconjunto. Esto asegura que la estructura de carpetas es correcta y que los datos han sido cargados correctamente.
+		
+		\item \textbf{Inicialización del gestor de datos.}  
+		Se crea el \texttt{ImageDataManager} llamando a la función \texttt{get\_datamanager}, lo que permite aplicar las transformaciones y gestionar los minibatches para entrenamiento y validación.
+		
+		\item \textbf{Construcción del modelo.}  
+		Se construye un modelo de ReID (p. ej. OSNet) con el número de clases igual al número de identidades únicas en el conjunto de entrenamiento (\texttt{num\_train\_pids}), utilizando la función \texttt{build\_model}.
+		
+		\item \textbf{Entrenamiento del modelo.}  
+		Se lanza el entrenamiento completo mediante la función \texttt{train\_model}, que entrena el modelo sobre el conjunto de datos preparado, utilizando las configuraciones por defecto.
+		
+		\item \textbf{Guardado del modelo.}  
+		Una vez finalizado el entrenamiento, se guarda el estado de los pesos del modelo en el archivo \texttt{osnet\_sportsreid.pth}, que puede reutilizarse posteriormente para inferencia o evaluación.
+		
+		\item \textbf{(Opcional) Evaluación final.}  
+		Aunque está comentado en esta versión, el código incluye una llamada a \texttt{engine.test()} para realizar una evaluación final automatizada del modelo una vez entrenado.
+	\end{enumerate}
+	
+	\paragraph{Bloque de ejecución condicional}
+	
+	El archivo finaliza con el típico bloque de protección:
+	
+	\begin{verbatim}
+		if __name__ == '__main__':
+		main()
+	\end{verbatim}
+	
+	Esto asegura que la función \texttt{main()} solo se ejecute si el script se ejecuta directamente, y no cuando se importe desde otro módulo.
+	
 	
 	
 	\subsection{Preparar el dataset de testeo del modelo de ReID} 
