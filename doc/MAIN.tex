@@ -949,6 +949,89 @@
 	\end{itemize}
 	
 	
+	\subsubsection{dicMakerForTrainingReID.py}
+	
+	El programa \texttt{dicMakerForTrainingReID.py} se usa para reorganizar un conjunto de imágenes de jugadores en una estructura compatible con el formato Torchreid, utilizado para entrenar sistemas de Re-Identificación (ReID). El script divide las imágenes de cada jugador en tres conjuntos distintos: entrenamiento (train), consulta (query) y galería (gallery).
+	
+	El proceso se realiza en dos etapas principales:
+	
+	\textbf{Preparación de la estructura de directorios:} Crea las carpetas necesarias para los tres conjuntos de datos en el directorio de destino.
+	
+	\textbf{Distribución de imágenes:} Para cada jugador, divide sus imágenes disponibles en los tres conjuntos según las proporciones especificadas, asegurando un mínimo de imágenes por jugador.
+	
+	El código utilizado en este proceso es el siguiente:
+	\vspace{0.5cm}
+	
+	\begin{lstlisting}[style=pythonstyle]
+		import os
+		import shutil
+		import random
+		from pathlib import Path
+		
+		# Parametros
+		source_dir = Path(r"C:\Users\jismbs\Documents\gta-link\player_crops2")
+		target_dir = Path(r"C:\Users\jismbs\Documents\gta-link\player_crops2_reid")
+		
+		train_ratio = 0.7
+		query_ratio = 0.15
+		gallery_ratio = 0.15
+		
+		# suman 1.0
+		assert abs(train_ratio + query_ratio + gallery_ratio - 1.0) < 1e-6
+		
+		splits = ['train', 'query', 'gallery']
+		
+		for split in splits:
+		(target_dir / split).mkdir(parents=True, exist_ok=True)
+		
+		# Para cada jugador (identidad)
+		for player_folder in source_dir.iterdir():
+		if not player_folder.is_dir():
+		continue
+		
+		images = list(player_folder.glob("*.jpg"))
+		if len(images) < 3:
+		print(f"Saltando {player_folder.name}: no hay suficientes imagenes (minimo 3)")
+		continue
+		
+		random.shuffle(images)
+		n = len(images)
+		n_train = int(n * train_ratio)
+		n_query = int(n * query_ratio)
+		
+		split_counts = {
+			'train': images[:n_train],
+			'query': images[n_train:n_train + n_query],
+			'gallery': images[n_train + n_query:]
+		}
+		
+		for split, split_images in split_counts.items():
+		split_target_dir = target_dir / split / player_folder.name
+		split_target_dir.mkdir(parents=True, exist_ok=True)
+		for img_path in split_images:
+		shutil.copy(img_path, split_target_dir / img_path.name)
+		
+		print("Dataset reorganizado correctamente en formato Torchreid.")
+		
+	\end{lstlisting}
+	\vspace{0.5cm}
+	
+	El programa realiza las siguientes funciones:
+	
+	\begin{itemize}
+		\item \textbf{División proporcional:} Distribuye automáticamente las imágenes de cada jugador en los conjuntos train (70%), query (15%) y gallery (15%) por defecto, con validación de que la suma sea exactamente 1.0.
+		\item \textbf{Filtrado de jugadores:} Omite aquellos jugadores con menos de 3 imágenes, asegurando que cada identidad tenga suficientes muestras para ser útil en ReID.
+		\item \textbf{Estructura compatible con Torchreid:} Crea una organización de directorios estándar que puede ser directamente utilizada por frameworks como Torchreid.
+		\item \textbf{Barrido recursivo:} Detecta automáticamente todas las carpetas de jugadores en el directorio fuente y las procesa individualmente.
+	\end{itemize}
+	
+	\textbf{Consideraciones importantes:}
+	\begin{itemize}
+		\item El script mantiene la estructura original de nombres de archivos y carpetas.
+		\item La distribución de imágenes es aleatoria pero determinista (depende de la semilla aleatoria de Python).
+		\item Se recomienda tener al menos 3 imágenes por jugador para que la división sea efectiva.
+	\end{itemize}
+	
 	\subsection{Entrenar el modelo de ReID}
 	
 	Para el entrenamiento del modelo de re-identificación (ReID), se utilizó el repositorio \texttt{Sportsreid}, que está basado en \texttt{SoccerNet Re-Identification} y \texttt{Torchreid}. Este repositorio permite reidentificar al mismo jugador en diferentes fotogramas de un video de un partido de fútbol. Sportsreid ha alcanzado el segundo puesto en el leaderboard de la división de prueba del reto SoccerNet 2022 de Re-Identification.
