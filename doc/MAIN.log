@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.14)  20 JUN 2025 02:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.14)  22 JUN 2025 23:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1594,8 +1594,15 @@ Package pdftex.def Info: backcover.pdf , page1 used on input line 1806.
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-04-14>
  ***********
-Package rerunfilecheck Info: File `MAIN.out' has not changed.
-(rerunfilecheck)             Checksum: 0BAD2AE8D1E3DC9218CCD16869C268D8;13380.
+
+
+Package rerunfilecheck Warning: File `MAIN.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `MAIN.out':
+(rerunfilecheck)             Before: AC91F531C73BDDA975A28703516BDCBC;13324
+(rerunfilecheck)             After:  3431E8654D80D44E63EABBF462B915E3;13400.
 Package logreq Info: Writing requests to 'MAIN.run.xml'.
 \openout1 = `MAIN.run.xml'.
 
@@ -1625,7 +1632,7 @@ pe1/public/amsfonts/cm/cmr8.pfb><C:/Users/Soriano/AppData/Local/Programs/MiKTeX
 rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Soriano/AppData
 /Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Sori
 ano/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on MAIN.pdf (56 pages, 13533480 bytes).
+Output written on MAIN.pdf (56 pages, 13533413 bytes).
 PDF statistics:
  1349 PDF objects out of 1440 (max. 8388607)
  603 named destinations out of 1000 (max. 500000)
