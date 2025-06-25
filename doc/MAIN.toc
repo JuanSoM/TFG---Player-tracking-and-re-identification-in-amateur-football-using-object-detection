@@ -25,52 +25,54 @@
 \contentsline {subsection}{\numberline {8.2}Gestión de IDs}{16}{subsection.8.2}%
 \contentsline {section}{\numberline {9}Propuesta}{17}{section.9}%
 \contentsline {section}{\numberline {10}Arquitectura general del sistema}{18}{section.10}%
-\contentsline {subsection}{\numberline {10.1}Preparar el dataset de entrenamiento del modelo de ReID}{18}{subsection.10.1}%
-\contentsline {subsubsection}{\numberline {10.1.1}annotate\_review.py}{18}{subsubsection.10.1.1}%
-\contentsline {subsubsection}{\numberline {10.1.2}annotate\_review\_precise.py}{21}{subsubsection.10.1.2}%
-\contentsline {subsubsection}{\numberline {10.1.3}dicMaker\_idPlayer.py}{26}{subsubsection.10.1.3}%
-\contentsline {subsubsection}{\numberline {10.1.4}dicMakerForTrainingReID.py}{28}{subsubsection.10.1.4}%
-\contentsline {subsection}{\numberline {10.2}Entrenar los modelos de ReID con torchreid}{30}{subsection.10.2}%
-\contentsline {subsubsection}{\numberline {10.2.1}Módulo \texttt {sportsreid\_dataset.py}}{31}{subsubsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.1}Selección del vídeo de entrada (video.mp4)}{18}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Preparar el dataset de entrenamiento del modelo de ReID}{19}{subsection.10.2}%
+\contentsline {subsubsection}{\numberline {10.2.1}annotate\_review.py}{19}{subsubsection.10.2.1}%
+\contentsline {subsubsection}{\numberline {10.2.2}annotate\_review\_precise.py}{22}{subsubsection.10.2.2}%
+\contentsline {subsubsection}{\numberline {10.2.3}dicMaker\_idPlayer.py}{26}{subsubsection.10.2.3}%
+\contentsline {subsubsection}{\numberline {10.2.4}dicMakerForTrainingReID.py}{28}{subsubsection.10.2.4}%
+\contentsline {subsection}{\numberline {10.3}Entrenar los modelos de ReID con torchreid}{30}{subsection.10.3}%
+\contentsline {subsubsection}{\numberline {10.3.1}Módulo \texttt {sportsreid\_dataset.py}}{31}{subsubsection.10.3.1}%
 \contentsline {paragraph}{Clase \texttt {SportsReIDDataset}}{31}{section*.2}%
-\contentsline {paragraph}{Función \texttt {register\_dataset}}{31}{section*.3}%
-\contentsline {subsubsection}{\numberline {10.2.2}Módulo \texttt {trainer.py}}{32}{subsubsection.10.2.2}%
+\contentsline {paragraph}{Función \texttt {register\_dataset}}{32}{section*.3}%
+\contentsline {subsubsection}{\numberline {10.3.2}Módulo \texttt {trainer.py}}{32}{subsubsection.10.3.2}%
 \contentsline {paragraph}{Función \texttt {get\_datamanager}}{32}{section*.4}%
 \contentsline {paragraph}{Función \texttt {train\_model}}{32}{section*.5}%
-\contentsline {subsubsection}{\numberline {10.2.3}Módulo \texttt {model\_builder.py}}{33}{subsubsection.10.2.3}%
+\contentsline {subsubsection}{\numberline {10.3.3}Módulo \texttt {model\_builder.py}}{33}{subsubsection.10.3.3}%
 \contentsline {paragraph}{Función \texttt {build\_model}}{33}{section*.6}%
-\contentsline {subsubsection}{\numberline {10.2.4}Módulo \texttt {transforms.py}}{33}{subsubsection.10.2.4}%
+\contentsline {subsubsection}{\numberline {10.3.4}Módulo \texttt {transforms.py}}{34}{subsubsection.10.3.4}%
 \contentsline {paragraph}{Función \texttt {get\_transform}}{34}{section*.7}%
-\contentsline {subsubsection}{\numberline {10.2.5}Módulo \texttt {visualization.py}}{34}{subsubsection.10.2.5}%
-\contentsline {paragraph}{Función \texttt {visualize\_results}}{34}{section*.8}%
-\contentsline {subsubsection}{\numberline {10.2.6}Módulo \texttt {main.py}}{35}{subsubsection.10.2.6}%
+\contentsline {subsubsection}{\numberline {10.3.5}Módulo \texttt {visualization.py}}{34}{subsubsection.10.3.5}%
+\contentsline {paragraph}{Función \texttt {visualize\_results}}{35}{section*.8}%
+\contentsline {subsubsection}{\numberline {10.3.6}Módulo \texttt {main.py}}{35}{subsubsection.10.3.6}%
 \contentsline {paragraph}{Función \texttt {main}}{35}{section*.9}%
 \contentsline {paragraph}{Bloque de ejecución condicional}{36}{section*.10}%
-\contentsline {subsection}{\numberline {10.3}Preparar el dataset de testeo del modelo de ReID}{36}{subsection.10.3}%
-\contentsline {subsection}{\numberline {10.4}Aplicar modelo de detección de objetos (YOLOX)}{37}{subsection.10.4}%
-\contentsline {subsubsection}{\numberline {10.4.1}Configuración del Modelo YOLOX en \texttt {yolox\_x\_ch\_sportsmot.py}}{37}{subsubsection.10.4.1}%
-\contentsline {subsubsection}{\numberline {10.4.2}Implementación en \texttt {demo.py}}{38}{subsubsection.10.4.2}%
-\contentsline {subsection}{\numberline {10.5}Aplicar tracker (DeepEIoU) y modelo de reID}{39}{subsection.10.5}%
-\contentsline {subsubsection}{\numberline {10.5.1}Deep-EIoU en \texttt {DeepEIoU.py}}{39}{subsubsection.10.5.1}%
-\contentsline {subsubsection}{\numberline {10.5.2}Modelo de Reidentificación (ReID)}{40}{subsubsection.10.5.2}%
-\contentsline {subsection}{\numberline {10.6}Aplicar GTA-LINK}{41}{subsection.10.6}%
-\contentsline {subsubsection}{\numberline {10.6.1}generate\_tracklets.py}{41}{subsubsection.10.6.1}%
-\contentsline {subsubsection}{\numberline {10.6.2}refine\_tracklets.py}{42}{subsubsection.10.6.2}%
-\contentsline {section}{\numberline {11}Resultados}{43}{section.11}%
-\contentsline {subsection}{\numberline {11.1}Definiciones de las métricas usadas}{43}{subsection.11.1}%
-\contentsline {subsubsection}{\numberline {11.1.1}Rank-k Accuracy (Rank-1, Rank-5, Rank-10, etc.)}{43}{subsubsection.11.1.1}%
-\contentsline {subsubsection}{\numberline {11.1.2}mAP – mean Average Precision}{44}{subsubsection.11.1.2}%
-\contentsline {subsection}{\numberline {11.2}Comparación de evaluación de YOLOv10 que he realizado frente a la de Market-1501}{44}{subsection.11.2}%
-\contentsline {subsubsection}{\numberline {11.2.1}Ejemplo de evaluación de Re-Identification}{45}{subsubsection.11.2.1}%
-\contentsline {subsection}{\numberline {11.3}Evaluación de la re-identificación}{46}{subsection.11.3}%
-\contentsline {subsubsection}{\numberline {11.3.1}YOLOv10}{46}{subsubsection.11.3.1}%
-\contentsline {subsubsection}{\numberline {11.3.2}Osnet Sportsmot}{47}{subsubsection.11.3.2}%
-\contentsline {subsubsection}{\numberline {11.3.3}Osnet Soccernet}{48}{subsubsection.11.3.3}%
-\contentsline {subsubsection}{\numberline {11.3.4}ResNet Soccernet}{49}{subsubsection.11.3.4}%
-\contentsline {subsubsection}{\numberline {11.3.5}Osnet mi dataset estiquetado}{50}{subsubsection.11.3.5}%
-\contentsline {subsection}{\numberline {11.4}Resultados de MOT}{50}{subsection.11.4}%
-\contentsline {section}{\numberline {12}Cosas adicionales que hice}{51}{section.12}%
-\contentsline {subsection}{\numberline {12.1}Entrenar un modelo de YOLOv8 con un dataset etiquetado propio}{51}{subsection.12.1}%
-\contentsline {subsection}{\numberline {12.2}Entrenamiento del modelo de YOLO}{52}{subsection.12.2}%
-\contentsline {section}{\numberline {13}Dificultades encontradas}{53}{section.13}%
-\contentsline {section}{\numberline {14}Conclusiones}{53}{section.14}%
+\contentsline {subsection}{\numberline {10.4}Preparar el dataset de testeo del modelo de ReID}{36}{subsection.10.4}%
+\contentsline {subsection}{\numberline {10.5}Aplicar modelo de detección de objetos (YOLOX)}{37}{subsection.10.5}%
+\contentsline {subsubsection}{\numberline {10.5.1}Configuración del Modelo YOLOX en \texttt {yolox\_x\_ch\_sportsmot.py}}{37}{subsubsection.10.5.1}%
+\contentsline {subsubsection}{\numberline {10.5.2}Implementación en \texttt {demo.py}}{38}{subsubsection.10.5.2}%
+\contentsline {subsection}{\numberline {10.6}Aplicar tracker (DeepEIoU) y modelo de reID}{38}{subsection.10.6}%
+\contentsline {subsubsection}{\numberline {10.6.1}Deep-EIoU en \texttt {DeepEIoU.py}}{39}{subsubsection.10.6.1}%
+\contentsline {subsubsection}{\numberline {10.6.2}Modelo de Reidentificación (ReID)}{40}{subsubsection.10.6.2}%
+\contentsline {subsection}{\numberline {10.7}Aplicar GTA-LINK}{41}{subsection.10.7}%
+\contentsline {subsubsection}{\numberline {10.7.1}generate\_tracklets.py}{41}{subsubsection.10.7.1}%
+\contentsline {subsubsection}{\numberline {10.7.2}refine\_tracklets.py}{42}{subsubsection.10.7.2}%
+\contentsline {section}{\numberline {11}Resultados}{58}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Definiciones de las métricas usadas}{58}{subsection.11.1}%
+\contentsline {subsubsection}{\numberline {11.1.1}Rank-k Accuracy (Rank-1, Rank-5, Rank-10, etc.)}{58}{subsubsection.11.1.1}%
+\contentsline {subsubsection}{\numberline {11.1.2}mAP – mean Average Precision}{59}{subsubsection.11.1.2}%
+\contentsline {subsection}{\numberline {11.2}Método de evaluación para YOLOv10}{60}{subsection.11.2}%
+\contentsline {subsubsection}{\numberline {11.2.1}Ejemplo de evaluación de Re-Identification para YOLO}{60}{subsubsection.11.2.1}%
+\contentsline {subsection}{\numberline {11.3}Evaluación de re-identificación para modelos de torchreid}{61}{subsection.11.3}%
+\contentsline {subsection}{\numberline {11.4}Resultados de la evaluación de re-identificación}{63}{subsection.11.4}%
+\contentsline {subsubsection}{\numberline {11.4.1}YOLOv10}{63}{subsubsection.11.4.1}%
+\contentsline {subsubsection}{\numberline {11.4.2}Osnet Sportsmot}{64}{subsubsection.11.4.2}%
+\contentsline {subsubsection}{\numberline {11.4.3}Osnet Soccernet}{65}{subsubsection.11.4.3}%
+\contentsline {subsubsection}{\numberline {11.4.4}ResNet Soccernet}{66}{subsubsection.11.4.4}%
+\contentsline {subsubsection}{\numberline {11.4.5}Osnet mi dataset estiquetado}{67}{subsubsection.11.4.5}%
+\contentsline {subsection}{\numberline {11.5}Resultados de MOT}{67}{subsection.11.5}%
+\contentsline {section}{\numberline {12}Cosas adicionales que hice}{68}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Entrenar un modelo de YOLOv8 con un dataset etiquetado propio}{68}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Entrenamiento del modelo de YOLO}{69}{subsection.12.2}%
+\contentsline {section}{\numberline {13}Dificultades encontradas}{70}{section.13}%
+\contentsline {section}{\numberline {14}Conclusiones}{70}{section.14}%
