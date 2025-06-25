@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.14)  25 JUN 2025 21:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.14)  26 JUN 2025 00:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -771,12 +771,12 @@ Package biblatex Info: Reference segment=0 on input line 51.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<cover.pdf, id=279, 597.73312pt x 845.40843pt>
+<cover.pdf, id=291, 597.73312pt x 845.40843pt>
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf>
 Package pdftex.def Info: cover.pdf  used on input line 54.
 (pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
-<cover.pdf, id=281, page=1, 597.73312pt x 845.40843pt>
+<cover.pdf, id=293, page=1, 597.73312pt x 845.40843pt>
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf, page 1>
 Package pdftex.def Info: cover.pdf , page1 used on input line 54.
@@ -799,12 +799,12 @@ Package pdftex.def Info: cover.pdf , page1 used on input line 54.
 
 
  <./cover.pdf>]
-<title.pdf, id=299, 597.73312pt x 845.40843pt>
+<title.pdf, id=311, 597.73312pt x 845.40843pt>
 File: title.pdf Graphic file (type pdf)
 <use title.pdf>
 Package pdftex.def Info: title.pdf  used on input line 59.
 (pdftex.def)             Requested size: 597.73166pt x 845.40636pt.
-<title.pdf, id=301, page=1, 597.73312pt x 845.40843pt>
+<title.pdf, id=313, page=1, 597.73312pt x 845.40843pt>
 File: title.pdf Graphic file (type pdf)
 <use title.pdf, page 1>
 Package pdftex.def Info: title.pdf , page1 used on input line 59.
@@ -834,14 +834,14 @@ Package pdftex.def Info: title.pdf , page1 used on input line 59.
 
 
  <./title.pdf>] (MAIN.toc
-
-[2{C:/Users/Soriano/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-Overfull \hbox (2.24379pt too wide) in paragraph at lines 52--52
+Overfull \hbox (2.24379pt too wide) in paragraph at lines 30--30
  [][] [][]\OT1/cmr/m/n/12 Configuraci^^Son del Mod-elo YOLOX en \OT1/cmtt/m/n/1
 2 yolox[]x[]ch[]sportsmot.py[] [][]  
  []
 
-)
+
+
+[2{C:/Users/Soriano/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}])
 \tf@toc=\write5
 \openout5 = `MAIN.toc'.
 
@@ -852,12 +852,12 @@ Overfull \hbox (2.24379pt too wide) in paragraph at lines 52--52
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\cite' on input line 82.
 
-<image/metricasBeta.png, id=401, 310.761pt x 271.61475pt>
+<image/metricasBeta.png, id=416, 310.761pt x 271.61475pt>
 File: image/metricasBeta.png Graphic file (type png)
 <use image/metricasBeta.png>
 Package pdftex.def Info: image/metricasBeta.png  used on input line 88.
 (pdftex.def)             Requested size: 341.43437pt x 298.43314pt.
-<image/Centrarse.png, id=403, 418.56375pt x 122.25674pt>
+<image/Centrarse.png, id=418, 418.56375pt x 122.25674pt>
 File: image/Centrarse.png Graphic file (type png)
 <use image/Centrarse.png>
 Package pdftex.def Info: image/Centrarse.png  used on input line 97.
@@ -894,7 +894,7 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.128 	
         <./image/Centrarse.png>]
-<image/deepEIoU.png, id=418, 867.84225pt x 246.9225pt>
+<image/deepEIoU.png, id=433, 867.84225pt x 246.9225pt>
 File: image/deepEIoU.png Graphic file (type png)
 <use image/deepEIoU.png>
 Package pdftex.def Info: image/deepEIoU.png  used on input line 149.
@@ -917,12 +917,12 @@ Overfull \hbox (88.48886pt too wide) in paragraph at lines 228--229
 ogies/?utm[]source=chatgpt.com" 
  []
 
-<image/tracab.png, id=437, 1204.5pt x 677.53125pt>
+<image/tracab.png, id=452, 1204.5pt x 677.53125pt>
 File: image/tracab.png Graphic file (type png)
 <use image/tracab.png>
 Package pdftex.def Info: image/tracab.png  used on input line 234.
 (pdftex.def)             Requested size: 192.0548pt x 108.02469pt.
-<image/tracab2.png, id=438, 1927.2pt x 1084.05pt>
+<image/tracab2.png, id=453, 1927.2pt x 1084.05pt>
 File: image/tracab2.png Graphic file (type png)
 <use image/tracab2.png>
 Package pdftex.def Info: image/tracab2.png  used on input line 240.
@@ -933,7 +933,7 @@ Underfull \vbox (badness 2951) has occurred while \output is active []
 
 
 [9]
-<image/longomatch.png, id=443, 1927.2pt x 956.57375pt>
+<image/longomatch.png, id=458, 1927.2pt x 956.57375pt>
 File: image/longomatch.png Graphic file (type png)
 <use image/longomatch.png>
 Package pdftex.def Info: image/longomatch.png  used on input line 253.
@@ -1005,12 +1005,12 @@ en-tre-nar el mod-elo de re-identificaci^^Son.
 
 
 [12]
-<image/yolodec1.jpg, id=466, 803.0pt x 362.35374pt>
+<image/yolodec1.jpg, id=481, 803.0pt x 362.35374pt>
 File: image/yolodec1.jpg Graphic file (type jpg)
 <use image/yolodec1.jpg>
 Package pdftex.def Info: image/yolodec1.jpg  used on input line 347.
 (pdftex.def)             Requested size: 341.43437pt x 154.07294pt.
-<image/yolodec2.jpg, id=467, 803.0pt x 358.33875pt>
+<image/yolodec2.jpg, id=482, 803.0pt x 358.33875pt>
 File: image/yolodec2.jpg Graphic file (type jpg)
 <use image/yolodec2.jpg>
 Package pdftex.def Info: image/yolodec2.jpg  used on input line 359.
@@ -1027,12 +1027,12 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.363 		
          <./image/yolodec1.jpg>]
-<image/yolodec3.jpg, id=476, 803.0pt x 389.455pt>
+<image/yolodec3.jpg, id=491, 803.0pt x 389.455pt>
 File: image/yolodec3.jpg Graphic file (type jpg)
 <use image/yolodec3.jpg>
 Package pdftex.def Info: image/yolodec3.jpg  used on input line 370.
 (pdftex.def)             Requested size: 341.43437pt x 165.5964pt.
-<image/yolodec4.jpg, id=477, 803.0pt x 414.54875pt>
+<image/yolodec4.jpg, id=492, 803.0pt x 414.54875pt>
 File: image/yolodec4.jpg Graphic file (type jpg)
 <use image/yolodec4.jpg>
 Package pdftex.def Info: image/yolodec4.jpg  used on input line 381.
@@ -1055,7 +1055,7 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.385 		
          <./image/yolodec2.jpg> <./image/yolodec3.jpg>]
-<image/yolodec5.jpg, id=486, 803.0pt x 451.6875pt>
+<image/yolodec5.jpg, id=501, 803.0pt x 451.6875pt>
 File: image/yolodec5.jpg Graphic file (type jpg)
 <use image/yolodec5.jpg>
 Package pdftex.def Info: image/yolodec5.jpg  used on input line 393.
@@ -1075,7 +1075,7 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.411 	
         <./image/yolodec4.jpg> <./image/yolodec5.jpg>]
-<image/tracking_id.png, id=495, 1283.79625pt x 720.6925pt>
+<image/tracking_id.png, id=510, 1283.79625pt x 720.6925pt>
 File: image/tracking_id.png Graphic file (type png)
 <use image/tracking_id.png>
 Package pdftex.def Info: image/tracking_id.png  used on input line 416.
@@ -1089,7 +1089,7 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.431 	
         <./image/tracking_id.png (PNG copy)>]
-<image/gestion_id.png, id=501, 371.3875pt x 371.3875pt>
+<image/gestion_id.png, id=516, 371.3875pt x 371.3875pt>
 File: image/gestion_id.png Graphic file (type png)
 <use image/gestion_id.png>
 Package pdftex.def Info: image/gestion_id.png  used on input line 436.
@@ -1103,7 +1103,7 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.445 	
         <./image/gestion_id.png (PNG copy)>]
-<image/Flowcharts.png, id=507, 1011.78pt x 325.215pt>
+<image/Flowcharts.png, id=522, 1011.78pt x 325.215pt>
 File: image/Flowcharts.png Graphic file (type png)
 <use image/Flowcharts.png>
 Package pdftex.def Info: image/Flowcharts.png  used on input line 450.
@@ -1117,241 +1117,154 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.467 	
         <./image/Flowcharts.png>]
-Overfull \hbox (141.30893pt too wide) in paragraph at lines 484--484
-[]  \OT1/cmtt/m/n/12 # Interactive MOT correction with flexible ID modification
- and distinct duplicate coloring[] 
- []
-
-
-Overfull \hbox (85.7339pt too wide) in paragraph at lines 501--501
-[]  \OT1/cmtt/m/n/12 def draw_annotations(img, detections, global_highlight=Non
-e, raw_color_map=None):[] 
- []
-
-
-
-[19]
-Overfull \hbox (79.5589pt too wide) in paragraph at lines 515--515
-[]   \OT1/cmtt/m/n/12 cv2.putText(out, str(tid), (x, y - 5), cv2.FONT_HERSHEY_S
-IMPLEX, 0.5, color, 2)[] 
- []
-
-
-(C:\Users\Soriano\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
-File: lstlang1.sty 2024/09/23 1.10c listings language file
-)
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 526.
-
-
-[20]
-
-[21]
-<image/entr_reid.png, id=589, 1902.10625pt x 970.62625pt>
-File: image/entr_reid.png Graphic file (type png)
-<use image/entr_reid.png>
-Package pdftex.def Info: image/entr_reid.png  used on input line 603.
-(pdftex.def)             Requested size: 341.43437pt x 174.23125pt.
-
-
-[22
-pdfTeX warning (ext4): destination with the same identifier (name{figure.14}) h
-as been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.641 		def 
-            draw_annotations(img, detections, <./image/entr_reid.png (PNG copy)
->]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[23]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[24]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[25]
-Overfull \hbox (4.88432pt too wide) in paragraph at lines 779--780
-[]\OT1/cmr/bx/n/12 Control man-ual: \OT1/cmr/m/n/12 Se cam-bia la man-era de re
-cor-rer los frames au-tom^^Saticamente
- []
-
-<image/dir_reid.png, id=763, 844.15375pt x 447.6725pt>
-File: image/dir_reid.png Graphic file (type png)
-<use image/dir_reid.png>
-Package pdftex.def Info: image/dir_reid.png  used on input line 786.
-(pdftex.def)             Requested size: 341.43437pt x 181.07411pt.
-
-
-[26
-pdfTeX warning (ext4): destination with the same identifier (name{figure.15}) h
-as been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.806 		import 
-               cv2 <./image/dir_reid.png (PNG copy)>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[27]
-
-[28]
-Overfull \hbox (0.53496pt too wide) in paragraph at lines 898--899
-[]\OT1/cmr/bx/n/12 Distribuci^^Son de im^^Sagenes: \OT1/cmr/m/n/12 Para cada ju
--gador, di-vide sus im^^Sagenes disponibles
- []
-
-
-
-[29]
-Overfull \hbox (0.97342pt too wide) in paragraph at lines 963--964
-[]\OT1/cmr/bx/n/12 Barrido re-cur-sivo: \OT1/cmr/m/n/12 De-tecta au-tom^^Satica
-mente to-das las car-petas de ju-gadores
- []
-
-
-
-[30]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 993.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 472.
 
-
-[31]
-Overfull \hbox (74.71751pt too wide) in paragraph at lines 1028--1029
- []\OT1/cmr/bx/n/12 Funci^^Son \OT1/cmtt/m/n/12 register[]dataset[] \OT1/cmr/m/
-n/12 Fi-nal-mente, se pro-por-ciona una funci^^Son aux-il-iar \OT1/cmtt/m/n/12 
-register[]dataset\OT1/cmr/m/n/12 ,
- []
-
-
-Overfull \hbox (12.71936pt too wide) in paragraph at lines 1040--1041
-[]\OT1/cmr/m/n/12 Cargar el con-junto de datos desde el di-rec-to-rio es-peci-f
-i-cado me-di-ante el par^^Sametro
- []
-
-
-Overfull \hbox (23.42569pt too wide) in paragraph at lines 1041--1042
-[]\OT1/cmr/m/n/12 Aplicar trans-for-ma-ciones de pre-proce-samiento como volteo
- aleato-rio (\OT1/cmtt/m/n/12 random[]flip\OT1/cmr/m/n/12 )
- []
-
-
-Overfull \hbox (4.84462pt too wide) in paragraph at lines 1043--1044
-[]\OT1/cmr/m/n/12 Organizar los datos en mini-batches para en-tre-namiento (\OT
-1/cmtt/m/n/12 batch[]size[]train=32\OT1/cmr/m/n/12 )
- []
-
-
-
-[32]
-Overfull \hbox (167.49092pt too wide) in paragraph at lines 1061--1062
-[]\OT1/cmr/m/n/12 La car-peta donde se guardar^^San los re-sul-ta-dos y mod-e-l
-os en-tre-na-dos (\OT1/cmtt/m/n/12 save[]dir='log/osnet[]sportsreid'\OT1/cmr/m/
-n/12 ). 
- []
-
-
-Overfull \hbox (16.36192pt too wide) in paragraph at lines 1083--1084
-\OT1/cmr/m/n/12 de ju-gadores) que debe pre-de-cir el mod-elo. Este valor se de
--ter-mina din^^Samicamente
- []
-
-
-Overfull \hbox (12.28526pt too wide) in paragraph at lines 1089--1090
-\OT1/cmtt/m/n/12 engine \OT1/cmr/m/n/12 definido en el archivo \OT1/cmtt/m/n/12
- trainer.py\OT1/cmr/m/n/12 . Esta sep-a-raci^^Son mod-u-lar per-mite f^^Sacilme
-nte
- []
-
-
-
-[33]
-Overfull \hbox (1.81808pt too wide) in paragraph at lines 1117--1118
-\OT1/cmr/m/n/12 elo de rei-den-ti-fi-caci^^Son en-tre-nado y generar vi-su-al-i
-za-ciones de los re-sul-ta-dos obtenidos.
- []
-
-
-Overfull \hbox (6.02719pt too wide) in paragraph at lines 1124--1125
-[]\OT1/cmr/m/n/12 Se carga el mod-elo pre-vi-a-mente en-tre-nado desde la ruta 
-in-di-cada en \OT1/cmtt/m/n/12 model[]path\OT1/cmr/m/n/12 .
- []
-
-
-
-[34]
-Overfull \hbox (24.55005pt too wide) in paragraph at lines 1149--1151
-[]\OT1/cmr/bx/n/12 Registro del dataset per-son-al-izado. \OT1/cmr/m/n/12 Se ll
-ama a la funci^^Son \OT1/cmtt/m/n/12 register[]dataset()
- []
-
-
-
-[35]
-
-[36]
-Overfull \hbox (6.19643pt too wide) in paragraph at lines 1202--1203
+Overfull \hbox (6.19643pt too wide) in paragraph at lines 474--475
 \OT1/cmr/m/n/12 El archivo \OT1/cmtt/m/n/12 yolox[]x[]ch[]sportsmot.py \OT1/cmr
 /m/n/12 de-fine los par^^Sametros clave del mod-elo YOLOX,
  []
 
 
-Overfull \hbox (26.14244pt too wide) in paragraph at lines 1212--1213
+Overfull \hbox (26.14244pt too wide) in paragraph at lines 484--485
 []\OT1/cmr/bx/n/12 Par^^Sametros de Eval-u-aci^^Son: \OT1/cmr/m/n/12 Se es-peci
 -f-i-can los um-brales de con-fi-anza (\OT1/cmtt/m/n/12 test[]conf\OT1/cmr/m/n/
 12 )
  []
 
 
-Overfull \hbox (11.88663pt too wide) in paragraph at lines 1218--1219
+Overfull \hbox (11.88663pt too wide) in paragraph at lines 490--491
 []\OT1/cmr/bx/n/12 Configuraci^^Son de Datos y Trans-for-ma-ciones: \OT1/cmr/m/
 n/12 Se uti-liza la clase \OT1/cmtt/m/n/12 MOTDataset
  []
 
 
 
-[37]
-Overfull \hbox (34.83356pt too wide) in paragraph at lines 1247--1247
+[19]
+Overfull \hbox (34.83356pt too wide) in paragraph at lines 519--519
  []   \OT1/cmtt/m/n/12 img, ratio = preproc(img, self.test_size, self.rgb_means
 , self.std) 
  []
 
 
-Overfull \hbox (16.30855pt too wide) in paragraph at lines 1248--1248
+Overfull \hbox (16.30855pt too wide) in paragraph at lines 520--520
  []   \OT1/cmtt/m/n/12 img = torch.from_numpy(img).unsqueeze(0).float().to(self
 .device)[] 
  []
 
 
 
-[38]
+[20]
+(C:\Users\Soriano\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2024/09/23 1.10c listings language file
+)
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 555.
 
-[39]
 
-[40]
-Overfull \hbox (2.20975pt too wide) in paragraph at lines 1388--1389
+[21]
+
+[22]
+
+[23]
+
+[24]
+Overfull \hbox (2.20975pt too wide) in paragraph at lines 719--720
 []\OT1/cmr/m/n/12 Se proce-san las se-cuen-cias de v^^S^^Pdeo para obtener las 
 predic-ciones de seguimiento
  []
 
 
-Overfull \hbox (1.78337pt too wide) in paragraph at lines 1389--1390
+Overfull \hbox (1.78337pt too wide) in paragraph at lines 720--721
 []\OT1/cmr/m/n/12 El script or-ga-niza los re-sul-ta-dos de las de-tec-ciones d
 e cada se-cuen-cia en archivos
  []
 
 
 
+[25]
+
+[26]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[27]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[28]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[29]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[30]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[31]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[32]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[33]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[34]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[35]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[36]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[37]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[38]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[39]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[40]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
 [41]
 
 [42]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 [43]
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1359,31 +1272,49 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 [44]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 [45]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Overfull \hbox (141.30893pt too wide) in paragraph at lines 1524--1524
+[]  \OT1/cmtt/m/n/12 # Interactive MOT correction with flexible ID modification
+ and distinct duplicate coloring[] 
+ []
+
+
+Overfull \hbox (85.7339pt too wide) in paragraph at lines 1541--1541
+[]  \OT1/cmtt/m/n/12 def draw_annotations(img, detections, global_highlight=Non
+e, raw_color_map=None):[] 
+ []
+
+
+Overfull \hbox (73.3839pt too wide) in paragraph at lines 1555--1555
+[]  \OT1/cmtt/m/n/12 cv2.putText(out, str(tid), (x, y - 5), cv2.FONT_HERSHEY_SI
+MPLEX, 0.5, color, 2)[] 
+ []
 
 
 
 [46]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 [47]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+<image/entr_reid.png, id=1516, 1902.10625pt x 970.62625pt>
+File: image/entr_reid.png Graphic file (type png)
+<use image/entr_reid.png>
+Package pdftex.def Info: image/entr_reid.png  used on input line 1647.
+(pdftex.def)             Requested size: 341.43437pt x 174.23125pt.
+
+Underfull \vbox (badness 4193) has occurred while \output is active []
 
 
 
 [48]
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-
-[49]
+[49
+pdfTeX warning (ext4): destination with the same identifier (name{figure.14}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1690 		for 
+             det in detections: <./image/entr_reid.png (PNG copy)>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
@@ -1394,226 +1325,313 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 [51]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 [52]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Overfull \hbox (4.88432pt too wide) in paragraph at lines 1823--1824
+[]\OT1/cmr/bx/n/12 Control man-ual: \OT1/cmr/m/n/12 Se cam-bia la man-era de re
+cor-rer los frames au-tom^^Saticamente
+ []
+
+<image/dir_reid.png, id=1720, 844.15375pt x 447.6725pt>
+File: image/dir_reid.png Graphic file (type png)
+<use image/dir_reid.png>
+Package pdftex.def Info: image/dir_reid.png  used on input line 1830.
+(pdftex.def)             Requested size: 341.43437pt x 181.07411pt.
 
 
-
-[53]
+[53
+pdfTeX warning (ext4): destination with the same identifier (name{figure.15}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1854 		from 
+              tqdm import tqdm <./image/dir_reid.png (PNG copy)>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
 [54]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 [55]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Overfull \hbox (0.53496pt too wide) in paragraph at lines 1944--1945
+[]\OT1/cmr/bx/n/12 Distribuci^^Son de im^^Sagenes: \OT1/cmr/m/n/12 Para cada ju
+-gador, di-vide sus im^^Sagenes disponibles
+ []
 
 
 
 [56]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Overfull \hbox (0.97342pt too wide) in paragraph at lines 2009--2010
+[]\OT1/cmr/bx/n/12 Barrido re-cur-sivo: \OT1/cmr/m/n/12 De-tecta au-tom^^Satica
+mente to-das las car-petas de ju-gadores
+ []
 
 
 
 [57]
 
 [58]
+Overfull \hbox (74.71751pt too wide) in paragraph at lines 2074--2075
+ []\OT1/cmr/bx/n/12 Funci^^Son \OT1/cmtt/m/n/12 register[]dataset[] \OT1/cmr/m/
+n/12 Fi-nal-mente, se pro-por-ciona una funci^^Son aux-il-iar \OT1/cmtt/m/n/12 
+register[]dataset\OT1/cmr/m/n/12 ,
+ []
+
+
+Overfull \hbox (12.71936pt too wide) in paragraph at lines 2086--2087
+[]\OT1/cmr/m/n/12 Cargar el con-junto de datos desde el di-rec-to-rio es-peci-f
+i-cado me-di-ante el par^^Sametro
+ []
+
+
+Overfull \hbox (23.42569pt too wide) in paragraph at lines 2087--2088
+[]\OT1/cmr/m/n/12 Aplicar trans-for-ma-ciones de pre-proce-samiento como volteo
+ aleato-rio (\OT1/cmtt/m/n/12 random[]flip\OT1/cmr/m/n/12 )
+ []
+
+
+Overfull \hbox (4.84462pt too wide) in paragraph at lines 2089--2090
+[]\OT1/cmr/m/n/12 Organizar los datos en mini-batches para en-tre-namiento (\OT
+1/cmtt/m/n/12 batch[]size[]train=32\OT1/cmr/m/n/12 )
+ []
+
+
 
 [59]
+Overfull \hbox (167.49092pt too wide) in paragraph at lines 2107--2108
+[]\OT1/cmr/m/n/12 La car-peta donde se guardar^^San los re-sul-ta-dos y mod-e-l
+os en-tre-na-dos (\OT1/cmtt/m/n/12 save[]dir='log/osnet[]sportsreid'\OT1/cmr/m/
+n/12 ). 
+ []
+
+
+Overfull \hbox (16.36192pt too wide) in paragraph at lines 2129--2130
+\OT1/cmr/m/n/12 de ju-gadores) que debe pre-de-cir el mod-elo. Este valor se de
+-ter-mina din^^Samicamente
+ []
+
+
+Overfull \hbox (12.28526pt too wide) in paragraph at lines 2135--2136
+\OT1/cmtt/m/n/12 engine \OT1/cmr/m/n/12 definido en el archivo \OT1/cmtt/m/n/12
+ trainer.py\OT1/cmr/m/n/12 . Esta sep-a-raci^^Son mod-u-lar per-mite f^^Sacilme
+nte
+ []
+
+
 
 [60]
-Overfull \hbox (14.5231pt too wide) in paragraph at lines 2192--2192
+Overfull \hbox (1.81808pt too wide) in paragraph at lines 2163--2164
+\OT1/cmr/m/n/12 elo de rei-den-ti-fi-caci^^Son en-tre-nado y generar vi-su-al-i
+za-ciones de los re-sul-ta-dos obtenidos.
+ []
+
+
+Overfull \hbox (6.02719pt too wide) in paragraph at lines 2170--2171
+[]\OT1/cmr/m/n/12 Se carga el mod-elo pre-vi-a-mente en-tre-nado desde la ruta 
+in-di-cada en \OT1/cmtt/m/n/12 model[]path\OT1/cmr/m/n/12 .
+ []
+
+
+
+[61]
+Overfull \hbox (24.55005pt too wide) in paragraph at lines 2195--2197
+[]\OT1/cmr/bx/n/12 Registro del dataset per-son-al-izado. \OT1/cmr/m/n/12 Se ll
+ama a la funci^^Son \OT1/cmtt/m/n/12 register[]dataset()
+ []
+
+
+
+[62]
+
+[63]
+
+[64]
+Overfull \hbox (15.3331pt too wide) in paragraph at lines 2304--2304
+[]\OT1/cmr/bx/n/14.4 M^^Setodo de eval-u-aci^^Son de re-identificaci^^Son para 
+YOLOv10 
+ []
+
+
+
+[65]
+Overfull \hbox (14.5231pt too wide) in paragraph at lines 2387--2387
 []\OT1/cmr/bx/n/14.4 Evaluaci^^Son de re-identificaci^^Son para mod-e-los de to
 rchreid 
  []
 
 
 
-[61]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[66]
 
-
-
-[62]
-<image/metricas_reid_yolo10.png, id=1789, 172.39406pt x 90.3375pt>
+[67]
+<image/metricas_reid_yolo10.png, id=1967, 172.39406pt x 90.3375pt>
 File: image/metricas_reid_yolo10.png Graphic file (type png)
 <use image/metricas_reid_yolo10.png>
-Package pdftex.def Info: image/metricas_reid_yolo10.png  used on input line 225
-9.
+Package pdftex.def Info: image/metricas_reid_yolo10.png  used on input line 245
+4.
 (pdftex.def)             Requested size: 341.43437pt x 178.93631pt.
-<image/sports_model.pth.tar-60_sportsmot.png, id=1790, 140.77594pt x 104.64093p
-t>
-File: image/sports_model.pth.tar-60_sportsmot.png Graphic file (type png)
-<use image/sports_model.pth.tar-60_sportsmot.png>
-Package pdftex.def Info: image/sports_model.pth.tar-60_sportsmot.png  used on i
-nput line 2273.
-(pdftex.def)             Requested size: 341.43437pt x 253.83853pt.
-
-Underfull \vbox (badness 1337) has occurred while \output is active []
 
 
-
-[63
+[68
 pdfTeX warning (ext4): destination with the same identifier (name{figure.16}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.2277  	
+l.2462  	
           <./image/metricas_reid_yolo10.png>]
-<image/model.osnet.pth.tar-10_soccernet.png, id=1808, 146.04562pt x 101.62968pt
+<image/sports_model.pth.tar-60_sportsmot.png, id=1997, 140.77594pt x 104.64093p
+t>
+File: image/sports_model.pth.tar-60_sportsmot.png Graphic file (type png)
+<use image/sports_model.pth.tar-60_sportsmot.png>
+Package pdftex.def Info: image/sports_model.pth.tar-60_sportsmot.png  used on i
+nput line 2468.
+(pdftex.def)             Requested size: 341.43437pt x 253.83853pt.
+<image/model.osnet.pth.tar-10_soccernet.png, id=1998, 146.04562pt x 101.62968pt
 >
 File: image/model.osnet.pth.tar-10_soccernet.png Graphic file (type png)
 <use image/model.osnet.pth.tar-10_soccernet.png>
 Package pdftex.def Info: image/model.osnet.pth.tar-10_soccernet.png  used on in
-put line 2287.
+put line 2482.
 (pdftex.def)             Requested size: 341.43437pt x 237.61864pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[64
+[69
 pdfTeX warning (ext4): destination with the same identifier (name{figure.17}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.2291  	
+l.2486  	
           <./image/sports_model.pth.tar-60_sportsmot.png>]
-<image/model.resnet50.pth.tar-20_soccernet.png, id=1815, 144.54pt x 104.64093pt
+<image/model.resnet50.pth.tar-20_soccernet.png, id=2005, 144.54pt x 104.64093pt
 >
 File: image/model.resnet50.pth.tar-20_soccernet.png Graphic file (type png)
 <use image/model.resnet50.pth.tar-20_soccernet.png>
 Package pdftex.def Info: image/model.resnet50.pth.tar-20_soccernet.png  used on
- input line 2302.
+ input line 2497.
 (pdftex.def)             Requested size: 341.43437pt x 247.19789pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[65
+[70
 pdfTeX warning (ext4): destination with the same identifier (name{figure.18}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.2306  	
+l.2501  	
           <./image/model.osnet.pth.tar-10_soccernet.png>]
-<image/resultado_entrenamiento_reid_myData_osnet.png, id=1822, 141.52875pt x 10
+<image/resultado_entrenamiento_reid_myData_osnet.png, id=2012, 141.52875pt x 10
 1.62968pt>
 File: image/resultado_entrenamiento_reid_myData_osnet.png Graphic file (type pn
 g)
 <use image/resultado_entrenamiento_reid_myData_osnet.png>
 Package pdftex.def Info: image/resultado_entrenamiento_reid_myData_osnet.png  u
-sed on input line 2315.
+sed on input line 2510.
 (pdftex.def)             Requested size: 341.43437pt x 245.22658pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[66
+[71
 pdfTeX warning (ext4): destination with the same identifier (name{figure.19}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.2319  	
+l.2514  	
           <./image/model.resnet50.pth.tar-20_soccernet.png>]
-<image/metricas_mot_yolo10.png, id=1830, 267.399pt x 27.10126pt>
+<image/metricas_mot_yolo10.png, id=2019, 267.399pt x 27.10126pt>
 File: image/metricas_mot_yolo10.png Graphic file (type png)
 <use image/metricas_mot_yolo10.png>
-Package pdftex.def Info: image/metricas_mot_yolo10.png  used on input line 2329
+Package pdftex.def Info: image/metricas_mot_yolo10.png  used on input line 2524
 .
 (pdftex.def)             Requested size: 341.43437pt x 34.60759pt.
-<image/metricas_mot_deepEIoU_osnet_sportmot.png, id=1831, 264.38776pt x 25.8967
+<image/metricas_mot_deepEIoU_osnet_sportmot.png, id=2020, 264.38776pt x 25.8967
 4pt>
 File: image/metricas_mot_deepEIoU_osnet_sportmot.png Graphic file (type png)
 <use image/metricas_mot_deepEIoU_osnet_sportmot.png>
 Package pdftex.def Info: image/metricas_mot_deepEIoU_osnet_sportmot.png  used o
-n input line 2336.
+n input line 2531.
 (pdftex.def)             Requested size: 341.43437pt x 33.44485pt.
-<image/metricas_mot_deepEIoU_osnet_soccernet.png, id=1832, 263.7855pt x 25.2945
+<image/metricas_mot_deepEIoU_osnet_soccernet.png, id=2021, 263.7855pt x 25.2945
 pt>
 File: image/metricas_mot_deepEIoU_osnet_soccernet.png Graphic file (type png)
 <use image/metricas_mot_deepEIoU_osnet_soccernet.png>
 Package pdftex.def Info: image/metricas_mot_deepEIoU_osnet_soccernet.png  used 
-on input line 2343.
+on input line 2538.
 (pdftex.def)             Requested size: 341.43437pt x 32.74039pt.
 
 
-[67
+[72
 pdfTeX warning (ext4): destination with the same identifier (name{figure.20}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.2347 	
+l.2542 	
         
 pdfTeX warning (ext4): destination with the same identifier (name{figure.21}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.2347 	
+l.2542 	
         
 pdfTeX warning (ext4): destination with the same identifier (name{figure.22}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.2347 	
+l.2542 	
          <./image/resultado_entrenamiento_reid_myData_osnet.png> <./image/metri
 cas_mot_yolo10.png> <./image/metricas_mot_deepEIoU_osnet_sportmot.png>]
-Overfull \hbox (6.09908pt too wide) in paragraph at lines 2361--2362
+Overfull \hbox (6.09908pt too wide) in paragraph at lines 2556--2557
 []\OT1/cmr/m/n/12 Aunque en este proyecto ^^Sunicamente se ha uti-lizado una cl
 ase (\OT1/cmtt/m/n/12 jugador\OT1/cmr/m/n/12 ), Roboflow
  []
 
-<image/dif_de_clases.png, id=1843, 1354.05875pt x 619.31375pt>
+<image/dif_de_clases.png, id=2033, 1354.05875pt x 619.31375pt>
 File: image/dif_de_clases.png Graphic file (type png)
 <use image/dif_de_clases.png>
-Package pdftex.def Info: image/dif_de_clases.png  used on input line 2366.
+Package pdftex.def Info: image/dif_de_clases.png  used on input line 2561.
 (pdftex.def)             Requested size: 341.43437pt x 156.16049pt.
-<image/entr_yolo.png, id=1844, 1542.76375pt x 611.28375pt>
+<image/entr_yolo.png, id=2034, 1542.76375pt x 611.28375pt>
 File: image/entr_yolo.png Graphic file (type png)
 <use image/entr_yolo.png>
-Package pdftex.def Info: image/entr_yolo.png  used on input line 2375.
+Package pdftex.def Info: image/entr_yolo.png  used on input line 2570.
 (pdftex.def)             Requested size: 341.43437pt x 135.28499pt.
 
 
-[68
+[73
 pdfTeX warning (ext4): destination with the same identifier (name{figure.23}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.2379 	
+l.2574 	
         
 pdfTeX warning (ext4): destination with the same identifier (name{figure.24}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.2379 	
+l.2574 	
          <./image/metricas_mot_deepEIoU_osnet_soccernet.png> <./image/dif_de_cl
 ases.png (PNG copy)>]
-Overfull \hbox (48.68388pt too wide) in paragraph at lines 2392--2392
+Overfull \hbox (48.68388pt too wide) in paragraph at lines 2587--2587
 []  \OT1/cmtt/m/n/12 project = rf.workspace("pruebabalonmano").project("handbal
 l-dataset-def-2")[] 
  []
 
 
 
-[69
+[74
 pdfTeX warning (ext4): destination with the same identifier (name{figure.25}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.2412 	\end{verbatim}
+l.2607 	\end{verbatim}
                        <./image/entr_yolo.png (PNG copy)>]
-Overfull \hbox (12.00873pt too wide) in paragraph at lines 2416--2417
+Overfull \hbox (12.00873pt too wide) in paragraph at lines 2611--2612
 []\OT1/cmr/m/n/12 Una vez fi-nal-izado el en-tre-namiento, se gen-era au-tom^^S
 aticamente el archivo \OT1/cmtt/m/n/12 best.pt\OT1/cmr/m/n/12 ,
  []
@@ -1622,10 +1640,10 @@ aticamente el archivo \OT1/cmtt/m/n/12 best.pt\OT1/cmr/m/n/12 ,
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=1859, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=2049, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 2438.
+Package pdftex.def Info: backcover.pdf  used on input line 2633.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -1635,49 +1653,56 @@ ersion <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=1861, page=1, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=2051, page=1, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 2438.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 2633.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
-[70]
+[75]
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 2438.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 2633.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 2438.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 2633.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 2438.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 2633.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-[71
+[76
 
  <./backcover.pdf>] (MAIN.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-04-14>
  ***********
-Package rerunfilecheck Info: File `MAIN.out' has not changed.
-(rerunfilecheck)             Checksum: 157ACA636D9EE50E1E466CE3364C8272;14416.
+
+
+Package rerunfilecheck Warning: File `MAIN.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `MAIN.out':
+(rerunfilecheck)             Before: 3C6B16455170DD5EC0054838938FA556;15130
+(rerunfilecheck)             After:  5C86BB24228408CD204DF1D04E1D918D;15201.
 Package logreq Info: Writing requests to 'MAIN.run.xml'.
 \openout1 = `MAIN.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 22473 strings out of 469940
- 387757 string characters out of 5468441
- 1490723 words of memory out of 5000000
- 47792 multiletter control sequences out of 15000+600000
+ 22674 strings out of 469940
+ 391110 string characters out of 5468441
+ 1529467 words of memory out of 5000000
+ 47831 multiletter control sequences out of 15000+600000
  634170 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,17n,79p,1905b,2127s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,17n,79p,1905b,2137s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Soriano\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tc
 bx1200.pk> <C:\Users\Soriano\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/d
 pi600\tcrm1200.pk><C:/Users/Soriano/AppData/Local/Programs/MiKTeX/fonts/type1/p
@@ -1695,9 +1720,9 @@ pe1/public/amsfonts/cm/cmr8.pfb><C:/Users/Soriano/AppData/Local/Programs/MiKTeX
 rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Soriano/AppData
 /Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Sori
 ano/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on MAIN.pdf (72 pages, 13694577 bytes).
+Output written on MAIN.pdf (77 pages, 13741969 bytes).
 PDF statistics:
- 2209 PDF objects out of 2487 (max. 8388607)
- 1268 named destinations out of 1440 (max. 500000)
- 728 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2434 PDF objects out of 2487 (max. 8388607)
+ 1430 named destinations out of 1440 (max. 500000)
+ 752 words of extra memory for PDF output out of 10000 (max. 10000000)
 

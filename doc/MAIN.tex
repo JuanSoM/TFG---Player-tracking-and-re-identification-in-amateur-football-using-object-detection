@@ -465,734 +465,6 @@
 	
 	Asimismo, se buscó que las entradas y salidas iban a producirse a profundidades diferentes en el plano de la imagen, o sea, que los jugadores estuvieran a distancias diferentes de la cámara, lo que produciría el efecto de la perspectiva, y que se traduciría en variaciones interesantes en tamaño aparente, resolución, textura visual de los jugadores, para dificultar aún más el trabajo del modelo de ReID. Así, la reidentificación ha de ser capaz de lidiar con discrepancias importantes en la representación visual del mismo individuo en condiciones de entrar o reaparecer.
 	
-	\subsection{Preparar el dataset de entrenamiento del modelo de ReID}
-	
-	El manejo de errores relacionados con la asignación incorrecta de IDs es un paso crucial en el proceso de reidentificación (ReID). Para resolver este problema, se utilizó un enfoque interactivo en el que se corrigen manualmente los errores de asignación de IDs en las anotaciones generadas por el modelo de ReID previamente entrenado con el dataset de SportMOT, que contiene imágenes de fútbol profesional.
-	
-	\subsubsection{annotate\_review.py}
-	
-	En primer lugar, las anotaciones de un partido de fútbol amateur fueron generadas utilizando el modelo de ReID entrenado con el dataset de SportMOT. Posteriormente, estas anotaciones fueron procesadas para corregir posibles errores de asignación de IDs. El código utilizado para este proceso interactivo es  y es el siguiente:
-	
-	\begin{verbatim}
-		import os
-		import cv2
-		import argparse
-		import tkinter as tk
-		from tkinter import simpledialog
-		from collections import Counter
-		
-		# Interactive MOT correction with flexible ID modification and distinct duplicate coloring
-		
-		def parse_mot_file(mot_path):
-		entries = []
-		with open(mot_path, 'r') as f:
-		for line in f:
-			if not line.strip(): continue
-				parts = line.strip().split(',')
-			entries.append({
-				'frame': int(float(parts[0])), 
-				'id': int(float(parts[1])), 
-				'bbox': tuple(map(float, parts[2:6])),
-				'raw': line.strip()
-			})
-		return entries
-		
-		
-		def draw_annotations(img, detections, global_highlight=None, raw_color_map=None):
-		out = img.copy()
-		global_h = set(global_highlight or [])
-		for det in detections:
-			x, y, w, h = map(int, det['bbox'])
-			tid = det['id']
-			raw = det['raw']
-			if raw_color_map and raw in raw_color_map:
-				color = raw_color_map[raw]
-			elif tid in global_h:
-				color = (0, 0, 255)
-			else:
-				color = (0, 255, 0)
-			cv2.rectangle(out, (x, y), (x + w, y + h), color, 2)
-			cv2.putText(out, str(tid), (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-		return out
-	\end{verbatim}
-	
-	Este código permite corregir las asignaciones incorrectas de IDs mediante una interfaz gráfica que permite al usuario modificar o eliminar detecciones, asignar nuevos IDs a instancias específicas, y aprobar o eliminar duplicados.
-	
-	\textbf{Interacción del usuario:} La interacción con el programa es completamente visual e intuitiva. Al ejecutar el código, el usuario puede visualizar las detecciones en cada fotograma del video y recibir la opción de:
-	
-	\begin{itemize}
-		\item Navegar entre los fotogramas (siguiente y anterior):
-		\begin{lstlisting}[style=pythonstyle]
-			if key == ord('n') and i < len(frames) - 1:
-			i += 1
-			elif key == ord('p') and i > 0:
-			i -= 1
-		\end{lstlisting}
-		
-		\item Modificar o eliminar instancias específicas de detecciones con IDs incorrectos:
-		\begin{lstlisting}[style=pythonstyle]
-			if key in (ord('m'), ord('d')):
-			root = tk.Tk(); root.withdraw()
-			prompt = "Introduzca 'i'<indice> para instancia o ID para global:"
-			sel = simpledialog.askstring("Seleccionar deteccion", prompt)
-			root.destroy()
-			if not sel: continue
-			if sel.startswith('i'):
-			try:
-			idx = int(sel[1:]) - 1
-			chosen = duplicate_entries[idx]
-			except:
-			print("Seleccion invalida")
-			continue
-			if key == ord('m'):
-			new_id = simpledialog.askinteger("Nuevo ID", "Nuevo ID para la instancia seleccionada:")
-			if new_id is not None:
-			raw_map[chosen['raw']] = new_id
-			print(f"Instancia bbox {chosen['bbox']} mapeada a {new_id}")
-			else:
-			removed.add(chosen['raw'])
-			print(f"Instancia bbox {chosen['bbox']} eliminada")
-			else:
-			try:
-			orig = int(sel)
-			except:
-			print("ID invalido.")
-			continue
-			if key == ord('m'):
-			new = simpledialog.askinteger("Nuevo ID", f"Nuevo ID para todas detecciones {orig}:")
-			if new is not None:
-			id_map[orig] = new
-			print(f"Mapeado global ID {orig} -> {new}")
-			else:
-			for d in by_frame[orig_frame]:
-			cur = raw_map.get(d['raw'], id_map.get(d['id'], d['id']))
-			if cur == orig:
-			removed.add(d['raw'])
-			print(f"Todas detecciones ID {orig} eliminadas en frame {orig_frame}")
-		\end{lstlisting}
-		
-		\item Corregir duplicados, donde se le presenta un mensaje con las IDs duplicadas detectadas en el fotograma:
-		\begin{lstlisting}[style=pythonstyle]
-			if duplicate_entries:
-			dup_msgs = []
-			dup_ids = []
-			for idx_det, det in enumerate(duplicate_entries, 1):
-			det_id = raw_map.get(det['raw'], id_map.get(det['id'], det['id']))
-			name = color_names[(idx_det - 1) % len(color_names)]
-			dup_msgs.append(f"{idx_det} ({name}) id {det_id}")
-			dup_ids.append(det_id)
-			print("Duplicados: " + ", ".join(dup_msgs) + f" en frame {orig_frame}")
-		\end{lstlisting}
-		
-		\item Aceptar los cambios realizados y continuar con la corrección de otras detecciones:
-		\begin{lstlisting}[style=pythonstyle]
-			elif key == ord('c'):
-			if duplicate_entries:
-			approved_dup_ids.update(dup_ids)
-			break
-		\end{lstlisting}
-	\end{itemize}
-	
-	
-	El programa recorre automáticamente los fotogramas del video y, al detectar un nuevo ID, muestra una serie de opciones al usuario. Estos nuevos IDs se resaltan en rojo, lo que facilita su identificación como detecciones recién encontradas. Una vez que el usuario aprueba el ID, este se mantiene en verde, indicando que ha sido aprobado y no se volverá a revisar en el futuro. \ref{entr_reid}
-	
-	Este programa permite arreglar problemas graves de asignación de ids. Por ejemplo, que un jugador tenga un nuevo id durante el resto de la secuencia.
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.8\textwidth]{image/entr_reid}
-		\caption{\textbf{Programa para el entrenamiento}}
-		\label{entr_reid}
-	\end{figure}
-	
-	
-	\subsubsection{annotate\_review\_precise.py}
-	
-	El programa \texttt{annotate\_review\_precise.py} es una versión complementaria del programa anterior \texttt{annotate\_review.py}.
-	
-	El código utilizado en este programa es el siguiente:
-	\vspace{0.5cm}
-	
-	\begin{lstlisting}[style=pythonstyle]
-		import os
-		import cv2
-		import argparse
-		import tkinter as tk
-		from tkinter import simpledialog
-		from collections import Counter
-		
-		# Interactive MOT correction with manual frame control, per-frame ID modifications, approval colors, and undo
-		
-		def parse_mot_file(mot_path):
-		entries = []
-		with open(mot_path, 'r') as f:
-		for line in f:
-		if not line.strip(): continue
-		parts = line.strip().split(',')
-		entries.append({
-			'frame': int(float(parts[0])),  # frame number
-			'id':    int(float(parts[1])),  # original ID
-			'bbox':  tuple(map(float, parts[2:6])),  # bbox
-			'raw':   line.strip()  # raw line
-		})
-		return entries
-		
-		
-		def draw_annotations(img, detections,
-		new_ids, approved_new_ids,
-		duplicate_entries, approved_dup_ids,
-		raw_color_map=None, raw_index_map=None):
-		out = img.copy()
-		for det in detections:
-		x, y, w, h = map(int, det['bbox'])
-		tid = det['id']
-		raw = det['raw']
-		# determine color
-		if raw_color_map and raw in raw_color_map:
-		color = raw_color_map[raw]
-		elif tid in approved_new_ids or tid in approved_dup_ids:
-		color = (0, 255, 0)  # green approved
-		elif tid in new_ids or any(d['id'] == tid for d in duplicate_entries):
-		color = (0, 0, 255)  # red pending
-		else:
-		color = (0, 255, 0)
-		# draw rectangle
-		cv2.rectangle(out, (x, y), (x + w, y + h), color, 2)
-		# prepare label
-		label = str(tid)
-		if raw_index_map and raw in raw_index_map:
-		label += f"(i{raw_index_map[raw] + 1})"
-		# put text
-		cv2.putText(out, label, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-		return out
-		
-		
-		def get_mapped_id(frame, det,
-		id_map, raw_map,
-		frame_id_map, frame_raw_map):
-		# per-frame raw map
-		if frame in frame_raw_map and det['raw'] in frame_raw_map[frame]:
-		return frame_raw_map[frame][det['raw']]
-		# per-frame id map
-		if frame in frame_id_map and det['id'] in frame_id_map[frame]:
-		return frame_id_map[frame][det['id']]
-		# fallback global maps
-		return raw_map.get(det['raw'], id_map.get(det['id'], det['id']))
-		
-		
-		def pause_loop(by_frame, frames,
-		id_map, raw_map,
-		frame_id_map, frame_raw_map,
-		removed, frames_dir,
-		new_ids, duplicate_entries,
-		approved_new_ids, approved_dup_ids,
-		start_i):
-		i = start_i
-		orig_frame = frames[i]
-		# color palette for duplicates
-		palette = [(255, 0, 0), (255, 255, 0), (255, 0, 255), (0, 255, 255), (128, 0, 255)]
-		raw_color_map = {d['raw']: palette[idx % len(palette)] for idx, d in enumerate(duplicate_entries)}
-		raw_index_map = {d['raw']: idx for idx, d in enumerate(duplicate_entries)}
-		
-		# display duplicate info with indices
-		if duplicate_entries:
-		dup_info = ', '.join(f"i{idx+1}:{d['id']}" for idx, d in enumerate(duplicate_entries))
-		print(f"Duplicados en frame {orig_frame}: {dup_info}")
-		elif new_ids:
-		print(f"Nuevos IDs en frame {orig_frame}: {new_ids}")
-		print("Navegacion: [n]/[c]=next, [p]=prev, [u]=undo, [m]=modificar, [d]=delete, [q]=quit")
-		
-		while True:
-		f2 = frames[i]
-		dets2 = [d for d in by_frame[f2] if d['raw'] not in removed]
-		mapped2 = []
-		for d in dets2:
-		mid = get_mapped_id(f2, d, id_map, raw_map, frame_id_map, frame_raw_map)
-		mapped2.append({'bbox': d['bbox'], 'id': mid, 'raw': d['raw']})
-		img2 = cv2.imread(os.path.join(frames_dir, f"{f2:06d}.jpg"))
-		cv2.imshow('Annotations', draw_annotations(
-		img2, mapped2,
-		new_ids, approved_new_ids,
-		duplicate_entries, approved_dup_ids,
-		raw_color_map if f2 == orig_frame else None,
-		raw_index_map if f2 == orig_frame else None
-		))
-		
-		key = cv2.waitKey(0) & 0xFF
-		if key in (ord('n'), ord('c')):
-		approved_new_ids.update(new_ids)
-		approved_dup_ids.update(d['id'] for d in duplicate_entries)
-		return min(i + 1, len(frames) - 1), False
-		elif key == ord('p'):
-		return max(i - 1, 0), False
-		elif key == ord('u'):
-		return max(i - 1, 0), True
-		elif key in (ord('m'), ord('d')):
-		root = tk.Tk(); root.withdraw()
-		sel = simpledialog.askstring("Seleccionar deteccion", "'i'<numero> o ID:")
-		root.destroy()
-		if not sel: continue
-		# instance-level
-		if sel.startswith('i'):
-		try:
-		idx = int(sel[1:]) - 1
-		chosen = duplicate_entries[idx]
-		except:
-		print("Seleccion invalida"); continue
-		if key == ord('m'):
-		new_id = simpledialog.askinteger("Nuevo ID", "ID para esta instancia:")
-		if new_id is not None:
-		frame_raw_map.setdefault(orig_frame, {})[chosen['raw']] = new_id
-		print(f"Instancia raw={chosen['raw']} -> {new_id} en frame {orig_frame}")
-		else:
-		removed.add(chosen['raw'])
-		print("Instancia eliminada")
-		# global-level
-		else:
-		try:
-		orig = int(sel)
-		except:
-		print("ID invalido"); continue
-		if key == ord('m'):
-		new = simpledialog.askinteger("Nuevo ID", f"ID {orig} -> ? en frame {orig_frame}:")
-		if new is not None:
-		frame_id_map.setdefault(orig_frame, {})[orig] = new
-		print(f"ID {orig} -> {new} en frame {orig_frame}")
-		else:
-		for d in by_frame[orig_frame]:
-		cur = get_mapped_id(orig_frame, d, id_map, raw_map, frame_id_map, frame_raw_map)
-		if cur == orig:
-		removed.add(d['raw'])
-		print(f"Instancias ID {orig} eliminadas en frame {orig_frame}")
-		continue
-		elif key == ord('q'):
-		return len(frames), False
-		else:
-		continue
-	\end{lstlisting}
-	
-	Este programa introduce varias mejoras y características adicionales respecto a la versión anterior:
-	
-	\begin{itemize}
-		\item \textbf{Deshacer cambios:} La opción de deshacer (\texttt{[u]}) permite revertir los cambios realizados en el fotograma actual, añadiendo flexibilidad al proceso de corrección.
-		\item \textbf{Visualización de duplicados mejorada:} Los duplicados se visualizan con colores específicos y se puede asignar un nuevo ID o eliminarlos en función de la decisión del usuario.
-		\item \textbf{Control manual:} Se cambia la manera de recorrer los frames automáticamente a manualmente. Cada vez que se apruebe un frame se pasa al siguiente.
-	\end{itemize}
-	
-	Este enfoque permite una corrección más precisa y segura, evitando acarrear ids erróneos.
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.8\textwidth]{image/dir_reid}
-		\caption{\textbf{Estructura del dataset}}
-		\label{dir_reid}
-	\end{figure}
-	
-	\subsubsection{dicMaker\_idPlayer.py}
-	
-	El programa \texttt{dicMaker\_idPlayer.py} se utiliza para procesar un archivo MOT y generar recortes de imágenes de los jugadores en cada fotograma, organizados por ID de jugador. El archivo MOT contiene las anotaciones de las detecciones para cada fotograma, y el objetivo de este programa es generar recortes individuales de cada jugador basado en esas anotaciones.
-	
-	El proceso se realiza en dos etapas principales:
-	
-	1. \textbf{Lectura y análisis del archivo MOT:} El programa lee el archivo MOT que contiene las anotaciones de cada detección (frame, ID de jugador, coordenadas de la caja delimitadora) y organiza las detecciones por fotograma.
-	
-	2. \textbf{Recorte y guardado de las imágenes de los jugadores:} Para cada fotograma y cada jugador identificado en las detecciones, el programa recorta la región de la imagen correspondiente a las coordenadas de la caja delimitadora y guarda cada recorte en una carpeta organizada por ID de jugador.
-	
-	El código utilizado en este proceso es el siguiente:
-	\vspace{0.5cm}
-	
-	\begin{lstlisting}[style=pythonstyle]
-		import os 
-		import cv2
-		import argparse
-		from tqdm import tqdm
-		
-		def parse_mot_file(mot_file_path):
-		detections = {}
-		with open(mot_file_path, 'r') as f:
-		for line in f:
-		parts = line.strip().split(',')
-		if len(parts) < 6:
-		continue
-		
-		frame_id = int(float(parts[0]))
-		track_id = int(float(parts[1]))
-		x, y, w, h = map(float, parts[2:6])
-		
-		if frame_id not in detections:
-		detections[frame_id] = []
-		detections[frame_id].append((track_id, int(x), int(y), int(w), int(h)))
-		
-		return detections
-		
-		def crop_and_save_detections(image_folder, detections, output_folder):
-		os.makedirs(output_folder, exist_ok=True)
-		
-		for frame_id in tqdm(sorted(detections.keys()), desc="Procesando frames"):
-		img_path = os.path.join(image_folder, f"{frame_id:06d}.jpg")
-		
-		if not os.path.exists(img_path):
-		continue
-		
-		img = cv2.imread(img_path)
-		if img is None:
-		continue
-		
-		for track_id, x, y, w, h in detections[frame_id]:
-		track_folder = os.path.join(output_folder, f"player_{track_id:03d}")
-		os.makedirs(track_folder, exist_ok=True)
-		
-		x1 = max(0, x)
-		y1 = max(0, y)
-		x2 = min(img.shape[1], x + w)
-		y2 = min(img.shape[0], y + h)
-		
-		if x2 <= x1 or y2 <= y1:
-		continue
-		
-		crop = img[y1:y2, x1:x2]
-		
-		# Cambiado el nombre del archivo al formato deseado: frameId_trackId.jpg
-		output_filename = f"{frame_id:06d}_{track_id:03d}.jpg"
-		output_path = os.path.join(track_folder, output_filename)
-		cv2.imwrite(output_path, crop)
-		
-		def main():
-		parser = argparse.ArgumentParser()
-		parser.add_argument('--mot_file', required=True)
-		parser.add_argument('--image_folder', required=True)
-		parser.add_argument('--output_folder', required=True)
-		
-		args = parser.parse_args()
-		
-		print("Leyendo archivo MOT...")
-		detections = parse_mot_file(args.mot_file)
-		
-		print("\nRecortando detecciones...")
-		crop_and_save_detections(args.image_folder, detections, args.output_folder)
-		
-		print(f"\nProceso completado. Recortes en: {args.output_folder}")
-		
-		if __name__ == "__main__":
-		main()
-	\end{lstlisting}
-	\vspace{0.5cm}
-	
-	El programa realiza las siguientes funciones:
-	
-	\begin{itemize}
-		\item \textbf{Parseo del archivo MOT:} El archivo MOT se procesa para organizar las detecciones por fotograma y por jugador. Cada detección incluye las coordenadas de la caja delimitadora y el ID de jugador.
-		\item \textbf{Recorte de las imágenes:} Para cada fotograma y cada jugador detectado, se recorta la imagen según las coordenadas de la caja delimitadora. Los recortes se guardan en una estructura de carpetas donde cada jugador tiene su propia carpeta identificada por su \texttt{track\_id}.
-		\item \textbf{Uso de la barra de progreso:} Se utiliza la librería \texttt{tqdm} para mostrar una barra de progreso durante el procesamiento de los fotogramas, facilitando el seguimiento del proceso.
-	\end{itemize}
-	
-	
-	\subsubsection{dicMakerForTrainingReID.py}
-	
-	El programa \texttt{dicMakerForTrainingReID.py} se usa para reorganizar un conjunto de imágenes de jugadores en una estructura compatible con el formato Torchreid, utilizado para entrenar sistemas de Re-Identificación (ReID). El script divide las imágenes de cada jugador en tres conjuntos distintos: entrenamiento (train), consulta (query) y galería (gallery).
-	
-	El proceso se realiza en dos etapas principales:
-	
-	\textbf{Preparación de la estructura de directorios:} Crea las carpetas necesarias para los tres conjuntos de datos en el directorio de destino.
-	
-	\textbf{Distribución de imágenes:} Para cada jugador, divide sus imágenes disponibles en los tres conjuntos según las proporciones especificadas, asegurando un mínimo de imágenes por jugador.
-	
-	El código utilizado en este proceso es el siguiente:
-	\vspace{0.5cm}
-	
-	\begin{lstlisting}[style=pythonstyle]
-		import os
-		import shutil
-		import random
-		from pathlib import Path
-		
-		# Parametros
-		source_dir = Path(r"C:\Users\jismbs\Documents\gta-link\player_crops2")
-		target_dir = Path(r"C:\Users\jismbs\Documents\gta-link\player_crops2_reid")
-		
-		train_ratio = 0.7
-		query_ratio = 0.15
-		gallery_ratio = 0.15
-		
-		# suman 1.0
-		assert abs(train_ratio + query_ratio + gallery_ratio - 1.0) < 1e-6
-		
-		splits = ['train', 'query', 'gallery']
-		
-		for split in splits:
-		(target_dir / split).mkdir(parents=True, exist_ok=True)
-		
-		# Para cada jugador (identidad)
-		for player_folder in source_dir.iterdir():
-		if not player_folder.is_dir():
-		continue
-		
-		images = list(player_folder.glob("*.jpg"))
-		if len(images) < 3:
-		print(f"Saltando {player_folder.name}: no hay suficientes imagenes (minimo 3)")
-		continue
-		
-		random.shuffle(images)
-		n = len(images)
-		n_train = int(n * train_ratio)
-		n_query = int(n * query_ratio)
-		
-		split_counts = {
-			'train': images[:n_train],
-			'query': images[n_train:n_train + n_query],
-			'gallery': images[n_train + n_query:]
-		}
-		
-		for split, split_images in split_counts.items():
-		split_target_dir = target_dir / split / player_folder.name
-		split_target_dir.mkdir(parents=True, exist_ok=True)
-		for img_path in split_images:
-		shutil.copy(img_path, split_target_dir / img_path.name)
-		
-		print("Dataset reorganizado correctamente en formato Torchreid.")
-		
-	\end{lstlisting}
-	\vspace{0.5cm}
-	
-	El programa realiza las siguientes funciones:
-	
-	\begin{itemize}
-		\item \textbf{División proporcional:} Distribuye automáticamente las imágenes de cada jugador en los conjuntos train (70%), query (15%) y gallery (15%) por defecto, con validación de que la suma sea exactamente 1.0.
-		\item \textbf{Filtrado de jugadores:} Omite aquellos jugadores con menos de 3 imágenes, asegurando que cada identidad tenga suficientes muestras para ser útil en ReID.
-		\item \textbf{Estructura compatible con Torchreid:} Crea una organización de directorios estándar que puede ser directamente utilizada por frameworks como Torchreid.
-		\item \textbf{Barrido recursivo:} Detecta automáticamente todas las carpetas de jugadores en el directorio fuente y las procesa individualmente.
-	\end{itemize}
-	
-	\textbf{Consideraciones importantes:}
-	\begin{itemize}
-		\item El script mantiene la estructura original de nombres de archivos y carpetas.
-		\item La distribución de imágenes es aleatoria pero determinista (depende de la semilla aleatoria de Python).
-		\item Se recomienda tener al menos 3 imágenes por jugador para que la división sea efectiva.
-	\end{itemize}
-	
-	
-	
-	\subsection{Entrenar los modelos de ReID con torchreid}
-	
-	El entrenamiento de los modelos de reidentificación se ha organizado de forma modular, siguiendo una arquitectura clara que separa las distintas responsabilidades del proceso. A continuación se describe brevemente la función de cada componente principal implicado:
-	
-	\begin{itemize}
-		\item \textbf{datasets/sportsreid\_dataset.py}: contiene la clase del dataset personalizado utilizado para el entrenamiento. Define cómo se cargan las imágenes, las etiquetas de identidad y cómo se aplican las transformaciones necesarias.
-		
-		\item \textbf{engine/trainer.py}: implementa la lógica principal del entrenamiento, incluyendo el bucle de épocas, el cálculo de pérdidas, métricas y la evaluación del modelo.
-		
-		\item \textbf{models/model\_builder.py}: define la arquitectura del modelo de reidentificación, incluyendo la selección de backbone (por ejemplo, OSNet) y el número de clases de salida.
-		
-		\item \textbf{utils/transforms.py}: contiene las transformaciones de imagen aplicadas durante el preprocesamiento, tanto en fase de entrenamiento como de validación.
-		
-		\item \textbf{utils/visualization.py}: módulo auxiliar para visualizar imágenes junto con sus etiquetas o embeddings, útil para depuración y análisis cualitativo del modelo.
-		
-		\item \textbf{main.py}: archivo principal desde el que se lanza el entrenamiento. Se encarga de la configuración general, carga de parámetros y orquestación del resto de módulos.
-	\end{itemize}
-	
-	\subsubsection{Módulo \texttt{sportsreid\_dataset.py}}
-	
-	Este módulo define el conjunto de datos personalizado utilizado para entrenar el modelo de reidentificación en el dominio del fútbol amateur. Se construye sobre la clase base \texttt{ImageDataset} de \texttt{Torchreid}, lo que garantiza compatibilidad directa con el resto de herramientas del framework.
-	
-	\paragraph{Clase \texttt{SportsReIDDataset}}
-	
-	La clase \texttt{SportsReIDDataset} se encarga de organizar y cargar las imágenes de jugadores, almacenadas bajo una estructura de carpetas jerárquica. Dicha estructura contiene tres subdirectorios principales: \texttt{train}, \texttt{query} y \texttt{gallery}, cada uno de los cuales agrupa las imágenes correspondientes a una fase del entrenamiento o evaluación.
-	
-	\begin{itemize}
-		\item En cada subdirectorio, las imágenes están organizadas en carpetas con nombres como \texttt{player\_<pid>}, donde \texttt{<pid>} es el identificador original del jugador.
-		\item Durante la inicialización, se recorren todas las carpetas de jugadores para extraer el conjunto total de identificadores únicos (\texttt{pid\_set}).
-		\item A continuación, se construye un diccionario de reindexado \texttt{pid2label}, que asigna a cada jugador un nuevo identificador continuo, empezando desde cero. Esta reindexación es esencial para el entrenamiento, ya que el modelo espera que los identificadores sean enteros consecutivos.
-	\end{itemize}
-	
-	Cada conjunto de datos (train, query y gallery) se carga utilizando el método privado \texttt{\_load\_set}, que genera una lista de tuplas con el siguiente formato:
-	
-	\begin{center}
-		\texttt{(ruta\_imagen, pid, camid, dsetid)}
-	\end{center}
-	
-	\begin{itemize}
-		\item \texttt{pid}: identificador del jugador reindexado.
-		\item \texttt{camid}: identificador de la cámara. Se asignan valores fijos por conjunto:
-		\begin{itemize}
-			\item 0 para \texttt{query},
-			\item 1 para \texttt{gallery},
-			\item 2 para \texttt{train}.
-		\end{itemize}
-		\item \texttt{dsetid}: identificador del dataset. En este caso se fija a 0 para todas las imágenes, ya que solo se usa un único conjunto de datos.
-	\end{itemize}
-	
-	Además, si alguno de los subconjuntos se encuentra vacío, se incluye una imagen de relleno ficticia para asegurar la compatibilidad con \texttt{Torchreid}, evitando errores durante el entrenamiento.
-	
-	\paragraph{Función \texttt{register\_dataset}}
-	
-	Finalmente, se proporciona una función auxiliar \texttt{register\_dataset}, que registra el dataset personalizado bajo el nombre \texttt{sportsreid} dentro del entorno de \texttt{Torchreid}. Esto permite que se pueda referenciar directamente en los scripts de entrenamiento utilizando dicho identificador.
-	
-	
-	\subsubsection{Módulo \texttt{trainer.py}}
-	
-	El módulo \texttt{trainer.py} encapsula la lógica principal para entrenar el modelo de reidentificación utilizando las herramientas provistas por el framework \texttt{Torchreid}. Este archivo define dos funciones clave: una para preparar los datos y otra para lanzar el entrenamiento.
-	
-	\paragraph{Función \texttt{get\_datamanager}}
-	
-	Esta función construye un objeto \texttt{ImageDataManager}, que se encarga de la gestión de los datos durante todo el proceso de entrenamiento y evaluación. El \texttt{DataManager} cumple un papel fundamental al encargarse de:
-	
-	\begin{itemize}
-		\item Cargar el conjunto de datos desde el directorio especificado mediante el parámetro \texttt{dataset\_dir}.
-		\item Aplicar transformaciones de preprocesamiento como volteo aleatorio (\texttt{random\_flip}) y modificación de color (\texttt{color\_jitter}).
-		\item Normalizar las imágenes con la media y desviación estándar estándar de ImageNet.
-		\item Organizar los datos en minibatches para entrenamiento (\texttt{batch\_size\_train=32}) y evaluación (\texttt{batch\_size\_test=100}).
-	\end{itemize}
-	
-	El dataset utilizado está registrado bajo el nombre \texttt{sportsreid}, que corresponde al conjunto personalizado definido en el archivo \texttt{sportsreid\_dataset.py}. La resolución de las imágenes se fija a 256 píxeles de alto y 128 píxeles de ancho, dimensiones estándar para modelos de reidentificación.
-	
-	\paragraph{Función \texttt{train\_model}}
-	
-	Esta función recibe un objeto \texttt{DataManager} y un modelo previamente construido, y lanza el proceso completo de entrenamiento. Su funcionamiento se desglosa de la siguiente manera:
-	
-	\begin{enumerate}
-		\item Se construye un optimizador utilizando el algoritmo \texttt{Adam} con una tasa de aprendizaje de 0.0003.
-		
-		\item A continuación, se define una política de aprendizaje basada en un plan de reducción del learning rate cada 20 épocas (\texttt{stepsize=20}), utilizando el scheduler \texttt{single\_step}.
-		
-		\item Se crea un objeto \texttt{ImageSoftmaxEngine}, que implementa el motor de entrenamiento y evaluación supervisada mediante entropía cruzada con suavizado de etiquetas (\texttt{label\_smooth=True}).
-		
-		\item Finalmente, se lanza el entrenamiento mediante el método \texttt{run}, indicando:
-		\begin{itemize}
-			\item La carpeta donde se guardarán los resultados y modelos entrenados (\texttt{save\_dir='log/osnet\_sportsreid'}).
-			\item El número máximo de épocas (\texttt{max\_epoch=1} en esta versión inicial de prueba).
-			\item Frecuencia de evaluación (\texttt{eval\_freq=-1}, lo que desactiva la evaluación intermedia).
-			\item Frecuencia de impresión por consola (\texttt{print\_freq=10}).
-			\item Parámetros opcionales como \texttt{test\_only=False} y \texttt{visrank=False}, que desactivan el testeo aislado y la visualización de rankings de imágenes similares.
-		\end{itemize}
-	\end{enumerate}
-	
-	Una vez finalizado el entrenamiento, se devuelve el objeto \texttt{engine}, que contiene el modelo ya entrenado y permite realizar evaluaciones posteriores.
-	
-	\subsubsection{Módulo \texttt{model\_builder.py}}
-	
-	Este módulo está dedicado a la construcción del modelo de reidentificación que se entrenará con los datos previamente preparados. Utiliza directamente las funcionalidades del framework \texttt{Torchreid}, que proporciona implementaciones de arquitecturas avanzadas diseñadas específicamente para tareas de person re-identification.
-	
-	\paragraph{Función \texttt{build\_model}}
-	
-	La función \texttt{build\_model} construye una instancia del modelo OSNet, concretamente la variante \texttt{osnet\_x1\_0}, que ha demostrado ser especialmente efectiva en tareas de reidentificación por su capacidad de capturar información multiescala y contextos locales y globales simultáneamente.
-	
-	El modelo se construye con los siguientes parámetros:
-	
-	\begin{itemize}
-		\item \texttt{name='osnet\_x1\_0'}: se selecciona la arquitectura OSNet en su versión base (x1.0), entrenada originalmente sobre ImageNet.
-		\item \texttt{num\_classes=num\_classes}: especifica el número de clases (identidades únicas de jugadores) que debe predecir el modelo. Este valor se determina dinámicamente en función del dataset.
-		\item \texttt{loss='softmax'}: se indica que el modelo se entrenará con una función de pérdida basada en entropía cruzada estándar, compatible con clasificación supervisada.
-		\item \texttt{pretrained=True}: se carga el modelo con pesos preentrenados, lo que proporciona una base más robusta que acelera la convergencia y mejora la precisión.
-		\item \texttt{use\_gpu=True}: habilita el uso de la GPU para el entrenamiento, si está disponible.
-	\end{itemize}
-	
-	La función retorna el modelo ya configurado, listo para ser entrenado con el \texttt{engine} definido en el archivo \texttt{trainer.py}. Esta separación modular permite fácilmente cambiar la arquitectura o parámetros del modelo sin alterar el resto del pipeline.
-	
-	
-	\subsubsection{Módulo \texttt{transforms.py}}
-	
-	El módulo \texttt{transforms.py} define el conjunto de transformaciones de preprocesamiento que se aplican a las imágenes antes de ser introducidas al modelo de reidentificación. Estas transformaciones aseguran una representación coherente y normalizada de los datos de entrada, lo que facilita un entrenamiento más estable y eficiente.
-	
-	\paragraph{Función \texttt{get\_transform}}
-	
-	La función \texttt{get\_transform} retorna una secuencia de transformaciones encadenadas mediante \texttt{torchvision.transforms.Compose}. Las transformaciones aplicadas son las siguientes:
-	
-	\begin{itemize}
-		\item \texttt{T.Resize((256, 128))}: redimensiona todas las imágenes a una resolución fija de 256 píxeles de alto y 128 píxeles de ancho. Esta dimensión es estándar en tareas de reidentificación, ya que mantiene la proporción corporal y reduce el coste computacional.
-		
-		\item \texttt{T.ToTensor()}: convierte la imagen de formato \texttt{PIL} o \texttt{numpy array} a un tensor de PyTorch, con valores normalizados en el rango [0, 1].
-		
-		\item \texttt{T.Normalize(mean, std)}: aplica una normalización canal a canal utilizando la media y desviación estándar de las imágenes de ImageNet:
-		\begin{itemize}
-			\item \texttt{mean = [0.485, 0.456, 0.406]}
-			\item \texttt{std = [0.229, 0.224, 0.225]}
-		\end{itemize}
-		Esta normalización es fundamental cuando se emplean modelos preentrenados sobre ImageNet, como OSNet, ya que asegura una coherencia estadística entre los datos originales y los nuevos datos de entrada.
-	\end{itemize}
-	
-	Este conjunto de transformaciones se utiliza principalmente durante la fase de inferencia o validación, ya que no incluye modificaciones aleatorias como rotaciones o cambios de color, las cuales sí se añaden durante el entrenamiento desde el propio \texttt{ImageDataManager}.
-	
-	\subsubsection{Módulo \texttt{visualization.py}}
-	
-	El módulo \texttt{visualization.py} tiene como propósito evaluar el rendimiento del modelo de reidentificación entrenado y generar visualizaciones de los resultados obtenidos. Esto resulta especialmente útil para realizar un análisis cualitativo del comportamiento del modelo, más allá de las métricas numéricas tradicionales.
-	
-	\paragraph{Función \texttt{visualize\_results}}
-	
-	Esta función realiza los siguientes pasos secuenciales:
-	
-	\begin{enumerate}
-		\item Se carga el modelo previamente entrenado desde la ruta indicada en \texttt{model\_path}. Para ello, se instancia un modelo OSNet con un número ficticio de clases igual a 1, ya que no se requiere reentrenar el modelo. Posteriormente, se restauran los pesos entrenados mediante \texttt{load\_state\_dict}.
-		
-		\item Se prepara nuevamente el conjunto de datos mediante el \texttt{DataManager}, llamando a la función \texttt{get\_datamanager}, para asegurar que los datos de prueba estén correctamente cargados.
-		
-		\item Se realiza la extracción de características (\textit{feature extraction}) de todas las imágenes tanto del conjunto \texttt{query} como del conjunto \texttt{gallery}. Esto se hace con la función \texttt{torchreid.utils.feature\_extraction}, que retorna una matriz de distancias (\texttt{distmat}) y las listas de identidades y cámaras asociadas a cada imagen.
-		
-		\item Con la matriz de distancias y las identidades extraídas, se evalúan las métricas estándar en reidentificación:
-		\begin{itemize}
-			\item \textbf{mAP (mean Average Precision)}: evalúa la precisión media considerando el ranking completo.
-			\item \textbf{CMC (Cumulative Matching Characteristics)}: calcula la tasa de aciertos en las primeras posiciones del ranking, destacando especialmente el \texttt{top-1} y el \texttt{top-5}.
-		\end{itemize}
-		
-		\item Finalmente, se genera una visualización de los resultados mediante la función \texttt{visualize\_rank}. Esta función guarda imágenes en las que se muestran, para cada imagen de consulta, sus cinco resultados más similares en la galería. El resultado se almacena en la carpeta \texttt{visrank\_results}, facilitando una inspección visual de la calidad del ranking realizado por el modelo.
-	\end{enumerate}
-	
-	
-	\subsubsection{Módulo \texttt{main.py}}
-	
-	Actúa como el punto de entrada principal del sistema de entrenamiento, cuyo objetivo es el de coordinar la ejecución de todas las fases, desde la preparación de los datos hasta el entrenamiento y guardado del modelo final. Además, tiene otros bloques de verificación que ayudan a comprobar que el conjunto de datos ha sido correctamente cargado y formateado.
-	
-	\paragraph{Función \texttt{main}}
-	
-	La función \texttt{main} se compone de varios pasos organizados de forma secuencial:
-	
-	\begin{enumerate}
-		\item \textbf{Registro del dataset personalizado.}  
-		Se llama a la función \texttt{register\_dataset()} para registrar el conjunto \texttt{sportsreid} en el sistema de \texttt{Torchreid}. Esto permite que el dataset sea identificado por su nombre durante el proceso de entrenamiento.
-		
-		\item \textbf{Configuración de rutas.}  
-		Se define la ruta al directorio raíz del dataset, que contiene las carpetas \texttt{train}, \texttt{query} y \texttt{gallery}, y también la ruta de guardado de los resultados y modelos (\texttt{save\_dir}).
-		
-		\item \textbf{Verificación del dataset.}  
-		A modo de comprobación manual, se instancia el dataset utilizando la clase \texttt{SportsReIDDataset} y se imprimen algunos ejemplos de cada subconjunto. Esto asegura que la estructura de carpetas es correcta y que los datos han sido cargados correctamente.
-		
-		\item \textbf{Inicialización del gestor de datos.}  
-		Se crea el \texttt{ImageDataManager} llamando a la función \texttt{get\_datamanager}, lo que permite aplicar las transformaciones y gestionar los minibatches para entrenamiento y validación.
-		
-		\item \textbf{Construcción del modelo.}  
-		Se construye un modelo de ReID (p. ej. OSNet) con el número de clases igual al número de identidades únicas en el conjunto de entrenamiento (\texttt{num\_train\_pids}), utilizando la función \texttt{build\_model}.
-		
-		\item \textbf{Entrenamiento del modelo.}  
-		Se lanza el entrenamiento completo mediante la función \texttt{train\_model}, que entrena el modelo sobre el conjunto de datos preparado, utilizando las configuraciones por defecto.
-		
-		\item \textbf{Guardado del modelo.}  
-		Una vez finalizado el entrenamiento, se guarda el estado de los pesos del modelo en el archivo \texttt{osnet\_sportsreid.pth}, que puede reutilizarse posteriormente para inferencia o evaluación.
-		
-		\item \textbf{(Opcional) Evaluación final.}  
-		Aunque está comentado en esta versión, el código incluye una llamada a \texttt{engine.test()} para realizar una evaluación final automatizada del modelo una vez entrenado.
-	\end{enumerate}
-	
-	\paragraph{Bloque de ejecución condicional}
-	
-	El archivo finaliza con el típico bloque de protección:
-	
-	\begin{verbatim}
-		if __name__ == '__main__':
-		main()
-	\end{verbatim}
-	
-	Esto asegura que la función \texttt{main()} solo se ejecute si el script se ejecuta directamente, y no cuando se importe desde otro módulo.
-	
-	
-	
-	\subsection{Preparar el dataset de testeo del modelo de ReID}
-	
-	Tal como se ha mencionado anteriormente, se ha preparado una serie de datos estructurados de una forma concreta en tres particiones como son train, query y gallery. Todos los recortes de imagen pertenecen a un mismo clip de vídeo de fútbol amateur, el cual se ha procesado previamente para extraer los jugadores detectados en todos los fotogramas.
-	
-	El conjunto train ha sido usado para el proceso de entrenamiento del modelo (OSNet en este caso) mientras que las particiones correspondientes a la evaluación son las query y gallery. Cada imagen de la query representa una instancia a buscar y se compara con todas las imágenes de la gallery, siendo este conjunto la base de búsqueda. Las imágenes de ambos subconjuntos están seleccionadas de tal forma que pertenecen a las mismas identidades que aparecen en el entrenamiento pero en distintos momentos de la secuencia del vídeo o en otras condiciones visuales.
-	
-	
-	
-	
 	\subsection{Aplicar modelo de detección de objetos (YOLOX)}
 	
 	Para aplicar el modelo de detección de objetos YOLOX, se utilizó el código del repositorio \texttt{DeepEIoU}, específicamente el archivo \texttt{demo.py}, junto con una configuración personalizada definida en el archivo \texttt{yolox\_x\_ch\_sportsmot.py}. El objetivo es detectar jugadores en los fotogramas de un vídeo utilizando el modelo YOLOX.
@@ -1278,6 +550,7 @@
 	\begin{itemize}
 		\item \textbf{Clase \texttt{STrack}:}  
 		La clase \texttt{STrack} representa un objeto de seguimiento y contiene las características principales, como la predicción de la posición del objeto, la actualización de las características y la gestión de su estado utilizando un filtro de Kalman.
+		\vspace{0.5cm}
 		\begin{lstlisting}[style=pythonstyle]
 			class STrack(BaseTrack):
 			shared_kalman = KalmanFilter()
@@ -1289,6 +562,7 @@
 		
 		\item \textbf{Predicción y Actualización:}  
 		La predicción de la siguiente posición de un objeto se realiza usando el filtro de Kalman para predecir su estado y su covarianza. La función \texttt{predict()} actualiza la posición del objeto.
+		\vspace{0.5cm}
 		\begin{lstlisting}[style=pythonstyle]
 			def predict(self):
 			self.mean, self.covariance = self.kalman_filter.predict(self.mean, self.covariance)
@@ -1296,6 +570,7 @@
 		
 		\item \textbf{Activación y Re-activación:}  
 		Los objetos se activan al ser detectados por primera vez y se reactivan si han sido perdidos temporalmente. El método \texttt{activate()} inicia un nuevo seguimiento, mientras que \texttt{re\_activate()} se utiliza para volver a activar objetos previamente perdidos.
+		\vspace{0.5cm}
 		\begin{lstlisting}[style=pythonstyle]
 			def activate(self, kalman_filter, frame_id):
 			...
@@ -1305,6 +580,7 @@
 		
 		\item \textbf{Estado del Objeto:}  
 		La propiedad \texttt{tlwh} convierte la posición de los objetos en el formato de caja delimitadora y la propiedad \texttt{xywh} convierte la caja en un formato de coordenadas (centro x, centro y, ancho, altura).
+		\vspace{0.5cm}
 		\begin{lstlisting}[style=pythonstyle]
 			@property
 			def tlwh(self):
@@ -1316,6 +592,7 @@
 		
 		\item \textbf{Tracker \texttt{Deep\_EIoU}:}  
 		El tracker \texttt{Deep\_EIoU} gestiona los objetos detectados y su seguimiento a lo largo de los fotogramas. El método \texttt{update()} actualiza los objetos seguidos, gestiona las asociaciones entre objetos y detecciones, y controla la activación y reactivación de los objetos.
+		\vspace{0.5cm}
 		\begin{lstlisting}[style=pythonstyle]
 			class Deep_EIoU(object):
 			def __init__(self, args, frame_rate=30):
@@ -1323,11 +600,12 @@
 			def update(self, output_results, embedding):
 			...
 		\end{lstlisting}
-		
+		\vspace{0.5cm}
 		El método \texttt{update()} recibe las detecciones y las características de cada objeto, realiza asociaciones entre los objetos seguidos y las nuevas detecciones, y actualiza el estado de cada objeto.
 		
 		\item \textbf{Asociación de Detecciones:}  
 		La asociación de objetos se realiza utilizando una combinación de la distancia IoU (Intersection over Union) y la distancia en el espacio de características (\texttt{embedding}) de ReID. Los objetos se asocian primero con detecciones de alta puntuación y luego con detecciones de puntuación baja.
+		\vspace{0.5cm}
 		\begin{lstlisting}[style=pythonstyle]
 			ious_dists = matching.eiou_distance(strack_pool, detections, cur_expand_scale)
 			matches, u_track, u_detection = matching.linear_assignment(dists, thresh=self.args.match_thresh)
@@ -1335,6 +613,7 @@
 		
 		\item \textbf{Gestión de la Pérdida de Objetos:}  
 		Los objetos perdidos se gestionan mediante el parámetro \texttt{max\_time\_lost}, y se marcan como eliminados si no se han rastreado durante el número máximo de fotogramas permitidos.
+		\vspace{0.5cm}
 		\begin{lstlisting}[style=pythonstyle]
 			for track in self.lost_stracks:
 			if self.frame_id - track.end_frame > self.max_time_lost:
@@ -1349,6 +628,7 @@
 	\begin{itemize}
 		\item \textbf{Extracción de Características de ReID:}  
 		Se extraen características visuales de las detecciones utilizando un extractor de características preentrenado, como el modelo \texttt{osnet\_x1\_0}.
+		\vspace{0.5cm}
 		\begin{lstlisting}[style=pythonstyle]
 			extractor = FeatureExtractor(
 			model_name='osnet_x1_0',
@@ -1356,9 +636,10 @@
 			device='cpu'
 			)
 		\end{lstlisting}
-		
+		\vspace{0.5cm}
 		\item \textbf{Asignación de Características a Detecciones:}  
 		Las características extraídas se asignan a las detecciones de los jugadores, permitiendo al tracker realizar la reidentificación de los mismos a lo largo de los fotogramas.
+		\vspace{0.5cm}
 		\begin{lstlisting}[style=pythonstyle]
 			cropped_imgs = [frame[max(0,int(y1)):min(height,int(y2)),max(0,int(x1)):min(width,int(x2))] for x1,y1,x2,y2,_,_,_ in det]
 			embs = extractor(cropped_imgs)
@@ -1366,7 +647,57 @@
 		\end{lstlisting}
 	\end{itemize}
 	
+	\subsection{Extraer frames}
+	El procedimiento a seguir consiste en la extracción de los fotogramas individuales a partir del vídeo original, para así poder preparar los datos de entrada requeridos por el módulo generate\_tracklets.py del sistema GTA-LINK. Al igual que el resto de módulos, dicho módulo necesita que los frames se encuentren en formato imagen, a partir de los cuales se generarán posteriormente las trayectorias iniciales de los jugadores.
 	
+	Para conseguirlo se creó el script extract\_frames.py, el cual se dedica a extraer un video (para el caso del presente trabajo, video.mp4 ) y transformarlo en una secuencia ordenada a partir de imágenes numeradas que serán guardado en el folder img1, la cual sigue la especificación de la estructura de carpetas que se sigue en el estándar MOT Challenge necesaria para todos los modelos de detección y seguimiento que se utilizan en el flujo posterior.
+	\vspace{0.5cm}
+	\begin{lstlisting}[style=pythonstyle]
+		import os
+		import cv2
+		
+		def extract_frames(video_path, output_dir):
+		"""
+		Extrae los frames de un video y los guarda en la estructura MOT Challenge.
+		
+		Args:
+		video_path (str): Ruta al video de entrada (ej: 'video1.mp4').
+		output_dir (str): Directorio base de salida (ej: 'frames/').
+		"""
+		# Crear estructura de directorios (MOT Challenge style)
+		seq_name = os.path.splitext(os.path.basename(video_path))[0]  # 'video1' si el input es 'video1.mp4'
+		img_dir = os.path.join(output_dir, seq_name, "img1")
+		os.makedirs(img_dir, exist_ok=True)
+		
+		# Abrir video
+		cap = cv2.VideoCapture(video_path)
+		if not cap.isOpened():
+		raise ValueError(f"No se pudo abrir el video: {video_path}")
+		
+		frame_count = 0
+		
+		while True:
+		ret, frame = cap.read()
+		if not ret:
+		break
+		
+		frame_count += 1
+		frame_filename = f"{frame_count:06d}.jpg"  # Formato: 000001.jpg, 000002.jpg, ...
+		frame_path = os.path.join(img_dir, frame_filename)
+		cv2.imwrite(frame_path, frame)
+		
+		cap.release()
+		print(f"{frame_count} frames extraidos y guardados en: {img_dir}")
+		
+		if __name__ == "__main__":
+		import argparse
+		parser = argparse.ArgumentParser(description="Extrae frames de un video y los guarda en estructura MOT Challenge.")
+		parser.add_argument("--video_path", type=str, required=True, help="Ruta al video de entrada (ej: 'video1.mp4').")
+		parser.add_argument("--output_dir", type=str, default="frames", help="Directorio base de salida (ej: 'frames/').")
+		args = parser.parse_args()
+		
+		extract_frames(args.video_path, args.output_dir)
+	\end{lstlisting}
 	
 	\subsection{Aplicar GTA-LINK}
 	
@@ -1390,7 +721,7 @@
 	\end{itemize}
 	
 	El código esencial del script se muestra a continuación:
-	
+	\vspace{0.5cm}
 	\begin{lstlisting}[style=pythonstyle]
 		def main(model_path, data_path, pred_dir, tracker):
 		# Cargar extractor de caracteristicas
@@ -2046,6 +1377,870 @@
 	
 	Este script se encarga de mejorar los tracklets mediante la fusión y la división de tracklets en función de sus características y la similitud espacial. Esto mejora la precisión del seguimiento de jugadores en el vídeo.
 	
+	\subsection{Generar el output.mp4 y MOT}
+	
+	Una vez que se hace el procedimiento correspondiente tanto a la etapa de seguimiento como a la de refinamiento por medio de GTA-LINK —archivo refine\_tracklets.py— se genera un archivo MOT en un formato de texto plano (.txt) con el resultado final que contiene por fotograma las trayectorias finales de los jugadores y también las IDs asignadas. El fichero resultante es sencillamente un archivo de texto plano que no arroja una representación visual del resultado deseado.
+	
+	Para remediar esta limitación se utilizó el script visualize2.py cuya finalidad es conseguir la visualización de resultado tanto para poder validar el resultado visualmente como para obtener el resultado para su visualización. Este script puede leer como entrada el fichero MOT producido por medio de GTA-LINK y la carpeta img1 donde se encuentren guardados los fotogramas originales y produce un nuevo conjunto de imágenes donde se generan las cajas con las IDs de cada jugador. De forma que se obtiene una nueva secuencia de imágenes con los contornos del resultado final.
+	
+	Durante este proceso, la ID es rendida con un color aleatorio pero constante para poder seguir el jugador indicando el recorrido durante la reproducción del video. Para cada uno de los fotogramas de vídeo se generan las cajas y textos y se guardan con las imágenes en un directorio definido por el usuario. Llevando a completar así una representación completamente visualizada con la información que existe en el fichero MOT.
+	
+	Visualize2.py:
+	\vspace{0.5cm}
+	\begin{lstlisting}[style=pythonstyle]
+		import os
+		import cv2
+		import random
+		from tqdm import tqdm
+		
+		# Configuracion de rutas
+		
+		tracklet_file = r"C:\Users\jismbs\Documents\gta-link\DeepEIoU_SoccerNet_Split+Connect_eps0.8_minSamples10_K4_mergeDist0.7_spatial1.0\video2_mydata.txt"
+		image_folder = r"C:\Users\jismbs\Documents\gta-link\frames_trackerVideo2DeepEIoU_osnet_ImageNet_Soccernet\video2\img1"
+		output_folder = r"C:\Users\jismbs\Documents\gta-link\osnetMyData+gta_link"
+		
+		
+		os.makedirs(output_folder, exist_ok=True)
+		
+		# 1. Cargar tracklets (convertir valores decimales a enteros)
+		print("Cargando datos de tracklets...")
+		detections = {}
+		colors = {}
+		
+		with open(tracklet_file, 'r') as f:
+		for line in f:
+		parts = line.strip().split(',')
+		try:
+		# Convertir a float primero y luego a int para manejar valores como "1.0"
+		frame_id = int(float(parts[0]))
+		track_id = int(float(parts[1]))
+		x, y, w, h = map(float, parts[2:6])
+		
+		if track_id not in colors:
+		colors[track_id] = (
+		random.randint(50, 200),
+		random.randint(50, 200),
+		random.randint(50, 200)
+		)
+		
+		if frame_id not in detections:
+		detections[frame_id] = []
+		detections[frame_id].append((track_id, int(x), int(y), int(w), int(h)))
+		except (ValueError, IndexError) as e:
+		print(f"Advertencia: Error al procesar linea - {line.strip()}. Error: {e}")
+		continue
+		
+		# 2. Procesar frames
+		print("\nGenerando visualizaciones...")
+		for frame_id in tqdm(sorted(detections.keys()), desc="Procesando frames"):
+		img_path = os.path.join(image_folder, f"{frame_id:06d}.jpg")
+		if not os.path.exists(img_path):
+		continue
+		
+		img = cv2.imread(img_path)
+		
+		for track_id, x, y, w, h in detections[frame_id]:
+		color = colors[track_id]
+		
+		# Bounding box
+		cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
+		
+		# Etiqueta con ID
+		label = f"ID:{track_id}"
+		(text_width, text_height), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 1)
+		cv2.rectangle(img, (x, y - text_height - 10), (x + text_width, y), color, -1)
+		cv2.putText(img, label, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255,255,255), 1)
+		
+		cv2.imwrite(os.path.join(output_folder, f"{frame_id:06d}.jpg"), img)
+		
+		print(f"\nVisualizacion completada. Resultados en:\n{output_folder}")
+	\end{lstlisting}
+	\vspace{0.5cm}
+	Por último, a partir de las imágenes anotadas que ya aparecen generadas con visualize2.py se recurrió al script videomakerByFrame.py para hacer la reconstrucción del archivo final en formato de video. Este script va recuperando las imágenes ordenadas e irlas concatenando a un determinado frame rate constante de 30 FPS y el resultado es un archivo output.mp4que representa el resultado del seguimiento y reidentificación desde una perspectiva visual e interpretable.
+	
+	videomakerByFrame.py:
+	\vspace{0.5cm}
+	\begin{lstlisting}[style=pythonstyle]
+		import cv2
+		import os
+		from tqdm import tqdm  # Importar tqdm para la barra de progreso
+		
+		# Ruta a la carpeta con las imagenes procesadas
+		img_folder = r"C:\Users\jismbs\Documents\path\to\SoccerNet\tracking\test\tracked_output"
+		
+		# Ruta de salida para el video
+		output_video = os.path.join(img_folder, "output_video.mp4")
+		
+		# Obtener la lista de imagenes ordenadas (recorriendo subcarpetas)
+		images = []
+		for root, dirs, files in os.walk(img_folder):
+		for file in files:
+		if file.endswith(".jpg"):
+		images.append(os.path.join(root, file))
+		
+		# Verificar si se encontraron imagenes
+		if not images:
+		print("No se encontraron imagenes en la carpeta.")
+		exit()
+		
+		# Ordenar las imagenes por nombre para asegurar el orden correcto
+		images = sorted(images)
+		
+		# Leer la primera imagen para obtener las dimensiones
+		first_image = cv2.imread(images[0])
+		height, width, _ = first_image.shape
+		
+		# Configurar el video (30 FPS)
+		fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Codec para MP4
+		video = cv2.VideoWriter(output_video, fourcc, 30, (width, height))
+		
+		# Usar tqdm para mostrar la barra de carga mientras agregamos las imagenes al video
+		for img_path in tqdm(images, desc="Creando video", ncols=100):
+		frame = cv2.imread(img_path)
+		video.write(frame)
+		
+		# Liberar el video
+		video.release()
+		print(f"Video guardado en: {output_video}")
+	\end{lstlisting}
+	\vspace{0.5cm}
+	
+	\subsection{Correción de las anotaciones de output.mp4 (MOT)}
+	
+	El manejo de errores relacionados con la asignación incorrecta de IDs es un paso crucial en el proceso de reidentificación (ReID). Para resolver este problema, se utilizó un enfoque interactivo en el que se corrigen manualmente los errores de asignación de IDs en las anotaciones generadas por el modelo de ReID previamente entrenado con el dataset de SportMOT, que contiene imágenes de fútbol profesional.
+	
+	\subsubsection{annotate\_review.py}
+	
+	En primer lugar, las anotaciones de un partido de fútbol amateur fueron generadas utilizando el modelo de ReID entrenado con el dataset de SportMOT. Posteriormente, estas anotaciones fueron procesadas para corregir posibles errores de asignación de IDs. El código utilizado para este proceso interactivo es  y es el siguiente:
+	
+	\begin{verbatim}
+		import os
+		import cv2
+		import argparse
+		import tkinter as tk
+		from tkinter import simpledialog
+		from collections import Counter
+		
+		# Interactive MOT correction with flexible ID modification and distinct duplicate coloring
+		
+		def parse_mot_file(mot_path):
+		entries = []
+		with open(mot_path, 'r') as f:
+		for line in f:
+		if not line.strip(): continue
+		parts = line.strip().split(',')
+		entries.append({
+			'frame': int(float(parts[0])), 
+			'id': int(float(parts[1])), 
+			'bbox': tuple(map(float, parts[2:6])),
+			'raw': line.strip()
+		})
+		return entries
+		
+		
+		def draw_annotations(img, detections, global_highlight=None, raw_color_map=None):
+		out = img.copy()
+		global_h = set(global_highlight or [])
+		for det in detections:
+		x, y, w, h = map(int, det['bbox'])
+		tid = det['id']
+		raw = det['raw']
+		if raw_color_map and raw in raw_color_map:
+		color = raw_color_map[raw]
+		elif tid in global_h:
+		color = (0, 0, 255)
+		else:
+		color = (0, 255, 0)
+		cv2.rectangle(out, (x, y), (x + w, y + h), color, 2)
+		cv2.putText(out, str(tid), (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+		return out
+	\end{verbatim}
+	
+	Este código permite corregir las asignaciones incorrectas de IDs mediante una interfaz gráfica que permite al usuario modificar o eliminar detecciones, asignar nuevos IDs a instancias específicas, y aprobar o eliminar duplicados.
+	
+	\textbf{Interacción del usuario:} La interacción con el programa es completamente visual e intuitiva. Al ejecutar el código, el usuario puede visualizar las detecciones en cada fotograma del video y recibir la opción de:
+	
+	\begin{itemize}
+		\item Navegar entre los fotogramas (siguiente y anterior):
+		\vspace{0.5cm}
+		\begin{lstlisting}[style=pythonstyle]
+			if key == ord('n') and i < len(frames) - 1:
+			i += 1
+			elif key == ord('p') and i > 0:
+			i -= 1
+		\end{lstlisting}
+		
+		\item Modificar o eliminar instancias específicas de detecciones con IDs incorrectos:
+		\vspace{0.5cm}
+		\begin{lstlisting}[style=pythonstyle]
+			if key in (ord('m'), ord('d')):
+			root = tk.Tk(); root.withdraw()
+			prompt = "Introduzca 'i'<indice> para instancia o ID para global:"
+			sel = simpledialog.askstring("Seleccionar deteccion", prompt)
+			root.destroy()
+			if not sel: continue
+			if sel.startswith('i'):
+			try:
+			idx = int(sel[1:]) - 1
+			chosen = duplicate_entries[idx]
+			except:
+			print("Seleccion invalida")
+			continue
+			if key == ord('m'):
+			new_id = simpledialog.askinteger("Nuevo ID", "Nuevo ID para la instancia seleccionada:")
+			if new_id is not None:
+			raw_map[chosen['raw']] = new_id
+			print(f"Instancia bbox {chosen['bbox']} mapeada a {new_id}")
+			else:
+			removed.add(chosen['raw'])
+			print(f"Instancia bbox {chosen['bbox']} eliminada")
+			else:
+			try:
+			orig = int(sel)
+			except:
+			print("ID invalido.")
+			continue
+			if key == ord('m'):
+			new = simpledialog.askinteger("Nuevo ID", f"Nuevo ID para todas detecciones {orig}:")
+			if new is not None:
+			id_map[orig] = new
+			print(f"Mapeado global ID {orig} -> {new}")
+			else:
+			for d in by_frame[orig_frame]:
+			cur = raw_map.get(d['raw'], id_map.get(d['id'], d['id']))
+			if cur == orig:
+			removed.add(d['raw'])
+			print(f"Todas detecciones ID {orig} eliminadas en frame {orig_frame}")
+		\end{lstlisting}
+		
+		\item Corregir duplicados, donde se le presenta un mensaje con las IDs duplicadas detectadas en el fotograma:
+		\vspace{0.5cm}
+		\begin{lstlisting}[style=pythonstyle]
+			if duplicate_entries:
+			dup_msgs = []
+			dup_ids = []
+			for idx_det, det in enumerate(duplicate_entries, 1):
+			det_id = raw_map.get(det['raw'], id_map.get(det['id'], det['id']))
+			name = color_names[(idx_det - 1) % len(color_names)]
+			dup_msgs.append(f"{idx_det} ({name}) id {det_id}")
+			dup_ids.append(det_id)
+			print("Duplicados: " + ", ".join(dup_msgs) + f" en frame {orig_frame}")
+		\end{lstlisting}
+		
+		\item Aceptar los cambios realizados y continuar con la corrección de otras detecciones:
+		\vspace{0.5cm}
+		\begin{lstlisting}[style=pythonstyle]
+			elif key == ord('c'):
+			if duplicate_entries:
+			approved_dup_ids.update(dup_ids)
+			break
+		\end{lstlisting}
+	\end{itemize}
+	
+	
+	El programa recorre automáticamente los fotogramas del video y, al detectar un nuevo ID, muestra una serie de opciones al usuario. Estos nuevos IDs se resaltan en rojo, lo que facilita su identificación como detecciones recién encontradas. Una vez que el usuario aprueba el ID, este se mantiene en verde, indicando que ha sido aprobado y no se volverá a revisar en el futuro. \ref{entr_reid}
+	
+	Este programa permite arreglar problemas graves de asignación de ids. Por ejemplo, que un jugador tenga un nuevo id durante el resto de la secuencia.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/entr_reid}
+		\caption{\textbf{Programa para el entrenamiento}}
+		\label{entr_reid}
+	\end{figure}
+	
+	
+	\subsubsection{annotate\_review\_precise.py}
+	
+	El programa \texttt{annotate\_review\_precise.py} es una versión complementaria del programa anterior \texttt{annotate\_review.py}.
+	
+	El código utilizado en este programa es el siguiente:
+	\vspace{0.5cm}
+	
+	\begin{lstlisting}[style=pythonstyle]
+		import os
+		import cv2
+		import argparse
+		import tkinter as tk
+		from tkinter import simpledialog
+		from collections import Counter
+		
+		# Interactive MOT correction with manual frame control, per-frame ID modifications, approval colors, and undo
+		
+		def parse_mot_file(mot_path):
+		entries = []
+		with open(mot_path, 'r') as f:
+		for line in f:
+		if not line.strip(): continue
+		parts = line.strip().split(',')
+		entries.append({
+			'frame': int(float(parts[0])),  # frame number
+			'id':    int(float(parts[1])),  # original ID
+			'bbox':  tuple(map(float, parts[2:6])),  # bbox
+			'raw':   line.strip()  # raw line
+		})
+		return entries
+		
+		
+		def draw_annotations(img, detections,
+		new_ids, approved_new_ids,
+		duplicate_entries, approved_dup_ids,
+		raw_color_map=None, raw_index_map=None):
+		out = img.copy()
+		for det in detections:
+		x, y, w, h = map(int, det['bbox'])
+		tid = det['id']
+		raw = det['raw']
+		# determine color
+		if raw_color_map and raw in raw_color_map:
+		color = raw_color_map[raw]
+		elif tid in approved_new_ids or tid in approved_dup_ids:
+		color = (0, 255, 0)  # green approved
+		elif tid in new_ids or any(d['id'] == tid for d in duplicate_entries):
+		color = (0, 0, 255)  # red pending
+		else:
+		color = (0, 255, 0)
+		# draw rectangle
+		cv2.rectangle(out, (x, y), (x + w, y + h), color, 2)
+		# prepare label
+		label = str(tid)
+		if raw_index_map and raw in raw_index_map:
+		label += f"(i{raw_index_map[raw] + 1})"
+		# put text
+		cv2.putText(out, label, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+		return out
+		
+		
+		def get_mapped_id(frame, det,
+		id_map, raw_map,
+		frame_id_map, frame_raw_map):
+		# per-frame raw map
+		if frame in frame_raw_map and det['raw'] in frame_raw_map[frame]:
+		return frame_raw_map[frame][det['raw']]
+		# per-frame id map
+		if frame in frame_id_map and det['id'] in frame_id_map[frame]:
+		return frame_id_map[frame][det['id']]
+		# fallback global maps
+		return raw_map.get(det['raw'], id_map.get(det['id'], det['id']))
+		
+		
+		def pause_loop(by_frame, frames,
+		id_map, raw_map,
+		frame_id_map, frame_raw_map,
+		removed, frames_dir,
+		new_ids, duplicate_entries,
+		approved_new_ids, approved_dup_ids,
+		start_i):
+		i = start_i
+		orig_frame = frames[i]
+		# color palette for duplicates
+		palette = [(255, 0, 0), (255, 255, 0), (255, 0, 255), (0, 255, 255), (128, 0, 255)]
+		raw_color_map = {d['raw']: palette[idx % len(palette)] for idx, d in enumerate(duplicate_entries)}
+		raw_index_map = {d['raw']: idx for idx, d in enumerate(duplicate_entries)}
+		
+		# display duplicate info with indices
+		if duplicate_entries:
+		dup_info = ', '.join(f"i{idx+1}:{d['id']}" for idx, d in enumerate(duplicate_entries))
+		print(f"Duplicados en frame {orig_frame}: {dup_info}")
+		elif new_ids:
+		print(f"Nuevos IDs en frame {orig_frame}: {new_ids}")
+		print("Navegacion: [n]/[c]=next, [p]=prev, [u]=undo, [m]=modificar, [d]=delete, [q]=quit")
+		
+		while True:
+		f2 = frames[i]
+		dets2 = [d for d in by_frame[f2] if d['raw'] not in removed]
+		mapped2 = []
+		for d in dets2:
+		mid = get_mapped_id(f2, d, id_map, raw_map, frame_id_map, frame_raw_map)
+		mapped2.append({'bbox': d['bbox'], 'id': mid, 'raw': d['raw']})
+		img2 = cv2.imread(os.path.join(frames_dir, f"{f2:06d}.jpg"))
+		cv2.imshow('Annotations', draw_annotations(
+		img2, mapped2,
+		new_ids, approved_new_ids,
+		duplicate_entries, approved_dup_ids,
+		raw_color_map if f2 == orig_frame else None,
+		raw_index_map if f2 == orig_frame else None
+		))
+		
+		key = cv2.waitKey(0) & 0xFF
+		if key in (ord('n'), ord('c')):
+		approved_new_ids.update(new_ids)
+		approved_dup_ids.update(d['id'] for d in duplicate_entries)
+		return min(i + 1, len(frames) - 1), False
+		elif key == ord('p'):
+		return max(i - 1, 0), False
+		elif key == ord('u'):
+		return max(i - 1, 0), True
+		elif key in (ord('m'), ord('d')):
+		root = tk.Tk(); root.withdraw()
+		sel = simpledialog.askstring("Seleccionar deteccion", "'i'<numero> o ID:")
+		root.destroy()
+		if not sel: continue
+		# instance-level
+		if sel.startswith('i'):
+		try:
+		idx = int(sel[1:]) - 1
+		chosen = duplicate_entries[idx]
+		except:
+		print("Seleccion invalida"); continue
+		if key == ord('m'):
+		new_id = simpledialog.askinteger("Nuevo ID", "ID para esta instancia:")
+		if new_id is not None:
+		frame_raw_map.setdefault(orig_frame, {})[chosen['raw']] = new_id
+		print(f"Instancia raw={chosen['raw']} -> {new_id} en frame {orig_frame}")
+		else:
+		removed.add(chosen['raw'])
+		print("Instancia eliminada")
+		# global-level
+		else:
+		try:
+		orig = int(sel)
+		except:
+		print("ID invalido"); continue
+		if key == ord('m'):
+		new = simpledialog.askinteger("Nuevo ID", f"ID {orig} -> ? en frame {orig_frame}:")
+		if new is not None:
+		frame_id_map.setdefault(orig_frame, {})[orig] = new
+		print(f"ID {orig} -> {new} en frame {orig_frame}")
+		else:
+		for d in by_frame[orig_frame]:
+		cur = get_mapped_id(orig_frame, d, id_map, raw_map, frame_id_map, frame_raw_map)
+		if cur == orig:
+		removed.add(d['raw'])
+		print(f"Instancias ID {orig} eliminadas en frame {orig_frame}")
+		continue
+		elif key == ord('q'):
+		return len(frames), False
+		else:
+		continue
+	\end{lstlisting}
+	
+	Este programa introduce varias mejoras y características adicionales respecto a la versión anterior:
+	
+	\begin{itemize}
+		\item \textbf{Deshacer cambios:} La opción de deshacer (\texttt{[u]}) permite revertir los cambios realizados en el fotograma actual, añadiendo flexibilidad al proceso de corrección.
+		\item \textbf{Visualización de duplicados mejorada:} Los duplicados se visualizan con colores específicos y se puede asignar un nuevo ID o eliminarlos en función de la decisión del usuario.
+		\item \textbf{Control manual:} Se cambia la manera de recorrer los frames automáticamente a manualmente. Cada vez que se apruebe un frame se pasa al siguiente.
+	\end{itemize}
+	
+	Este enfoque permite una corrección más precisa y segura, evitando acarrear ids erróneos.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/dir_reid}
+		\caption{\textbf{Estructura del dataset}}
+		\label{dir_reid}
+	\end{figure}
+	
+	\subsection{Preparar el dataset de entrenamiento del modelo de ReID}
+	
+	\subsubsection{dicMaker\_idPlayer.py}
+	
+	El programa \texttt{dicMaker\_idPlayer.py} se utiliza para procesar un archivo MOT y generar recortes de imágenes de los jugadores en cada fotograma, organizados por ID de jugador. El archivo MOT contiene las anotaciones de las detecciones para cada fotograma, y el objetivo de este programa es generar recortes individuales de cada jugador basado en esas anotaciones.
+	
+	El proceso se realiza en dos etapas principales:
+	
+	1. \textbf{Lectura y análisis del archivo MOT:} El programa lee el archivo MOT que contiene las anotaciones de cada detección (frame, ID de jugador, coordenadas de la caja delimitadora) y organiza las detecciones por fotograma.
+	
+	2. \textbf{Recorte y guardado de las imágenes de los jugadores:} Para cada fotograma y cada jugador identificado en las detecciones, el programa recorta la región de la imagen correspondiente a las coordenadas de la caja delimitadora y guarda cada recorte en una carpeta organizada por ID de jugador.
+	
+	El código utilizado en este proceso es el siguiente:
+	\vspace{0.5cm}
+	
+	\begin{lstlisting}[style=pythonstyle]
+		import os 
+		import cv2
+		import argparse
+		from tqdm import tqdm
+		
+		def parse_mot_file(mot_file_path):
+		detections = {}
+		with open(mot_file_path, 'r') as f:
+		for line in f:
+		parts = line.strip().split(',')
+		if len(parts) < 6:
+		continue
+		
+		frame_id = int(float(parts[0]))
+		track_id = int(float(parts[1]))
+		x, y, w, h = map(float, parts[2:6])
+		
+		if frame_id not in detections:
+		detections[frame_id] = []
+		detections[frame_id].append((track_id, int(x), int(y), int(w), int(h)))
+		
+		return detections
+		
+		def crop_and_save_detections(image_folder, detections, output_folder):
+		os.makedirs(output_folder, exist_ok=True)
+		
+		for frame_id in tqdm(sorted(detections.keys()), desc="Procesando frames"):
+		img_path = os.path.join(image_folder, f"{frame_id:06d}.jpg")
+		
+		if not os.path.exists(img_path):
+		continue
+		
+		img = cv2.imread(img_path)
+		if img is None:
+		continue
+		
+		for track_id, x, y, w, h in detections[frame_id]:
+		track_folder = os.path.join(output_folder, f"player_{track_id:03d}")
+		os.makedirs(track_folder, exist_ok=True)
+		
+		x1 = max(0, x)
+		y1 = max(0, y)
+		x2 = min(img.shape[1], x + w)
+		y2 = min(img.shape[0], y + h)
+		
+		if x2 <= x1 or y2 <= y1:
+		continue
+		
+		crop = img[y1:y2, x1:x2]
+		
+		# Cambiado el nombre del archivo al formato deseado: frameId_trackId.jpg
+		output_filename = f"{frame_id:06d}_{track_id:03d}.jpg"
+		output_path = os.path.join(track_folder, output_filename)
+		cv2.imwrite(output_path, crop)
+		
+		def main():
+		parser = argparse.ArgumentParser()
+		parser.add_argument('--mot_file', required=True)
+		parser.add_argument('--image_folder', required=True)
+		parser.add_argument('--output_folder', required=True)
+		
+		args = parser.parse_args()
+		
+		print("Leyendo archivo MOT...")
+		detections = parse_mot_file(args.mot_file)
+		
+		print("\nRecortando detecciones...")
+		crop_and_save_detections(args.image_folder, detections, args.output_folder)
+		
+		print(f"\nProceso completado. Recortes en: {args.output_folder}")
+		
+		if __name__ == "__main__":
+		main()
+	\end{lstlisting}
+	\vspace{0.5cm}
+	
+	El programa realiza las siguientes funciones:
+	
+	\begin{itemize}
+		\item \textbf{Parseo del archivo MOT:} El archivo MOT se procesa para organizar las detecciones por fotograma y por jugador. Cada detección incluye las coordenadas de la caja delimitadora y el ID de jugador.
+		\item \textbf{Recorte de las imágenes:} Para cada fotograma y cada jugador detectado, se recorta la imagen según las coordenadas de la caja delimitadora. Los recortes se guardan en una estructura de carpetas donde cada jugador tiene su propia carpeta identificada por su \texttt{track\_id}.
+		\item \textbf{Uso de la barra de progreso:} Se utiliza la librería \texttt{tqdm} para mostrar una barra de progreso durante el procesamiento de los fotogramas, facilitando el seguimiento del proceso.
+	\end{itemize}
+	
+	
+	\subsubsection{dicMakerForTrainingReID.py}
+	
+	El programa \texttt{dicMakerForTrainingReID.py} se usa para reorganizar un conjunto de imágenes de jugadores en una estructura compatible con el formato Torchreid, utilizado para entrenar sistemas de Re-Identificación (ReID). El script divide las imágenes de cada jugador en tres conjuntos distintos: entrenamiento (train), consulta (query) y galería (gallery).
+	
+	El proceso se realiza en dos etapas principales:
+	
+	\textbf{Preparación de la estructura de directorios:} Crea las carpetas necesarias para los tres conjuntos de datos en el directorio de destino.
+	
+	\textbf{Distribución de imágenes:} Para cada jugador, divide sus imágenes disponibles en los tres conjuntos según las proporciones especificadas, asegurando un mínimo de imágenes por jugador.
+	
+	El código utilizado en este proceso es el siguiente:
+	\vspace{0.5cm}
+	
+	\begin{lstlisting}[style=pythonstyle]
+		import os
+		import shutil
+		import random
+		from pathlib import Path
+		
+		# Parametros
+		source_dir = Path(r"C:\Users\jismbs\Documents\gta-link\player_crops2")
+		target_dir = Path(r"C:\Users\jismbs\Documents\gta-link\player_crops2_reid")
+		
+		train_ratio = 0.7
+		query_ratio = 0.15
+		gallery_ratio = 0.15
+		
+		# suman 1.0
+		assert abs(train_ratio + query_ratio + gallery_ratio - 1.0) < 1e-6
+		
+		splits = ['train', 'query', 'gallery']
+		
+		for split in splits:
+		(target_dir / split).mkdir(parents=True, exist_ok=True)
+		
+		# Para cada jugador (identidad)
+		for player_folder in source_dir.iterdir():
+		if not player_folder.is_dir():
+		continue
+		
+		images = list(player_folder.glob("*.jpg"))
+		if len(images) < 3:
+		print(f"Saltando {player_folder.name}: no hay suficientes imagenes (minimo 3)")
+		continue
+		
+		random.shuffle(images)
+		n = len(images)
+		n_train = int(n * train_ratio)
+		n_query = int(n * query_ratio)
+		
+		split_counts = {
+			'train': images[:n_train],
+			'query': images[n_train:n_train + n_query],
+			'gallery': images[n_train + n_query:]
+		}
+		
+		for split, split_images in split_counts.items():
+		split_target_dir = target_dir / split / player_folder.name
+		split_target_dir.mkdir(parents=True, exist_ok=True)
+		for img_path in split_images:
+		shutil.copy(img_path, split_target_dir / img_path.name)
+		
+		print("Dataset reorganizado correctamente en formato Torchreid.")
+		
+	\end{lstlisting}
+	\vspace{0.5cm}
+	
+	El programa realiza las siguientes funciones:
+	
+	\begin{itemize}
+		\item \textbf{División proporcional:} Distribuye automáticamente las imágenes de cada jugador en los conjuntos train (70%), query (15%) y gallery (15%) por defecto, con validación de que la suma sea exactamente 1.0.
+		\item \textbf{Filtrado de jugadores:} Omite aquellos jugadores con menos de 3 imágenes, asegurando que cada identidad tenga suficientes muestras para ser útil en ReID.
+		\item \textbf{Estructura compatible con Torchreid:} Crea una organización de directorios estándar que puede ser directamente utilizada por frameworks como Torchreid.
+		\item \textbf{Barrido recursivo:} Detecta automáticamente todas las carpetas de jugadores en el directorio fuente y las procesa individualmente.
+	\end{itemize}
+	
+	\textbf{Consideraciones importantes:}
+	\begin{itemize}
+		\item El script mantiene la estructura original de nombres de archivos y carpetas.
+		\item La distribución de imágenes es aleatoria pero determinista (depende de la semilla aleatoria de Python).
+		\item Se recomienda tener al menos 3 imágenes por jugador para que la división sea efectiva.
+	\end{itemize}
+	
+	
+	
+	\subsection{Entrenar los modelos de ReID con torchreid}
+	
+	El entrenamiento de los modelos de reidentificación se ha organizado de forma modular, siguiendo una arquitectura clara que separa las distintas responsabilidades del proceso. A continuación se describe brevemente la función de cada componente principal implicado:
+	
+	\begin{itemize}
+		\item \textbf{datasets/sportsreid\_dataset.py}: contiene la clase del dataset personalizado utilizado para el entrenamiento. Define cómo se cargan las imágenes, las etiquetas de identidad y cómo se aplican las transformaciones necesarias.
+		
+		\item \textbf{engine/trainer.py}: implementa la lógica principal del entrenamiento, incluyendo el bucle de épocas, el cálculo de pérdidas, métricas y la evaluación del modelo.
+		
+		\item \textbf{models/model\_builder.py}: define la arquitectura del modelo de reidentificación, incluyendo la selección de backbone (por ejemplo, OSNet) y el número de clases de salida.
+		
+		\item \textbf{utils/transforms.py}: contiene las transformaciones de imagen aplicadas durante el preprocesamiento, tanto en fase de entrenamiento como de validación.
+		
+		\item \textbf{utils/visualization.py}: módulo auxiliar para visualizar imágenes junto con sus etiquetas o embeddings, útil para depuración y análisis cualitativo del modelo.
+		
+		\item \textbf{main.py}: archivo principal desde el que se lanza el entrenamiento. Se encarga de la configuración general, carga de parámetros y orquestación del resto de módulos.
+	\end{itemize}
+	
+	\subsubsection{Módulo \texttt{sportsreid\_dataset.py}}
+	
+	Este módulo define el conjunto de datos personalizado utilizado para entrenar el modelo de reidentificación en el dominio del fútbol amateur. Se construye sobre la clase base \texttt{ImageDataset} de \texttt{Torchreid}, lo que garantiza compatibilidad directa con el resto de herramientas del framework.
+	
+	\paragraph{Clase \texttt{SportsReIDDataset}}
+	
+	La clase \texttt{SportsReIDDataset} se encarga de organizar y cargar las imágenes de jugadores, almacenadas bajo una estructura de carpetas jerárquica. Dicha estructura contiene tres subdirectorios principales: \texttt{train}, \texttt{query} y \texttt{gallery}, cada uno de los cuales agrupa las imágenes correspondientes a una fase del entrenamiento o evaluación.
+	
+	\begin{itemize}
+		\item En cada subdirectorio, las imágenes están organizadas en carpetas con nombres como \texttt{player\_<pid>}, donde \texttt{<pid>} es el identificador original del jugador.
+		\item Durante la inicialización, se recorren todas las carpetas de jugadores para extraer el conjunto total de identificadores únicos (\texttt{pid\_set}).
+		\item A continuación, se construye un diccionario de reindexado \texttt{pid2label}, que asigna a cada jugador un nuevo identificador continuo, empezando desde cero. Esta reindexación es esencial para el entrenamiento, ya que el modelo espera que los identificadores sean enteros consecutivos.
+	\end{itemize}
+	
+	Cada conjunto de datos (train, query y gallery) se carga utilizando el método privado \texttt{\_load\_set}, que genera una lista de tuplas con el siguiente formato:
+	
+	\begin{center}
+		\texttt{(ruta\_imagen, pid, camid, dsetid)}
+	\end{center}
+	
+	\begin{itemize}
+		\item \texttt{pid}: identificador del jugador reindexado.
+		\item \texttt{camid}: identificador de la cámara. Se asignan valores fijos por conjunto:
+		\begin{itemize}
+			\item 0 para \texttt{query},
+			\item 1 para \texttt{gallery},
+			\item 2 para \texttt{train}.
+		\end{itemize}
+		\item \texttt{dsetid}: identificador del dataset. En este caso se fija a 0 para todas las imágenes, ya que solo se usa un único conjunto de datos.
+	\end{itemize}
+	
+	Además, si alguno de los subconjuntos se encuentra vacío, se incluye una imagen de relleno ficticia para asegurar la compatibilidad con \texttt{Torchreid}, evitando errores durante el entrenamiento.
+	
+	\paragraph{Función \texttt{register\_dataset}}
+	
+	Finalmente, se proporciona una función auxiliar \texttt{register\_dataset}, que registra el dataset personalizado bajo el nombre \texttt{sportsreid} dentro del entorno de \texttt{Torchreid}. Esto permite que se pueda referenciar directamente en los scripts de entrenamiento utilizando dicho identificador.
+	
+	
+	\subsubsection{Módulo \texttt{trainer.py}}
+	
+	El módulo \texttt{trainer.py} encapsula la lógica principal para entrenar el modelo de reidentificación utilizando las herramientas provistas por el framework \texttt{Torchreid}. Este archivo define dos funciones clave: una para preparar los datos y otra para lanzar el entrenamiento.
+	
+	\paragraph{Función \texttt{get\_datamanager}}
+	
+	Esta función construye un objeto \texttt{ImageDataManager}, que se encarga de la gestión de los datos durante todo el proceso de entrenamiento y evaluación. El \texttt{DataManager} cumple un papel fundamental al encargarse de:
+	
+	\begin{itemize}
+		\item Cargar el conjunto de datos desde el directorio especificado mediante el parámetro \texttt{dataset\_dir}.
+		\item Aplicar transformaciones de preprocesamiento como volteo aleatorio (\texttt{random\_flip}) y modificación de color (\texttt{color\_jitter}).
+		\item Normalizar las imágenes con la media y desviación estándar estándar de ImageNet.
+		\item Organizar los datos en minibatches para entrenamiento (\texttt{batch\_size\_train=32}) y evaluación (\texttt{batch\_size\_test=100}).
+	\end{itemize}
+	
+	El dataset utilizado está registrado bajo el nombre \texttt{sportsreid}, que corresponde al conjunto personalizado definido en el archivo \texttt{sportsreid\_dataset.py}. La resolución de las imágenes se fija a 256 píxeles de alto y 128 píxeles de ancho, dimensiones estándar para modelos de reidentificación.
+	
+	\paragraph{Función \texttt{train\_model}}
+	
+	Esta función recibe un objeto \texttt{DataManager} y un modelo previamente construido, y lanza el proceso completo de entrenamiento. Su funcionamiento se desglosa de la siguiente manera:
+	
+	\begin{enumerate}
+		\item Se construye un optimizador utilizando el algoritmo \texttt{Adam} con una tasa de aprendizaje de 0.0003.
+		
+		\item A continuación, se define una política de aprendizaje basada en un plan de reducción del learning rate cada 20 épocas (\texttt{stepsize=20}), utilizando el scheduler \texttt{single\_step}.
+		
+		\item Se crea un objeto \texttt{ImageSoftmaxEngine}, que implementa el motor de entrenamiento y evaluación supervisada mediante entropía cruzada con suavizado de etiquetas (\texttt{label\_smooth=True}).
+		
+		\item Finalmente, se lanza el entrenamiento mediante el método \texttt{run}, indicando:
+		\begin{itemize}
+			\item La carpeta donde se guardarán los resultados y modelos entrenados (\texttt{save\_dir='log/osnet\_sportsreid'}).
+			\item El número máximo de épocas (\texttt{max\_epoch=1} en esta versión inicial de prueba).
+			\item Frecuencia de evaluación (\texttt{eval\_freq=-1}, lo que desactiva la evaluación intermedia).
+			\item Frecuencia de impresión por consola (\texttt{print\_freq=10}).
+			\item Parámetros opcionales como \texttt{test\_only=False} y \texttt{visrank=False}, que desactivan el testeo aislado y la visualización de rankings de imágenes similares.
+		\end{itemize}
+	\end{enumerate}
+	
+	Una vez finalizado el entrenamiento, se devuelve el objeto \texttt{engine}, que contiene el modelo ya entrenado y permite realizar evaluaciones posteriores.
+	
+	\subsubsection{Módulo \texttt{model\_builder.py}}
+	
+	Este módulo está dedicado a la construcción del modelo de reidentificación que se entrenará con los datos previamente preparados. Utiliza directamente las funcionalidades del framework \texttt{Torchreid}, que proporciona implementaciones de arquitecturas avanzadas diseñadas específicamente para tareas de person re-identification.
+	
+	\paragraph{Función \texttt{build\_model}}
+	
+	La función \texttt{build\_model} construye una instancia del modelo OSNet, concretamente la variante \texttt{osnet\_x1\_0}, que ha demostrado ser especialmente efectiva en tareas de reidentificación por su capacidad de capturar información multiescala y contextos locales y globales simultáneamente.
+	
+	El modelo se construye con los siguientes parámetros:
+	
+	\begin{itemize}
+		\item \texttt{name='osnet\_x1\_0'}: se selecciona la arquitectura OSNet en su versión base (x1.0), entrenada originalmente sobre ImageNet.
+		\item \texttt{num\_classes=num\_classes}: especifica el número de clases (identidades únicas de jugadores) que debe predecir el modelo. Este valor se determina dinámicamente en función del dataset.
+		\item \texttt{loss='softmax'}: se indica que el modelo se entrenará con una función de pérdida basada en entropía cruzada estándar, compatible con clasificación supervisada.
+		\item \texttt{pretrained=True}: se carga el modelo con pesos preentrenados, lo que proporciona una base más robusta que acelera la convergencia y mejora la precisión.
+		\item \texttt{use\_gpu=True}: habilita el uso de la GPU para el entrenamiento, si está disponible.
+	\end{itemize}
+	
+	La función retorna el modelo ya configurado, listo para ser entrenado con el \texttt{engine} definido en el archivo \texttt{trainer.py}. Esta separación modular permite fácilmente cambiar la arquitectura o parámetros del modelo sin alterar el resto del pipeline.
+	
+	
+	\subsubsection{Módulo \texttt{transforms.py}}
+	
+	El módulo \texttt{transforms.py} define el conjunto de transformaciones de preprocesamiento que se aplican a las imágenes antes de ser introducidas al modelo de reidentificación. Estas transformaciones aseguran una representación coherente y normalizada de los datos de entrada, lo que facilita un entrenamiento más estable y eficiente.
+	
+	\paragraph{Función \texttt{get\_transform}}
+	
+	La función \texttt{get\_transform} retorna una secuencia de transformaciones encadenadas mediante \texttt{torchvision.transforms.Compose}. Las transformaciones aplicadas son las siguientes:
+	
+	\begin{itemize}
+		\item \texttt{T.Resize((256, 128))}: redimensiona todas las imágenes a una resolución fija de 256 píxeles de alto y 128 píxeles de ancho. Esta dimensión es estándar en tareas de reidentificación, ya que mantiene la proporción corporal y reduce el coste computacional.
+		
+		\item \texttt{T.ToTensor()}: convierte la imagen de formato \texttt{PIL} o \texttt{numpy array} a un tensor de PyTorch, con valores normalizados en el rango [0, 1].
+		
+		\item \texttt{T.Normalize(mean, std)}: aplica una normalización canal a canal utilizando la media y desviación estándar de las imágenes de ImageNet:
+		\begin{itemize}
+			\item \texttt{mean = [0.485, 0.456, 0.406]}
+			\item \texttt{std = [0.229, 0.224, 0.225]}
+		\end{itemize}
+		Esta normalización es fundamental cuando se emplean modelos preentrenados sobre ImageNet, como OSNet, ya que asegura una coherencia estadística entre los datos originales y los nuevos datos de entrada.
+	\end{itemize}
+	
+	Este conjunto de transformaciones se utiliza principalmente durante la fase de inferencia o validación, ya que no incluye modificaciones aleatorias como rotaciones o cambios de color, las cuales sí se añaden durante el entrenamiento desde el propio \texttt{ImageDataManager}.
+	
+	\subsubsection{Módulo \texttt{visualization.py}}
+	
+	El módulo \texttt{visualization.py} tiene como propósito evaluar el rendimiento del modelo de reidentificación entrenado y generar visualizaciones de los resultados obtenidos. Esto resulta especialmente útil para realizar un análisis cualitativo del comportamiento del modelo, más allá de las métricas numéricas tradicionales.
+	
+	\paragraph{Función \texttt{visualize\_results}}
+	
+	Esta función realiza los siguientes pasos secuenciales:
+	
+	\begin{enumerate}
+		\item Se carga el modelo previamente entrenado desde la ruta indicada en \texttt{model\_path}. Para ello, se instancia un modelo OSNet con un número ficticio de clases igual a 1, ya que no se requiere reentrenar el modelo. Posteriormente, se restauran los pesos entrenados mediante \texttt{load\_state\_dict}.
+		
+		\item Se prepara nuevamente el conjunto de datos mediante el \texttt{DataManager}, llamando a la función \texttt{get\_datamanager}, para asegurar que los datos de prueba estén correctamente cargados.
+		
+		\item Se realiza la extracción de características (\textit{feature extraction}) de todas las imágenes tanto del conjunto \texttt{query} como del conjunto \texttt{gallery}. Esto se hace con la función \texttt{torchreid.utils.feature\_extraction}, que retorna una matriz de distancias (\texttt{distmat}) y las listas de identidades y cámaras asociadas a cada imagen.
+		
+		\item Con la matriz de distancias y las identidades extraídas, se evalúan las métricas estándar en reidentificación:
+		\begin{itemize}
+			\item \textbf{mAP (mean Average Precision)}: evalúa la precisión media considerando el ranking completo.
+			\item \textbf{CMC (Cumulative Matching Characteristics)}: calcula la tasa de aciertos en las primeras posiciones del ranking, destacando especialmente el \texttt{top-1} y el \texttt{top-5}.
+		\end{itemize}
+		
+		\item Finalmente, se genera una visualización de los resultados mediante la función \texttt{visualize\_rank}. Esta función guarda imágenes en las que se muestran, para cada imagen de consulta, sus cinco resultados más similares en la galería. El resultado se almacena en la carpeta \texttt{visrank\_results}, facilitando una inspección visual de la calidad del ranking realizado por el modelo.
+	\end{enumerate}
+	
+	
+	\subsubsection{Módulo \texttt{main.py}}
+	
+	Actúa como el punto de entrada principal del sistema de entrenamiento, cuyo objetivo es el de coordinar la ejecución de todas las fases, desde la preparación de los datos hasta el entrenamiento y guardado del modelo final. Además, tiene otros bloques de verificación que ayudan a comprobar que el conjunto de datos ha sido correctamente cargado y formateado.
+	
+	\paragraph{Función \texttt{main}}
+	
+	La función \texttt{main} se compone de varios pasos organizados de forma secuencial:
+	
+	\begin{enumerate}
+		\item \textbf{Registro del dataset personalizado.}  
+		Se llama a la función \texttt{register\_dataset()} para registrar el conjunto \texttt{sportsreid} en el sistema de \texttt{Torchreid}. Esto permite que el dataset sea identificado por su nombre durante el proceso de entrenamiento.
+		
+		\item \textbf{Configuración de rutas.}  
+		Se define la ruta al directorio raíz del dataset, que contiene las carpetas \texttt{train}, \texttt{query} y \texttt{gallery}, y también la ruta de guardado de los resultados y modelos (\texttt{save\_dir}).
+		
+		\item \textbf{Verificación del dataset.}  
+		A modo de comprobación manual, se instancia el dataset utilizando la clase \texttt{SportsReIDDataset} y se imprimen algunos ejemplos de cada subconjunto. Esto asegura que la estructura de carpetas es correcta y que los datos han sido cargados correctamente.
+		
+		\item \textbf{Inicialización del gestor de datos.}  
+		Se crea el \texttt{ImageDataManager} llamando a la función \texttt{get\_datamanager}, lo que permite aplicar las transformaciones y gestionar los minibatches para entrenamiento y validación.
+		
+		\item \textbf{Construcción del modelo.}  
+		Se construye un modelo de ReID (p. ej. OSNet) con el número de clases igual al número de identidades únicas en el conjunto de entrenamiento (\texttt{num\_train\_pids}), utilizando la función \texttt{build\_model}.
+		
+		\item \textbf{Entrenamiento del modelo.}  
+		Se lanza el entrenamiento completo mediante la función \texttt{train\_model}, que entrena el modelo sobre el conjunto de datos preparado, utilizando las configuraciones por defecto.
+		
+		\item \textbf{Guardado del modelo.}  
+		Una vez finalizado el entrenamiento, se guarda el estado de los pesos del modelo en el archivo \texttt{osnet\_sportsreid.pth}, que puede reutilizarse posteriormente para inferencia o evaluación.
+		
+		\item \textbf{(Opcional) Evaluación final.}  
+		Aunque está comentado en esta versión, el código incluye una llamada a \texttt{engine.test()} para realizar una evaluación final automatizada del modelo una vez entrenado.
+	\end{enumerate}
+	
+	\paragraph{Bloque de ejecución condicional}
+	
+	El archivo finaliza con el típico bloque de protección:
+	
+	\begin{verbatim}
+		if __name__ == '__main__':
+		main()
+	\end{verbatim}
+	
+	Esto asegura que la función \texttt{main()} solo se ejecute si el script se ejecuta directamente, y no cuando se importe desde otro módulo.
+	
+	
+	
+	\subsection{Preparar el dataset de testeo del modelo de ReID}
+	
+	Tal como se ha mencionado anteriormente, se ha preparado una serie de datos estructurados de una forma concreta en tres particiones como son train, query y gallery. Todos los recortes de imagen pertenecen a un mismo clip de vídeo de fútbol amateur, el cual se ha procesado previamente para extraer los jugadores detectados en todos los fotogramas.
+	
+	El conjunto train ha sido usado para el proceso de entrenamiento del modelo (OSNet en este caso) mientras que las particiones correspondientes a la evaluación son las query y gallery. Cada imagen de la query representa una instancia a buscar y se compara con todas las imágenes de la gallery, siendo este conjunto la base de búsqueda. Las imágenes de ambos subconjuntos están seleccionadas de tal forma que pertenecen a las mismas identidades que aparecen en el entrenamiento pero en distintos momentos de la secuencia del vídeo o en otras condiciones visuales.
+	
+	
+	
+	
+	
+	
 	
 	
 	\section{Resultados}
@@ -2106,7 +2301,7 @@
 		\item $AP_i$ es la \textit{average precision} para la query $i$.
 	\end{itemize}
 	
- 	\subsection{Método de evaluación para YOLOv10} \cite{7410490}
+ 	\subsection{Método de evaluación de re-identificación para YOLOv10} \cite{7410490}
  	
  	En contraste con los modelos que tienen un propósito explícito en la tarea de reidentificación de personas (ReID), como podría ser el caso del OSNet, los modelos de la familia YOLO, de los que se hace eco el mencionado modelo YOLOv10 en este trabajo, no tienen una finalidad explícita de extraer embeddings de la identidad visual de una persona, sino que se limitan a la detección de objetos en una imagen o en un vídeo, devolviendo coordenadas espaciales de las detecciones y puntuaciones de confianza y, en algunas implementaciones, los identificadores temporales que permite hacer seguimiento de la trayectoria de las detecciones, pero no tienen la capacidad de generar una descripción profunda y discriminativa de la apariencia de los objetos que detectan, de forma que tampoco se pueden aplicar para ReID.
  	
@@ -2115,7 +2310,7 @@
  	Estos vectores, a pesar de ser muy básicos y no tener capacidad semántica alguna, permiten la aplicación de métricas clásicas de evaluación en ReID como son el Rank-k y el mean Average Precision (mAP) mediante el cálculo de distancias entre embeddings; de esta forma, por un lado, se estima qué tipo de información útil ofrece YOLOv10 en términos de identidad visual y, por otro lado, se establece una línea base (baseline) contra la cual compararemos los resultados obtenidos con modelos que sí son especialistas en ReID, como OSNet.
  	
  	
- 	\subsubsection{Ejemplo de evaluación de Re-Identification para YOLO}
+ 	\subsubsection{Ejemplo de evaluación de re-identificación para YOLO}
  	
  	Supongamos que ya tenemos dos ficheros de entrada:
  	
