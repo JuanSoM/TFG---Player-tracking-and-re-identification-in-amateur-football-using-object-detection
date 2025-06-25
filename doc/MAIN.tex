@@ -424,7 +424,11 @@
 	
 	"https://paperswithcode.com/task/person-re-identification"
 	
-	La Re-identificación de Personas es una tarea de visión por computadora cuyo objetivo es asociar la identidad de una persona a través de diferentes cámaras o ubicaciones en una secuencia de vídeo o imágenes. Implica detectar y seguir a una persona y luego utilizar características como apariencia, forma del cuerpo y ropa para asociar su identidad en diferentes fotogramas. El objetivo es asociar a la misma persona en múltiples vistas de cámara no superpuestas de manera robusta y eficiente. 
+	La Re-identificación de Personas es una tarea de visión por computadora cuyo objetivo es asociar la identidad de una persona a través de diferentes cámaras o ubicaciones en una secuencia de vídeo o imágenes. Esto lo hacemos mediante modelos de ReID. 
+	
+	Los modelos de reidentificación de personas (ReID), tal y como OSNet o ResNet, están orientados a transformar las imágenes de las personas en vectores numéricos, generalmente conocidos como \textit{embeddings} que resumen visualmente el aspecto de cada uno de los bebés. Para ello, comienzan por la imagen de entrada, que normalmente tiene 3 canales (RGB: rojo, verde y azul). Con la red convolucional, esta imagen es tratada por varios filtros que producen canales intermedios de activación. Dichos canales pueden ir desde docenas de ellos hasta miles de ellas, y entonces dejan de representar colores básicos y empiezan a representar patrones visuales más complejos: texturas de la ropa, formas del cuerpo, tipo de vestimenta o incluso composiciones más estrictas de rasgos visuales. Cada canal puede ser entendido como un detector especializado en la obtención de cierta característica, y en conjunto ellos forman un mapa de activación tridimensional. Al final de la red, dichos mapas son reducidos por pooling global y son luego aplanados para las embeddings finales, que son un vector de gran dimensión (ejemplo 512 números), donde cada número codifica una sección abstracta del aspecto visual del jugador. Este vector no representa un ID explícito sino una posición en un espacio métrico, donde las personas visualmente similares quedan próximas entre sí.
+	
+	Para evaluar la similitud de dos imágenes de dos jugadores, el modelo computa sus embeddings usando una métrica de similitud, de las cuales la \textit{distancia del coseno} (cosine distance) es una de las más utilizadas. Ésta mide no los valores absolutos de los vectores, sino más bien cómo de alineadas se encuentran en el espacio. Si dos vectores se encuentran en direcciones muy similares, el coseno del ángulo entre ellos se aproxima a 1 y en consecuencia la distancia coseno (definida como $1 - \cos(\theta)$), será muy cercana a 0, lo cual indicará una gran similitud. Sin embargo, si los vectores se encuentran desalineados, la distancia aumenta. En definitiva, el modelo de ReID no identifica a los jugadores, sino que aprende a colocar sus embeddings logrando que las imágenes del mismo jugador se encuentren próximas unas de otras en el espacio vectorial, mientras que las imágenes de los distintos jugadores, lejos.
 	
 	\begin{figure}[H]
 		\centering
@@ -436,11 +440,9 @@
 	
 	\section{Propuesta}
 	
-	El flujo de trabajo propuesto tiene como objetivo optimizar el análisis de vídeos deportivos mediante un proceso de detección, seguimiento y reidentificación de jugadores, utilizando técnicas avanzadas de visión por computadora. El propósito es automatizar y mejorar la precisión en la identificación de jugadores a lo largo del vídeo, proporcionando un sistema que permita analizar el comportamiento de cada jugador durante el transcurso del partido.
+	El flujo de trabajo que se propone, tiene como fin evaluar y comparar modelos de reidentificación (ReID) en el contexto del análisis deportivo, mediante una secuencia de procesamiento de vídeo que engloba detección, tracking y reidentificación de los jugadores. El flujo de trabajo empieza, por la aplicación de modelos de detección de objetos (bajo YOLOv10 o YOLOX), la obtención de las etiquetas con los modelos de ReID y el algoritmo de asociación GTA-LINK, hasta la obtención de un vídeo con las identidades de los jugadores y un fichero MOT con las trayectorias de los jugadores.
 	
-	El resultado esperado de este flujo de trabajo es un archivo etiquetado que permita identificar a cada jugador con un seguimiento consistente a lo largo de las secuencias del video que utilizamos como input, lo que se traduce en un análisis más eficaz y exhaustivo. Este sistema facilitaría la recopilación de datos clave sobre el rendimiento individual de los jugadores, como su posición, movimientos y comportamientos durante el partido, ayudando a cerrar la brecha entre el análisis del fútbol profesional y el amateur.
-	
-	Al final del proceso, se espera obtener una salida en formato de vídeo con los jugadores anotados en el mismo y otra en formato MOT que contenga las trayectorias y las identificaciones de los jugadores, lo cual puede ser utilizado para estudios adicionales, análisis tácticos y optimización del rendimiento. Este flujo de trabajo proporciona la base para un sistema más completo y adaptable, capaz de integrarse con otras herramientas y métodos de análisis deportivos.
+	Al extraer esta anotación, tienen que ser los usuarios los que las modifiquen mediante un procedimiento manual, obteniendo un dataset (OIR) para entrenar y evaluar nuevos modelos de ReID en condiciones controladas. La evaluación se efectúa utilizando parámetros estándar como mAP y Rank-k, cuantificando así el rendimiento de los modelos en diferentes escenarios, configuraciones y circunstancias.
 	
 	\begin{figure}[H]
 		\centering
@@ -453,79 +455,6 @@
 	\section{Arquitectura general del sistema}
 	
 	A continuación, se explica paso a paso el flujo completo, desde la entrada de vídeo original hasta la salida final con el vídeo anotado y anotaciones generadas. Cada módulo del sistema se presenta de forma independiente, especificando su función dentro del flujo, la tecnología empleada y los beneficios que aporta al conjunto. \ref{fig:Propuesta}
-	
-	
-	\subsection{Preparar el dataset (Roboflow)}
-	
-	https://roboflow.com/
-	
-	Para entrenar el modelo de detección de jugadores, utilizamos la plataforma Roboflow, una herramienta online ampliamente utilizada para gestionar datasets de visión por computador. Roboflow facilita la carga, etiquetado, preprocesado y exportación de conjuntos de datos en formatos compatibles con múltiples frameworks de deep learning, incluyendo YOLO.
-	
-	En nuestro caso, el proceso comenzó con la recopilación de fotogramas extraídos de vídeos de partidos de fútbol amateur. Estos frames fueron subidos a Roboflow, donde se realizó el etiquetado manual de los jugadores. Cada jugador fue anotado mediante la creación de una \textit{bounding box} alrededor de su figura, y se le asignó la clase \texttt{jugador}.
-	
-	Aunque en este proyecto únicamente se ha utilizado una clase (\texttt{jugador}), Roboflow permite una gestión flexible de múltiples clases. En el caso de que se hubiera querido incluir también la detección de otros roles como \texttt{árbitro} o \texttt{balón}, bastaría con asignar un nuevo nombre de clase a las anotaciones correspondientes durante el etiquetado. Cada vez que se etiqueta un objeto en un fotograma, se puede seleccionar (o crear) la clase deseada desde el menú desplegable de etiquetas.
-	
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.8\textwidth]{image/dif_de_clases}
-		\caption{\textbf{Diferenciación de clases}}
-		\label{dif_de_clases}
-	\end{figure}
-	
-	De este modo, el dataset resultante puede incluir múltiples clases, y el modelo YOLO aprenderá a diferenciarlas durante el entrenamiento, basándose en sus apariencias y posiciones relativas. Esta capacidad de distinguir entre diferentes tipos de objetos resulta esencial en contextos deportivos donde intervienen múltiples agentes.
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.8\textwidth]{image/entr_yolo}
-		\caption{\textbf{Entrenamiento YOLO}}
-		\label{entr_yolo}
-	\end{figure}
-	
-	Una vez completado el etiquetado, el dataset fue exportado desde Roboflow en el formato YOLOv5/YOLOv8, incluyendo las anotaciones en archivos de texto por imagen, y un archivo \texttt{data.yaml} que especifica la configuración general del conjunto de datos, como las rutas, el número de clases y sus nombres.
-	
-	
-	\subsection{Entrenamiento del modelo de YOLO}
-	
-	Una vez preparado el conjunto de datos en Roboflow y exportado en formato compatible con YOLOv8, se procedió al entrenamiento del modelo utilizando el framework \texttt{Ultralytics}, que proporciona una implementación optimizada y fácil de usar de los modelos YOLO.
-	
-	El entrenamiento se realizó en Python, comenzando por la descarga del dataset directamente desde la API de Roboflow. Para ello, se utilizó el siguiente fragmento de código:
-	
-	\begin{verbatim}
-		from roboflow import Roboflow
-		rf = Roboflow(api_key="sONwHlD0Zcp6DurtT8Nw")
-		project = rf.workspace("pruebabalonmano").project("handball-dataset-def-2")
-		version = project.version(1)
-		dataset = version.download("yolov8")
-	\end{verbatim}
-	
-	Este código descarga automáticamente las imágenes y las anotaciones en formato YOLOv8, incluyendo el archivo \texttt{data.yaml} con la configuración del dataset.
-	
-	A continuación, se cargó un modelo base preentrenado \texttt{yolov8n.pt} (versión ligera del modelo), y se inició el entrenamiento personalizado con los parámetros definidos:
-	
-	\begin{verbatim}
-		from ultralytics import YOLO
-		
-		model = YOLO("yolov8n.pt")  # Modelo base preentrenado
-		results = model.train(
-		data=f"{dataset.location}/data.yaml",
-		epochs=25,
-		imgsz=640,
-		batch=16,
-		name="yolov8_handball"
-		)
-	\end{verbatim}
-	
-	En este caso, se entrenó durante 25 épocas, con imágenes de tamaño 640×640 píxeles y un tamaño de lote (\texttt{batch size}) de 16 imágenes. El modelo aprende a identificar la clase \texttt{jugador} a partir de los ejemplos anotados.
-	
-	Una vez finalizado el entrenamiento, se genera automáticamente el archivo \texttt{best.pt}, que contiene los pesos del modelo con mejor rendimiento en validación. Este modelo final puede utilizarse directamente para la inferencia:
-	
-	\begin{verbatim}
-		best_model = YOLO("runs/detect/yolov8_handball/weights/best.pt")
-	\end{verbatim}
-	
-	Este flujo de trabajo permite adaptar el modelo YOLOv8 a un dominio concreto, como el fútbol amateur, utilizando anotaciones específicas y obteniendo así un detector más ajustado al contexto real de aplicación.
-	
 	
 	\subsection{Preparar el dataset de entrenamiento del modelo de ReID}
 	
@@ -1513,7 +1442,7 @@
 	
 	
 	
-	\section{Resultados Preliminares}
+	\section{Resultados}
 	
 	\subsection{Definiciones de las métricas usadas}
 	
@@ -1571,7 +1500,7 @@
 		\item $AP_i$ es la \textit{average precision} para la query $i$.
 	\end{itemize}
 	
- 	\subsection{Comparación de protocolos de re-identificación} \cite{7410490}
+ 	\subsection{Comparación de evaluación de YOLOv10 que he realizado frente a la de Market-1501} \cite{7410490}
  	
  	En ambos casos, tanto en el protocolo de Market-1501 como en la evaluación actual, la idea central es muy parecida, pero difieren en qué se pone en la galería y cómo se definen las consultas:
  	
@@ -1596,28 +1525,22 @@
  			\end{itemize}
  		\end{itemize}
  		
- 		\item \textbf{Tu protocolo actual (detección vs.\ detección por frame)}
+ 		\item \textbf{Mi protocolo actual (detección vs.\ detección por frame)}
  		\begin{itemize}
  			\item \textbf{Extracción.}  
- 			A partir de un vídeo, generas miles de recortes (detecciones) y extraes un embedding por cada uno.
+ 			A partir de un vídeo, genero miles de recortes (detecciones) y extraigo un embedding por cada uno.
  			\item \textbf{Split query vs.\ gallery.}  
- 			Para cada jugador (\texttt{track\_id}), tomas una detección como consulta y todas las demás detecciones de ese mismo jugador pasan a la galería, que puede ser muy grande (p. ej. 25 000 detecciones).
+ 			Para cada jugador (\texttt{track\_id}), tomo una detección como consulta y todas las demás detecciones de ese mismo jugador pasan a la galería, que puede ser muy grande (p. ej. 25 000 detecciones).
  			\item \textbf{Distancias y ranking.}  
- 			Igual que en Market-1501, mides distancias consulta→galería.
+ 			Igual que en Market-1501, mido distancias consulta→galería.
  			\item \textbf{CMC (Rank-\(k\)) y mAP.}  
- 			Cálculo idéntico: porcentaje de veces que tu embedding de consulta aparece en top-\(k\) de esas 25 000 detecciones, y AP sobre el ranking completo.
- 			\item \textbf{Diferencias clave.}
- 			\begin{itemize}
- 				\item \textbf{Escala de la galería:} Market-1501 suele tener menos de 1 000 imágenes; aquí tienes decenas de miles.
- 				\item \textbf{Naturaleza de la galería:} Market-1501 agrupa vistas distintas (cámaras), mientras que tú repites la misma cámara+jugador cientos de veces (frames contiguos).
- 				\item \textbf{Objetivo:} Market-1501 mide robustez a cambios de punto de vista e iluminación entre cámaras; tu versión mide robustez a pequeñas variaciones de pose y ruido de detección dentro de un mismo vídeo.
- 			\end{itemize}
+ 			Cálculo idéntico: porcentaje de veces que el embedding de consulta aparece en top-\(k\) de esas 25 000 detecciones, y AP sobre el ranking completo.
  		\end{itemize}
  	\end{enumerate}
  	
  	\subsubsection{Ejemplo de evaluación de Re-Identification}
  	
- 	Supongamos que ya tienes dos ficheros de entrada:
+ 	Supongamos que ya tenemos dos ficheros de entrada:
  	
  	\medskip
  	\noindent
@@ -1789,6 +1712,81 @@
 	\end{figure}
 	
 	resnet50\_fc512
+	
+	
+	\section{Cosas adicionales que hice}
+	
+	\subsection{Entrenar un modelo de YOLOv8 con un dataset etiquetado propio}
+	
+	https://roboflow.com/
+	
+	Para entrenar el modelo de detección de jugadores, utilizamos la plataforma Roboflow, una herramienta online ampliamente utilizada para gestionar datasets de visión por computador. Roboflow facilita la carga, etiquetado, preprocesado y exportación de conjuntos de datos en formatos compatibles con múltiples frameworks de deep learning, incluyendo YOLO.
+	
+	En nuestro caso, el proceso comenzó con la recopilación de fotogramas extraídos de vídeos de partidos de fútbol amateur. Estos frames fueron subidos a Roboflow, donde se realizó el etiquetado manual de los jugadores. Cada jugador fue anotado mediante la creación de una \textit{bounding box} alrededor de su figura, y se le asignó la clase \texttt{jugador}.
+	
+	Aunque en este proyecto únicamente se ha utilizado una clase (\texttt{jugador}), Roboflow permite una gestión flexible de múltiples clases. En el caso de que se hubiera querido incluir también la detección de otros roles como \texttt{árbitro} o \texttt{balón}, bastaría con asignar un nuevo nombre de clase a las anotaciones correspondientes durante el etiquetado. Cada vez que se etiqueta un objeto en un fotograma, se puede seleccionar (o crear) la clase deseada desde el menú desplegable de etiquetas.
+	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/dif_de_clases}
+		\caption{\textbf{Diferenciación de clases}}
+		\label{dif_de_clases}
+	\end{figure}
+	
+	De este modo, el dataset resultante puede incluir múltiples clases, y el modelo YOLO aprenderá a diferenciarlas durante el entrenamiento, basándose en sus apariencias y posiciones relativas. Esta capacidad de distinguir entre diferentes tipos de objetos resulta esencial en contextos deportivos donde intervienen múltiples agentes.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/entr_yolo}
+		\caption{\textbf{Entrenamiento YOLO}}
+		\label{entr_yolo}
+	\end{figure}
+	
+	Una vez completado el etiquetado, el dataset fue exportado desde Roboflow en el formato YOLOv5/YOLOv8, incluyendo las anotaciones en archivos de texto por imagen, y un archivo \texttt{data.yaml} que especifica la configuración general del conjunto de datos, como las rutas, el número de clases y sus nombres.
+	
+	
+	\subsection{Entrenamiento del modelo de YOLO}
+	
+	Una vez preparado el conjunto de datos en Roboflow y exportado en formato compatible con YOLOv8, se procedió al entrenamiento del modelo utilizando el framework \texttt{Ultralytics}, que proporciona una implementación optimizada y fácil de usar de los modelos YOLO.
+	
+	El entrenamiento se realizó en Python, comenzando por la descarga del dataset directamente desde la API de Roboflow. Para ello, se utilizó el siguiente fragmento de código:
+	
+	\begin{verbatim}
+		from roboflow import Roboflow
+		rf = Roboflow(api_key="sONwHlD0Zcp6DurtT8Nw")
+		project = rf.workspace("pruebabalonmano").project("handball-dataset-def-2")
+		version = project.version(1)
+		dataset = version.download("yolov8")
+	\end{verbatim}
+	
+	Este código descarga automáticamente las imágenes y las anotaciones en formato YOLOv8, incluyendo el archivo \texttt{data.yaml} con la configuración del dataset.
+	
+	A continuación, se cargó un modelo base preentrenado \texttt{yolov8n.pt} (versión ligera del modelo), y se inició el entrenamiento personalizado con los parámetros definidos:
+	
+	\begin{verbatim}
+		from ultralytics import YOLO
+		
+		model = YOLO("yolov8n.pt")  # Modelo base preentrenado
+		results = model.train(
+		data=f"{dataset.location}/data.yaml",
+		epochs=25,
+		imgsz=640,
+		batch=16,
+		name="yolov8_handball"
+		)
+	\end{verbatim}
+	
+	En este caso, se entrenó durante 25 épocas, con imágenes de tamaño 640×640 píxeles y un tamaño de lote (\texttt{batch size}) de 16 imágenes. El modelo aprende a identificar la clase \texttt{jugador} a partir de los ejemplos anotados.
+	
+	Una vez finalizado el entrenamiento, se genera automáticamente el archivo \texttt{best.pt}, que contiene los pesos del modelo con mejor rendimiento en validación. Este modelo final puede utilizarse directamente para la inferencia:
+	
+	\begin{verbatim}
+		best_model = YOLO("runs/detect/yolov8_handball/weights/best.pt")
+	\end{verbatim}
+	
+	Este flujo de trabajo permite adaptar el modelo YOLOv8 a un dominio concreto, como el fútbol amateur, utilizando anotaciones específicas y obteniendo así un detector más ajustado al contexto real de aplicación.
+	
 	
 	\section{Dificultades encontradas}
 	

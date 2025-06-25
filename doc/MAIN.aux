@@ -69,81 +69,82 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces \textbf  {Propuesta}}}{18}{figure.13}\protected@file@percent }
 \newlabel{fig:Propuesta}{{13}{18}{\textbf {Propuesta}}{figure.13}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {10}Arquitectura general del sistema}{18}{section.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Preparar el dataset (Roboflow)}{18}{subsection.10.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces \textbf  {Diferenciación de clases}}}{19}{figure.14}\protected@file@percent }
-\newlabel{dif_de_clases}{{14}{19}{\textbf {Diferenciación de clases}}{figure.14}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces \textbf  {Entrenamiento YOLO}}}{19}{figure.15}\protected@file@percent }
-\newlabel{entr_yolo}{{15}{19}{\textbf {Entrenamiento YOLO}}{figure.15}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Entrenamiento del modelo de YOLO}{19}{subsection.10.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Preparar el dataset de entrenamiento del modelo de ReID}{20}{subsection.10.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.3.1}annotate\_review.py}{20}{subsubsection.10.3.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces \textbf  {Programa para el entrenamiento}}}{23}{figure.16}\protected@file@percent }
-\newlabel{entr_reid}{{16}{23}{\textbf {Programa para el entrenamiento}}{figure.16}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.3.2}annotate\_review\_precise.py}{24}{subsubsection.10.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces \textbf  {Estructura del dataset}}}{28}{figure.17}\protected@file@percent }
-\newlabel{dir_reid}{{17}{28}{\textbf {Estructura del dataset}}{figure.17}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.3.3}dicMaker\_idPlayer.py}{28}{subsubsection.10.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.3.4}dicMakerForTrainingReID.py}{30}{subsubsection.10.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}Entrenar los modelos de ReID con torchreid}{32}{subsection.10.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.4.1}Módulo \texttt  {sportsreid\_dataset.py}}{33}{subsubsection.10.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Clase \texttt  {SportsReIDDataset}}{33}{section*.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Función \texttt  {register\_dataset}}{33}{section*.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.4.2}Módulo \texttt  {trainer.py}}{34}{subsubsection.10.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Función \texttt  {get\_datamanager}}{34}{section*.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Función \texttt  {train\_model}}{34}{section*.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.4.3}Módulo \texttt  {model\_builder.py}}{35}{subsubsection.10.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Función \texttt  {build\_model}}{35}{section*.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.4.4}Módulo \texttt  {transforms.py}}{35}{subsubsection.10.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Función \texttt  {get\_transform}}{36}{section*.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.4.5}Módulo \texttt  {visualization.py}}{36}{subsubsection.10.4.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Función \texttt  {visualize\_results}}{36}{section*.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.4.6}Módulo \texttt  {main.py}}{37}{subsubsection.10.4.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Función \texttt  {main}}{37}{section*.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Bloque de ejecución condicional}{38}{section*.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.5}Preparar el dataset de testeo del modelo de ReID}{38}{subsection.10.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.6}Aplicar modelo de detección de objetos (YOLOX)}{39}{subsection.10.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.6.1}Configuración del Modelo YOLOX en \texttt  {yolox\_x\_ch\_sportsmot.py}}{39}{subsubsection.10.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.6.2}Implementación en \texttt  {demo.py}}{40}{subsubsection.10.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.7}Aplicar tracker (DeepEIoU) y modelo de reID}{41}{subsection.10.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.7.1}Deep-EIoU en \texttt  {DeepEIoU.py}}{41}{subsubsection.10.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.7.2}Modelo de Reidentificación (ReID)}{42}{subsubsection.10.7.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.8}Aplicar GTA-LINK}{43}{subsection.10.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.8.1}generate\_tracklets.py}{43}{subsubsection.10.8.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.8.2}refine\_tracklets.py}{44}{subsubsection.10.8.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {11}Resultados Preliminares}{45}{section.11}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.1}Definiciones de las métricas usadas}{45}{subsection.11.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.1.1}Rank-k Accuracy (Rank-1, Rank-5, Rank-10, etc.)}{45}{subsubsection.11.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Preparar el dataset de entrenamiento del modelo de ReID}{18}{subsection.10.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.1.1}annotate\_review.py}{18}{subsubsection.10.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces \textbf  {Programa para el entrenamiento}}}{21}{figure.14}\protected@file@percent }
+\newlabel{entr_reid}{{14}{21}{\textbf {Programa para el entrenamiento}}{figure.14}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.1.2}annotate\_review\_precise.py}{21}{subsubsection.10.1.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces \textbf  {Estructura del dataset}}}{26}{figure.15}\protected@file@percent }
+\newlabel{dir_reid}{{15}{26}{\textbf {Estructura del dataset}}{figure.15}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.1.3}dicMaker\_idPlayer.py}{26}{subsubsection.10.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.1.4}dicMakerForTrainingReID.py}{28}{subsubsection.10.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Entrenar los modelos de ReID con torchreid}{30}{subsection.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.2.1}Módulo \texttt  {sportsreid\_dataset.py}}{31}{subsubsection.10.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Clase \texttt  {SportsReIDDataset}}{31}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Función \texttt  {register\_dataset}}{31}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.2.2}Módulo \texttt  {trainer.py}}{32}{subsubsection.10.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Función \texttt  {get\_datamanager}}{32}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Función \texttt  {train\_model}}{32}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.2.3}Módulo \texttt  {model\_builder.py}}{33}{subsubsection.10.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Función \texttt  {build\_model}}{33}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.2.4}Módulo \texttt  {transforms.py}}{33}{subsubsection.10.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Función \texttt  {get\_transform}}{34}{section*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.2.5}Módulo \texttt  {visualization.py}}{34}{subsubsection.10.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Función \texttt  {visualize\_results}}{34}{section*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.2.6}Módulo \texttt  {main.py}}{35}{subsubsection.10.2.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Función \texttt  {main}}{35}{section*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Bloque de ejecución condicional}{36}{section*.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Preparar el dataset de testeo del modelo de ReID}{36}{subsection.10.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}Aplicar modelo de detección de objetos (YOLOX)}{37}{subsection.10.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.4.1}Configuración del Modelo YOLOX en \texttt  {yolox\_x\_ch\_sportsmot.py}}{37}{subsubsection.10.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.4.2}Implementación en \texttt  {demo.py}}{38}{subsubsection.10.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.5}Aplicar tracker (DeepEIoU) y modelo de reID}{39}{subsection.10.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.5.1}Deep-EIoU en \texttt  {DeepEIoU.py}}{39}{subsubsection.10.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.5.2}Modelo de Reidentificación (ReID)}{40}{subsubsection.10.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.6}Aplicar GTA-LINK}{41}{subsection.10.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.6.1}generate\_tracklets.py}{41}{subsubsection.10.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {10.6.2}refine\_tracklets.py}{42}{subsubsection.10.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}Resultados}{43}{section.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.1}Definiciones de las métricas usadas}{43}{subsection.11.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.1.1}Rank-k Accuracy (Rank-1, Rank-5, Rank-10, etc.)}{43}{subsubsection.11.1.1}\protected@file@percent }
 \citation{7410490}
 \abx@aux@cite{0}{7410490}
 \abx@aux@segm{0}{0}{7410490}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.1.2}mAP – mean Average Precision}{46}{subsubsection.11.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.2}Comparación de protocolos de re-identificación}{46}{subsection.11.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.2.1}Ejemplo de evaluación de Re-Identification}{47}{subsubsection.11.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.3}Evaluación de la re-identificación}{48}{subsection.11.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.3.1}YOLOv10}{49}{subsubsection.11.3.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces \textbf  {Resultado ReID Yolov10}}}{49}{figure.18}\protected@file@percent }
-\newlabel{fig:Resultado Yolov10 reid}{{18}{49}{\textbf {Resultado ReID Yolov10}}{figure.18}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.3.2}Osnet Sportsmot}{50}{subsubsection.11.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces \textbf  {Resultado ReID con Osnet entrenado con el dataset de Sportmot}}}{50}{figure.19}\protected@file@percent }
-\newlabel{fig:Resultado DeepEIoU con Osnet reid sportsmot osnet_x1_0}{{19}{50}{\textbf {Resultado ReID con Osnet entrenado con el dataset de Sportmot}}{figure.19}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.3.3}Osnet Soccernet}{51}{subsubsection.11.3.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces \textbf  {Resultado ReID con Osnet entrenado con el dataset de Soccernet}}}{51}{figure.20}\protected@file@percent }
-\newlabel{fig:Resultado DeepEIoU con Osnet reid soccernet osnet_x1_0}{{20}{51}{\textbf {Resultado ReID con Osnet entrenado con el dataset de Soccernet}}{figure.20}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.3.4}ResNet Soccernet}{52}{subsubsection.11.3.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces \textbf  {Resultado ReID con Resnet entrenado con el dataset de Soccernet}}}{52}{figure.21}\protected@file@percent }
-\newlabel{fig:Resultado con Resnet reid soccernet resnet50_fc512}{{21}{52}{\textbf {Resultado ReID con Resnet entrenado con el dataset de Soccernet}}{figure.21}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.3.5}Osnet mi dataset estiquetado}{53}{subsubsection.11.3.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces \textbf  {Resultado ReID con Osnet entrenado con mi dataset etiquetado}}}{53}{figure.22}\protected@file@percent }
-\newlabel{fig:Resultado con Osnet reid mi dataset etiquetado osnet_x1_0}{{22}{53}{\textbf {Resultado ReID con Osnet entrenado con mi dataset etiquetado}}{figure.22}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.4}Resultados de MOT}{53}{subsection.11.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces \textbf  {Resultado MOT Yolov10}}}{53}{figure.23}\protected@file@percent }
-\newlabel{fig:Resultado Yolov10 mot}{{23}{53}{\textbf {Resultado MOT Yolov10}}{figure.23}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces \textbf  {Resultado MOT DeepEIoU con Osnet entrenado con el dataset de Sportmot}}}{53}{figure.24}\protected@file@percent }
-\newlabel{fig:Resultado DeepEIoU con Osnet mot sportmot}{{24}{53}{\textbf {Resultado MOT DeepEIoU con Osnet entrenado con el dataset de Sportmot}}{figure.24}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces \textbf  {Resultado MOT DeepEIoU con Osnet entrenado con el dataset de Soccernet}}}{54}{figure.25}\protected@file@percent }
-\newlabel{fig:Resultado DeepEIoU con Osnet mot soccernet}{{25}{54}{\textbf {Resultado MOT DeepEIoU con Osnet entrenado con el dataset de Soccernet}}{figure.25}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {12}Dificultades encontradas}{54}{section.12}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {13}Conclusiones}{54}{section.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.1.2}mAP – mean Average Precision}{44}{subsubsection.11.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.2}Comparación de evaluación de YOLOv10 que he realizado frente a la de Market-1501}{44}{subsection.11.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.2.1}Ejemplo de evaluación de Re-Identification}{45}{subsubsection.11.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.3}Evaluación de la re-identificación}{46}{subsection.11.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.3.1}YOLOv10}{46}{subsubsection.11.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces \textbf  {Resultado ReID Yolov10}}}{47}{figure.16}\protected@file@percent }
+\newlabel{fig:Resultado Yolov10 reid}{{16}{47}{\textbf {Resultado ReID Yolov10}}{figure.16}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.3.2}Osnet Sportsmot}{47}{subsubsection.11.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces \textbf  {Resultado ReID con Osnet entrenado con el dataset de Sportmot}}}{47}{figure.17}\protected@file@percent }
+\newlabel{fig:Resultado DeepEIoU con Osnet reid sportsmot osnet_x1_0}{{17}{47}{\textbf {Resultado ReID con Osnet entrenado con el dataset de Sportmot}}{figure.17}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.3.3}Osnet Soccernet}{48}{subsubsection.11.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces \textbf  {Resultado ReID con Osnet entrenado con el dataset de Soccernet}}}{48}{figure.18}\protected@file@percent }
+\newlabel{fig:Resultado DeepEIoU con Osnet reid soccernet osnet_x1_0}{{18}{48}{\textbf {Resultado ReID con Osnet entrenado con el dataset de Soccernet}}{figure.18}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.3.4}ResNet Soccernet}{49}{subsubsection.11.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces \textbf  {Resultado ReID con Resnet entrenado con el dataset de Soccernet}}}{49}{figure.19}\protected@file@percent }
+\newlabel{fig:Resultado con Resnet reid soccernet resnet50_fc512}{{19}{49}{\textbf {Resultado ReID con Resnet entrenado con el dataset de Soccernet}}{figure.19}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {11.3.5}Osnet mi dataset estiquetado}{50}{subsubsection.11.3.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces \textbf  {Resultado ReID con Osnet entrenado con mi dataset etiquetado}}}{50}{figure.20}\protected@file@percent }
+\newlabel{fig:Resultado con Osnet reid mi dataset etiquetado osnet_x1_0}{{20}{50}{\textbf {Resultado ReID con Osnet entrenado con mi dataset etiquetado}}{figure.20}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.4}Resultados de MOT}{50}{subsection.11.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces \textbf  {Resultado MOT Yolov10}}}{50}{figure.21}\protected@file@percent }
+\newlabel{fig:Resultado Yolov10 mot}{{21}{50}{\textbf {Resultado MOT Yolov10}}{figure.21}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces \textbf  {Resultado MOT DeepEIoU con Osnet entrenado con el dataset de Sportmot}}}{50}{figure.22}\protected@file@percent }
+\newlabel{fig:Resultado DeepEIoU con Osnet mot sportmot}{{22}{50}{\textbf {Resultado MOT DeepEIoU con Osnet entrenado con el dataset de Sportmot}}{figure.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces \textbf  {Resultado MOT DeepEIoU con Osnet entrenado con el dataset de Soccernet}}}{51}{figure.23}\protected@file@percent }
+\newlabel{fig:Resultado DeepEIoU con Osnet mot soccernet}{{23}{51}{\textbf {Resultado MOT DeepEIoU con Osnet entrenado con el dataset de Soccernet}}{figure.23}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12}Cosas adicionales que hice}{51}{section.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.1}Entrenar un modelo de YOLOv8 con un dataset etiquetado propio}{51}{subsection.12.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces \textbf  {Diferenciación de clases}}}{51}{figure.24}\protected@file@percent }
+\newlabel{dif_de_clases}{{24}{51}{\textbf {Diferenciación de clases}}{figure.24}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces \textbf  {Entrenamiento YOLO}}}{52}{figure.25}\protected@file@percent }
+\newlabel{entr_yolo}{{25}{52}{\textbf {Entrenamiento YOLO}}{figure.25}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2}Entrenamiento del modelo de YOLO}{52}{subsection.12.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {13}Dificultades encontradas}{53}{section.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {14}Conclusiones}{53}{section.14}\protected@file@percent }
 \abx@aux@read@bbl@mdfivesum{F93A8B181A07BF34968D961D4AAA8256}
 \abx@aux@defaultrefcontext{0}{huang2024iterative}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{sportsmot_paperswithcode}{nty/global//global/global/global}
@@ -153,4 +154,4 @@
 \abx@aux@defaultlabelprefix{0}{sportsmot_paperswithcode}{}
 \abx@aux@defaultlabelprefix{0}{sun2024gta}{}
 \abx@aux@defaultlabelprefix{0}{7410490}{}
-\gdef \@abspage@last{56}
+\gdef \@abspage@last{55}
